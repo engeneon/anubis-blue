@@ -1,0 +1,483 @@
+{
+  "companion_requirements": {
+    "architecture": {
+      "anchors": [
+        {
+          "gpus": 256,
+          "nodes": 32
+        },
+        {
+          "gpus": 512,
+          "nodes": 64
+        },
+        {
+          "gpus": 1024,
+          "nodes": 128
+        }
+      ],
+      "fabric": "Spectrum-X",
+      "family": "Enterprise RA dual plane",
+      "id": "SX-HGXB300-DP-ENT-1.0.0",
+      "platform": "HGX_B300",
+      "sha256": "ddad35c3ee06e30615f534f6211349a919f381fd01a3857c2fbb1c2457049a4a",
+      "source": "ckp/spectrumx_reference/v1_0_0/ckp/reference_profiles/sx_hgxb300_dp_ent_1_0_0.json"
+    },
+    "catalog_digest": "9232d2e598b47e007b4c0a7e29930c6038885b6f1a78f9ae339eabbcff17e94b",
+    "catalog_version": "planning-1.1",
+    "cpu_cores_provision": 128,
+    "downside_gpus": 8,
+    "egress_Gbps": "0.000013",
+    "evidence_basis": "analytical_planning",
+    "excess_gpus": 248,
+    "expansion_anchor": {
+      "gpus": 512,
+      "nodes": 64
+    },
+    "expansion_trigger": "Review when observed demand exceeds initial planning envelope or agreed service degrades. start procurement before declared lead time expires",
+    "gaps": [],
+    "hardware": {
+      "bandwidth_TBps": "7.7",
+      "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+      "cpu_cores_per_node": 128,
+      "dense_bf16_TFLOPS": "2250",
+      "gpu_per_node": 8,
+      "hbm_GB": "288",
+      "host_ram_GB_per_node": "2048",
+      "local_disk_GB_per_node": "30720",
+      "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+      "usable_hbm_fraction": "0.90"
+    },
+    "hardware_comparison": [
+      {
+        "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+        "downside_gpus": 8,
+        "gaps": [],
+        "gpu_per_node": 8,
+        "hardware": {
+          "bandwidth_TBps": "7.7",
+          "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+          "cpu_cores_per_node": 128,
+          "dense_bf16_TFLOPS": "2250",
+          "gpu_per_node": 8,
+          "hbm_GB": "288",
+          "host_ram_GB_per_node": "2048",
+          "local_disk_GB_per_node": "30720",
+          "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+          "usable_hbm_fraction": "0.90"
+        },
+        "platform": "HGX_B300",
+        "provided_GB_per_gpu": "288",
+        "raw_gpus": 8,
+        "required_GB_per_gpu": "58.359738",
+        "stage_calculations": [
+          {
+            "assumptions": {
+              "activation_GB_per_gpu": "32",
+              "concurrent_sequences": 32,
+              "context_tokens": 8192,
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "kv_bytes": "2",
+              "local_disk_GB_per_gpu": "3840",
+              "model": "dense8b",
+              "parallel_gpus": 1,
+              "training_bytes_per_parameter": "16",
+              "weight_bytes": "2",
+              "workspace_GB": "8"
+            },
+            "capacity_per_replica": "4.892797",
+            "capacity_unit": "calls/s",
+            "demand": "0.666667",
+            "kv_cache_GB_per_replica": "34.359738",
+            "memory_fit": true,
+            "model": {
+              "head_dimension": 128,
+              "kv_heads": 8,
+              "label": "Generic dense 8B planning model",
+              "layers": 32,
+              "parameters": "8000000000"
+            },
+            "raw_gpus": 8,
+            "replicas": 1,
+            "required_GB_per_gpu": "58.359738",
+            "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+            "scenario_id": "coincident",
+            "service_objectives": [],
+            "stage_id": "component_1",
+            "weights_GB": "16"
+          }
+        ],
+        "status": "conditional",
+        "upside_gpus": 8
+      },
+      {
+        "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+        "downside_gpus": 8,
+        "gaps": [],
+        "gpu_per_node": 8,
+        "hardware": {
+          "bandwidth_TBps": "8",
+          "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+          "compute_source": "https://www.nvidia.com/en-au/data-center/hgx/",
+          "cpu_cores_per_node": 128,
+          "dense_bf16_TFLOPS": "2250",
+          "gpu_per_node": 8,
+          "hbm_GB": "180",
+          "host_ram_GB_per_node": "2048",
+          "local_disk_GB_per_node": "30720",
+          "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+          "usable_hbm_fraction": "0.90"
+        },
+        "platform": "HGX_B200",
+        "provided_GB_per_gpu": "180",
+        "raw_gpus": 8,
+        "required_GB_per_gpu": "58.359738",
+        "stage_calculations": [
+          {
+            "assumptions": {
+              "activation_GB_per_gpu": "32",
+              "concurrent_sequences": 32,
+              "context_tokens": 8192,
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "kv_bytes": "2",
+              "local_disk_GB_per_gpu": "3840",
+              "model": "dense8b",
+              "parallel_gpus": 1,
+              "training_bytes_per_parameter": "16",
+              "weight_bytes": "2",
+              "workspace_GB": "8"
+            },
+            "capacity_per_replica": "5.083426",
+            "capacity_unit": "calls/s",
+            "demand": "0.666667",
+            "kv_cache_GB_per_replica": "34.359738",
+            "memory_fit": true,
+            "model": {
+              "head_dimension": 128,
+              "kv_heads": 8,
+              "label": "Generic dense 8B planning model",
+              "layers": 32,
+              "parameters": "8000000000"
+            },
+            "raw_gpus": 8,
+            "replicas": 1,
+            "required_GB_per_gpu": "58.359738",
+            "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+            "scenario_id": "coincident",
+            "service_objectives": [],
+            "stage_id": "component_1",
+            "weights_GB": "16"
+          }
+        ],
+        "status": "conditional",
+        "upside_gpus": 8
+      },
+      {
+        "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+        "downside_gpus": 8,
+        "gaps": [],
+        "gpu_per_node": 8,
+        "hardware": {
+          "bandwidth_TBps": "4.8",
+          "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+          "compute_source": "https://www.nvidia.com/en-au/data-center/h200/",
+          "cpu_cores_per_node": 128,
+          "dense_bf16_TFLOPS": "989.5",
+          "gpu_per_node": 8,
+          "hbm_GB": "141",
+          "host_ram_GB_per_node": "2048",
+          "local_disk_GB_per_node": "30720",
+          "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+          "usable_hbm_fraction": "0.90"
+        },
+        "platform": "HGX_H200",
+        "provided_GB_per_gpu": "141",
+        "raw_gpus": 8,
+        "required_GB_per_gpu": "58.359738",
+        "stage_calculations": [
+          {
+            "assumptions": {
+              "activation_GB_per_gpu": "32",
+              "concurrent_sequences": 32,
+              "context_tokens": 8192,
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "kv_bytes": "2",
+              "local_disk_GB_per_gpu": "3840",
+              "model": "dense8b",
+              "parallel_gpus": 1,
+              "training_bytes_per_parameter": "16",
+              "weight_bytes": "2",
+              "workspace_GB": "8"
+            },
+            "capacity_per_replica": "3.050056",
+            "capacity_unit": "calls/s",
+            "demand": "0.666667",
+            "kv_cache_GB_per_replica": "34.359738",
+            "memory_fit": true,
+            "model": {
+              "head_dimension": 128,
+              "kv_heads": 8,
+              "label": "Generic dense 8B planning model",
+              "layers": 32,
+              "parameters": "8000000000"
+            },
+            "raw_gpus": 8,
+            "replicas": 1,
+            "required_GB_per_gpu": "58.359738",
+            "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+            "scenario_id": "coincident",
+            "service_objectives": [],
+            "stage_id": "component_1",
+            "weights_GB": "16"
+          }
+        ],
+        "status": "conditional",
+        "upside_gpus": 8
+      }
+    ],
+    "host_ram_GB_provided": "65536",
+    "host_ram_GB_required": "2048",
+    "ingress_Gbps": "0.000051",
+    "initial_gpus": 256,
+    "limitations": [
+      "Analytical assumptions, not measured serving performance or guaranteed latency",
+      "Distinct stages use dedicated pools. scenarios reuse capacity only when declared non-overlapping",
+      "Host configuration and training scaling require later deployment validation"
+    ],
+    "local_disk_GB_required": "30720",
+    "network_scope": "Application tokens plus declared external transfers. customer RTT requirement remains independent. other payloads must be declared",
+    "networks": {
+      "basis": "Decimal TB and GB. Initial transfer rate = volume times 8 divided by transfer seconds. Apply protocol allowance and divide by usable link fraction. Application traffic is counted once at the external and north-south boundaries.",
+      "east_west": {
+        "fabric": "Spectrum-X",
+        "per_gpu_link_lower_bound_Gbps": null,
+        "per_gpu_payload_Gbps": null,
+        "scope": "GPU communication fabric. A fabric selection is not a qualified bandwidth or latency result."
+      },
+      "external_customer_datacenter": {
+        "connection": "Customer datacenter to AI Factory routed connectivity. Carrier, redundancy and encryption design remain architect decisions.",
+        "initial_load_link_Gbps": null,
+        "required_ingress_lower_bound_Gbps": null,
+        "round_trip_target_ms": null,
+        "status": "initial_load_unresolved",
+        "steady_egress_lower_bound_Gbps": "0.000019",
+        "steady_ingress_lower_bound_Gbps": "0.000073"
+      },
+      "follow_up": [
+        "Provide the initial customer-datacenter data volume and allowed transfer window.",
+        "Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates.",
+        "Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth.",
+        "East-west per-GPU port demand needs the selected reference design and collective-communication measurements.",
+        "Customer-datacenter round-trip latency objective is unspecified."
+      ],
+      "initial_load_overlaps_operation": true,
+      "model_version": "network-planning-1.0",
+      "north_south": {
+        "egress_lower_bound_Gbps": "0.000019",
+        "ingress_lower_bound_Gbps": null,
+        "scope": "Factory border to workload and storage endpoints. Carries the same external traffic, not an additional copy. Other tenants and non-model payloads need separate measurements."
+      },
+      "protocol_allowance": "1.2",
+      "storage": {
+        "converged": false,
+        "dedicated": true,
+        "read_link_lower_bound_Gbps": null,
+        "read_payload_Gbps": null,
+        "scope": "Physically dedicated storage fabric. Read and write are separate directions. Confirm bisection, fan-in, checkpoint bursts and initial-load writes. Unknown rates are not zero.",
+        "technology": "Ethernet",
+        "write_link_lower_bound_Gbps": null,
+        "write_payload_Gbps": null
+      },
+      "usable_link_fraction": "0.7"
+    },
+    "nodes_or_trays": 32,
+    "policy": {
+      "accept_capacity_shortfall": false,
+      "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+      "assumptions_accepted": true,
+      "bytes_per_token": "4",
+      "compute_efficiency": "0.35",
+      "expansion_lead_days": 90,
+      "memory_efficiency": "0.50",
+      "minimum_service_fraction": "1",
+      "protocol_allowance": "1.2",
+      "sensitivity_percent": "30",
+      "source": "Anubis guided-1.0 planning defaults, consultant accepted; not measured"
+    },
+    "provided_GB_per_gpu": "288",
+    "racks": null,
+    "raw_gpus": 8,
+    "required_GB_per_gpu": "58.359738",
+    "scenarios": [
+      {
+        "downside_gpus": 8,
+        "failure_nodes": 0,
+        "id": "coincident",
+        "raw_gpus": 8,
+        "upside_gpus": 8
+      }
+    ],
+    "selected_anchor": {
+      "gpus": 256,
+      "nodes": 32
+    },
+    "service_capacity_fraction": "1",
+    "shortfall_gpus": 0,
+    "stage_calculations": [
+      {
+        "assumptions": {
+          "activation_GB_per_gpu": "32",
+          "concurrent_sequences": 32,
+          "context_tokens": 8192,
+          "cpu_cores_per_gpu": 16,
+          "host_ram_GB_per_gpu": "256",
+          "kv_bytes": "2",
+          "local_disk_GB_per_gpu": "3840",
+          "model": "dense8b",
+          "parallel_gpus": 1,
+          "training_bytes_per_parameter": "16",
+          "weight_bytes": "2",
+          "workspace_GB": "8"
+        },
+        "capacity_per_replica": "4.892797",
+        "capacity_unit": "calls/s",
+        "demand": "0.666667",
+        "kv_cache_GB_per_replica": "34.359738",
+        "memory_fit": true,
+        "model": {
+          "head_dimension": 128,
+          "kv_heads": 8,
+          "label": "Generic dense 8B planning model",
+          "layers": 32,
+          "parameters": "8000000000"
+        },
+        "raw_gpus": 8,
+        "replicas": 1,
+        "required_GB_per_gpu": "58.359738",
+        "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+        "scenario_id": "coincident",
+        "service_objectives": [],
+        "stage_id": "component_1",
+        "weights_GB": "16"
+      }
+    ],
+    "status": "conditional",
+    "storage": [],
+    "storage_fabric": "Ethernet",
+    "storage_network_policy": "Physically dedicated storage network required. Converged networking is excluded.",
+    "tenancy": "single",
+    "upside_gpus": 8,
+    "usable_GB_per_gpu": "259.2",
+    "version": "1.0",
+    "workload_capacity": {
+      "basis": "Whole copies of the same workload profile at coincident declared peaks, using dedicated node-rounded GPU pools and a separate reserve per copy. Sensitivity counts are planning envelopes, not confidence intervals.",
+      "minimum_architecture": {
+        "additional_instances_compute": 31,
+        "downside_instances_compute": 32,
+        "equivalent_instances_compute": 32,
+        "gpus": 256,
+        "supports_one_instance_compute": true,
+        "upside_instances_compute": 32
+      },
+      "qualification": "Compute estimate only. Each copy also needs its storage, host resources and network capacity. tenancy and isolation require architectural validation. Architecture family is the selected catalogue profile, not an additional NCP compliance claim.",
+      "selected_architecture": {
+        "additional_instances_compute": 31,
+        "downside_instances_compute": 32,
+        "equivalent_instances_compute": 32,
+        "gpus": 256,
+        "supports_one_instance_compute": true,
+        "upside_instances_compute": 32
+      },
+      "tenant_limit": null
+    }
+  },
+  "external_obligations": [
+    "Verify modelling node count and NIC endpoints",
+    "Preserve host and physical compute specification",
+    "Qualify separate storage tiers and reserve handling",
+    "Assess returned fabrics and capacity"
+  ],
+  "intended_configuration": {
+    "constraints": [],
+    "evidence_channel": "public_planning",
+    "gpu_per_node": 8,
+    "gpus": 256,
+    "host": {
+      "ram_GB": "65536"
+    },
+    "id": "planning:factory",
+    "memory": {
+      "required_GB_per_gpu": "58.359738"
+    },
+    "nodes": 32,
+    "planning": true,
+    "platform": "HGX_B300",
+    "profile_id": "SX-HGXB300-DP-ENT-1.0.0",
+    "scenario_id": "portfolio",
+    "stage_id": "factory",
+    "status": "conditional"
+  },
+  "mapping_ledger": [
+    {
+      "affected_domains": [
+        "physical_compute",
+        "node_count",
+        "NIC_endpoints",
+        "scale_up",
+        "failure_domains"
+      ],
+      "assessment": "external_adjustment",
+      "field": "requirements.platform",
+      "intended": "HGX_B300",
+      "mode": "direct",
+      "projected": "HGX_B300"
+    },
+    {
+      "field": "requirements.target_gpu_count",
+      "intended": 256,
+      "projected": 256,
+      "rounding": "downstream design tool result requires reassessment"
+    },
+    {
+      "field": "north_south",
+      "mode": "brief_only",
+      "reason": "No verified intake field. Architect must apply ingress and egress requirements."
+    },
+    {
+      "field": "external_customer_datacenter",
+      "mode": "brief_only",
+      "reason": "Initial loading, ongoing link rates and latency targets require architect action."
+    },
+    {
+      "field": "dedicated_storage_network",
+      "mode": "brief_only",
+      "reason": "Intake carries Ethernet technology only. Physical separation, no convergence and bandwidth require architect action."
+    },
+    {
+      "field": "N-S ingress/egress, per-device VRAM, host RAM, CPU, local disk and tier throughput",
+      "mode": "brief_only",
+      "reason": "No verified equivalent intake scalar; retain in companion specification"
+    }
+  ],
+  "payload": {
+    "project": {
+      "name": "Document assistant fixture"
+    },
+    "requirements": {
+      "east_west_fabric": "Spectrum-X",
+      "network_fabric": "Spectrum-X",
+      "platform": "HGX_B300",
+      "storage_fabric": "Ethernet",
+      "target_gpu_count": 256,
+      "tenancy_model": "single_tenant"
+    }
+  },
+  "payload_digest": "63046d38f51a3cad86473b78fcd639b4e16bf60d2017b395ac66db0207b88137",
+  "projection_mode": "partial",
+  "result_id": "fixture-result",
+  "selection_state": "experimental",
+  "target_profile": "neon-source-01bccd6-manual-v1",
+  "target_qualified_live": false
+}

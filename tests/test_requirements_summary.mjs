@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {requirementsRows,requirementsText} from '../ui/dist/projection-summary.js';
+const empty=requirementsText({});
+assert.ok(empty.includes('Measurement required'));
+assert.ok(!empty.includes('undefined'));
+assert.ok(!empty.includes('NaN'));
+assert.ok(!empty.includes('0 GPUs'));
+const p={status:'conditional',raw_gpus:8,initial_gpus:256,stage_calculations:[{}],storage:[],networks:{external_customer_datacenter:{initial_load_link_Gbps:0},storage:{read_link_lower_bound_Gbps:null,write_link_lower_bound_Gbps:0}}};
+const text=requirementsText(p);
+assert.equal(text,requirementsText(structuredClone(p)));
+assert.ok(text.includes('Initial loading: 0 Gbps'));
+assert.ok(text.includes('Measurement required / 0 Gbps write'));
+assert.ok(text.includes('not automatically copied'));
+assert.equal(requirementsRows(p)[0][1],'8 GPUs');
+assert.equal(requirementsRows(p)[1][1],'256 GPUs');
+assert.ok(requirementsText({...p,status:'unknown'}).includes('Supported components only'));
+assert.ok(requirementsText({...p,storage:[{tier:'object',usable_bytes:'4000000000000',read_Bps:null,write_Bps:'0'}]}).includes('4000000000000 usable bytes'));
+console.log('Requirements summary: unknown versus zero, scope, placement, anchor distinction and determinism passed');
+
+assert.ok(!requirementsText({stage_calculations:[],raw_gpus:0,required_GB_per_gpu:0,host_ram_GB_required:0,local_disk_GB_required:0}).includes('0 GB'));

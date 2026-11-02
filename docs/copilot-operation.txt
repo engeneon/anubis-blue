@@ -1,0 +1,141 @@
+Anubis Consultant Copilot
+Local operation and validation
+
+Purpose
+The copilot proposes architecture and workload inputs. A consultant reviews changes before they reach the deterministic sizing engine. It is optional. The workload builder, saved results and design exports remain usable without a model service.
+
+Access Anubis
+Start the local service with python3 deploy/local/run.py and open http://127.0.0.1:8787. On first login, open the project's private .anubis/identities.json file and copy the token value for your identity into Access token. Do not paste that token into chat or a source document. Provider API credentials are different from Anubis access tokens.
+
+Configure a model connection
+The local launcher also reads provider keys from the git-ignored .env file. DEEPSEEK_API_KEY maps to ANUBIS_AI_KEY_DEEPSEEK. OPENAI_API_KEY, ANTHROPIC_API_KEY and XAI_API_KEY have equivalent aliases. This parser reads values only and never executes shell syntax.
+
+1. Supply a provider API key through the backend environment under a name beginning ANUBIS_AI_KEY_. For example ANUBIS_AI_KEY_PRIMARY. Set the secret through your deployment's protected environment mechanism. Do not store it in the repository or browser.
+2. Restart the service so the process receives the environment variable.
+3. Open AI connections as an administrator. Choose the provider, enter the connection name, API origin, API path, model identifier and the secret variable NAME. Never enter the secret value into this screen.
+4. Select corporate data approval only when your organization's provider agreement and deployment policy permit it. Corporate-classified sessions cannot use public-only profiles.
+5. Save the profile and run Test. Capability passed verifies a structured response through the configured adapter. It does not qualify interpretation quality.
+6. Open Consultant Copilot and select the approved profile. A consumer chat subscription must not be assumed to include API access or billing.
+
+Provider wire formats
+OpenAI uses /v1/chat/completions with JSON output and max_completion_tokens. DeepSeek uses /chat/completions. xAI uses /v1/chat/completions. A corporate gateway uses the compatible chat-completion contract. Anthropic uses /v1/messages with a forced structured proposal tool and the pinned 2023-06-01 API header. Supported model identifiers are deployment choices. Existing DeepSeek profiles default to non-thinking mode. New profiles may explicitly select low or high reasoning effort. Qualify each setting separately. The application uses only the final structured response, not the provider reasoning text. Each configured model must pass its own capability and scenario evaluation. There is no silent fallback to another provider.
+
+Corporate endpoints
+Nonstandard origins require a server-side JSON allowlist in ANUBIS_AI_ALLOWED_ORIGINS. Entries are exact origins with scheme and optional port, without paths. TLS is required. Explicitly allowlisted loopback HTTP is supported for local test services only. Standard public-provider DNS addresses are checked and pinned for the request. Redirects are disabled. An administrator approving a private origin is responsible for its network and data policy.
+
+Use the assisted workflow
+1. Choose Consultant Copilot. Start an engagement with a name and data classification. An existing guided draft can be used. Opening the advanced editor does not change compatibility. Copilot can work from an existing assisted description while preserving advanced settings. Conflicting proposals are blocked before any write.
+2. Describe the customer application. Explain who uses it, what work it performs, where compute and supporting services run and whether work overlaps.
+3. Answer the next material question. Daily totals are not measured peak rates. Variable agent call expansion must remain explicit.
+4. Inspect the proposed diagram and input table. Expand the diagram for a larger view. Each value has a basis and source when available. Exact quotations establish traceability, not correctness.
+5. Review the fact proposal as a whole. Structured facts are applied atomically so their dependencies remain consistent. Correct a fact through a clarification or manual fact entry and review the fresh proposal. Accept the visible assumptions and choose Apply selected. Legacy field proposals retain selective editing.
+6. In Your next step, choose Review and calculate GPU estimate. This opens Review and estimate directly. Review the planning defaults, select Use these planning assumptions, then Calculate estimate. The Workload analysis screen shows GPU counts and hardware comparisons. Use the earlier step buttons if measurements need refinement.
+7. Return to the copilot to inspect saved engine facts. A stale-result warning means current draft edits are not represented in that result.
+8. On Workload analysis, choose Continue to Design handoff, or click 4. Design handoff in the journey. There is no need to return to Copilot. Review the target configuration and select Prepare projection. Read the executive summary and preview the target payload and companion specification. External submission retains the existing explicit approval and status reconciliation controls.
+
+Comparisons
+Fork comparison scenario creates a separate case and session without changing the baseline. Accept and calculate the alternative through the same review controls. Compare saved results using the existing Compare view. No model-generated arithmetic is used to rank scenarios.
+
+Source documents and telemetry
+The first ingestion adapter accepts UTF-8 TXT, CSV and JSON files up to 32 KB. Export relevant passages or telemetry from larger files. Native PDF and DOCX parsing is not included. Every source receives a content digest and session scope. Uploaded instructions are untrusted data. The assistant can extract candidate values but cannot label them as measured qualification or silently apply them. Sources and review records are accessible in the source register.
+
+MCP tools
+Configure MCP separately from the model service. The current client supports the pinned 2025-06-18 Streamable HTTP initialization flow, JSON and bounded SSE responses. Test discovery first. Create a profile with explicitly approved read-only tool names and schema digests. Tools are never auto-approved. Argument validation supports bounded object, array, string, numeric, boolean and null schemas with enums and basic bounds. Unsupported schema validation keywords fail closed.
+A model exposed as a corporate MCP tool is optional. Configure model_tool and model_tool_digest through the profile API. Its arguments are instructions, context and max_output_tokens. It must return the proposal object as structuredContent or JSON text. Discovery-only servers cannot be selected as model connections. This custom adapter requires provider-specific validation.
+The stdio MCP facade at mcp/server.mjs exposes scoped context, results, compilation and proposal tools. It has no acceptance, credential-management, evidence-publication or design-submission tool. Agent proposal and compilation budgets remain case-owner controlled.
+
+Budgets and failures
+ANUBIS_COPILOT_DISABLED=1 disables provider and MCP calls globally. Per-profile turn limits and output-token limits bound sessions. ANUBIS_AI_DAILY_CALL_LIMIT limits model and MCP jobs across the local deployment during a rolling 24-hour window, default 200. Input context is limited to 120 KB, with up to 32 sources per session. Failed requests still consume a turn budget because they may incur provider cost.
+Cancellation prevents publication. It cannot guarantee cancellation of already-billed provider computation. Network requests time out and do not hold the API mutex. In-flight external work is not automatically retried after restart. Inspect outcome_unknown jobs and retry explicitly if appropriate. Changing or disabling a profile invalidates pending model output. Historical calculations remain unchanged.
+Credentials are resolved from the backend only during transport. They are absent from saved job payloads, exports and ordinary errors. Persisted case sources, model context and review records follow the current local database backup and retention policy. Automated transcript expiry and shared-deployment identity federation are not implemented. This remains a local deployment feature, not a production multi-organization service.
+
+Validation
+Run python3 scripts/validate_copilot.py --ui for the repeatable local suite. It includes core, API, provider-format fixture, source and permission checks, the 16 scenario oracle suite and the actual browser journey. The test-only provider is started solely by the test launcher. It is not an offline language interpreter in the product.
+The random scenario is frozen in implementation/copilot/random-scenario.json. Screenshots and the browser record are under implementation/copilot/gui. Local fixture tests do not prove the quality of a real model. Live qualification requires an approved provider, model and credential. The live evaluation script stores outputs for review and must not be treated as automatic release approval.
+The target of reducing consultant completion time by 25 percent requires a paired usability pilot with people. No benefit claim is made from fixture tests or the automated browser duration.
+
+References for adapter implementation
+https://developers.openai.com/api/reference/resources/chat
+https://platform.claude.com/docs/en/api/messages
+https://api-docs.deepseek.com/api/create-chat-completion/
+https://docs.x.ai/developers/model-capabilities/text/structured-outputs
+Provider contracts must be reviewed when changing model profiles or adapter versions.
+
+Structured workload facts (version 2)
+Normal copilot turns now extract facts rather than editing sizing fields directly. Anubis validates the facts, converts measurements, matches architecture rules and selects the next clarification. Review the fact ledger and its translated inputs together. A reported fact is a customer statement, not an independently verified measurement.
+
+Use Describe demand using measurements or users for the shortest numerical path. Measured traffic needs the busy-period request count and period. The user route needs active users and requests per active user over a period. Total employee population is context only. Selecting a route does not add both demand estimates.
+
+Use Enter or correct a fact without a model when a measurement is available or an interpretation needs correction. Choose the activity, fact, value, unit and evidence status. Unknown is not zero. If replacing an accepted value, review the highlighted previous and proposed values before accepting the new revision.
+
+The original measurement remains visible. For example 2,400 requests in one hour becomes 40 requests/minute using deterministic code. Average and peak measurements remain separate. Clock windows crossing midnight are calculated from their start and end times. Application response time and network latency are separate requirements.
+
+Architecture library and measurement guide contains descriptions, diagrams, examples, counterexamples and measurement points. The library separates computation, orchestration and schedule. Image generation remains a specialist media workload even when scheduled in a batch. A retrieval pipeline does not automatically become an agent.
+
+Agent call expansion keeps typical and upper counts. Select a planning envelope explicitly. This is separate from the existing sensitivity percentage. Compute, search and data placement are separate. Outside this AI Factory can mean a customer cluster, an existing search service or a hosted model endpoint. It does not necessarily mean a different datacenter or public Internet.
+
+For unsupported computations, Anubis prepares the requirements it can support and requests application-specific throughput and memory evidence. It does not substitute text-token equations. A measured-performance estimate is available only where an applicable deterministic method exists. Otherwise the output remains a requirements brief.
+
+Correction and limits
+A model response can receive one bounded correction attempt after a validation error. Both attempts are retained in the scoped job record. The deployment request allowance reserves two requests for each copilot turn. Failed correction leaves accepted inputs unchanged. If some extracted facts validate independently, Anubis can show a partial proposal with excluded facts listed and estimate readiness withheld. Otherwise it offers manual continuation. Partial extraction does not count as full interpretation qualification. No automatic provider switching occurs.
+
+Version records
+The fact contract, architecture catalogue digest, rule version, prompt digest and accepted fact revision are retained. Saved sizing results are not reinterpreted automatically. Existing guided engagements remain supported. Advanced manually edited workloads continue to use their existing protected path.
+
+Validation commands
+python3 tests/test_interpretation.py
+python3 scripts/validate_copilot.py --ui
+python3 scripts/evaluate_copilot_live.py --provider deepseek --model deepseek-v4-pro --secret-env DEEPSEEK_API_KEY --env-file .env --trials 3 --output implementation/copilot/live-evaluation-new.json
+python3 scripts/review_interpretation.py implementation/copilot/live-evaluation-new.json
+Live evaluation sends fictional customer stories to the selected provider and consumes API credit. Automated checks are separate from engineering semantic review and the consultant pilot. Consult the latest execution report before making a qualification claim.
+
+Provider reference for the reasoning configuration: https://api-docs.deepseek.com/guides/thinking_mode/
+
+Moving between assisted and advanced editing
+Opening the advanced editor does not mark or save a change. Use Review assisted editing options to check compatibility and return to assisted editing when reconstruction is lossless. The compatibility check compares actual workload content with the saved assisted description, so a historical advanced flag alone does not lock the workload.
+
+Before saving an incompatible edit, Anubis explains the affected field paths and offers Save or Cancel. Cancel leaves the unsaved edits in the editor. Save preserves the detailed workload. Name, notes and tenancy edits are carried into the assisted description when the remaining content is compatible.
+
+Copilot checks each accepted update against the saved advanced differences. Non-overlapping changes preserve custom values. Stage, dependency and scenario edits are treated as one related workload graph, so potentially conflicting graph updates require advanced review. Revision checks still prevent a stale session from overwriting newer work. Use Review latest saved workload with Copilot when offered.
+
+For conversion, choose Review a separate assisted copy. The preview shows current values and their replacements in the assisted copy. Create separate assisted copy creates a new engagement and draft. The original remains unchanged. Workloads without a recoverable assisted description can still be edited and calculated in the advanced editor, with a separate new assisted engagement available.
+
+Existing results remain available in Workload analysis. Viewing compatibility or making a copy is not a new sizing calculation.
+
+Complete and retrieve an engagement
+1. Calculate requirements, continue to Design handoff and prepare a projection.
+2. In Complete this engagement, review the selected calculation and projection. Add optional consultant notes and confirm that the selected requirements are delivered.
+3. Select Complete engagement. This preserves the calculation, projection, executive summary, notes, author and completion time. It means requirements delivered, not downstream architecture approval or performance qualification.
+4. If newer workload edits exist, recalculate first or explicitly acknowledge delivery of the selected earlier calculation. Completion never silently substitutes another result.
+5. Saved deliverables lists each completed version. Download the executive summary, design intake, architecture brief, companion specification, calculation result or complete engagement record. Completed summaries are retrieved as saved text rather than regenerated with later narrative rules.
+6. You can sign out or close the browser after completion. Later, open Cases, locate the named engagement marked Completed and select View engagement. It opens Saved deliverables.
+7. Reopen engagement for revisions returns it to Active and opens Consultant Copilot from the latest saved draft with a fresh session budget. Earlier conversations and completed versions remain unchanged. Describe the changes you want to make. Workloads without a recoverable assisted description retain the advanced-editor route. Completing again creates another version linked to the previous completion.
+
+Prepared projections are also available in Saved projection history, including projections created before completion was introduced. Opening a saved projection retrieves the original payload and allows completing with that selected calculation. Data remains in the local Anubis database. Downloading a complete engagement record provides a separate portable record, but is not a backup of the whole installation.
+
+Delete and restore engagements
+In Cases, choose Delete engagement beside the engagement you own. Confirm the named engagement to move it to Trash. Cancel leaves it unchanged. Deleted engagements disappear from Your engagements and cannot receive new edits. Running or queued jobs must finish or be cancelled before deletion.
+
+Choose Show deleted engagements in Trash and Restore engagement to bring one back with its saved data and completion history. This is recoverable deletion, not permanent erasure. Records and backups are retained. Only the engagement owner can delete or restore it.
+
+If the engagement was already reopened before this update, open Saved deliverables and choose Continue with Copilot. This starts a fresh session against the latest saved draft without changing earlier completed records.
+
+Copilot activity and engagement status
+While a model operation is active, the workspace shows an animated status banner, queued/running/cancellation state and elapsed time. After 30 seconds it explains that the operation is taking longer. No percentage or completion-time promise is inferred. The description box is disabled while the submitted operation runs. Cancel assistant operation remains available. Returning to a session with a pending job resumes status polling.
+
+Describe and refine is the visually highlighted input workspace. Its instructions explain the sequence: enter information, ask Copilot, then review and apply the proposed facts.
+
+Cases shows a derived phase and next action: new engagement, describing workload, calculation pending, calculated with handoff pending, handoff prepared with delivery pending, or completed. If saved inputs have changed since the latest result, the list says Inputs changed — recalculate. These labels describe workflow state, not engineering qualification.
+
+Opening Consultant Copilot for a completed engagement shows a historical-record notice rather than an active input box. View saved deliverables to retrieve the delivery or reopen explicitly for revisions. Start a new assisted engagement begins a separate engagement and clears the previous selection from the workspace.
+
+Conclude when a design handoff cannot be established
+An engagement can finish with a final status report rather than delivered design requirements. Copilot offers Review final status report for specialist scope or insufficient information. Conclude with a final status report is also available as an explicit consultant choice in Copilot and Saved deliverables. Detection describes current limitations, not permanent impossibility.
+
+Review the report preview. It distinguishes accepted facts, source statements and unaccepted proposals, records existing calculations with their original qualifications, and identifies missing evidence or specialist work. Enter why the engagement is concluding now and the recommended next action. Confirm closure without a design handoff, then select Close with final status report. No GPU count or projection is required and neither is invented to enable closure.
+
+An active job must finish or be cancelled first. If evidence changes after the preview, refresh the status report before closing. The Cases list marks the outcome Closed — final status report. Saved deliverables offers Download final status report and Download complete closure record, containing the source, proposal, workload and available result snapshots. Reopen for revisions when measurements or a suitable sizing method become available. Earlier closure records remain unchanged.
+
+The View engagement button is a navigation action, not an Open status. The phase badge beside the name is the engagement status. Specialist workloads point to further evidence or final-status-report closure instead of implying a complete handoff is ready.
+
+Stage 4 also offers Review final status report directly. When no resolved candidate exists, it shows Stage 4: conclude or continue discovery and offers report closure or continued evidence gathering. It does not instruct the user to prepare an unavailable projection.

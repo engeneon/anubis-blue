@@ -1,0 +1,2 @@
+Tool: built-in image_gen editing the previous logo. Transparent background.
+Prompt: Redesign as a radically simplified corporate mark. Solid black Anubis holding a balance with a workload cube and an ostrich feather. Flat black geometric shapes with transparent negative space. No gold, gradients, clothing ornament, fingers or text. Minimal jackal profile, bust and angular arm. Compact silhouette readable at 64 pixels.

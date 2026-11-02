@@ -1,0 +1,30 @@
+{
+  "strategy": "hybrid-public-first",
+  "records": [
+    {
+      "id": "mlperf-submission-guidelines",
+      "repository": "mlcommons/inference",
+      "commit": "8c17da9b0d4b03e8e1c8aa356e279dd50e8c25d9",
+      "url": "https://raw.githubusercontent.com/mlcommons/inference/8c17da9b0d4b03e8e1c8aa356e279dd50e8c25d9/Submission_Guidelines.md",
+      "path": "knowledge/public-evidence/sources/mlperf-submission-guidelines.md",
+      "sha256": "4b27d108f02dbc5da64c343bcd029af9943a938ab57b52aba11209f166c3d167",
+      "classification": "benchmark_methodology",
+      "activation": "not_performance_evidence",
+      "rights_status": "review_before_redistribution",
+      "captured_utc": "2026-10-24T16:49:20.384345+00:00"
+    },
+    {
+      "id": "tensorrt-llm-benchmarking",
+      "repository": "NVIDIA/TensorRT-LLM",
+      "commit": "8a9c66ce086594054d3722307cfed2d658d25e60",
+      "url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/8a9c66ce086594054d3722307cfed2d658d25e60/docs/source/legacy/performance/perf-benchmarking.md",
+      "path": "knowledge/public-evidence/sources/tensorrt-llm-benchmarking.md",
+      "sha256": "aad3e8480127d47b0350ffdff3a9c962078c348bad85f55d572cf7302c0bd4d2",
+      "classification": "benchmark_methodology",
+      "activation": "not_performance_evidence",
+      "rights_status": "review_before_redistribution",
+      "captured_utc": "2026-10-24T16:49:21.237955+00:00"
+    }
+  ],
+  "performance_qualification": false
+}

@@ -1,0 +1,36 @@
+{
+  "profile": "macos-arm64-local-development",
+  "qualification": "workspace build only; clean-install and cross-platform qualification pending",
+  "vendored": [
+    {
+      "path": "third_party/nlohmann/json.hpp",
+      "sha256": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6"
+    },
+    {
+      "path": "third_party/nlohmann/LICENSE.MIT",
+      "sha256": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    },
+    {
+      "path": "third_party/httplib/httplib.h",
+      "sha256": "a0a0c13dc086663863dbe6730a19716f7d3744904b6205496e8301750814dbd5"
+    },
+    {
+      "path": "third_party/httplib/LICENSE",
+      "sha256": "4b45cbe16d7b71b89ae6127e26e0d90a029198ca5e958ad8e3d0b8bbed364d8b"
+    }
+  ],
+  "observed_toolchain": {
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "cmake": "cmake version 4.2.0",
+    "node": "v26.8.1",
+    "npm": "11.19.0"
+  },
+  "dependency_versions": {
+    "nlohmann_json": "3.11.3",
+    "cpp_httplib": "0.18.3",
+    "typescript": "5.7.3",
+    "playwright": "1.64.1",
+    "prettier": "3.6.2"
+  },
+  "npm_integrity": "package-lock.json"
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "name": "Aster Language Research",
+  "stages": [
+    {
+      "id": "campaign",
+      "name": "Campaign",
+      "type": "training",
+      "observations": {
+        "tokens": {
+          "state": "estimated",
+          "value": "120000000000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "window": {
+          "state": "estimated",
+          "value": "30",
+          "unit": "day",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "effective_fraction": {
+          "state": "assumed",
+          "value": ".85",
+          "unit": "ratio",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      },
+      "model": "30B dense model exact revision unresolved"
+    },
+    {
+      "id": "ingestion",
+      "name": "Ingestion",
+      "type": "transfer",
+      "observations": {
+        "bytes": {
+          "state": "estimated",
+          "value": "60",
+          "unit": "TB",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "window": {
+          "state": "estimated",
+          "value": "12",
+          "unit": "hour",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        }
+      }
+    },
+    {
+      "id": "recovery",
+      "name": "Recovery",
+      "type": "checkpoint",
+      "observations": {
+        "checkpoint_bytes": {
+          "state": "assumed",
+          "value": "2",
+          "unit": "TiB",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "save_window": {
+          "state": "estimated",
+          "value": "120",
+          "unit": "s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "recent": {
+          "state": "estimated",
+          "value": "4",
+          "unit": "count",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "daily": {
+          "state": "estimated",
+          "value": "30",
+          "unit": "count",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        }
+      },
+      "storage_tier": "file"
+    },
+    {
+      "id": "corpus",
+      "name": "Corpus",
+      "type": "data",
+      "observations": {
+        "bytes": {
+          "state": "estimated",
+          "value": "60",
+          "unit": "TB",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        }
+      },
+      "storage_tier": "object"
+    }
+  ],
+  "edges": [],
+  "scenarios": [
+    {
+      "id": "campaign",
+      "name": "Training and checkpoint stress",
+      "active_stages": [
+        "campaign",
+        "recovery",
+        "corpus"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    },
+    {
+      "id": "preload",
+      "name": "Precampaign ingestion",
+      "active_stages": [
+        "ingestion",
+        "corpus"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    }
+  ],
+  "tenancy": "single"
+}

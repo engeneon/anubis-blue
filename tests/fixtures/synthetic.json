@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "name": "Synthetic placement oracle",
+  "stages": [
+    {
+      "id": "serving",
+      "name": "Serving",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "known",
+          "value": "100",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "known",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "output_tokens": {
+          "state": "known",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        }
+      },
+      "fingerprint": {
+        "model": "synthetic-dense-v1",
+        "runtime": "synthetic-runtime-v1",
+        "precision": "bf16",
+        "input_distribution": "fixed-2000",
+        "output_distribution": "fixed-400",
+        "slo": "ttft-p95-1s-itl-p95-50ms",
+        "cache": "cold",
+        "parallelism": "TP4",
+        "quality": "synthetic-only"
+      },
+      "platforms": [
+        "B200_TEST_ONLY"
+      ]
+    }
+  ],
+  "edges": [],
+  "scenarios": [
+    {
+      "id": "node_loss",
+      "name": "One-node loss",
+      "failed_nodes": 1,
+      "multiplier": "1"
+    }
+  ],
+  "tenancy": "single"
+}

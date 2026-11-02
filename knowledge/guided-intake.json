@@ -1,0 +1,86 @@
+{
+  "version": "guided-1.0",
+  "policy": {
+    "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+    "sensitivity_percent": "30",
+    "compute_efficiency": "0.35",
+    "memory_efficiency": "0.50",
+    "minimum_service_fraction": "1",
+    "accept_capacity_shortfall": false,
+    "bytes_per_token": "4",
+    "protocol_allowance": "1.2",
+    "assumptions_accepted": true,
+    "expansion_lead_days": 90,
+    "source": "Anubis guided-1.0 planning defaults, consultant accepted; not measured"
+  },
+  "serving": {
+    "model": "dense8b",
+    "parallel_gpus": 1,
+    "concurrent_sequences": 32,
+    "context_tokens": 8192,
+    "weight_bytes": "2",
+    "kv_bytes": "2",
+    "workspace_GB": "8",
+    "training_bytes_per_parameter": "16",
+    "activation_GB_per_gpu": "32",
+    "host_ram_GB_per_gpu": "256",
+    "local_disk_GB_per_gpu": "3840",
+    "cpu_cores_per_gpu": 16
+  },
+  "patterns": [
+    {
+      "id": "direct",
+      "name": "Direct model service",
+      "description": "Answer, classify or translate with a model.",
+      "sizing": "GPU planning estimate available after essential workload inputs."
+    },
+    {
+      "id": "retrieval",
+      "name": "Document or search assistant",
+      "description": "Search information before producing an answer.",
+      "sizing": "GPU planning estimate available after essential workload inputs."
+    },
+    {
+      "id": "agent",
+      "name": "Agent or multi-step workflow",
+      "description": "Choose actions, use tools or repeat model calls.",
+      "sizing": "GPU planning estimate available after essential workload inputs."
+    },
+    {
+      "id": "batch",
+      "name": "Batch processing",
+      "description": "Process a collection of items by a deadline.",
+      "sizing": "GPU planning estimate available after essential workload inputs."
+    },
+    {
+      "id": "stream",
+      "name": "Continuous processing",
+      "description": "Process live audio, video or other arriving events.",
+      "sizing": "Requires a specialised sizing model"
+    },
+    {
+      "id": "generation",
+      "name": "Content generation",
+      "description": "Create images, audio or video.",
+      "sizing": "Requires a specialised sizing model"
+    },
+    {
+      "id": "adaptation",
+      "name": "Model adaptation",
+      "description": "Modify an existing model with customer training data.",
+      "sizing": "Requires a specialised sizing model"
+    },
+    {
+      "id": "training",
+      "name": "Model training",
+      "description": "Train from scratch or continue pretraining.",
+      "sizing": "GPU planning estimate available after essential workload inputs."
+    },
+    {
+      "id": "other",
+      "name": "Other GPU application",
+      "description": "Simulation, scientific computing or another workload outside the AI library.",
+      "sizing": "Specialist measurements required; no text-model substitution"
+    }
+  ]
+}

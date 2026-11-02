@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "name": "Meridian Industrial Services",
+  "stages": [
+    {
+      "id": "assistant",
+      "name": "Assistant",
+      "type": "inference",
+      "observations": {
+        "users": {
+          "state": "estimated",
+          "value": "1200",
+          "unit": "count",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "interval": {
+          "state": "estimated",
+          "value": "120",
+          "unit": "s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "extra_calls": {
+          "state": "assumed",
+          "value": ".25",
+          "unit": "ratio",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "input_tokens": {
+          "state": "unknown",
+          "reason": "Prompt distribution not supplied"
+        },
+        "output_tokens": {
+          "state": "unknown",
+          "reason": "Estimated 300\u2013700 tokens is not a qualified distribution"
+        }
+      },
+      "model": "unresolved",
+      "notes": "Private RAG assistant; retrieval and tool workload measurements pending."
+    },
+    {
+      "id": "reports",
+      "name": "Reports",
+      "type": "batch",
+      "observations": {
+        "jobs": {
+          "state": "estimated",
+          "value": "30000",
+          "unit": "count",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "window": {
+          "state": "estimated",
+          "value": "8",
+          "unit": "hour",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        }
+      },
+      "notes": "Report-to-model-call expansion remains unresolved; one call per report is not established."
+    },
+    {
+      "id": "documents",
+      "name": "Documents",
+      "type": "data",
+      "observations": {
+        "bytes": {
+          "state": "estimated",
+          "value": "8",
+          "unit": "TB",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "free_fraction": {
+          "state": "unknown",
+          "reason": "Reserve not agreed"
+        }
+      },
+      "storage_tier": "object"
+    }
+  ],
+  "edges": [],
+  "scenarios": [
+    {
+      "id": "day",
+      "name": "Daytime assistant",
+      "active_stages": [
+        "assistant",
+        "documents"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    },
+    {
+      "id": "overnight",
+      "name": "Overnight reports",
+      "active_stages": [
+        "reports",
+        "documents"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    }
+  ],
+  "tenancy": "single"
+}

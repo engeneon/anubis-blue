@@ -1,0 +1,38 @@
+import {chromium} from '/Users/trai/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const out='deliverables/mvp-human-playbook', name='Cedar Engineering Review';
+const identity=JSON.parse(readFileSync('.anubis/identities.json','utf8')).find(x=>x.id==='local-owner');
+const browser=await chromium.launch({headless:true,executablePath:'/Users/trai/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'});
+const page=await browser.newPage({viewport:{width:1280,height:920},deviceScaleFactor:1.5});page.setDefaultTimeout(15000);
+const evidence={name,url:'http://127.0.0.1:8787',screens:[],errors:[],started:new Date().toISOString()};
+page.on('pageerror',e=>evidence.errors.push(e.message));
+const click=async name=>page.getByRole('button',{name,exact:true}).click();
+const fill=async(label,value)=>page.getByLabel(label,{exact:true}).fill(value);
+const shot=async(name,locator)=>{if(locator){await locator.scrollIntoViewIfNeeded();await locator.screenshot({path:out+'/screenshots/'+name+'.png'});}else await page.screenshot({path:out+'/screenshots/'+name+'.png'});evidence.screens.push(name);};
+const panel=title=>page.getByRole('heading',{name:title,exact:true}).locator('..');
+const focus=async(name,label)=>{await page.getByLabel(label,{exact:true}).evaluate(e=>e.scrollIntoView({block:'start'}));await shot(name);};
+const download=async(label,file)=>{const [d]=await Promise.all([page.waitForEvent('download'),click(label)]);await d.saveAs(out+'/'+file);return readFileSync(out+'/'+file,'utf8');};
+try{
+await page.goto(evidence.url);await shot('01-sign-in');await fill('Access token',identity.token);await click('Open workspace');
+await shot('02-start',panel('From workload to requirements'));
+await click('New engagement');await fill('Customer workload name',name);await click('Add Document or search assistant');await focus('03-choose','Customer workload name');
+await click('Continue');await page.getByLabel('Do activities run at the same time?',{exact:true}).selectOption('yes');await fill('Component name 1','Engineering answers');await page.getByLabel('Search and indexing location 1',{exact:true}).selectOption('external');await focus('04-arrangement','Factory users');
+await click('Continue');await fill('Peak requests per minute','40');await fill('Model calls per request or job','1');await fill('Input tokens per model call','2000');await fill('Output tokens per model call','500');await focus('05-demand','Model preset');
+await page.getByText('Data capacity and growth',{exact:true}).click();await focus('06-data','Locally retained data in TB');
+await page.getByText('Factory networks and customer datacenter connection',{exact:true}).click();await focus('07-networks','Initial dataset to load in TB');await focus('08-network-policy','Usable link fraction');
+await fill('Customer context and measurement notes','Existing search and its 4 TB document corpus remain outside this AI Factory. No corpus copy is requested. Busy-hour demand is 2400 questions / 60 = 40 requests per minute. One model call per question. dense8b and 2000 input / 500 output tokens are explicit planning assumptions. No latency guarantee.');
+await click('Continue');await page.getByLabel('Use these planning assumptions',{exact:true}).check();await page.getByRole('heading',{name:'Review your first estimate',exact:true}).evaluate(e=>e.scrollIntoView({block:'start'}));await shot('09-review');
+await click('Calculate estimate');await page.getByRole('heading',{name:'Workload analysis',exact:true}).waitFor();
+await shot('10-system',page.getByRole('region',{name:'Your application architecture',exact:true}));
+await shot('11-summary',panel('Your requirements at a glance'));await shot('12-gpus',panel('GPU workload comparison'));await shot('13-networks',panel('Four network requirements'));
+const result=JSON.parse(await download('Export result','result.json'));await download('Download requirements summary','requirements.txt');
+assert.equal(result.planning.raw_gpus,8);assert.equal(result.planning.initial_gpus,256);assert.deepEqual(result.planning.storage,[]);assert.equal(result.planning.networks.external_customer_datacenter.initial_load_link_Gbps,null);
+for(const h of result.planning.hardware_comparison)assert.equal(h.raw_gpus,8);
+await click('Continue to Design handoff');await shot('14-handoff',panel('Prepare an existing-field intake'));await click('Prepare projection');await shot('15-executive',panel('AI Factory design executive summary'));
+await download('Download executive summary','executive-summary.txt');await download('Download design intake','design-intake.json');await download('Download companion specification','companion.json');
+await fill('Completion notes','Planning requirements delivered for architectural review. External document corpus remains outside this AI Factory. Network measurements remain to be confirmed.');await page.getByLabel('I confirm that these selected requirements are delivered.',{exact:true}).check();await shot('16-complete',panel('Complete this engagement'));await click('Complete engagement');await page.getByRole('heading',{name:'Saved deliverables',exact:true}).waitFor();await shot('17-saved');
+await page.reload();await click('Cases');const row=page.locator('.engagement-row').filter({hasText:name}).last();await shot('18-case',row);await row.getByRole('button',{name:'View engagement',exact:true}).click();await page.getByRole('button',{name:'Download complete engagement record',exact:true}).waitFor();await shot('19-retrieved');const record=JSON.parse(await download('Download complete engagement record','completed-engagement.json'));assert.deepEqual(record.data.result_snapshot.result.planning,result.planning);
+assert.equal(evidence.errors.length,0);evidence.passed=true;evidence.result={workload_gpus:8,factory_gpus:256,required_GB_per_gpu:result.planning.required_GB_per_gpu,comparisons:result.planning.hardware_comparison.map(x=>({gpu:x.platform,gpus:x.raw_gpus})),local_storage_tiers:0};
+}catch(e){await page.screenshot({path:out+'/screenshots/failure.png'});evidence.error=String(e);throw e;}finally{evidence.finished=new Date().toISOString();writeFileSync(out+'/validation.json',JSON.stringify(evidence,null,2));await browser.close();}
+console.log('GUI walkthrough completed and saved results verified.');

@@ -1,0 +1,6 @@
+Anubis customer-facing writing
+Use periods or bullet points instead of semicolons as sentence separators.
+Use readable deployment labels. Keep stable identifiers in technical details only.
+Every user guide and playbook must include first-login access-token instructions.
+Describe all four network roles. Storage networking is physically dedicated and never converged.
+Never print actual access tokens in documentation, logs, screenshots or exports.

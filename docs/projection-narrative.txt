@@ -1,0 +1,17 @@
+Deterministic projection narrative
+
+Version: projection-narrative-1.0
+Implementation: ui/src/projection-summary.ts
+
+The executive summary is a pure rendering of a saved projection. No model service is called. Fixed conditions select sentences and insert formatted values. The same input produces the same ordered bullets. Display rounding never changes the underlying calculation or export payload.
+
+Each bullet retains its source-field paths. Workload GPU estimates, selected factory anchors and projected intake counts have separate sentences. Equivalent workload copies are compute-only capacity, never a tenant guarantee. Unknown values remain unresolved. Numeric zero is not treated as missing. Empty shared-storage tiers do not establish zero storage demand. Platform mapping does not prove physical compatibility. Network lower bounds are not recommended circuit sizes. The companion specification and mapping ledger remain authoritative details.
+
+The current renderer covers planning projections. If planning fields are absent, it reports that the relevant values are not established rather than inventing them. It does not infer an application's purpose, training/inference percentage, external corpus size or vendor suitability when the projection does not contain those facts.
+
+Repeatable checks
+npm run build
+node tests/test_projection_summary.mjs
+npm run test:ui
+
+The narrative test covers the document-assistant projection, repeatability, source references, architecture anchor versus workload demand, unknown versus zero, undersized configurations and tenancy/storage-policy branches. The browser test prepares a projection and checks the visible summary and download action.

@@ -1,0 +1,235 @@
+# Anubis Agentic AI Technical Architecture
+Optional consultant assistance for deterministic workload sizing
+Version 1.0 | 1 November 2026 | Implementation specification
+Author: Traiano Giuseppe Welcome
+Email: traiano@gmail.com
+
+## 1 Purpose and architecture decision
+Anubis will provide an optional Consultant Copilot that helps a consultant describe an application, identify its architecture, obtain useful workload measurements and interpret AI Factory requirements. The copilot will operate through a controlled agent harness. The existing deterministic application remains the authority for validation, calculations, configuration selection and design handoff.
+This document consolidates the business case, user experience, component architecture, data contracts, model and MCP integration, security controls, implementation sequence and acceptance criteria. It is intended for product owners, architects, developers and test engineers implementing the feature. Requirements expressed as must are Anubis design decisions, not assertions of compliance with an external standard.
+The first release should use one assistant with a small set of narrowly defined tools. It should extend the existing application service and workload builder. A multi-agent platform, general-purpose autonomous operator and new distributed infrastructure are unnecessary for the initial customer outcome.
+The defining guarantee is that identical accepted inputs, calculation policies, knowledge packs and engine versions produce identical semantic sizing results, whether inputs were entered manually or proposed by an assistant. Language model conversations need not be reproducible. The accepted input snapshot and sizing calculation must be reproducible.
+### Scope and implementation status
+The repository contains guided workload and characterization operations, compilation, comparison and target-specific projection routes. These are integration points, not evidence that the complete copilot described here is implemented. The proposal-review workflow, provider capability registry, assistant sessions and associated UX are additions specified by this document. Existing authorization and agent compilation limits should be reused after verification, not bypassed.
+This specification complements the Anubis Workload Sizing Methodology Version 2.0 and the existing technical and UX architecture documents. It does not replace the sizing methodology or enlarge the currently supported workload families through natural-language claims.
+### Reading guide
+Sections 2 and 3 establish customer value and authority. Sections 4 through 8 define the system, UX and contracts. Sections 9 and 10 cover operation and testing. Sections 11 and 12 define delivery and an end-to-end example. Section 13 records references and decisions.
+@page
+## 2 Business case and product scope
+The customer problem is the effort required to translate a business application into a credible workload description. A consultant may understand the application but not know which measurements matter, which architecture pattern applies or how to interpret the resulting GPU, storage and network requirements. An assistant has value when it reduces that translation effort and makes assumptions visible.
+The copilot should help the user reach a useful first estimate with a small set of essential inputs, then refine it. It should not turn every engagement into a comprehensive technical questionnaire. Unknown values remain unknown or become visibly accepted planning assumptions. An LLM response never converts an assumption into measured evidence.
+| Priority | Capability | Customer outcome |
+| Initial | Conversational discovery and architecture mapping | A reviewable workload draft from ordinary language |
+| Initial | Contextual questions and measurement guidance | Fewer unnecessary questions and clearer ways to obtain inputs |
+| Initial | Explanation of saved engine results | Understand the drivers of GPU count and infrastructure requirements |
+| Next | Document and telemetry extraction | Less manual transcription with source locations retained |
+| Next | Bounded scenario comparisons | Compare alternatives without losing the accepted baseline |
+| Later | Downstream design loop and evidence research | Reduce handoff effort and propose evidence updates for review |
+### Measuring the business benefit
+Establish a manual-builder baseline using the same scenarios and comparable consultant experience. Measure median time to a first usable estimate, completion rate, clarification count, rejected proposed inputs, consultant correction time and support requests. Record whether the output includes the supported GPU comparisons and required infrastructure domains. A faster conversation that creates an incorrect scope is not a success.
+Use the existing 16 scenarios for repeatable regression and add unfamiliar customer scenarios for usability evaluation. Proposed pilot targets are a 25 percent reduction in median completion time with no reduction in completion quality and no increase in critical input errors. These are product targets to test, not demonstrated benefits or performance promises.
+### Cost and commercial discipline
+Estimate benefit per engagement as consultant hours saved multiplied by the loaded hourly cost. Subtract model usage, document processing, hosting, support and the amortized implementation cost. Capture actual usage per engagement and avoid a fixed savings claim until pilot data exists.
+Use a configurable token and tool-call budget, targeted context retrieval and an explicit stop condition. Do not send an entire knowledge library on every turn. Select provider and model profiles using evaluated task quality, data policy and cost, rather than model popularity. A user must be able to complete the engagement with the assistant disabled.
+@page
+## 3 Authority and methodological safeguards
+Harness engineering is the construction of the controlled environment in which a model acts through tools, context, state and feedback [1]. In Anubis, this environment supports interpretation and workflow assistance. The deterministic engine remains a separate domain component. The harness must enforce the boundary in code rather than relying only on instructions to the model.
+| Operation | Assistant authority | Application authority |
+| Interpret a customer statement | Propose fields and architecture patterns | Validate supported patterns and show uncertainty |
+| Change a workload | Submit a structured change proposal | Require user acceptance and create a revision |
+| Calculate GPU or network requirements | Request a permitted compilation | Execute versioned engine calculations |
+| Compare alternatives | Propose bounded scenario variants | Preserve baseline and calculate each variant |
+| Explain a result | Reference saved facts and assumptions | Render authoritative values from the result record |
+| Publish rules or benchmark evidence | Prepare a candidate record only | Require curator review and a versioned release |
+| Send a design handoff | Prepare a preview | Require destination and payload approval before submission |
+### Rules that cannot be delegated
+The engine owns units, arithmetic, memory sizing, deployment rounding, permitted evidence reuse, hardware feasibility and projection mappings. No assistant-generated code, formula or script may execute within the compiler. Provider selection must not change an accepted workload or silently replace a calculation policy.
+Planning results may use the accepted sensitivity envelopes of plus or minus 10, 20 or 30 percent. These are sensitivity scenarios, not measured accuracy or statistical confidence intervals. The assistant must preserve evidence level, applicability limitations and unsupported domains in explanations. It must not introduce exact benchmark matching as a new condition for a planning estimate.
+The preference for smaller initial deployment and later expansion must remain an explicit scenario policy. It must respect platform deployment anchors and expose any unmet demand or service objective. A lower-cost initial option must not be labelled as fully satisfying a workload that it does not meet.
+All relevant output domains remain in scope: GPU count by supported GPU type, required device memory, host resources, storage capacity and performance, east–west, north–south, external customer connectivity, physically dedicated storage networking and tenancy. Missing support is reported per domain. It is not filled in with plausible language.
+### Evidence and knowledge
+The harness reads approved CKP and EKB content using the existing pack conventions. It supplies only relevant records and their versions to the assistant. Draft research or uploaded material stays separate from released packs. Customer acceptance of an extracted value confirms its use in the case, not its truth or benchmark qualification.
+@page
+## 4 Logical architecture and deployment
+@figure architecture
+Figure 1. The copilot proposes actions through the application boundary. It has no direct write path to the compiler, database or released knowledge packs.
+### Components and responsibilities
+The web client retains the architecture diagram, workload forms and results view. A copilot panel displays dialogue, proposals, progress and errors. The application API owns case access, validation, accepted revisions and calculation requests. An agent harness adds session management, context selection, tool dispatch, budget enforcement and review state.
+A model adapter normalizes supported provider requests and responses. Separate MCP clients connect to approved tools and knowledge sources. The knowledge reader resolves approved records by identifier and version. An audit store records action outcomes and provenance. A report presenter renders numerical requirements from saved compilation facts, with optional assistant narrative alongside them.
+Deploy the first release as an optional module of the existing application service. Preserve the C++ compiler boundary and existing web client rather than rewriting them around an agent framework. A separately supervised adapter worker is justified only if an approved SDK or document parser requires a different runtime or stronger isolation. Use versioned JSON messages across that process boundary.
+The local profile can retain local persistence and operate without any model connection. A shared deployment requires organization-scoped identities, provider profiles and case isolation. Anubis application access boundaries are distinct from the tenancy of the AI Factory being sized.
+### Two independent connections
+A model connection provides language-model inference. An MCP connection provides approved tools or contextual resources. MCP defines context exchange and does not itself dictate how an application uses an LLM [2]. A corporate deployment may offer both services, but the UI and configuration must distinguish their roles.
+Anubis may also expose an MCP server for external agents. That server must wrap the same application operations, authorization checks and review requirements. It must not introduce a privileged alternative path. Neither external MCP exposure nor a live design-tool connection is a prerequisite for the initial embedded copilot.
+@page
+## 5 User experience and interaction design
+The interface should preserve the user's mental model of the application. The main workspace remains an architecture diagram and workload editor. The optional right-hand Consultant Copilot panel helps at the current step. Application, Arrangement, Demand, Estimate and Design handoff remain visible workflow stages. Selecting a diagram component focuses its associated inputs and the assistant's context.
+@figure ux
+Figure 2. Proposed workspace layout. The architecture and accepted data remain visible while assistance is offered.
+### Discovery and progressive detail
+A new engagement offers Describe my application and Build it myself. Both routes populate the same draft and use the same supported architecture catalogue. The assistant proposes a common-core pattern or a combination, labels the components in customer language and highlights where measurements are required. It does not invent a new supported sizing model for an unfamiliar architecture.
+Ask one material question at a time, preferably with choices and a Not sure option. Each input offers a definition, why it affects sizing, a practical measurement method and a planning default where supported. Numerical demand questions must remain reachable from New Engagement. Advanced details are available on demand rather than required before a first estimate.
+### Review before application
+A proposed-change card shows UI field, current value, proposed value and unit, source or assumption, and why the change matters. Actions are Apply selected, Edit and Discard. The state labels are Proposed, Applied to draft and Calculated. Application of a proposal must not make an older calculation appear current.
+Use bold dark blue for UI labels, dark green monospace for entered values and clearly styled action controls, consistent with the playbook convention. Also distinguish states using text and icons so meaning does not depend on colour. Keyboard navigation, screen-reader labels and responsive stacking are release requirements.
+### Results and terminology
+Show authoritative result cards for workload GPU demand and the selected deployment anchor separately. Explain what limits the estimate and what additional measurement would improve it. A count of repeated workload servings must identify whether it is compute-only or checked across all relevant domains.
+Use Outside this AI Factory for placement and offer examples such as an existing customer datacenter, managed search service or cloud object store. Clarify that scope is not the same as geography. Use downstream AI Factory design tool or process in the customer narrative. Connector-specific names remain available where needed to identify a real export target.
+@page
+## 6 Model services and MCP configuration
+### Model connection settings
+Administrators create approved connection profiles. Consultants select from permitted profiles rather than entering credentials into a chat. A local single-user installation may expose the same controls to its owner. The assistant may also be disabled globally or for a case.
+| Setting | Required behaviour |
+| Connection type | Direct provider, corporate gateway, private endpoint or disabled |
+| Provider and endpoint | OpenAI API, Anthropic Claude, DeepSeek, xAI Grok or a validated gateway adapter |
+| Model identifier | Explicit configured identifier and recorded revision where available |
+| Authentication | Backend secret reference with restricted access and rotation |
+| Capabilities | Tested structured output, tool calls, streaming and context limits |
+| Data policy | Permitted case classifications, destinations, redaction and retention |
+| Budget | Per-turn, per-session and organization usage limits |
+| Health | Connection test, capability test and last successful check |
+Do not imply that a consumer chat subscription supplies API access. Setup help must identify the selected provider's API credentials and billing requirements. Verify provider-specific authentication, SDK and API details during adapter implementation. This architecture intentionally does not hard-code model names, prices or assumed feature parity.
+A provider adapter exposes generate, cancel and capability discovery through a normalized interface. Requests include messages, context references, permitted tool schemas, output schema, timeout and budget. Responses include structured proposals or tool requests, usage, provider request ID, finish reason and typed errors. Tool arguments must be independently validated after parsing.
+A profile that fails the structured proposal tests is restricted to explanation-only mode or disabled. There is no silent fallback from a corporate endpoint to a public provider. Switching providers must respect case data policy and create an audit event. Historical calculations remain unchanged.
+### Tools and Knowledge settings
+Configure MCP servers separately, including endpoint, protocol version, authentication reference, permitted tools, resource scope, data classification and timeout. Tool discovery is informational. New or changed tools are not automatically authorized. Pin approved schemas and require review of material changes.
+A corporate MCP server that exposes a custom model-inference tool can be supported through an explicit adapter contract, including structured output, error, usage and cancellation semantics. A generic MCP endpoint must not be presented as an interchangeable model endpoint. This compatibility path is optional and follows the standard model-provider abstraction.
+### Credentials and data destinations
+Credentials stay on the backend and never enter prompts, browser storage, exported reports or logs. Anubis login credentials, provider API credentials and MCP credentials are different objects. Connection screens must explain their purpose without asking the user to paste any secret into conversation text.
+@page
+## 7 Data architecture and lifecycle
+The accepted workload revision is the engineering source of truth. Conversation history is supporting context. The harness must be able to recover accepted facts without reconstructing them from a transcript or an assistant-generated summary.
+| Entity | Minimum persisted fields |
+| AgentSession | Session ID, organization, case, actor, base revision, connection profile, status and budget |
+| InputProposal | Proposal ID, schema version, base revision, field changes, units, basis, sources and expiry |
+| SourceReference | Artifact ID and digest, page or record location, observed time, classification and origin |
+| ReviewDecision | Actor, selected changes, decision, timestamp and resulting revision |
+| AgentAction | Action ID, tool and schema version, redacted arguments, authorization decision, outcome and duration |
+| CompilationReference | Run ID, accepted input digest, engine and pack versions, policy digest and semantic result digest |
+| ProviderExecution | Profile, model, adapter and prompt versions, request ID, usage and error category |
+| HandoffRecord | Target profile, payload digest, mapping ledger, approval, submission ID and remote status |
+### Proposal contract
+An InputProposal contains allowlisted field-level replacements, not arbitrary database operations or executable JSON patch paths. Each change has a stable field identifier, expected prior value, proposed typed value, unit, basis and source references. Basis values distinguish customer statement, extracted observation and planning assumption. Include a short rationale for review, not private model reasoning.
+For example, a proposal may set a component's peak request rate to 12 request/s, with basis customer statement and a reference to the relevant message. If the statement was 12 requests per minute, the application must reject an inconsistent unit interpretation or present a deterministic conversion. The language model must not silently reinterpret the time basis.
+### State transitions and concurrency
+A proposal progresses from proposed to validated to accepted or rejected. Accepted proposals produce a new draft revision through an atomic application operation. A calculation freezes a specific revision and binds it to engine, packs and policy. Later edits make the displayed result stale until recalculated.
+Review uses optimistic concurrency with the expected base revision. A stale proposal must be revalidated and reviewed against the current draft, not applied blindly. Retried mutations carry an idempotency key scoped to actor, case and operation. A repeated key with a different payload is rejected. Proposal application and its audit record commit together.
+### Retention and replay
+Persist the structured inputs and versioned dependencies needed for calculation replay. Transcript retention can be shorter and configurable. Redaction or deletion must not leave a false claim that unavailable evidence can be reproduced. Store decision summaries, source links and tool outcomes. Do not require storage of hidden model chain-of-thought.
+@page
+## 8 Tools and application API contracts
+All new user and administrative operations must be available through the application API. The GUI, embedded assistant and optional external MCP facade use the same authorization rules. The following names are proposed contracts to map into the existing routing conventions, not claims of deployed endpoints.
+| Proposed operation | Access and side effect |
+| Read case context and approved patterns | Case-scoped read, filtered by role and classification |
+| Create assistant session or message | Create session state and consume permitted model budget |
+| Propose input changes | Store a proposal, never alter accepted inputs |
+| Validate proposal | Return field diagnostics and supported-model gaps |
+| Apply reviewed proposal | User-authorized atomic revision update with conflict check |
+| Compile accepted revision | Invoke existing compilation with run limits and immutable inputs |
+| Read result facts | Retrieve saved facts, assumptions, evidence and domain status |
+| Fork and compare scenarios | Create bounded variants without replacing the baseline |
+| Prepare design handoff | Produce payload preview and mapping ledger |
+| Submit approved handoff | Separate authorized operation bound to payload and destination |
+### Execution sequence
+The harness authenticates the user, loads the permitted case snapshot and chooses relevant approved context. It sends the model only the tool set authorized for the current task. A requested tool call is parsed, schema-validated, authorized again and checked against budget before dispatch. Returned data is treated as data, not as new instructions.
+Bound the loop by elapsed time, tokens and tool calls. A useful initial default is six tool calls per turn and a 60-second turn deadline, configurable by deployment and evaluated for usability. Long compilation jobs return a job identifier and progress. Do not hold a model request open indefinitely while waiting for computation.
+Read and explanation tools may run within the user's selected mode without repeated confirmation. The user's Apply selected action authorizes that exact input change. A bounded comparison request can authorize its stated variant set. Submission approval must bind the destination and exact payload digest. The assistant cannot approve its own actions.
+### Result presentation contract
+Numerical cards, tables and exports are rendered from result fact identifiers, not parsed out of generated prose. The assistant may describe why a constraint binds, but quantitative statements must reference engine facts. Prefer templated value insertion. If a referenced fact is missing, stale or inconsistent, omit that claim and show a validation message.
+Projection preserves the current downstream adapter, including Neon-compatible formatting and existing field names internally. The public narrative remains generic. Unsupported target fields belong in a companion specification with an explicit mapping status. Successfully producing a file does not imply that a downstream service accepted it or that an architecture is qualified.
+@page
+## 9 Security operations and failure handling
+### Trust boundaries
+Treat customer documents, retrieved passages, MCP results and model outputs as untrusted content. None may redefine system policy, authorize tools, change evidence status or request secrets. Tool and resource authorization is enforced outside the model. An assistant role receives only case-scoped permissions and cannot directly access the database, shell or arbitrary filesystem.
+Apply access checks both when retrieving context and when resolving source links. Prevent one organization's context, cache entries or sessions from leaking into another. Enforce configured outbound destinations and protect endpoint configuration against server-side request forgery, including private network and metadata endpoints unless explicitly permitted for a corporate deployment.
+Document ingestion requires file size and type limits, isolated parsing and safe handling of embedded content. Extracted facts remain proposals. Approved pack publication requires a separate curator role. MCP server identity, tool schema changes and requested scopes are checked before connection or invocation.
+### Failure behaviour
+| Condition | Required user-visible behaviour |
+| Provider unavailable or rate limited | Preserve draft, offer retry or manual continuation |
+| Malformed model output | Reject it, allow a bounded repair attempt, then provide manual controls |
+| Budget exhausted | Stop agent execution and show consumed budget and next actions |
+| Unsupported workload pattern | Explain the unsupported scope and retain known inputs |
+| Stale proposal or result | Show the conflicting revision and require refresh or recalculation |
+| Cancel or timeout during mutation | Resolve the persisted action status before retrying |
+| Downstream submission timeout | Mark status unknown and reconcile before any repeat submission |
+Never retry an external write blindly. Use an idempotency mechanism where the target supports it. Otherwise reconcile by external reference or require a clear user decision after showing the uncertain outcome. Failure of the copilot must not take down the deterministic builder or prevent opening existing results.
+### Observability and operational controls
+Record success rate, latency, usage, validation failures, rejected proposals, approval events and tool errors with correlation IDs. Redact sensitive payloads from routine logs. Provide administrative disable switches for the feature, a provider and an MCP server. Set retention and access policy for diagnostic transcripts separately from engineering artifacts.
+Version prompts, tool schemas, adapters and evaluation datasets. Roll out behind a feature flag and retain the ability to disable assistance without data migration rollback. A model update is a behavioural change requiring evaluation, even when its API signature remains unchanged.
+@page
+## 10 Validation and release acceptance
+Validation has two distinct purposes. Deterministic tests prove that the harness cannot bypass application rules. Agent evaluations assess how well a model interprets a customer's intent. Passing the former does not prove the latter. Agent behaviour varies across attempts, so evaluation includes repeated trials [1].
+| Gate | Repeatable test and acceptance condition |
+| Calculation equivalence | Manual and accepted assistant inputs produce identical semantic results for the same engine and packs |
+| Input integrity | Invalid dimensions, unsupported fields and fabricated source IDs are rejected in all fixtures |
+| Review enforcement | No accepted-input mutation without the corresponding authorized decision |
+| Result fidelity | Every displayed quantitative claim resolves to the current compilation fact or a labelled input |
+| Isolation | Cross-case and cross-organization access attempts fail with no information disclosure |
+| Injection resistance | Malicious documents and tool results cannot invoke forbidden actions or alter policy |
+| Concurrency | Stale proposals fail safely and duplicate requests cause no duplicate revision or submission |
+| Failure continuity | Provider failure and cancellation preserve usable manual workflow and recorded action state |
+| Handoff integrity | Existing target contract tests pass, with explicit unsupported-field and substitution handling |
+| Accessibility | Keyboard and screen-reader journeys complete discovery, review and result inspection |
+### Evaluation design
+Use all 16 existing scenarios with reviewed expected architecture patterns, scope, units, material assumptions and acceptable input interpretations. Ambiguous descriptions may have several valid drafts. Grade whether the assistant asks the required clarification or exposes a justified assumption rather than expecting identical wording.
+Run at least three independent trials per scenario for each release candidate model profile. Add adversarial documents, contradictory statements, provider outages, stale revisions and unknown architectures. Preserve a held-out set of newly written scenarios to reduce overfitting. A random scenario journey is a useful demonstration, but is not a substitute for the full regression suite.
+Critical failures include unauthorized writes, lost scope boundaries, invented measurements, credential disclosure and unsupported calculations presented as validated. Release requires zero critical failures in the defined suite. This is a bounded test result, not a guarantee of perfect future behaviour. Human review remains necessary for interpretation and acceptance.
+### Practical verification strategy
+Use stubbed model responses for deterministic CI tests of schemas, authorization and state transitions. Run live-provider evaluations separately under controlled budgets and approved data policy. Record provider, model, prompt and adapter versions. Re-evaluate when any of these changes materially.
+Performance qualification of GPU or network predictions remains a separate methodology activity. Hybrid public evidence and local design-contract tests are the current qualification path. This copilot architecture does not authorize paid GPU benchmark runs or imply live downstream deployment validation.
+@page
+## 11 Delivery plan and implementation boundaries
+Deliver usable assistance in small increments while keeping every existing manual route operational. Each increment includes tests and an observable completion condition. Avoid adding a general workflow framework where a typed operation and a state transition are sufficient.
+| Increment | Deliverable | Completion evidence |
+| 1 Baseline | Existing API and authorization inventory, manual journey and input snapshots | Reproducible baseline across the 16 scenarios |
+| 2 Contracts | Proposal, provenance, review and concurrency schemas | Validation, conflict and idempotency tests |
+| 3 Model connection | Provider interface, secret references, one approved adapter and disabled mode | Capability, policy, timeout and secret-handling tests |
+| 4 Discovery UX | Copilot panel, pattern proposals, measurement help and diagram focus | New Engagement reaches numerical intake and review |
+| 5 Controlled application | Apply selected, revision creation and compilation integration | Mutation authorization and calculation equivalence tests |
+| 6 Results | Fact-bound explanations and domain-specific limitations | Numeric fidelity and stale-result tests |
+| 7 Pilot release | Budget controls, audit events and evaluated model profile | Full safety suite and measured usability comparison |
+| 8 Further integration | Additional providers, document extraction, comparisons and approved MCP | Separate adapter and feature acceptance suites |
+| 9 Design loop | Preview, approval, submission and status reconciliation | Local contract tests and later authorized live validation |
+### Initial release scope
+The first usable release includes architecture discovery, structured input proposals, contextual help, reviewed application and explanation of saved results. It includes model settings and operational controls. Start with the organization's selected model provider or gateway behind a provider-neutral interface. The remaining requested providers are added through the same adapter contract and their own qualification, not assumed compatible because they accept similar JSON.
+Document ingestion, remote MCP tools, automated evidence research and external write operations follow once the initial workflow demonstrates value. Optional features must remain independently switchable. No step requires automatic publication of knowledge, autonomous procurement or unreviewed changes to accepted design requirements.
+### Repository integration and economics
+Extend existing guided-workloads, characterizations, compilations, comparisons and projection operations. Keep harness code out of src/compiler. Reuse the application's schema, persistence and test conventions. Update guides with connection setup, credential distinctions, proposal review and manual fallback. Preserve the playbook input table, measurement appendix and actual workflow diagrams.
+Estimate effort after identifying reusable controls. Track delivery against customer outcomes. New infrastructure dependencies require a documented benefit that cannot reasonably be achieved within the existing application.
+@page
+## 12 Worked interaction and design handoff
+A fictional retailer wants an internal assistant that answers product and procedure questions from documents. The consultant says that 600 staff may use it, the documents occupy 4 TB, and a search service already runs in the customer datacenter. These facts are insufficient to derive a peak request rate. The assistant must not convert the number of staff into requests per second without an explicit activity assumption.
+### Discover the arrangement
+The copilot proposes a retrieval-assisted application with an interactive generation component inside the factory and search outside this AI Factory. The architecture diagram shows users, the factory boundary, generation, the search service and source documents. It asks whether document copies or indexes will also be stored inside the factory. The 4 TB source corpus is not silently treated as a measured index footprint or duplicated local storage requirement.
+### Obtain the minimum demand inputs
+The consultant supplies a peak of 12 requests per second from a service log and accepts a planning assumption for typical input and output lengths from an approved preset. The proposal card shows each value, unit, basis and source. It asks the material initial-data-transfer question only if data will actually be loaded into the factory. An external search service does not by itself imply copying the full corpus.
+The consultant selects Apply selected. The application validates the fields and creates a new revision. The diagram and form update together. The user requests an estimate for the supported B300, B200 and H200 profiles. Anubis compiles the frozen revision and presents results from the engine. This illustrative interaction specifies behaviour, not measured GPU counts.
+### Explain the estimate
+The copilot identifies the binding compute or memory constraint using returned fact references. The results distinguish workload allocation, deployment anchor, memory requirement, platform memory capacity and any conditional feasibility. Unsupported domains and assumptions remain visible. The assistant suggests the next measurement based on engine diagnostics or a bounded sensitivity comparison, not an invented numerical impact.
+The network view distinguishes external datacenter connectivity, factory north–south, east–west and the dedicated storage fabric. It explains which traffic is the same flow observed at different boundaries so the user does not add capacities indiscriminately. If the engine lacks a required flow model, the omission remains a recorded design obligation.
+### Prepare the downstream package
+The user selects Prepare design handoff. Anubis shows the target payload, generic requirements dossier and companion specification. Missing target support is explicit. A GPU substitution changes only the proposed target representation and requires review. It must not silently rewrite the intended hardware requirement.
+A local export needs no claim of a live connection. If a connected submission is requested, the user approves the exact destination and payload. The recorded remote status is shown separately from Anubis compilation success. A failed or uncertain submission leaves the accepted sizing result available for manual design use.
+@page
+## 13 Decisions references and ownership
+### Architecture decisions
+| Decision | Rationale |
+| One optional copilot | Delivers interpretation and explanation with limited operating complexity |
+| Deterministic core remains independent | Preserves sizing reproducibility and manual operation |
+| Reviewable structured proposals | Separates language interpretation from accepted engineering inputs |
+| Separate model and MCP configuration | Makes inference, tool access and data destinations understandable |
+| Existing API as the authority boundary | Avoids parallel permissions and duplicate business logic |
+| Engine-owned result values | Prevents fluent explanations from becoming numerical authority |
+| Versioned context and audit records | Supports investigation and calculation replay without requiring identical dialogue |
+| Progressive rollout | Proves customer value before expanding autonomy or integrations |
+### Ownership and release responsibilities
+The product owner owns the supported journeys, usability targets and initial provider priority. The methodology owner owns calculation policies, sensitivity interpretation and permitted evidence use. The application team owns contracts, authorization, revisions and replay. The integration team owns provider and MCP adapters. The deployment administrator owns credentials, destinations and retention. The consultant owns acceptance of case assumptions. Release approval combines technical test evidence with reviewed user outcomes.
+These responsibilities may be held by the same people in a small team. They remain distinct decisions. A model-provider change cannot approve a methodology change, and a consultant's acceptance cannot promote an unqualified benchmark into released evidence.
+### Internal implementation references
+Methodology: docs/anubis-framework-v2.txt. Solution architecture: docs/anubis-technical-architecture.md. UX baseline: docs/anubis-ux-data-gui-architecture.md.
+Integration routes: src/application/service.cpp. Pattern catalogue: knowledge/architecture-core.json. Regression scenarios: tests/fixtures/architecture-scenarios.json. Earlier architecture documents describe intended capabilities, not certified implementation completeness.
+### External references
+[1] Anthropic. Demystifying evals for AI agents. Published 9 January 2026. Defines agent harnesses and discusses repeatable agent evaluation. Accessed 1 November 2026.
+https://www.anthropic.com/research/demystifying-evals-for-ai-agents
+[2] Model Context Protocol. Architecture overview. Documentation version 2026-07-28. Describes context exchange, clients, servers and tools independently of a particular language model. Accessed 1 November 2026.
+https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture

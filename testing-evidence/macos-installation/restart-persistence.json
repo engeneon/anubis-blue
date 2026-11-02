@@ -1,0 +1,13 @@
+{
+  "timestamp_utc": "2026-11-02T19:36:15.835839+00:00",
+  "passed": true,
+  "checks": [
+    "first-launch private token bootstrap",
+    "identity unchanged after restart",
+    "same token authenticates after restart",
+    "case list unchanged",
+    "saved case unchanged",
+    "saved workload draft unchanged"
+  ],
+  "scope": "Isolated launcher and database on existing macOS toolchain. Normal process restart. Not crash, power-loss or pristine OS qualification."
+}

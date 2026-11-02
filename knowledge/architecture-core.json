@@ -1,0 +1,222 @@
+{
+  "version": "architecture-core-1.0",
+  "patterns": [
+    {
+      "id": "direct",
+      "name": "Direct model service",
+      "description": "Answer, classify or translate with a model.",
+      "sizing": "Existing engine components; quantitative inputs still required"
+    },
+    {
+      "id": "retrieval",
+      "name": "Document or search assistant",
+      "description": "Search information before producing an answer.",
+      "sizing": "Existing engine components; quantitative inputs still required"
+    },
+    {
+      "id": "agent",
+      "name": "Agent or multi-step workflow",
+      "description": "Choose actions, use tools or repeat model calls.",
+      "sizing": "Existing engine components; quantitative inputs still required"
+    },
+    {
+      "id": "batch",
+      "name": "Batch processing",
+      "description": "Process a collection of items by a deadline.",
+      "sizing": "Existing engine components; quantitative inputs still required"
+    },
+    {
+      "id": "stream",
+      "name": "Continuous processing",
+      "description": "Process live audio, video or other arriving events.",
+      "sizing": "Requires a specialised sizing model"
+    },
+    {
+      "id": "generation",
+      "name": "Content generation",
+      "description": "Create images, audio or video.",
+      "sizing": "Requires a specialised sizing model"
+    },
+    {
+      "id": "adaptation",
+      "name": "Model adaptation",
+      "description": "Modify an existing model with customer training data.",
+      "sizing": "Requires a specialised sizing model"
+    },
+    {
+      "id": "training",
+      "name": "Model training",
+      "description": "Train from scratch or continue pretraining.",
+      "sizing": "Existing engine components; quantitative inputs still required"
+    }
+  ],
+  "questions": [
+    {
+      "id": "text",
+      "label": "Does this activity answer, classify or translate text?",
+      "why": "Count the model work, not the number of screens or software services.",
+      "obtain": "Ask the application owner or inspect one complete request.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "search",
+      "label": "Does it search documents or another information source?",
+      "why": "Retrieval adds supporting work; it is not automatically another text-generation call.",
+      "obtain": "Walk through a question that needs customer information.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "agent",
+      "label": "Does it choose actions, call tools or repeat model calls?",
+      "why": "One customer task may cause several model calls.",
+      "obtain": "Inspect a task trace or ask the developer how a task is completed.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "batch",
+      "label": "Does it process a collection of items by a deadline?",
+      "why": "A deadline converts work volume into a processing rate.",
+      "obtain": "Ask how many items arrive and when their results are needed.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "stream",
+      "label": "Does it process a continuous stream?",
+      "why": "Live sources may require sustained capacity and bounded delay.",
+      "obtain": "Count simultaneous sources; ask for their formats and processing rates.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "generation",
+      "label": "Does it create images, audio or video?",
+      "why": "Output size, duration and generation settings affect the work.",
+      "obtain": "Ask for a representative output and its required generation time.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "adaptation",
+      "label": "Does it fine-tune an existing model?",
+      "why": "Fine-tuning needs a training-method profile, not an inference estimate.",
+      "obtain": "Ask the ML team for the base model and adaptation method.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "training",
+      "label": "Does it train from scratch or continue pretraining?",
+      "why": "Training volume, model and deadline determine a separate demand.",
+      "obtain": "Ask the ML team for the training campaign plan.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "indexing",
+      "label": "Does it build or refresh a searchable document index?",
+      "why": "Document preparation and embeddings can be a separate scheduled workload.",
+      "obtain": "Ask how documents are added, changed and made searchable.",
+      "options": [
+        "unknown",
+        "yes",
+        "no"
+      ]
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "location",
+      "label": "Where will the model processing run?",
+      "why": "Only locally hosted work belongs in the local GPU estimate. Mixed placement needs a split into activities.",
+      "obtain": "Ask the application owner which services are external.",
+      "options": [
+        "unknown",
+        "local",
+        "external",
+        "mixed"
+      ]
+    },
+    {
+      "id": "calls",
+      "label": "How many model calls make up one customer task?",
+      "why": "Repeated calls expand demand; this is separate from users and requests.",
+      "obtain": "Inspect a representative task trace. A fixed count can be entered during sizing.",
+      "options": [
+        "unknown",
+        "one",
+        "several_fixed",
+        "variable"
+      ]
+    },
+    {
+      "id": "schedule",
+      "label": "When does this activity run?",
+      "why": "Different schedules do not prove that workloads never overlap.",
+      "obtain": "Ask the operations owner for the busy periods and deadlines.",
+      "options": [
+        "unknown",
+        "interactive",
+        "continuous",
+        "scheduled",
+        "overnight"
+      ]
+    },
+    {
+      "id": "relationship",
+      "label": "How is this activity related to the earlier activity selected below?",
+      "why": "Order, parallel work and conditional work have different consequences. This is a discovery relationship, not a compute multiplier.",
+      "obtain": "Walk through a typical task and an exception with its owner.",
+      "options": [
+        "independent",
+        "after",
+        "alongside",
+        "conditional",
+        "unknown"
+      ]
+    },
+    {
+      "id": "sharing",
+      "label": "May this activity share computing capacity?",
+      "why": "Dedicated workloads need separate capacity; sharing still needs schedule and isolation checks.",
+      "obtain": "Ask the service owner about customer isolation and operating policy.",
+      "options": [
+        "unknown",
+        "shared",
+        "dedicated"
+      ]
+    }
+  ],
+  "sources": [
+    "https://build.nvidia.com/blueprints",
+    "https://docs.nvidia.com/nemo/"
+  ],
+  "policy": "Anubis product taxonomy, not an industry standard. Unknown is never interpreted as no. Recognition is distinct from sizing qualification."
+}

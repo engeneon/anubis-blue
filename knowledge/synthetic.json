@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "id": "synthetic-placement",
+  "version": "1.0",
+  "channel": "synthetic",
+  "dependencies": [],
+  "license": "Test fixture authored for Anubis",
+  "description": "Fictional performance. Never production evidence.",
+  "profiles": [
+    {
+      "id": "oracle-replica",
+      "platform": "B200_TEST_ONLY",
+      "kind": "inference",
+      "fingerprint": {
+        "model": "synthetic-dense-v1",
+        "runtime": "synthetic-runtime-v1",
+        "precision": "bf16",
+        "input_distribution": "fixed-2000",
+        "output_distribution": "fixed-400",
+        "slo": "ttft-p95-1s-itl-p95-50ms",
+        "cache": "cold",
+        "parallelism": "TP4",
+        "quality": "synthetic-only"
+      },
+      "gpu_per_node": 8,
+      "gpu_per_replica": 4,
+      "capacity": "12",
+      "admission": "0.8",
+      "memory_required_bytes": "60000000000",
+      "hbm_bytes": "80000000000",
+      "host_ram_bytes": "1000000000000",
+      "local_disk_bytes": "8000000000000",
+      "cpu_cores": 128,
+      "read_Bps": "100000000000",
+      "write_Bps": "100000000000",
+      "network_Bps": "100000000000",
+      "source": "framework-synthetic-example",
+      "evidence_basis": "synthetic",
+      "scope": "Exact synthetic fixture; all capacities fictional"
+    }
+  ]
+}

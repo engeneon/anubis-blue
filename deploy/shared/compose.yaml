@@ -1,0 +1,24 @@
+services:
+  database:
+    image: postgres:17@sha256:b8faeff7712663c2773a190181e1246e37e364b887611c04658c28b44e2408fe
+    environment:
+      POSTGRES_USER: anubis_test
+      POSTGRES_PASSWORD: isolated-development-only
+      POSTGRES_DB: anubis_test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U anubis_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  checks:
+    build:
+      context: ../..
+      dockerfile: deploy/shared/Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      ANUBIS_TEST_POSTGRES_URL: postgresql://anubis_test:isolated-development-only@database/anubis_test
+    network_mode: service:database

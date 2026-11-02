@@ -1,0 +1,114 @@
+ANUBIS MVP 1.0
+Local consultant planning release
+
+WHAT YOU CAN COMPLETE
+Describe a supported dense language-model assistant or batch text workload.
+Compare estimated H200, B200 and B300 workload GPU counts.
+Review GPU memory, host provision, storage and four network roles.
+Prepare a downstream design handoff, close the engagement and retrieve it later.
+
+INSTALL AND SIGN IN
+For the complete Mac walkthrough, token bootstrap, restart and backup steps,
+read docs/macos-installation-guide.txt. Linux installation guidance is deferred.
+1. Install CMake 3.24 or later, a C++20 compiler, OpenSSL development libraries,
+   SQLite development libraries, Node/npm and Python 3.
+2. From the project directory run:
+   cmake --preset local
+   cmake --build --preset local -j4
+   npm ci
+   npm run build
+   python3 deploy/local/run.py
+3. Open http://127.0.0.1:8787.
+4. The launcher creates .anubis/identities.json. Open that local file in a text
+   editor and copy the token value, without its quotation marks. Paste it into
+   Access token and select Open workspace. Do not share or export this file.
+   There is no public default token. Existing installations keep their identity.
+5. For an existing running installation, refresh the browser after building the
+   UI. Keep the service local to this computer.
+
+WORKED SCENARIO: ENGINEERING DOCUMENT ASSISTANT
+Engineers ask 2,400 questions during the busiest hour. A dense8b answer model
+runs inside this AI Factory. Existing search outside the factory supplies
+passages from a 4 TB corpus. Assume one call per question, 2,000 input tokens
+and 500 output tokens per call. No corpus copy has been requested.
+
+INPUTS
+Workload name: Engineering document assistant
+Application: Document or search assistant
+Compute: In this factory
+Search and indexing: Existing service outside this AI Factory
+Factory users: One organisation
+Peak requests per minute: 40 (2,400 divided by 60)
+Model preset: dense8b
+Model calls per request: 1
+Input tokens per call: 2000
+Output tokens per call: 500
+Locally retained data: leave unspecified
+Initial dataset to load: leave unspecified
+Infrastructure profile: existing HGX B300 Enterprise reference design
+Sensitivity envelope: retain the displayed default of 30 percent
+Other unmeasured network and storage throughput fields: leave unspecified
+
+MANUAL WORKFLOW
+1. Select New engagement. Enter the workload name and add Document or search assistant.
+2. Select Continue. Set the compute and search locations as above. Review the
+   architecture diagram. The search system belongs outside the factory.
+3. Select Continue. Enter the model, requests per minute and token quantities.
+   The 4 TB corpus is contextual information. Do not enter it as locally
+   retained data or an initial transfer without a requirement to copy it.
+4. Select Continue. Review the deployment profile and explicit assumptions.
+   Select Use these planning assumptions, then Calculate estimate.
+5. Read Your requirements at a glance and GPU workload comparison.
+   For this scenario the current catalogue produces 8 workload GPUs for each
+   comparison and a selected factory deployment of 256 B300 GPUs. Equal rounded
+   counts do not establish equal performance or cost. Estimated memory is about
+   58.36 GB per GPU. The current 256-GPU anchor is a catalogue choice, not a claim
+   that every Enterprise factory or NCP deployment must contain 256 GPUs.
+6. Select Download requirements summary for the compact readable result.
+   Measurement required means unresolved. It does not mean zero.
+7. Select Continue to Design handoff. Review the target configuration and select
+   Prepare projection. This prepares design inputs. It does not run or approve
+   a downstream architecture.
+8. Download the executive summary, design intake and companion specification.
+   The intake transfers only supported fields. The architect must also use the
+   companion requirements for the remaining network, storage and host details.
+9. Enter optional completion notes, confirm the selected requirements are
+   delivered, then select Complete engagement.
+10. From Cases, find the completed engagement and select View engagement.
+    Saved deliverables contains the saved calculation, handoff and complete
+    engagement record. Reopening for revisions preserves completed versions.
+
+OPTIONAL COPILOT
+Configure an approved model connection under AI connections using a backend
+credential environment variable. See docs/copilot-operation.txt. Never enter a
+provider key into the workload story. Describe the worked scenario, review its
+source-linked facts, accept the appropriate assumptions and select Review and
+calculate GPU estimate. Continue from step 4 above. An LLM is not required for
+manual sizing. Copilot interpretation must be reviewed before calculation.
+
+WHEN A HANDOFF CANNOT BE PRODUCED
+In Design handoff select Review final status report. Record the findings,
+missing evidence and recommended next action. Confirm closure without a design
+handoff. This saves the engagement without inventing a GPU estimate.
+
+RELEASE SCOPE AND LIMITATIONS
+This release uses existing analytical models and existing catalogue anchors.
+It adds a compact requirements table, a readable requirements download and a
+clear supported-scope statement. It corrects the sensitivity range order in
+new handoff narratives. Previously saved narratives remain unchanged.
+Speech, rendering, simulation and general distributed training require
+specialist evidence. Response-time targets are not performance guarantees.
+Sensitivity envelopes are not statistical confidence intervals.
+External corpus capacity is not automatically local storage or transfer volume.
+Network values are lower bounds where available, not purchased circuit sizes.
+Dedicated storage networking remains required. No converged storage is assumed.
+Local execution has been tested on macOS arm64. This is not a shared production
+service, a security certification, or empirical hardware qualification.
+
+REPEATABLE VALIDATION
+Run npm run test:mvp after the C++ build. The browser test uses an isolated local
+server and disposable database. It supplies a fixed source-linked proposal to
+exercise fact review, sizing, handoff, completion and retrieval without a paid
+LLM call. It checks 40 requests/minute, GPU comparisons, memory arithmetic,
+external corpus placement and equality of saved results. It is not a live
+provider interpretation qualification. Evidence: implementation/mvp-1.0.

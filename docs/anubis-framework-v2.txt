@@ -1,0 +1,367 @@
+# Anubis AI Factory Workload Sizing Methodology
+Architecture led characterisation and progressive qualification
+Version 2.0 | Draft for review | 1 November 2026
+Author: Traiano Giuseppe Welcome
+Email: traiano@gmail.com
+
+## Abstract
+AI factory planning commonly begins with a business use-case, an approximate demand forecast and an incomplete application design. Requiring production-grade telemetry at this point prevents useful sizing. Equally, presenting a theoretical GPU calculation as verified capacity creates unjustified confidence. Anubis addresses this problem through architecture-led characterisation, deterministic demand transformation and progressively stronger evidence.
+
+This paper defines a method that begins with recognisable application patterns and a small set of material measurements. It produces conditional estimates of GPU demand, memory, supporting resources and data movement, then translates those requirements into supported deployment sizes and a downstream AI Factory design tool or process. Assumptions, exclusions and unresolved domains remain explicit. Planning estimates, measurement-refined estimates and qualified configurations are distinct evidence levels rather than interchangeable labels.
+
+Version 2.0 makes analytical planning a first-class result. It separates workload GPU demand from reference-profile deployment anchors, introduces an explicit expansion-oriented decision policy and explains how excess deployment capacity can accommodate additional equivalent workloads. It retains the original separation between workload truth and downstream representation. No LLM is required for normal operation. Optional agents use the same governed interfaces as human users.
+
+The contribution is a practical synthesis for early architectural decisions, not a new universal sizing standard or a claim of demonstrated predictive accuracy. A worked example reproduces a retained Anubis scenario. The paper distinguishes implemented behaviour from proposed methodology and qualification work still required.
+
+## 1 Purpose and status
+The intended reader is a consultant, infrastructure architect or engineering reviewer. The method should support a defensible first estimate without requiring the consultant to become an inference-runtime specialist. Specialist knowledge remains necessary when workloads fall outside supported models or when contractual performance must be qualified.
+
+This draft revises the methodological baseline of 27 September 2026 [8]. Version 1.0 remains an historical document. Publication of this draft does not modify the engine, certify a deployment or promote existing planning estimates to qualified results. The implementation snapshot reviewed for this paper is the local repository as inspected on 1 November 2026, including the planning, guided-intake and network modules [9].
+
+Keywords: workload characterisation, AI infrastructure, GPU sizing, deterministic modelling, architecture patterns, uncertainty, progressive qualification.
+@page
+## 2 Method and authority boundaries
+The central sequence is customer intent, architecture characterisation, demand estimation, resource resolution, deployment selection and design handoff. Each transformation must have a stated rule and preserve the information needed to explain its result. Refinement returns to the relevant input or assumption and produces a new result rather than silently changing an existing recommendation.
+
+@figure method
+Figure 1. The consultant confirms the architecture and measurements. Anubis performs the numerical transformation. The downstream design process produces the physical and operational architecture.
+
+Anubis owns workload characterisation and resource estimates. The architect owns the final design, including topology, equipment realization, security controls, power, cooling and integration. A downstream tool may impose supported intake fields or deployment sizes. Those constraints affect projection and selection, not the meaning of the original workload.
+
+The reproducible calculation can be expressed as:
+@eq C = Compile(W, S, K, P, V)                                      (1)
+@eq J, L = Project(C_selected, T, A)                               (2)
+W is the normalized workload. S is the scenario set. K is the frozen knowledge manifest. P contains selection and operating policies. V identifies the engine. C contains calculations and assessments. T is the downstream intake contract. A contains explicit mapping decisions. J is the intake payload and L is the companion ledger of conversions, omissions and qualifications.
+
+Identical semantic inputs and versions should produce identical semantic results. Run identifiers and timestamps need not match. Reproducibility establishes what was calculated, not whether an assumption predicts reality.
+
+### 2.1 Three levels of evidence
+| Result level | Basis | Permitted interpretation |
+| Planning estimate | Declared demand, transparent defaults and analytical rules | Useful for early architecture, options and measurement priorities |
+| Measurement-refined estimate | Representative telemetry and justified calibration | Stronger estimate within the measured or calibrated scope |
+| Qualified configuration | Defined acceptance criteria and applicable configuration evidence | Meets the evaluated requirements under stated operating conditions |
+
+These are methodology levels. They are not a claim that the current UI implements a complete three-level promotion workflow. Evidence level is distinct from pass, fail, conditional or unknown. A measured observation can be irrelevant to the proposed configuration. An accepted assumption remains an assumption.
+@page
+## 3 Architecture led characterisation
+A customer should describe what the application does before supplying internal engine stages. The consultant selects one or more familiar patterns and gives each activity a customer-recognisable name. Anubis translates these into computational components. Patterns are modelling aids, not claims that every implementation of a pattern has the same resource requirements.
+
+| Common core pattern | Questions that identify it | Current quantitative route |
+| Direct model service | Does one model answer, classify or translate each item? | Local text inference estimate |
+| Document or search assistant | Are passages retrieved before the answer is generated? | Text generation estimate. Retrieval resources assessed separately |
+| Agent or multi-step workflow | Are tools, repeated calls or conditional actions involved? | Declared local model-call multiplier. Tool work is separate |
+| Batch processing | Is a collection processed within a completion window? | Work divided by window, with calls per item |
+| Continuous processing | Does audio, video or event data arrive continuously? | Specialist sizing required |
+| Content generation | Are images, audio or video generated? | Specialist sizing required |
+| Model adaptation | Is a model adapted using customer data? | Specialist sizing required for method-specific requirements |
+| Model training | Is dense-model training performed within a window? | Restricted analytical training approximation |
+| Other GPU application | Does the application fall outside the above patterns? | Preserve the description and request an applicable estimator |
+
+The library is extensible. Adding a visual pattern does not establish quantitative coverage. Every pattern must declare which resource models exist and what remains unresolved. Unsupported components must not appear as zero demand or be silently replaced with a text-model equation.
+
+### 3.1 A deterministic discovery sequence
+First identify the application outcome and quality requirement. Then determine whether work is interactive, batch or continuous. Ask whether it retrieves information, repeats model calls, trains a model or performs specialist computation. Confirm where each activity runs, how activities relate and whether they can overlap. Finally request only the measurements required by the applicable estimator.
+
+A customer may combine patterns. The consultant must avoid counting a local answer-generation service twice simply because it appears in both a retrieval assistant and a model-service description. Application relationships and resource sharing are separate questions. A sequential dependency does not prove that different customer requests cannot execute concurrently.
+
+### 3.2 The visual model
+The application diagram must identify the customer entry point, model execution, retrieval, retained data and scope boundaries. Demand, tokens, data growth and transfer windows should be marked at the places where they can be observed. The diagram is a customer-facing explanation of the workload model, not a detailed network topology or a guarantee that every depicted edge is simulated.
+@page
+## 4 Minimum intake and measurement strategy
+The first estimate should require the smallest set of parameters that changes the decision materially. Defaults may fill secondary modelling parameters when their meaning and limitations are visible. A default cannot supply missing business intent, invent a demand rate or establish a quality requirement.
+
+| Input group | Minimum information | Practical source or method |
+| Application and scope | Pattern, component name, local or outside placement | Owner interview and a simple application diagram |
+| Demand | Request rate, or users and request interval, or jobs and window | Gateway counts, job scheduler records or a labelled forecast |
+| Work per item | Local model calls and representative prompt and output sizes | Request traces, tokenizer counts and orchestration logs |
+| Model | Known model or explicitly provisional model preset | Application owner and serving configuration |
+| Timing | Overlap, deadline and response target if known | Service owner and operating schedule |
+| Data | Local retained capacity, growth and retention horizon if known | Inventory, storage reports and retention policy |
+| Connections | Initial volume and loading window, ongoing flows, relevant latency | Migration plan, flow counters and network owner |
+| Design policy | Tenancy intent, deployment profile and accepted assumptions | Consultant and infrastructure architect |
+
+The guided route currently exposes more internal defaults through optional inspection. It does not require every customer to measure each runtime parameter before obtaining a first result. In the initial text-model path, a consultant can use demand, model choice or preset, calls per request and accepted token presets. Missing storage or network measurements remain follow-up requirements.
+
+### 4.1 Measurement semantics
+Record the value, unit, scope, origin and observation window. Distinguish supplied estimates, measurements, assumptions and derived values. Retain source, date, owner and acceptance where available. Version 2.0 requires this provenance conceptually, but the guided route currently records entered numeric values broadly as customer estimates. It does not provide a full per-field measurement certification workflow.
+
+A population count is not concurrency. Dividing the busiest-hour total by sixty produces that hour's average requests per minute, not an observed peak minute. Mean input tokens must include the complete model prompt, including retrieved passages and conversation context. Mean output size alone does not characterize a tail-latency target.
+
+Blank means unspecified. Zero means a known zero. A rate without its averaging interval is incomplete. Decimal GB and TB must be distinguished from binary GiB and TiB. Rates in bytes and bits must not be interchanged.
+
+### 4.2 Refinement priority
+Prioritize information that could change the GPU node count, deployment anchor, memory fit or feasibility of a required service. The consultant can compare scenarios to identify these inputs. Automatic sensitivity-ranked questioning is a methodological extension, not a demonstrated capability of the current guided questionnaire.
+@page
+## 5 Demand transformation and scope
+For application a, let lambda_a be business transactions per second and m_aj be the declared visits to local component j per transaction. Let I_j and O_j be average input and output tokens per call.
+@eq lambda_j = sum_a(lambda_a * m_aj)                              (3)
+@eq input_tokens_per_second_j = lambda_j * I_j                     (4)
+@eq output_tokens_per_second_j = lambda_j * O_j                    (5)
+
+An agent's calls must include relevant retries, fan-out and repeated reasoning or tool-mediated model calls. Tool execution itself has separate resource and network requirements. Unbounded or unknown loops cannot receive a fabricated finite cost. The current guided implementation uses a supplied call multiplier. It does not derive complex branch probabilities or context growth automatically.
+
+For batch work, rate equals item count times local calls per item divided by the available processing seconds. For a user-based forecast, users divided by request interval gives an arrival approximation. If the interval depends on response time, a closed-loop model is needed for higher assurance. Do not add user-derived demand to measured request demand for the same activity.
+
+### 5.1 Operating scenarios and pooling
+Simultaneous work is aggregated. Work in explicitly separate operating windows can reuse capacity, subject to placement and operational constraints. In the current guided route, overlap unknown is treated as simultaneous. Dedicated reservation prevents the simple reuse route. Separate scenarios are evaluated and the largest allocation governs.
+
+Current planning rounds component allocations to nodes and adds them within a scenario. This is a deliberate simple allocation policy, not an optimized shared-pool scheduler. The relationship labels shown in the diagram do not provide a full dependency-aware simulation. Precise gang scheduling, burst queues, correlated retries and interference require further models or measurements.
+
+### 5.2 Outside this AI Factory
+This term means outside the infrastructure scope being sized. It does not necessarily mean another building, a cloud service or public Internet access. For compute, examples include a separately operated customer GPU cluster or managed model endpoint. For retrieval, examples include a customer search cluster or managed search service.
+
+Record the location of the search service, original documents and search index separately. Source systems may include object storage, NFS or SMB shares, or document-management platforms. A 4 TB document corpus is not automatically a 4 TB index or a 4 TB local copy. Resources outside scope are excluded from the local GPU subtotal, while their connectivity, latency and availability dependencies remain relevant.
+
+A local retrieval or indexing component without an estimator makes the whole-workload estimate incomplete. The current guided engine can suppress deployment-anchor selection when such GPU-related gaps exist, although supported subtotals remain informative. More granular partial-result selection is a refinement still needed, not a reason to conceal the gap.
+@page
+## 6 Analytical inference sizing
+The initial estimator models supported dense text workloads. It uses theoretical hardware rates reduced by explicit efficiency factors. These factors are planning assumptions unless calibrated against applicable evidence. They are not measured utilization percentages and do not prove latency compliance.
+
+Let P be model parameters, F effective compute in FLOP/s per GPU, B effective memory bandwidth in bytes/s per GPU, p GPUs per replica, b concurrent sequences, and I and O input and output tokens per request. Let W be resident weight bytes and K the allocated KV-cache bytes per replica.
+@eq q_compute = F * p / (2 * P * (I + O))                          (6)
+@eq q_bandwidth = B * p / (((W + K) / b) * O)                      (7)
+@eq q_planning = min(q_compute, q_bandwidth)                       (8)
+
+Equation 7 approximates batched decoding with weight and cache traffic amortized across b sequences. Equation 6 approximates model work. This is a planning proxy for combined prefill and decode, not a full runtime simulation. Attention work, kernel choices, communication, cache sharing, low-load batching and scheduling can materially change achieved throughput. The declared batch must be achievable in practice. Latency objectives remain validation requirements.
+
+### 6.1 Memory feasibility
+For the supported attention model, with L layers, H_kv KV heads, D head dimension, c allocated context tokens per sequence and s_kv bytes per cache element:
+@eq K = 2 * L * H_kv * D * s_kv * c * b                            (9)
+@eq W = P * s_weight                                             (10)
+@eq M_required_per_GPU = (W + K) / p + M_workspace                (11)
+
+The allocation must fit the usable device-memory budget and cover the input and output context. The current model uses uniform sharding and a workspace provision. Runtime fragmentation, prefix reuse, sliding windows, MoE residency and alternative attention mechanisms require their own treatment. PagedAttention research demonstrates why runtime cache management matters [7]. A host cache or KV offload is not free additional HBM.
+
+### 6.2 Replicas and nodes
+Let g be GPUs per node, with p dividing g, and lambda the required call rate:
+@eq replicas = ceil(lambda / q_planning)                          (12)
+@eq workload_GPUs = g * ceil(replicas / (g / p))                   (13)
+
+The current planner restricts replicas to a single node or tray. It does not solve arbitrary multi-node parallel placement. Memory failure is a failed candidate, not a reason to recommend the same configuration with an extra percentage margin. B300, B200 and H200 comparison results use their respective catalogue entries and the same stated workload assumptions. Equal rounded GPU counts do not imply equal device performance.
+@page
+## 7 Training and supporting resources
+### 7.1 Restricted dense training estimate
+For P parameters and T training tokens, the current screening work approximation is 6 * P * T FLOPs. If the completion window provides t seconds and the available-work fraction is e, the required token rate is T / (t * e). Effective replica capacity is F * p / (6 * P). The replica and node rounding rules then apply.
+
+Training device memory is approximated by parameter count times declared training-state bytes per parameter, divided by parallel GPUs, plus per-GPU activation and workspace provisions. These assumptions must account for the selected optimizer and execution strategy before the result can be refined or qualified.
+
+This route is not a general estimator for LoRA, MoE, reinforcement learning, multimodal training or arbitrary distributed jobs. Communication scaling, input stalls, checkpoint delays and restart time need applicable evidence. Avoid counting an overhead twice if effective throughput already includes it. Adding failed nodes is a capacity allowance, not a demonstrated recovery-time or placement guarantee.
+
+### 7.2 Host resources
+The current planning route calculates RAM, local disk and CPU provisions by multiplying the node-rounded GPU allocation by explicit per-GPU provisions. The worked scenario uses 256 GB RAM, 3,840 GB local disk and 16 CPU cores per GPU. These are editable planning assumptions, not universal server specifications or measured workload requirements.
+
+A refined host model should instead reconcile preprocessing, tokenization, retrieval, orchestration, pinned buffers, model staging, caches and the operating system with the selected server. Report workload allocation and whole-factory provision separately. A local eight-GPU allocation does not describe every host in a 256-GPU deployment.
+
+### 7.3 Storage capacity and performance
+Model source data, local retained data, indexes, model artifacts, checkpoints and caches as distinct quantities. A simple retention estimate is current bytes plus growth rate times planning horizon. Usable capacity with a free-space fraction f is:
+@eq usable_capacity = retained_bytes / (1 - f)                    (14)
+@eq checkpoint_write_rate = concurrent_checkpoint_bytes / save_s (15)
+
+Usable capacity excludes protection overhead and raw-media realization. Read/write throughput, IOPS, metadata load, protocol and client concurrency remain independent requirements. The guided local-retention path currently creates an object-storage requirement. This is a simplification, not automatic discovery of the correct filesystem for every use-case.
+
+Object/blob, file/NAS and high-performance parallel storage are selected from access needs. Product qualification must name a configuration, software version, protocol and workload. Neither a blanket vendor endorsement nor exclusion follows from a brand name. The current guided planner does not automatically qualify a vendor shortlist. MLPerf Storage can contribute applicable performance evidence [4].
+@page
+## 8 Uncertainty and deployment decisions
+Demand uncertainty, prediction error, reserve, failure allowance and future growth are separate quantities. Combining them into one unexplained safety factor obscures both costs and risk. Every margin must state what it changes and whether another allowance already includes it.
+
+The agreed ±10%, ±20% and ±30% bands are starting sensitivity envelopes. They are accepted planning defaults for this application. They are not certified industry tolerances or empirically demonstrated prediction intervals. The guided default is ±30%. The implementation accepts a wider configurable range, subject to input validation.
+
+For a fractional throughput variation d:
+@eq q_up = q_planning * (1 + d)                                   (16)
+@eq q_down = q_planning * (1 - d)                                 (17)
+Recompute replicas and whole nodes for each case. The resulting GPU range is generally asymmetric because demand is divided by capacity and then rounded. A displayed 8–8 range can reflect the eight-GPU node floor rather than low uncertainty. Demand-side scenarios should be modelled separately from throughput variation.
+
+### 8.1 Workload demand and deployment anchors
+A workload estimate answers how many GPUs the declared application needs under the stated assumptions. A deployment anchor answers which supported platform size can host that allocation under the selected reference profile. For anchor set A and target allocation G:
+@eq selected_anchor = min { a in A : a >= G }                     (18)
+
+The source, release, platform family and anchor set must be retained. NVIDIA reference designs use defined building blocks, but their applicability is profile-specific [5]. An Enterprise profile does not by itself establish compliance with an NCP programme. No single minimum GPU count should be described as universal across reference architectures.
+
+### 8.2 Expansion oriented policy
+Prefer the smallest eligible starting deployment under the agreed service target and show the next supported expansion step. This avoids automatically selecting the downside envelope as the purchase quantity. Expansion lead time and operational triggers should be agreed with the customer.
+
+A lower deployment that accepts reduced service requires explicit acceptance. Preserve the original demand and show the shortfall. The claim that expansion is commercially preferable is a customer policy, not a quantified cost optimum without procurement and operating evidence. The current planner stores lead time but does not establish an automated expansion-trigger service.
+
+For identical workloads allocated dedicated node-rounded pools, floor(anchor GPUs / workload GPUs) gives an indicative compute-only serving count when allowances are included consistently. It does not certify tenant count. Storage, connections, isolation and shared services may bind first. Further statistical multiplexing benefits require evidence rather than assumption.
+@page
+## 9 Four network roles and their boundaries
+The architecture must account for the customer-datacenter connection, north–south traffic, dedicated storage traffic and east–west GPU communication. These are roles and paths, not four independent copies of every byte.
+
+@figure network
+Figure 2. Customer transfers traverse the external link and the factory border. Storage and GPU communication use separate fabrics. Arrows show roles, not physical port counts or a validated topology.
+
+For decimal data volume V_TB and a loading window h_hours, with protocol multiplier a and usable link fraction u:
+@eq payload_Gbps = V_TB * 8000 / (h_hours * 3600)                  (19)
+@eq link_lower_bound_Gbps = payload_Gbps * a / u                  (20)
+
+Apply protocol overhead and utilization once. Daily GB divided by 86,400 seconds is an average, not a peak. Token bytes provide only a declared model-traffic contribution. Retrieved documents, tool payloads, checkpoints, replication and other tenants may dominate.
+
+| Role | Required characterization | Current treatment |
+| Customer datacenter to factory | Initial volume/window, ongoing flows, latency | Conditional line-rate lower bounds. Carrier, security and redundancy remain design choices |
+| North–south | Traffic crossing the factory border | Reuses the same external-flow requirement. Other traffic must be added once |
+| Dedicated storage | Concurrent reads/writes, load and checkpoint traffic | Dedicated Ethernet policy. Payload measurements and lower bounds retained |
+| East–west | Collectives, per-GPU traffic, topology and latency | Profile fabric and declared traffic. No automatic collective-performance qualification |
+
+Dedicated storage is a fixed Anubis design policy for this scope. Convergence is not offered as an alternative. This replaces the optional convergence discussion in Version 1.0. Ethernet carried in a downstream intake does not, by itself, enforce physical separation.
+
+The current network helper combines initial and steady external ingress when overlap is selected. Its storage write adjustment takes the greater of declared write demand and initial-load writes. If those writes are independently concurrent, an aggregate measurement or explicit correction is needed. That maximum operation must not be interpreted as proof that simultaneous storage writes are covered.
+
+Bandwidth arithmetic does not establish RTT, tail latency, bisection capacity, incast tolerance or training efficiency. Unknown requirements remain unresolved, not zero. Fabric selection from a profile does not prove that a workload requires InfiniBand or that an Ethernet alternative is infeasible.
+@page
+## 10 Knowledge and evidence governance
+Anubis should reuse the CKP/EKB separation between executable knowledge and its supporting engineering evidence. The CKP contains executable, validated rules and normalized catalogue values. The EKB retains sources, measurement context, qualifications and review history. These are logical responsibilities. The present JSON catalogues and source manifests do not constitute a fully implemented knowledge-publication platform.
+
+| Knowledge responsibility | Required content |
+| Architecture patterns | Discovery questions, component templates, scope rules and quantitative coverage |
+| Model and hardware catalogue | Model geometry, precision, GPU memory, throughput specifications, node constraints and source versions |
+| Performance evidence | Measurements or predictions, configurations, workload shape, quality and latency conditions |
+| Resource rules | Compute, memory, storage, host and directional traffic calculations with units |
+| Deployment profiles | Family-specific anchors, platform constraints, fabrics and provenance |
+| Decision policies | Sensitivity, service fraction, reservation and expansion choices |
+| Downstream mappings | Target contract, conversions, supported fields and retained obligations |
+
+The publication process should admit a source, extract facts, review applicability, validate units and rules, test changed decisions, and freeze a versioned manifest. New evidence produces new compilations rather than rewriting historical results. A source digest proves identity, not applicability or correctness.
+
+### 10.1 Evidence matching without impractical exactness
+Production workloads do not need to reproduce every benchmark dimension exactly before receiving a planning estimate. Hard compatibility constraints remain necessary, including memory fit and applicable model/runtime semantics. A refined estimate may use a named similarity or interpolation rule across declared dimensions, with its error and scope made explicit.
+
+A blanket ±30% permission is not a valid evidence-matching rule. Changing model architecture, quantization, cache behavior or parallelism can change the mechanism, not just the scale. The current planning path supplies analytical estimates independently of exact performance fingerprints. It does not implement a universal proximity-based evidence matcher. Exact identity checks may remain appropriate for replaying a measurement in the qualified evidence path.
+
+### 10.2 External foundations
+ITU-T F.748.26 concerns AI cloud platform performance evaluation [1]. MLPerf provides inference, training and storage benchmarking methods and results [2–4]. Vendor reference architectures supply platform-specific design constraints [5]. AIConfigurator is a potential source of versioned inference predictions [6]. None supplies Anubis with a universal mixed-workload sizing formula.
+
+References support particular methods and evidence. They do not imply blanket standards conformance, automatic ingestion of current benchmark results or empirical validation of Anubis defaults. Any formal conformance statement requires an applicable requirement-level assessment.
+@page
+## 11 Results and downstream design handoff
+The primary result must be understandable without reading a calculation trace. It should identify the application, scope, estimate, main assumptions and the next decision. Supporting detail should be available on demand.
+
+| Customer-facing output | Necessary distinction |
+| Workload classification | Qualitative pattern versus quantified GPU-hour share |
+| GPU comparison | Workload GPUs by platform versus selected deployment anchor |
+| Memory and host resources | Required memory versus device capacity and host provisions |
+| Storage | Source corpus, local usable capacity, index, cache and performance |
+| Four network roles | Derived lower bounds versus selected circuits and unresolved traffic |
+| Tenancy and capacity reuse | Intended tenancy and compute-only workload copies versus verified isolation |
+| Decision explanation | Binding assumptions, exclusions, sensitivity and refinement priorities |
+
+Percentages of training and inference should use occupied GPU-hours over a stated period and hardware scenario. Request shares or token shares are not substitutes. The current guided output should not be described as providing a fully validated workload-mix analysis or tenancy-feasibility determination.
+
+### 11.1 The handoff package
+Provide an existing-field intake payload, a readable architecture brief and a companion specification with mapping decisions and unresolved requirements. The intended platform and GPU workload estimate must survive independently of any downstream modelling substitution or deployment anchor.
+
+Direct mapping is preferred where semantics match. Partial mapping is acceptable when omitted requirements remain explicit and actionable. A substitution must record the intended and represented platform and identify affected domains such as endpoints, NICs, node count and scale-up boundaries. It must not silently redefine the workload.
+
+A successful export or import establishes a contract interaction, not an approved factory design. The architect must confirm how brief-only requirements, especially north–south traffic, external connections and dedicated storage separation, are realized. Existing local roundtrip tests do not establish compatibility with every future deployment.
+
+### 11.2 Deterministic interfaces and optional agents
+The architecture exposes governed operations through APIs. The GUI and optional MCP or agent integrations should use the same validation and compilation paths. Agents may interpret a narrative, propose inputs, retrieve evidence and explain alternatives. Reviewed structured inputs and engine rules remain the numerical authority.
+
+The customer can complete the structured workflow without an LLM. Agent-generated facts remain proposals until accepted with their provenance. Agents must not quietly relax a service target, select a smaller platform or promote an estimate to qualified status. Automated iteration needs explicit scope and stop conditions. This paper does not claim that every proposed integration operation already exists in the installed UI.
+@page
+## 12 Worked planning example
+Bracken Engineering has 8,000 engineers asking questions about maintenance manuals. A search service outside this AI Factory indexes a 4 TB document corpus and returns passages to a local answer-generation model. The busiest hour has 2,400 questions. Local retained capacity, initial transfer volume and latency targets have not been supplied.
+
+This example reproduces the retained scenario projection [10]. It is a fictional customer case and a deterministic arithmetic demonstration, not a GPU benchmark. Its deployment profile is an Enterprise profile from the retained catalogue, not a universal NCP minimum.
+
+| Selected input or assumption | Value |
+| Arrival approximation | 2,400 / 60 = 40 requests/minute, or 2/3 calls/s |
+| Local calls per question | 1 |
+| Model and prompt | Generic dense 8B, 2,000 input and 500 output tokens |
+| Replica and cache | 1 GPU, 32 sequences, 8,192 context tokens |
+| Model geometry | 32 layers, 8 KV heads, head dimension 128 |
+| Precision and workspace | 2-byte weights and KV elements, 8 GB workspace |
+| Efficiency assumptions | Compute 0.35, memory bandwidth 0.50 |
+| Sensitivity and host provisions | ±30%. 256 GB RAM, 3,840 GB disk, 16 CPU cores per GPU |
+
+Weight memory is 16 GB. Equation 9 gives 34.359738 GB KV cache per replica. Required device memory is therefore approximately 58.359738 GB. This is a modeled requirement, not the physical VRAM installed on each platform.
+
+The retained B300 calculation gives approximately 4.892797 calls/s per replica. At 2/3 calls/s, one replica is sufficient under this model. Whole-node allocation yields eight GPUs. B200 and H200 also round to eight GPUs in this example. Their equal counts reflect granularity and the small demand, not equal throughput or a measured service guarantee.
+
+The selected profile anchor is 256 B300 GPUs. Dividing by the eight-GPU allocation gives 32 equivalent compute allocations. Each additional workload still needs its own supporting resources and isolation assessment. The eight-GPU allocation carries 2,048 GB RAM, 30,720 GB local disk and 128 CPU cores as provisions.
+
+At four bytes per token, protocol multiplier 1.2 and usable fraction 0.7, declared model traffic gives roughly 0.000073 Gbps ingress and 0.000018 Gbps egress. These arithmetic approximations are tiny lower-bound contributions. The UI may show 0.000019 Gbps egress because the current network helper reuses a rounded intermediate rate. Full-precision propagation is a numerical refinement to make before using such small values comparatively. Neither figure sizes the complete WAN.
+
+The 4 TB corpus does not become local storage or initial-load volume automatically. Search-index footprint, source location and any local copy remain to be confirmed. The useful outcome is a conditional GPU allocation and a structured design handoff with explicit resource gaps.
+@page
+## 13 Validation and implementation coverage
+Validation has three independent goals: correct software behaviour, useful predictions and an adequate design handoff. Passing one does not imply passing the others. The current hybrid route uses public evidence and local downstream contract testing. Hardware qualification is deferred, rather than implied by synthetic examples [11].
+
+| Capability | Snapshot assessment | Consequence |
+| Pattern selection and deterministic transformation | Implemented for the core guided route | Inputs become reproducible component and scenario records |
+| Dense text and restricted training calculations | Analytical planning implemented | Conditional estimates with stated assumptions |
+| B300, B200 and H200 comparison | Implemented in the planning route | Whole-node comparisons, not universal platform support |
+| Arbitrary workflow and shared-pool optimization | Not established by guided route | Relationships and subtotals need careful interpretation |
+| Measured performance refinement | Evidence structures exist, broad calibration not established | No general predictive-accuracy claim |
+| Whole-workload joint feasibility | Partial | Unknown supporting resources prevent complete qualification |
+| Storage and four network roles | Capacity and lower-bound helpers implemented | Aggregation, topology and latency still need review |
+| Deployment projection | Existing-field mapping and companion outputs implemented | Validate the actual target contract and retained obligations |
+
+### 13.1 Repeatable software checks
+Check units, unknown handling, arithmetic, memory failure, node rounding, anchor selection, accepted shortfall and deterministic replay. Test mixed scopes, overlapping and separate windows, and unsupported components. Confirm that request rate is not counted twice, external resources are not charged locally and unmapped requirements survive export. The sixteen customer scenarios provide usability and coverage cases. They are not sixteen measured performance benchmarks.
+
+### 13.2 Empirical qualification protocol
+Freeze the supported domain, estimator version, calibration set and acceptance criteria before held-out evaluation. Measure representative throughput, latency, memory high-water marks, job completion and storage/network demand. Include busy intervals, cache-cold operation and relevant failure scenarios. Retain unsuccessful runs as well as successful observations.
+
+Report signed prediction error, absolute relative error, memory-fit failures, deadline violations and false-feasible recommendations. Compare against a simple throughput baseline and an expert estimate. Evaluate decision effects after node and anchor rounding, because a modest numerical error may or may not change the architecture. Report sample coverage rather than a single universal accuracy number.
+
+Test whether declared tolerance bands contain the observed variation for each applicable workload family. Revise bands when evidence contradicts them. Demonstrating software repeatability or matching a synthetic expected count cannot establish that the ±10/20/30% bands are empirically adequate.
+@page
+## 14 Changes from Version 1 and remaining work
+Version 1.0 established the separation of customer intent, workload model, resource configuration and downstream projection. It already allowed assumptions, partial readiness and conditional recommendations. Version 2.0 preserves those foundations while making the initial planning route explicit.
+
+| Change | Methodological effect |
+| Architecture patterns and visual measurement points | Customers describe their application before internal sizing stages |
+| Analytical planning as a first-class result | Useful estimates do not require exact production benchmark matches |
+| Three evidence levels | Separates early planning from refinement and qualification |
+| Explicit deployment anchors | Distinguishes workload demand from supported factory size |
+| Expansion-oriented selection | Makes commercial risk preference a declared policy |
+| Equivalent workload allocations | Explains usable compute headroom without certifying tenants |
+| Fixed dedicated storage policy | Removes converged storage from the current design alternatives |
+| Concrete placement language | Separates outside services, source storage, indexes and local copies |
+| Implementation coverage disclosure | Prevents prospective methodology from being read as delivered capability |
+
+### 14.1 Priority improvements without unnecessary complexity
+First, preserve full precision between calculations and format only at presentation boundaries. Second, distinguish independently concurrent storage writes from alternative peaks. Third, allow supported results to be selected with clearly scoped exclusions where appropriate, without presenting partial workloads as complete designs. Fourth, attach measurement provenance to entered values more precisely than the current broad estimate classification.
+
+Next, calibrate the highest-volume workload families and check the sensitivity envelopes. Improve scheduling, co-tenancy and specialized component models only when they materially affect decisions. A universal distributed-system simulator is not a prerequisite for a useful architecture-planning application.
+
+These items are methodological and implementation follow-ups. Drafting this paper does not execute them. They should be delivered with tests that distinguish useful partial answers from unjustified whole-system claims.
+
+### 14.2 Limitations and conclusion
+The method depends on the customer's demand forecast, the selected application model and the applicability of its assumptions. Novel models, uncertain agent behaviour, specialized GPU applications and unmeasured shared services may exceed the current quantitative scope. Determinism makes the derivation inspectable. It cannot remove those uncertainties.
+
+Anubis is therefore best understood as an architecture-planning method with progressive qualification. It should produce the most useful supported answer early, explain the assumptions that determine it and identify the measurements that could change the design. Final performance commitments require evidence at the configuration and operating conditions being committed to. This preserves the original engineering purpose while making the method practical for consultants and customers.
+@page
+## References and reproducibility record
+External references identify methodological foundations, not automatic product integrations or conformance. Online reference pages were checked on 1 November 2026. Mutable sources must be pinned when admitted into a production evidence pack.
+
+[1] ITU-T. F.748.26. Technical specification for artificial intelligence cloud platforms: Performance evaluation. February 2024.
+https://www.itu.int/rec/T-REC-F.748.26-202402-I/en
+
+[2] MLCommons. MLPerf Inference Datacenter benchmark.
+https://mlcommons.org/benchmarks/inference-datacenter/
+
+[3] MLCommons. MLPerf Training benchmark.
+https://mlcommons.org/benchmarks/training/
+
+[4] MLCommons. MLPerf Storage benchmark.
+https://mlcommons.org/benchmarks/storage/
+
+[5] NVIDIA. NVIDIA Enterprise Reference Architecture for NVL72 AI Factory. Used to illustrate profile-specific building blocks, not to substantiate the example's 256-GPU anchor.
+https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/abstract.html
+
+[6] NVIDIA and AI Dynamo contributors. AIConfigurator repository.
+https://github.com/ai-dynamo/aiconfigurator
+
+[7] Kwon, W. et al. Efficient Memory Management for Large Language Model Serving with PagedAttention. SOSP 2023.
+https://arxiv.org/abs/2309.06180
+
+[8] Anubis. AI Factory Workload Sizing Framework. Version 1.0, 27 September 2026. Repository source docs/anubis-framework.md and retained Word edition.
+
+[9] Anubis implementation snapshot. src/application/characterization/guided.hpp, src/compiler/planning.cpp, src/compiler/network_plan.hpp and knowledge/architecture-core.json, knowledge/guided-intake.json, knowledge/planning.json. Inspected 1 November 2026.
+
+[10] Anubis Bracken Engineering retained projection. deliverables/scenario-video/projection.json. Supports the worked example's inputs, conditional comparisons and deployment selection.
+
+[11] Anubis qualification decision. docs/qualification-options.md. Hybrid public evidence and local downstream testing selected on 24 October 2026.
+
+The accompanying source manifest records SHA-256 digests for the local implementation and example files used in this draft. It identifies the inspected files, including uncommitted working-copy content. It does not certify execution of that source or performance of a deployed binary.

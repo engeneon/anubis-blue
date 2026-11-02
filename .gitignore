@@ -1,0 +1,28 @@
+.document-build/
+__pycache__/
+build/
+build-release/
+node_modules/
+ui/dist/
+.anubis/
+playwright-report/
+test-results/
+*.sqlite*
+
+build-sanitize/
+
+# Local desktop metadata and document rendering intermediates
+.DS_Store
+.guide-build/
+deliverables/**/render*/
+deliverables/access-update-render/
+deliverables/narrative-update/qa/
+# Intermediate narration and video segments
+deliverables/scenario-video/video-build/
+
+deliverables/scenario-video/alice/video-build/
+
+# Backend provider credentials
+.env
+.env.*
+!.env.example

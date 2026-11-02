@@ -1,0 +1,252 @@
+{
+  "version": "planning-1.1",
+  "architectures": [
+    {
+      "id": "REF-HGX-B300-IB-V0_1",
+      "platform": "HGX_B300",
+      "fabric": "InfiniBand",
+      "anchors": [
+        {
+          "su": 1,
+          "nodes": 72,
+          "gpus": 576,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su": 2,
+          "nodes": 144,
+          "gpus": 1152,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su": 4,
+          "nodes": 288,
+          "gpus": 2304,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su": 8,
+          "nodes": 576,
+          "gpus": 4608,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su": 16,
+          "nodes": 1152,
+          "gpus": 9216,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su": 18,
+          "nodes": 1296,
+          "gpus": 10368,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su": 36,
+          "nodes": 2592,
+          "gpus": 20736,
+          "compute_fabric": "three_tier"
+        },
+        {
+          "su": 72,
+          "nodes": 5184,
+          "gpus": 41472,
+          "compute_fabric": "three_tier"
+        }
+      ],
+      "source": "ckp/reference_architecture_compiler/v0_1_1/reference_architectures/hgx_b300_infiniband.json",
+      "sha256": "0e414e30c8311b8ab0773c2962fdc8ae81bdb81459f1da7b1980636169565a20",
+      "family": "Quantum reference profile"
+    },
+    {
+      "id": "REF-GB300-NVL72-IB-V0_1",
+      "platform": "GB300_NVL72",
+      "fabric": "InfiniBand",
+      "anchors": [
+        {
+          "su_groups": 1,
+          "racks": 16,
+          "trays": 288,
+          "gpus": 1152,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su_groups": 2,
+          "racks": 32,
+          "trays": 576,
+          "gpus": 2304,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su_groups": 4,
+          "racks": 64,
+          "trays": 1152,
+          "gpus": 4608,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su_groups": 7,
+          "racks": 112,
+          "trays": 2016,
+          "gpus": 8064,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su_groups": 8,
+          "racks": 128,
+          "trays": 2304,
+          "gpus": 9216,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su_groups": 9,
+          "racks": 144,
+          "trays": 2592,
+          "gpus": 10368,
+          "compute_fabric": "two_tier"
+        },
+        {
+          "su_groups": 18,
+          "racks": 288,
+          "trays": 5184,
+          "gpus": 20736,
+          "compute_fabric": "three_tier"
+        },
+        {
+          "su_groups": 36,
+          "racks": 576,
+          "trays": 10368,
+          "gpus": 41472,
+          "compute_fabric": "three_tier"
+        }
+      ],
+      "source": "ckp/reference_architecture_compiler/v0_1_1/reference_architectures/gb300_nvl72_infiniband.json",
+      "sha256": "9497f00fceb0aec3b4db57717f8a9bf164672ec362dbc078663d058d2695d868",
+      "family": "Quantum reference profile"
+    },
+    {
+      "id": "SX-HGXB300-DP-ENT-1.0.0",
+      "platform": "HGX_B300",
+      "fabric": "Spectrum-X",
+      "anchors": [
+        {
+          "gpus": 256,
+          "nodes": 32
+        },
+        {
+          "gpus": 512,
+          "nodes": 64
+        },
+        {
+          "gpus": 1024,
+          "nodes": 128
+        }
+      ],
+      "source": "ckp/spectrumx_reference/v1_0_0/ckp/reference_profiles/sx_hgxb300_dp_ent_1_0_0.json",
+      "sha256": "ddad35c3ee06e30615f534f6211349a919f381fd01a3857c2fbb1c2457049a4a",
+      "family": "Enterprise RA dual plane"
+    },
+    {
+      "id": "SX-GB300-NVL72-DP-ENT-1.0.0",
+      "platform": "GB300_NVL72",
+      "fabric": "Spectrum-X",
+      "anchors": [
+        {
+          "gpus": 144,
+          "trays": 36,
+          "racks": 2
+        },
+        {
+          "gpus": 288,
+          "trays": 72,
+          "racks": 4
+        },
+        {
+          "gpus": 576,
+          "trays": 144,
+          "racks": 8
+        }
+      ],
+      "source": "ckp/spectrumx_reference/v1_0_0/ckp/reference_profiles/sx_gb300_nvl72_dp_ent_1_0_0.json",
+      "sha256": "f6ac1b99af0a74f3ece08f6f86e7d2603ca40eb93cb4672fd3701c73b4637fed",
+      "family": "Enterprise RA dual plane"
+    }
+  ],
+  "hardware": {
+    "HGX_B300": {
+      "gpu_per_node": 8,
+      "hbm_GB": "288",
+      "usable_hbm_fraction": "0.90",
+      "bandwidth_TBps": "7.7",
+      "dense_bf16_TFLOPS": "2250",
+      "host_ram_GB_per_node": "2048",
+      "cpu_cores_per_node": 128,
+      "local_disk_GB_per_node": "30720",
+      "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+      "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html"
+    },
+    "GB300_NVL72": {
+      "gpu_per_node": 4,
+      "hbm_GB": "279",
+      "usable_hbm_fraction": "0.90",
+      "bandwidth_TBps": "8",
+      "dense_bf16_TFLOPS": "2250",
+      "host_ram_GB_per_node": "992",
+      "cpu_cores_per_node": 144,
+      "local_disk_GB_per_node": "15360",
+      "basis": "GB300 rack/tray planning provision; host adequacy requires workload validation",
+      "source": "https://resources.nvidia.com/en-us-gpu-resources/blackwell-ultra-datasheet"
+    },
+    "HGX_B200": {
+      "gpu_per_node": 8,
+      "hbm_GB": "180",
+      "usable_hbm_fraction": "0.90",
+      "bandwidth_TBps": "8",
+      "dense_bf16_TFLOPS": "2250",
+      "host_ram_GB_per_node": "2048",
+      "cpu_cores_per_node": 128,
+      "local_disk_GB_per_node": "30720",
+      "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+      "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+      "compute_source": "https://www.nvidia.com/en-au/data-center/hgx/"
+    },
+    "HGX_H200": {
+      "gpu_per_node": 8,
+      "hbm_GB": "141",
+      "usable_hbm_fraction": "0.90",
+      "bandwidth_TBps": "4.8",
+      "dense_bf16_TFLOPS": "989.5",
+      "host_ram_GB_per_node": "2048",
+      "cpu_cores_per_node": 128,
+      "local_disk_GB_per_node": "30720",
+      "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+      "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+      "compute_source": "https://www.nvidia.com/en-au/data-center/h200/"
+    }
+  },
+  "models": {
+    "dense8b": {
+      "label": "Generic dense 8B planning model",
+      "parameters": "8000000000",
+      "layers": 32,
+      "kv_heads": 8,
+      "head_dimension": 128
+    },
+    "dense30b": {
+      "label": "Generic dense 30B planning model",
+      "parameters": "30000000000",
+      "layers": 60,
+      "kv_heads": 8,
+      "head_dimension": 128
+    },
+    "dense70b": {
+      "label": "Generic dense 70B planning model",
+      "parameters": "70000000000",
+      "layers": 80,
+      "kv_heads": 8,
+      "head_dimension": 128
+    }
+  },
+  "model_basis": "Explicit generic architecture assumptions, not a named model benchmark. Edit dimensions to match actual model before procurement."
+}

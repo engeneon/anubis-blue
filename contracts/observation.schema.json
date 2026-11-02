@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:anubis:observation:1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "state"
+  ],
+  "properties": {
+    "state": {
+      "enum": [
+        "known",
+        "estimated",
+        "assumed",
+        "unknown"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "pattern": "^-?[0-9]+(\\.[0-9]+)?$"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "origin": {
+      "enum": [
+        "customer",
+        "measurement",
+        "template",
+        "agent"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accepted": {
+      "type": "boolean"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "required": [
+            "value"
+          ]
+        }
+      },
+      "else": {
+        "required": [
+          "value",
+          "unit",
+          "origin",
+          "source"
+        ]
+      }
+    }
+  ]
+}

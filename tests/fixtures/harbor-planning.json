@@ -1,0 +1,273 @@
+{
+  "schema_version": "1.0",
+  "name": "Harbor Inference Cloud \u2014 planning",
+  "stages": [
+    {
+      "id": "standard",
+      "name": "Standard",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "40",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      },
+      "notes": "8 tenants at 5 requests/s; endpoint routing unresolved",
+      "planning": {
+        "model": "dense70b",
+        "parallel_gpus": 1,
+        "concurrent_sequences": 32,
+        "context_tokens": 8192,
+        "weight_bytes": "2",
+        "kv_bytes": "2",
+        "workspace_GB": "8",
+        "training_bytes_per_parameter": "16",
+        "activation_GB_per_gpu": "32",
+        "host_ram_GB_per_gpu": "256",
+        "local_disk_GB_per_gpu": "3840",
+        "cpu_cores_per_gpu": 16
+      }
+    },
+    {
+      "id": "priority",
+      "name": "Priority",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "40",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      },
+      "notes": "4 tenants at 10 requests/s; p95 TTFT 1s and ITL 50ms need boundaries",
+      "planning": {
+        "model": "dense70b",
+        "parallel_gpus": 1,
+        "concurrent_sequences": 32,
+        "context_tokens": 8192,
+        "weight_bytes": "2",
+        "kv_bytes": "2",
+        "workspace_GB": "8",
+        "training_bytes_per_parameter": "16",
+        "activation_GB_per_gpu": "32",
+        "host_ram_GB_per_gpu": "256",
+        "local_disk_GB_per_gpu": "3840",
+        "cpu_cores_per_gpu": 16
+      }
+    },
+    {
+      "id": "standard_burst",
+      "name": "Standard Burst",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "120",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      },
+      "planning": {
+        "model": "dense70b",
+        "parallel_gpus": 1,
+        "concurrent_sequences": 32,
+        "context_tokens": 8192,
+        "weight_bytes": "2",
+        "kv_bytes": "2",
+        "workspace_GB": "8",
+        "training_bytes_per_parameter": "16",
+        "activation_GB_per_gpu": "32",
+        "host_ram_GB_per_gpu": "256",
+        "local_disk_GB_per_gpu": "3840",
+        "cpu_cores_per_gpu": 16
+      }
+    },
+    {
+      "id": "priority_reserved",
+      "name": "Priority Reserved",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "100",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      },
+      "planning": {
+        "model": "dense70b",
+        "parallel_gpus": 1,
+        "concurrent_sequences": 32,
+        "context_tokens": 8192,
+        "weight_bytes": "2",
+        "kv_bytes": "2",
+        "workspace_GB": "8",
+        "training_bytes_per_parameter": "16",
+        "activation_GB_per_gpu": "32",
+        "host_ram_GB_per_gpu": "256",
+        "local_disk_GB_per_gpu": "3840",
+        "cpu_cores_per_gpu": 16
+      }
+    },
+    {
+      "id": "planning_data",
+      "name": "Planning dataset",
+      "type": "data",
+      "storage_tier": "object",
+      "observations": {
+        "bytes": {
+          "state": "assumed",
+          "value": "10",
+          "unit": "TB",
+          "origin": "template",
+          "source": "Planning storage provision",
+          "accepted": true
+        },
+        "free_fraction": {
+          "state": "assumed",
+          "value": ".2",
+          "unit": "ratio",
+          "origin": "template",
+          "source": "Planning storage provision",
+          "accepted": true
+        },
+        "read_rate": {
+          "state": "assumed",
+          "value": "2",
+          "unit": "GB/s",
+          "origin": "template",
+          "source": "Planning storage provision",
+          "accepted": true
+        },
+        "write_rate": {
+          "state": "assumed",
+          "value": "1",
+          "unit": "GB/s",
+          "origin": "template",
+          "source": "Planning storage provision",
+          "accepted": true
+        }
+      }
+    }
+  ],
+  "edges": [],
+  "scenarios": [
+    {
+      "id": "normal",
+      "name": "Normal traffic",
+      "active_stages": [
+        "standard",
+        "priority",
+        "planning_data"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    },
+    {
+      "id": "simultaneous",
+      "name": "Full simultaneous requested burst",
+      "active_stages": [
+        "standard_burst",
+        "priority_reserved",
+        "planning_data"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    },
+    {
+      "id": "failure",
+      "name": "Priority reservation after node loss",
+      "active_stages": [
+        "priority_reserved",
+        "planning_data"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 1
+    }
+  ],
+  "tenancy": "multi",
+  "planning": {
+    "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+    "sensitivity_percent": "30",
+    "compute_efficiency": "0.35",
+    "memory_efficiency": "0.50",
+    "minimum_service_fraction": "1",
+    "accept_capacity_shortfall": false,
+    "bytes_per_token": "4",
+    "protocol_allowance": "1.2",
+    "assumptions_accepted": true,
+    "expansion_lead_days": 90,
+    "source": "Illustrative consultant assumptions; editable, not measured"
+  }
+}

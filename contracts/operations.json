@@ -1,0 +1,951 @@
+[
+  {
+    "method": "GET",
+    "path": "capabilities",
+    "scope": "authenticated",
+    "description": "Declared support and bounds",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "component-descriptors",
+    "scope": "authenticated",
+    "description": "Registered intake controls",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "me",
+    "scope": "authenticated",
+    "description": "Effective identity",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "stories",
+    "scope": "authenticated",
+    "description": "Fictional reference workloads",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "openapi",
+    "scope": "authenticated",
+    "description": "Versioned API inventory",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "integration-capabilities",
+    "scope": "authenticated",
+    "description": "Configured integration scope",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "session",
+    "scope": "authenticated",
+    "description": "Set local HttpOnly session",
+    "body": {},
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "logout",
+    "scope": "authenticated",
+    "description": "Clear session",
+    "body": {},
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases",
+    "scope": "member",
+    "description": "List authorized engagements",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "cases",
+    "scope": "writer",
+    "description": "Create engagement",
+    "body": {
+      "name": {
+        "type": "string"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}",
+    "scope": "member",
+    "description": "Read engagement",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "PATCH",
+    "path": "cases/{id}",
+    "scope": "writer; owner for membership/budget",
+    "description": "Optimistic update (If-Match required)",
+    "body": {
+      "name": {
+        "type": "string"
+      },
+      "archived": {
+        "type": "boolean"
+      },
+      "members": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "agent_compile_limit": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "agent_proposal_limit": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}/drafts",
+    "scope": "member",
+    "description": "List case drafts",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}/runs",
+    "scope": "member",
+    "description": "List case runs",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}/audit",
+    "scope": "member",
+    "description": "List case audit",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}/proposals",
+    "scope": "member",
+    "description": "List case proposals",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}/completions",
+    "scope": "member",
+    "description": "List case completions",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}/saved-projections",
+    "scope": "member",
+    "description": "List case saved-projections",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/trash",
+    "scope": "member",
+    "description": "List recoverably deleted engagements",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "cases/{id}/delete",
+    "scope": "owner",
+    "description": "Move engagement to Trash or restore. If-Match and explicit confirmation required.",
+    "body": {
+      "confirm": {
+        "type": "boolean"
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "cases/{id}/restore",
+    "scope": "owner",
+    "description": "Move engagement to Trash or restore. If-Match and explicit confirmation required.",
+    "body": {
+      "confirm": {
+        "type": "boolean"
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "cases/{id}/closure-review",
+    "scope": "member",
+    "description": "Assess current limitations and preview a deterministic final status report without closing",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "cases/{id}/close-with-report",
+    "scope": "writer, not agent",
+    "description": "Conclude without a design handoff and preserve a final status report. If-Match and matching review digest required.",
+    "body": {
+      "review_digest": {
+        "type": "string"
+      },
+      "notes": {
+        "type": "string"
+      },
+      "confirm": {
+        "type": "boolean"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "cases/{id}/complete",
+    "scope": "writer, not agent",
+    "description": "Confirm requirements delivered and preserve selected result/projection snapshots. If-Match required.",
+    "body": {
+      "result_id": {
+        "type": "string"
+      },
+      "projection_id": {
+        "type": "string"
+      },
+      "notes": {
+        "type": "string"
+      },
+      "confirm_delivery": {
+        "type": "boolean"
+      },
+      "acknowledge_stale": {
+        "type": "boolean"
+      },
+      "executive_summary": {
+        "type": "string"
+      },
+      "narrative_version": {
+        "type": "string"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "cases/{id}/reopen",
+    "scope": "writer, not agent",
+    "description": "Reopen for revisions without changing completed snapshots. If-Match required.",
+    "body": {
+      "notes": {
+        "type": "string"
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "cases/{id}/drafts",
+    "scope": "writer",
+    "description": "Create structured draft",
+    "body": {
+      "$ref": "workload.schema.json"
+    },
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "drafts/{id}",
+    "scope": "member",
+    "description": "Read editable draft",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "PATCH",
+    "path": "drafts/{id}",
+    "scope": "writer",
+    "description": "Replace draft with If-Match version",
+    "body": {
+      "$ref": "workload.schema.json"
+    },
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "drafts/{id}/validate",
+    "scope": "writer",
+    "description": "validate effective workload; freeze requires If-Match",
+    "body": {},
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "drafts/{id}/freeze",
+    "scope": "writer",
+    "description": "freeze effective workload; freeze requires If-Match",
+    "body": {},
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "packs",
+    "scope": "authenticated",
+    "description": "List packs",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "packs/{id}",
+    "scope": "authenticated",
+    "description": "Read packs",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "activations",
+    "scope": "authenticated",
+    "description": "List activations",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "activations/{id}",
+    "scope": "authenticated",
+    "description": "Read activations",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "qualification-protocols",
+    "scope": "authenticated",
+    "description": "List qualification-protocols",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "qualification-protocols/{id}",
+    "scope": "authenticated",
+    "description": "Read qualification-protocols",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "qualification-reports",
+    "scope": "authenticated",
+    "description": "List qualification-reports",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "qualification-reports/{id}",
+    "scope": "authenticated",
+    "description": "Read qualification-reports",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "packs",
+    "scope": "curator/admin",
+    "description": "Import immutable version; executable extensions forbidden",
+    "body": null,
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "packs/{id}/activate",
+    "scope": "approver/admin",
+    "description": "Resolve exact dependency lock; production requires independent qualification",
+    "body": {
+      "channel": {
+        "enum": [
+          "demonstration",
+          "production"
+        ]
+      },
+      "qualification_report_id": {
+        "type": "string"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "activations/{id}/withdraw",
+    "scope": "approver/admin",
+    "description": "Withdraw for future jobs; retain history",
+    "body": {},
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "activations/{id}/impact",
+    "scope": "member",
+    "description": "List authorized dependent runs",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "qualification-protocols",
+    "scope": "curator/admin",
+    "description": "Freeze thresholds and calibration split",
+    "body": null,
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "qualification-runs",
+    "scope": "curator/admin",
+    "description": "Evaluate dataset against predeclared protocol",
+    "body": {
+      "protocol_id": {
+        "type": "string"
+      },
+      "dataset": {
+        "type": "object"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "observation-proposals",
+    "scope": "writer/agent with proposal budget",
+    "description": "Store unaccepted assumed agent observations; no draft mutation",
+    "body": {
+      "draft_id": {
+        "type": "string"
+      },
+      "rows": {
+        "type": "array",
+        "maxItems": 100
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "proposal-reviews",
+    "scope": "human writer",
+    "description": "Review explicit rows and apply against the original draft version",
+    "body": {
+      "proposal_id": {
+        "type": "string"
+      },
+      "accept_rows": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      },
+      "rationale": {
+        "type": "string"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "import-previews",
+    "scope": "writer",
+    "description": "Validate typed rows with per-row rejection reasons",
+    "body": {
+      "draft_id": {
+        "type": "string"
+      },
+      "rows": {
+        "type": "array",
+        "maxItems": 2000,
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "import-commits",
+    "scope": "writer",
+    "description": "Commit reviewed rows only against original draft version",
+    "body": {
+      "preview_id": {
+        "type": "string"
+      },
+      "accept_partial": {
+        "type": "boolean"
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "compilations",
+    "scope": "writer/agent with case budget",
+    "description": "Freeze job inputs and enqueue",
+    "body": {
+      "revision_id": {
+        "type": "string"
+      },
+      "activation_id": {
+        "type": "string"
+      }
+    },
+    "status": 202
+  },
+  {
+    "method": "GET",
+    "path": "jobs/{id}",
+    "scope": "member",
+    "description": "Poll job; job success is separate from engineering feasibility",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "jobs/{id}/cancel",
+    "scope": "writer",
+    "description": "Cancellation fenced against committed publication",
+    "body": {},
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "results/{id}",
+    "scope": "member",
+    "description": "Read immutable scoped results",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "revisions/{id}",
+    "scope": "member",
+    "description": "Read immutable scoped revisions",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "projections/{id}",
+    "scope": "member",
+    "description": "Read immutable scoped projections",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "reports/{id}",
+    "scope": "member",
+    "description": "Read immutable scoped reports",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "assessments/{id}",
+    "scope": "member",
+    "description": "Read immutable scoped assessments",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "decisions/{id}",
+    "scope": "member",
+    "description": "Read immutable scoped decisions",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "reports",
+    "scope": "writer",
+    "description": "Create frozen dossier manifest",
+    "body": {
+      "result_id": {
+        "type": "string"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "recommendation-decisions",
+    "scope": "writer; architect/admin for finalization",
+    "description": "Record selection without changing engineering status",
+    "body": {
+      "result_id": {
+        "type": "string"
+      },
+      "candidate_id": {
+        "type": "string"
+      },
+      "state": {
+        "enum": [
+          "selected",
+          "finalized"
+        ]
+      },
+      "rationale": {
+        "type": "string"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "comparisons",
+    "scope": "member/agent",
+    "description": "Compare immutable results",
+    "body": {
+      "left_id": {
+        "type": "string"
+      },
+      "right_id": {
+        "type": "string"
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "neon-projections",
+    "scope": "writer",
+    "description": "Create allowlisted manual handoff and separate mapping ledger",
+    "body": {
+      "result_id": {
+        "type": "string"
+      },
+      "mapping": {
+        "type": "object"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "external-result-imports",
+    "scope": "writer",
+    "description": "Retain downstream design tool authority; unresolved semantics stay unverifiable",
+    "body": {
+      "projection_id": {
+        "type": "string"
+      },
+      "external_result": {
+        "type": "object"
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "neon-submissions",
+    "scope": "writer; configured local target",
+    "description": "Experimental stateless submission; 409 when target unconfigured",
+    "body": {
+      "projection_id": {
+        "type": "string"
+      },
+      "confirm_experimental_submission": {
+        "type": "boolean"
+      }
+    },
+    "status": 202
+  },
+  {
+    "method": "POST",
+    "path": "jobs/{id}/reconcile",
+    "scope": "writer",
+    "description": "Import evidence to reconcile uncertain external outcome",
+    "body": {
+      "external_result": {
+        "type": "object"
+      },
+      "source": {
+        "type": "string"
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "admin/backup",
+    "scope": "admin",
+    "description": "Consistent SQLite snapshot to server-controlled backup directory",
+    "body": {},
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "planning-catalog",
+    "scope": "member",
+    "description": "Read versioned planning hardware, model assumptions and supported downstream design tool anchors",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "guided-catalog",
+    "scope": "member",
+    "description": "Read versioned application patterns and accepted-default profiles",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "guided-workloads",
+    "scope": "writer",
+    "description": "Transform architecture-led intake into a validated workload without persistence",
+    "body": {
+      "name": {
+        "type": "string"
+      },
+      "components": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 16,
+        "items": {
+          "type": "object"
+        }
+      },
+      "accepted": {
+        "type": "boolean"
+      },
+      "overlap": {
+        "enum": [
+          "yes",
+          "no",
+          "unknown"
+        ]
+      },
+      "tenancy": {
+        "enum": [
+          "single",
+          "multi"
+        ]
+      },
+      "architecture": {
+        "type": "string"
+      },
+      "sensitivity": {
+        "type": "string"
+      },
+      "notes": {
+        "type": "string"
+      }
+    },
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "assisted-compatibility",
+    "scope": "writer",
+    "description": "Inspect lossless assisted compatibility and preview a separate assisted copy without changing the supplied workload",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "copilot-capabilities",
+    "scope": "authenticated",
+    "description": "Copilot bounds, versioned fact schema, architecture cards and disabled status",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "copilot-profiles",
+    "scope": "authenticated",
+    "description": "List configured model and MCP connections without credentials",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "copilot-profiles",
+    "scope": "admin",
+    "description": "Create an endpoint-policy-checked profile using backend secret references",
+    "body": null,
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "copilot-profiles/{id}/test",
+    "scope": "admin",
+    "description": "Test capability or disable connection",
+    "body": {},
+    "status": 202
+  },
+  {
+    "method": "POST",
+    "path": "copilot-profiles/{id}/disable",
+    "scope": "admin",
+    "description": "Test capability or disable connection",
+    "body": {},
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "copilot-sessions",
+    "scope": "writer",
+    "description": "Create a case-scoped assistant session",
+    "body": {
+      "case_id": {
+        "type": "string"
+      },
+      "draft_id": {
+        "type": "string"
+      },
+      "classification": {
+        "enum": [
+          "public",
+          "corporate"
+        ]
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "copilot-sessions/{id}",
+    "scope": "member",
+    "description": "Read accepted session state",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "copilot-sessions/{id}/history",
+    "scope": "member",
+    "description": "Read scoped sources, proposals and job outcomes",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "copilot-sessions/{id}/sources",
+    "scope": "writer; proposals also budgeted agent",
+    "description": "Controlled assistant sources",
+    "body": null,
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "copilot-sessions/{id}/proposals",
+    "scope": "writer; proposals also budgeted agent",
+    "description": "Controlled assistant proposals",
+    "body": null,
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "copilot-sessions/{id}/turns",
+    "scope": "writer; proposals also budgeted agent",
+    "description": "Controlled assistant turns",
+    "body": null,
+    "status": 202
+  },
+  {
+    "method": "POST",
+    "path": "copilot-sessions/{id}/mcp-import",
+    "scope": "writer; proposals also budgeted agent",
+    "description": "Controlled assistant mcp-import",
+    "body": null,
+    "status": 202
+  },
+  {
+    "method": "POST",
+    "path": "copilot-sessions/{id}/fork",
+    "scope": "writer; proposals also budgeted agent",
+    "description": "Controlled assistant fork",
+    "body": null,
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "copilot-proposals/{id}",
+    "scope": "member",
+    "description": "Read immutable proposed values and review status",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "copilot-proposals/{id}/apply",
+    "scope": "human writer",
+    "description": "Apply reviewed fields with revision checks. Fact proposals are accepted atomically with their fact ledger",
+    "body": {
+      "selected": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      },
+      "accept_assumptions": {
+        "const": true
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "copilot-proposals/{id}/reject",
+    "scope": "human writer",
+    "description": "Reject pending proposal",
+    "body": {},
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "copilot-context/{id}",
+    "scope": "member",
+    "description": "Read case-scoped sessions and approved catalogue context",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "copilot-facts/{id}",
+    "scope": "member",
+    "description": "Read engine-owned facts from an immutable result",
+    "body": null,
+    "status": 200
+  }
+]

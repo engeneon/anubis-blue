@@ -1,0 +1,20 @@
+{
+  "name": "anubis-workload-engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p ui/tsconfig.json && node scripts/copy-ui.mjs",
+    "test:ui": "playwright test",
+    "check": "tsc -p ui/tsconfig.json --noEmit",
+    "test:usability": "python3 scripts/validate_usability.py",
+    "test:copilot": "python3 scripts/validate_copilot.py --ui",
+    "test:projection-summary": "npm run build && node tests/test_projection_summary.mjs",
+    "test:mvp": "npm run build && node tests/test_requirements_summary.mjs && node tests/test_projection_summary.mjs && playwright test tests/ui/mvp.spec.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "prettier": "3.6.2",
+    "typescript": "5.7.3"
+  }
+}

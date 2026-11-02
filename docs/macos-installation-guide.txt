@@ -1,0 +1,166 @@
+ANUBIS MVP 1.0 — MAC INSTALLATION AND DATA GUIDE
+
+Purpose
+Install Anubis on your own Mac, sign in and return to saved engagements.
+The evaluated platform is macOS on Apple Silicon. Intel Macs have not been
+qualified. Linux installation guidance is deferred. This is a source-based
+local installation, not a signed drag-and-drop Mac application.
+
+1. Obtain the application
+Obtain the approved Anubis source archive or access to its private repository
+from your administrator. Extract it to a permanent folder, for example
+~/Code/anubis. Do not run it inside a temporary extraction folder. Keep the
+whole source tree, including docs, knowledge, contracts, ui and deploy.
+Open Terminal and change to that folder:
+
+  cd ~/Code/anubis
+
+Use your actual folder if different. Commands below run from this folder.
+
+2. Install the prerequisites
+Install Apple's command-line developer tools if they are not already present:
+
+  xcode-select --install
+
+Complete the installer before continuing. If the tools are already installed,
+there is no need to reinstall them.
+Install Homebrew using its official instructions:
+https://docs.brew.sh/Installation
+Follow its displayed shell setup instructions and open a new Terminal window.
+Install the build tools and libraries:
+
+  brew install cmake node openssl@3 sqlite python
+
+Check that the commands are available:
+
+  cmake --version
+  c++ --version
+  node --version
+  npm --version
+  python3 --version
+
+Anubis requires CMake 3.24 or later and a C++20 compiler. The recorded Mac
+build used Apple clang 21, CMake 4.2, Node 26.8.1 and npm 11.19.0. Those are
+observed versions, not an exhaustive compatibility matrix. Initial dependency
+installation requires internet access. Manual sizing does not require a GPU
+or an LLM service.
+
+3. Build Anubis
+In the project folder, run each command and wait for it to finish successfully:
+
+  cmake --preset local -DCMAKE_PREFIX_PATH="$(brew --prefix openssl@3);$(brew --prefix sqlite)"
+  cmake --build --preset local -j4
+  npm ci --ignore-scripts
+  npm run build
+  ctest --test-dir build --output-on-failure
+
+The executable is build/anubis. The browser interface is generated in ui/dist.
+The test command should report no failed tests. Stop and resolve an error
+before proceeding. Do not run the build or application using sudo.
+
+4. Start the application and bootstrap your access token
+Run:
+
+  python3 deploy/local/run.py
+
+Leave this Terminal window running. The launcher automatically creates a
+private .anubis folder and, on the first launch only, an identities.json file
+containing your local-owner access token. You do not need to invent a token,
+register an online account or obtain a provider API key to sign in.
+Open http://127.0.0.1:8787 in your browser.
+
+In a second Terminal window, change to your Anubis folder and run:
+
+  open -a TextEdit .anubis/identities.json
+
+Find the entry with id "local-owner". Copy only the text inside the quotation
+marks after "token". Do not include the quotation marks, comma or braces.
+Paste it into the Access token field and select Open workspace. Close the
+text editor without changing the file. Keep this token private.
+
+Alternatively, in Finder open the Anubis folder, press Command Shift Period
+to show hidden files, and open .anubis/identities.json with a text editor.
+Anubis access tokens and model-provider API keys are different credentials.
+Do not put either credential in a workload story, screenshot or support report.
+
+5. Confirm the installation
+Select New engagement and give it a recognisable name. Follow the manual
+worked scenario in docs/mvp-1.0-guide.txt to calculate GPU requirements and
+prepare a design handoff. Complete the engagement to save its final delivery
+record. Open Cases to retrieve it later. No Copilot connection is required.
+For optional Copilot setup, follow docs/copilot-operation.txt. Provider keys
+are configured on the backend. A provider account and API billing may be
+required. Restart after changing backend credentials.
+
+6. Stop, restart and retrieve your work
+Stop Anubis with Control C in its Terminal window. Start it again using:
+
+  python3 deploy/local/run.py
+
+Open the same browser address. If asked to sign in, use the same access token.
+Choose Cases, locate the engagement and open it. Completed engagements retain
+their saved deliverables. Reopen an engagement for revisions when appropriate.
+A restart does not mark an open engagement complete or erase its history.
+There is no need to rebuild each time you start Anubis.
+
+What persists
+The launcher uses .anubis/anubis.sqlite inside this installation folder.
+Saved cases, drafts, revisions, calculations, projections, completion records
+and saved Copilot records are database data. They survive normal application
+restarts. The token remains in .anubis/identities.json and is reused.
+Text still being typed or changes not yet submitted to the server must not be
+assumed saved. Wait for operations to finish before stopping. An interrupted
+live provider request is not guaranteed to finish on restart.
+
+Deleting the .anubis folder deletes your local history and identity. A fresh
+checkout in a different folder has a different database and may appear empty.
+Do not treat reinstalling source files as a data migration. Browser downloads
+are separate files, not a complete database backup. Keep the same local-owner
+identity when restoring so that case membership continues to match.
+
+7. Back up your history
+From the project folder, create a verified database backup in a new path:
+
+  python3 scripts/backup.py backup .anubis/anubis.sqlite "$HOME/Anubis-backups/backup-01.sqlite"
+  python3 scripts/backup.py verify "$HOME/Anubis-backups/backup-01.sqlite"
+
+Choose a new filename for each backup. Existing destinations are refused.
+Keep the accompanying .manifest.json file. This utility uses SQLite's backup
+mechanism, including when the application is running. Do not copy only the
+live database file because SQLite may also have active journal files.
+Separately preserve .anubis/identities.json in a private protected backup.
+Preserve .env and any local target configuration securely if used. They are
+not included in the database backup. Never commit them to Git or share them.
+
+8. Restore a backup without overwriting current data
+Stop the application. Keep the backup and its manifest together. Restore to a
+new database path inside the installation:
+
+  python3 scripts/backup.py restore "$HOME/Anubis-backups/backup-01.sqlite" .anubis/restored.sqlite
+  python3 deploy/local/run.py --db "$PWD/.anubis/restored.sqlite"
+
+Continue to use that explicit --db path on subsequent launches while using
+the restored database. Launching without it returns to anubis.sqlite.
+Use the preserved identity file for a replacement installation. Do not edit
+identity IDs casually. Validate that Cases and saved deliverables are present
+before making further changes. Restoration is not a schema migration tool.
+
+9. Troubleshooting
+Command not found: complete prerequisite installation and Homebrew shell setup.
+OpenSSL or SQLite not found: repeat the configure command in step 3.
+Page unavailable: check the launch Terminal for an error and keep it running.
+Port 8787 already in use: check whether Anubis is already running. Do not start
+a second process against the same database. Reuse or stop the existing service.
+Token rejected: use the token from the installation that started this server.
+Do not delete the identity file to troubleshoot login.
+Cases missing: check which installation folder and --db path were used, and
+which identity is signed in. Do not assume the history was deleted.
+After an update: rebuild and restart the service, then refresh the browser.
+Take a verified backup before updating. Preserve the .anubis directory.
+
+Validation scope
+A fresh-directory build and first login passed on the existing Apple Silicon
+Mac toolchain. This does not establish installation on a pristine Mac or all
+macOS versions. Restart persistence is checked separately by
+scripts/test_local_restart.py. The local service binds to this computer and
+is not a shared multi-user deployment. Keep it off public network proxies.

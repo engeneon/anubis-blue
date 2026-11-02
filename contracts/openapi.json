@@ -1,0 +1,4418 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Anubis local development API",
+    "version": "0.1.0",
+    "description": "Runtime validates detailed cross-field semantics. Local deployment only; external integration remains unqualified."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8787"
+    }
+  ],
+  "paths": {
+    "/api/v1/capabilities": {
+      "get": {
+        "operationId": "get_capabilities",
+        "summary": "Declared support and bounds",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Declared support and bounds"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/component-descriptors": {
+      "get": {
+        "operationId": "get_component_descriptors",
+        "summary": "Registered intake controls",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registered intake controls"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/me": {
+      "get": {
+        "operationId": "get_me",
+        "summary": "Effective identity",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Effective identity"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/stories": {
+      "get": {
+        "operationId": "get_stories",
+        "summary": "Fictional reference workloads",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fictional reference workloads"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/openapi": {
+      "get": {
+        "operationId": "get_openapi",
+        "summary": "Versioned API inventory",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Versioned API inventory"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/integration-capabilities": {
+      "get": {
+        "operationId": "get_integration_capabilities",
+        "summary": "Configured integration scope",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configured integration scope"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/session": {
+      "post": {
+        "operationId": "post_session",
+        "summary": "Set local HttpOnly session",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Set local HttpOnly session"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/logout": {
+      "post": {
+        "operationId": "post_logout",
+        "summary": "Clear session",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clear session"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases": {
+      "get": {
+        "operationId": "get_cases",
+        "summary": "List authorized engagements",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List authorized engagements"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      },
+      "post": {
+        "operationId": "post_cases",
+        "summary": "Create engagement",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create engagement"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases/{id}": {
+      "get": {
+        "operationId": "get_cases_by_id",
+        "summary": "Read engagement",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read engagement"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "patch_cases_by_id",
+        "summary": "Optimistic update (If-Match required)",
+        "x-authorization": "writer; owner for membership/budget",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Optimistic update (If-Match required)"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]*$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "archived": {
+                    "type": "boolean"
+                  },
+                  "members": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "agent_compile_limit": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "agent_proposal_limit": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases/{id}/drafts": {
+      "get": {
+        "operationId": "get_cases_by_id_drafts",
+        "summary": "List case drafts",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List case drafts"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_cases_by_id_drafts",
+        "summary": "Create structured draft",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create structured draft"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "workload.schema.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases/{id}/runs": {
+      "get": {
+        "operationId": "get_cases_by_id_runs",
+        "summary": "List case runs",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List case runs"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/cases/{id}/audit": {
+      "get": {
+        "operationId": "get_cases_by_id_audit",
+        "summary": "List case audit",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List case audit"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/cases/{id}/proposals": {
+      "get": {
+        "operationId": "get_cases_by_id_proposals",
+        "summary": "List case proposals",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List case proposals"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/cases/{id}/completions": {
+      "get": {
+        "operationId": "get_cases_by_id_completions",
+        "summary": "List case completions",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List case completions"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/cases/{id}/saved-projections": {
+      "get": {
+        "operationId": "get_cases_by_id_saved_projections",
+        "summary": "List case saved-projections",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List case saved-projections"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/cases/trash": {
+      "get": {
+        "operationId": "get_cases_trash",
+        "summary": "List recoverably deleted engagements",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List recoverably deleted engagements"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/cases/{id}/delete": {
+      "post": {
+        "operationId": "post_cases_by_id_delete",
+        "summary": "Move engagement to Trash or restore. If-Match and explicit confirmation required.",
+        "x-authorization": "owner",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Move engagement to Trash or restore. If-Match and explicit confirmation required."
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "confirm": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases/{id}/restore": {
+      "post": {
+        "operationId": "post_cases_by_id_restore",
+        "summary": "Move engagement to Trash or restore. If-Match and explicit confirmation required.",
+        "x-authorization": "owner",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Move engagement to Trash or restore. If-Match and explicit confirmation required."
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "confirm": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases/{id}/closure-review": {
+      "get": {
+        "operationId": "get_cases_by_id_closure_review",
+        "summary": "Assess current limitations and preview a deterministic final status report without closing",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assess current limitations and preview a deterministic final status report without closing"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/cases/{id}/close-with-report": {
+      "post": {
+        "operationId": "post_cases_by_id_close_with_report",
+        "summary": "Conclude without a design handoff and preserve a final status report. If-Match and matching review digest required.",
+        "x-authorization": "writer, not agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Conclude without a design handoff and preserve a final status report. If-Match and matching review digest required."
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "review_digest": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  },
+                  "confirm": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases/{id}/complete": {
+      "post": {
+        "operationId": "post_cases_by_id_complete",
+        "summary": "Confirm requirements delivered and preserve selected result/projection snapshots. If-Match required.",
+        "x-authorization": "writer, not agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Confirm requirements delivered and preserve selected result/projection snapshots. If-Match required."
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "result_id": {
+                    "type": "string"
+                  },
+                  "projection_id": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  },
+                  "confirm_delivery": {
+                    "type": "boolean"
+                  },
+                  "acknowledge_stale": {
+                    "type": "boolean"
+                  },
+                  "executive_summary": {
+                    "type": "string"
+                  },
+                  "narrative_version": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cases/{id}/reopen": {
+      "post": {
+        "operationId": "post_cases_by_id_reopen",
+        "summary": "Reopen for revisions without changing completed snapshots. If-Match required.",
+        "x-authorization": "writer, not agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reopen for revisions without changing completed snapshots. If-Match required."
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drafts/{id}": {
+      "get": {
+        "operationId": "get_drafts_by_id",
+        "summary": "Read editable draft",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read editable draft"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "patch_drafts_by_id",
+        "summary": "Replace draft with If-Match version",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Replace draft with If-Match version"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]*$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "workload.schema.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drafts/{id}/validate": {
+      "post": {
+        "operationId": "post_drafts_by_id_validate",
+        "summary": "validate effective workload; freeze requires If-Match",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "validate effective workload; freeze requires If-Match"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drafts/{id}/freeze": {
+      "post": {
+        "operationId": "post_drafts_by_id_freeze",
+        "summary": "freeze effective workload; freeze requires If-Match",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "freeze effective workload; freeze requires If-Match"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]*$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/packs": {
+      "get": {
+        "operationId": "get_packs",
+        "summary": "List packs",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List packs"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      },
+      "post": {
+        "operationId": "post_packs",
+        "summary": "Import immutable version; executable extensions forbidden",
+        "x-authorization": "curator/admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Import immutable version; executable extensions forbidden"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/packs/{id}": {
+      "get": {
+        "operationId": "get_packs_by_id",
+        "summary": "Read packs",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read packs"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/activations": {
+      "get": {
+        "operationId": "get_activations",
+        "summary": "List activations",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List activations"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/activations/{id}": {
+      "get": {
+        "operationId": "get_activations_by_id",
+        "summary": "Read activations",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read activations"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/qualification-protocols": {
+      "get": {
+        "operationId": "get_qualification_protocols",
+        "summary": "List qualification-protocols",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List qualification-protocols"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      },
+      "post": {
+        "operationId": "post_qualification_protocols",
+        "summary": "Freeze thresholds and calibration split",
+        "x-authorization": "curator/admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Freeze thresholds and calibration split"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/qualification-protocols/{id}": {
+      "get": {
+        "operationId": "get_qualification_protocols_by_id",
+        "summary": "Read qualification-protocols",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read qualification-protocols"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/qualification-reports": {
+      "get": {
+        "operationId": "get_qualification_reports",
+        "summary": "List qualification-reports",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List qualification-reports"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/qualification-reports/{id}": {
+      "get": {
+        "operationId": "get_qualification_reports_by_id",
+        "summary": "Read qualification-reports",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read qualification-reports"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/packs/{id}/activate": {
+      "post": {
+        "operationId": "post_packs_by_id_activate",
+        "summary": "Resolve exact dependency lock; production requires independent qualification",
+        "x-authorization": "approver/admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resolve exact dependency lock; production requires independent qualification"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "enum": [
+                      "demonstration",
+                      "production"
+                    ]
+                  },
+                  "qualification_report_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activations/{id}/withdraw": {
+      "post": {
+        "operationId": "post_activations_by_id_withdraw",
+        "summary": "Withdraw for future jobs; retain history",
+        "x-authorization": "approver/admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Withdraw for future jobs; retain history"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activations/{id}/impact": {
+      "get": {
+        "operationId": "get_activations_by_id_impact",
+        "summary": "List authorized dependent runs",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List authorized dependent runs"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/qualification-runs": {
+      "post": {
+        "operationId": "post_qualification_runs",
+        "summary": "Evaluate dataset against predeclared protocol",
+        "x-authorization": "curator/admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Evaluate dataset against predeclared protocol"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "protocol_id": {
+                    "type": "string"
+                  },
+                  "dataset": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/observation-proposals": {
+      "post": {
+        "operationId": "post_observation_proposals",
+        "summary": "Store unaccepted assumed agent observations; no draft mutation",
+        "x-authorization": "writer/agent with proposal budget",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Store unaccepted assumed agent observations; no draft mutation"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "draft_id": {
+                    "type": "string"
+                  },
+                  "rows": {
+                    "type": "array",
+                    "maxItems": 100
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/proposal-reviews": {
+      "post": {
+        "operationId": "post_proposal_reviews",
+        "summary": "Review explicit rows and apply against the original draft version",
+        "x-authorization": "human writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Review explicit rows and apply against the original draft version"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "proposal_id": {
+                    "type": "string"
+                  },
+                  "accept_rows": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "rationale": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/import-previews": {
+      "post": {
+        "operationId": "post_import_previews",
+        "summary": "Validate typed rows with per-row rejection reasons",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Validate typed rows with per-row rejection reasons"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "draft_id": {
+                    "type": "string"
+                  },
+                  "rows": {
+                    "type": "array",
+                    "maxItems": 2000,
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/import-commits": {
+      "post": {
+        "operationId": "post_import_commits",
+        "summary": "Commit reviewed rows only against original draft version",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Commit reviewed rows only against original draft version"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "preview_id": {
+                    "type": "string"
+                  },
+                  "accept_partial": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/compilations": {
+      "post": {
+        "operationId": "post_compilations",
+        "summary": "Freeze job inputs and enqueue",
+        "x-authorization": "writer/agent with case budget",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Freeze job inputs and enqueue"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "revision_id": {
+                    "type": "string"
+                  },
+                  "activation_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{id}": {
+      "get": {
+        "operationId": "get_jobs_by_id",
+        "summary": "Poll job; job success is separate from engineering feasibility",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Poll job; job success is separate from engineering feasibility"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/jobs/{id}/cancel": {
+      "post": {
+        "operationId": "post_jobs_by_id_cancel",
+        "summary": "Cancellation fenced against committed publication",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cancellation fenced against committed publication"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/results/{id}": {
+      "get": {
+        "operationId": "get_results_by_id",
+        "summary": "Read immutable scoped results",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read immutable scoped results"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/revisions/{id}": {
+      "get": {
+        "operationId": "get_revisions_by_id",
+        "summary": "Read immutable scoped revisions",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read immutable scoped revisions"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/projections/{id}": {
+      "get": {
+        "operationId": "get_projections_by_id",
+        "summary": "Read immutable scoped projections",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read immutable scoped projections"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/reports/{id}": {
+      "get": {
+        "operationId": "get_reports_by_id",
+        "summary": "Read immutable scoped reports",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read immutable scoped reports"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/assessments/{id}": {
+      "get": {
+        "operationId": "get_assessments_by_id",
+        "summary": "Read immutable scoped assessments",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read immutable scoped assessments"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/decisions/{id}": {
+      "get": {
+        "operationId": "get_decisions_by_id",
+        "summary": "Read immutable scoped decisions",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read immutable scoped decisions"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/reports": {
+      "post": {
+        "operationId": "post_reports",
+        "summary": "Create frozen dossier manifest",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create frozen dossier manifest"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "result_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recommendation-decisions": {
+      "post": {
+        "operationId": "post_recommendation_decisions",
+        "summary": "Record selection without changing engineering status",
+        "x-authorization": "writer; architect/admin for finalization",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Record selection without changing engineering status"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "result_id": {
+                    "type": "string"
+                  },
+                  "candidate_id": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "enum": [
+                      "selected",
+                      "finalized"
+                    ]
+                  },
+                  "rationale": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/comparisons": {
+      "post": {
+        "operationId": "post_comparisons",
+        "summary": "Compare immutable results",
+        "x-authorization": "member/agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compare immutable results"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "left_id": {
+                    "type": "string"
+                  },
+                  "right_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/neon-projections": {
+      "post": {
+        "operationId": "post_neon_projections",
+        "summary": "Create allowlisted manual handoff and separate mapping ledger",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create allowlisted manual handoff and separate mapping ledger"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "result_id": {
+                    "type": "string"
+                  },
+                  "mapping": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/external-result-imports": {
+      "post": {
+        "operationId": "post_external_result_imports",
+        "summary": "Retain downstream design tool authority; unresolved semantics stay unverifiable",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Retain downstream design tool authority; unresolved semantics stay unverifiable"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projection_id": {
+                    "type": "string"
+                  },
+                  "external_result": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/neon-submissions": {
+      "post": {
+        "operationId": "post_neon_submissions",
+        "summary": "Experimental stateless submission; 409 when target unconfigured",
+        "x-authorization": "writer; configured local target",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Experimental stateless submission; 409 when target unconfigured"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projection_id": {
+                    "type": "string"
+                  },
+                  "confirm_experimental_submission": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{id}/reconcile": {
+      "post": {
+        "operationId": "post_jobs_by_id_reconcile",
+        "summary": "Import evidence to reconcile uncertain external outcome",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Import evidence to reconcile uncertain external outcome"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "external_result": {
+                    "type": "object"
+                  },
+                  "source": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/backup": {
+      "post": {
+        "operationId": "post_admin_backup",
+        "summary": "Consistent SQLite snapshot to server-controlled backup directory",
+        "x-authorization": "admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Consistent SQLite snapshot to server-controlled backup directory"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/planning-catalog": {
+      "get": {
+        "operationId": "get_planning_catalog",
+        "summary": "Read versioned planning hardware, model assumptions and supported downstream design tool anchors",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read versioned planning hardware, model assumptions and supported downstream design tool anchors"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/guided-catalog": {
+      "get": {
+        "operationId": "get_guided_catalog",
+        "summary": "Read versioned application patterns and accepted-default profiles",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read versioned application patterns and accepted-default profiles"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/guided-workloads": {
+      "post": {
+        "operationId": "post_guided_workloads",
+        "summary": "Transform architecture-led intake into a validated workload without persistence",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transform architecture-led intake into a validated workload without persistence"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "components": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 16,
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "accepted": {
+                    "type": "boolean"
+                  },
+                  "overlap": {
+                    "enum": [
+                      "yes",
+                      "no",
+                      "unknown"
+                    ]
+                  },
+                  "tenancy": {
+                    "enum": [
+                      "single",
+                      "multi"
+                    ]
+                  },
+                  "architecture": {
+                    "type": "string"
+                  },
+                  "sensitivity": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assisted-compatibility": {
+      "post": {
+        "operationId": "post_assisted_compatibility",
+        "summary": "Inspect lossless assisted compatibility and preview a separate assisted copy without changing the supplied workload",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inspect lossless assisted compatibility and preview a separate assisted copy without changing the supplied workload"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-capabilities": {
+      "get": {
+        "operationId": "get_copilot_capabilities",
+        "summary": "Copilot bounds, versioned fact schema, architecture cards and disabled status",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Copilot bounds, versioned fact schema, architecture cards and disabled status"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/api/v1/copilot-profiles": {
+      "get": {
+        "operationId": "get_copilot_profiles",
+        "summary": "List configured model and MCP connections without credentials",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List configured model and MCP connections without credentials"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      },
+      "post": {
+        "operationId": "post_copilot_profiles",
+        "summary": "Create an endpoint-policy-checked profile using backend secret references",
+        "x-authorization": "admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create an endpoint-policy-checked profile using backend secret references"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-profiles/{id}/test": {
+      "post": {
+        "operationId": "post_copilot_profiles_by_id_test",
+        "summary": "Test capability or disable connection",
+        "x-authorization": "admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Test capability or disable connection"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-profiles/{id}/disable": {
+      "post": {
+        "operationId": "post_copilot_profiles_by_id_disable",
+        "summary": "Test capability or disable connection",
+        "x-authorization": "admin",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Test capability or disable connection"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-sessions": {
+      "post": {
+        "operationId": "post_copilot_sessions",
+        "summary": "Create a case-scoped assistant session",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a case-scoped assistant session"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "case_id": {
+                    "type": "string"
+                  },
+                  "draft_id": {
+                    "type": "string"
+                  },
+                  "classification": {
+                    "enum": [
+                      "public",
+                      "corporate"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-sessions/{id}": {
+      "get": {
+        "operationId": "get_copilot_sessions_by_id",
+        "summary": "Read accepted session state",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read accepted session state"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/copilot-sessions/{id}/history": {
+      "get": {
+        "operationId": "get_copilot_sessions_by_id_history",
+        "summary": "Read scoped sources, proposals and job outcomes",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read scoped sources, proposals and job outcomes"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/copilot-sessions/{id}/sources": {
+      "post": {
+        "operationId": "post_copilot_sessions_by_id_sources",
+        "summary": "Controlled assistant sources",
+        "x-authorization": "writer; proposals also budgeted agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Controlled assistant sources"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-sessions/{id}/proposals": {
+      "post": {
+        "operationId": "post_copilot_sessions_by_id_proposals",
+        "summary": "Controlled assistant proposals",
+        "x-authorization": "writer; proposals also budgeted agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Controlled assistant proposals"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-sessions/{id}/turns": {
+      "post": {
+        "operationId": "post_copilot_sessions_by_id_turns",
+        "summary": "Controlled assistant turns",
+        "x-authorization": "writer; proposals also budgeted agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Controlled assistant turns"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-sessions/{id}/mcp-import": {
+      "post": {
+        "operationId": "post_copilot_sessions_by_id_mcp_import",
+        "summary": "Controlled assistant mcp-import",
+        "x-authorization": "writer; proposals also budgeted agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Controlled assistant mcp-import"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-sessions/{id}/fork": {
+      "post": {
+        "operationId": "post_copilot_sessions_by_id_fork",
+        "summary": "Controlled assistant fork",
+        "x-authorization": "writer; proposals also budgeted agent",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Controlled assistant fork"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-proposals/{id}": {
+      "get": {
+        "operationId": "get_copilot_proposals_by_id",
+        "summary": "Read immutable proposed values and review status",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read immutable proposed values and review status"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/copilot-proposals/{id}/apply": {
+      "post": {
+        "operationId": "post_copilot_proposals_by_id_apply",
+        "summary": "Apply reviewed fields with revision checks. Fact proposals are accepted atomically with their fact ledger",
+        "x-authorization": "human writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Apply reviewed fields with revision checks. Fact proposals are accepted atomically with their fact ledger"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "selected": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "accept_assumptions": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-proposals/{id}/reject": {
+      "post": {
+        "operationId": "post_copilot_proposals_by_id_reject",
+        "summary": "Reject pending proposal",
+        "x-authorization": "human writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reject pending proposal"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-context/{id}": {
+      "get": {
+        "operationId": "get_copilot_context_by_id",
+        "summary": "Read case-scoped sessions and approved catalogue context",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read case-scoped sessions and approved catalogue context"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/copilot-facts/{id}": {
+      "get": {
+        "operationId": "get_copilot_facts_by_id",
+        "summary": "Read engine-owned facts from an immutable result",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read engine-owned facts from an immutable result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

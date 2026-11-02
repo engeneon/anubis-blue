@@ -1,0 +1,22 @@
+{
+  "date_utc": "2026-11-02T19:36:42.221765+00:00",
+  "source_repository": "engeneon/anubis",
+  "source_commit": "03a083f",
+  "platform": "macOS Apple Silicon, existing toolchain",
+  "checks": {
+    "fresh_source_cmake_build": "passed",
+    "locked_npm_install": "passed",
+    "typescript_ui_build": "passed",
+    "ctest": "2 of 2 passed",
+    "requirements_summary": "passed",
+    "projection_summary": "passed",
+    "mvp_browser_workflows": "2 of 2 passed",
+    "token_and_restart_persistence": "passed"
+  },
+  "limitations": [
+    "Not a pristine operating-system installation",
+    "Copilot browser test uses a fixture provider",
+    "No hardware performance qualification",
+    "Generated historical artifacts and local secrets excluded"
+  ]
+}

@@ -1,0 +1,314 @@
+{
+  "version": "interpretation-2.0",
+  "kind": "CKP architecture and measurement rules",
+  "cards": [
+    {
+      "id": "direct",
+      "name": "Direct text model service",
+      "description": "A fixed text model call answers, classifies, translates or summarises.",
+      "decision_rule": "text_model=yes, search=no, actions=no",
+      "caution": "An application called an assistant may still be a direct service.",
+      "example": "A classifier labels incoming messages.",
+      "counterexample": "An agent selects tools and uses their results to choose subsequent actions.",
+      "measurement_points": [
+        "entry request count and period",
+        "model input and output tokens"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Direct text model service",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "analytical_text"
+    },
+    {
+      "id": "retrieval",
+      "name": "Document or search assistant",
+      "description": "A fixed pipeline retrieves passages and supplies them to a text model. Retrieval is supporting work, not a second text-generation call.",
+      "decision_rule": "search=yes, actions=no",
+      "caution": "Search before answer generation does not by itself establish agent behaviour.",
+      "example": "Search manuals then answer a maintenance question.",
+      "counterexample": "Dynamic tool selection and repeated reasoning belong to agent orchestration.",
+      "measurement_points": [
+        "entry questions and period",
+        "model prompt including retrieved passages",
+        "search location and index refresh"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Document or search assistant",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "analytical_text"
+    },
+    {
+      "id": "agent",
+      "name": "Agent workflow",
+      "description": "The model chooses actions or tools, or iterates based on tool results. Preserve the range of model calls per business request.",
+      "decision_rule": "actions=yes",
+      "caution": "Several fixed software steps are not sufficient evidence of agent behaviour.",
+      "example": "Resolve travel disruption by choosing schedule and hotel tools.",
+      "counterexample": "A fixed retrieve-then-answer pipeline is retrieval.",
+      "measurement_points": [
+        "business requests and period",
+        "typical and upper model calls",
+        "selected planning call envelope"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Agent workflow",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "analytical_text"
+    },
+    {
+      "id": "batch",
+      "name": "Scheduled text processing",
+      "description": "Text items must complete within a stated window. Batch is a schedule, not an underlying computation type.",
+      "decision_rule": "schedule=batch with text computation",
+      "caution": "A scheduled image generation job remains generation with a batch schedule.",
+      "example": "Summarise invoices overnight.",
+      "counterexample": "Twelve thousand images in four hours are not text-token work.",
+      "measurement_points": [
+        "items per window",
+        "completion window",
+        "calls and tokens per item"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Scheduled text processing",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "analytical_text"
+    },
+    {
+      "id": "stream",
+      "name": "Video or audio analysis",
+      "description": "Analyse continuous video, audio or events. Text-token equations do not describe frames or samples.",
+      "decision_rule": "media=video_analysis or audio_analysis",
+      "caution": "Capture rate and inference sampling rate can differ.",
+      "example": "Detect objects at five frames per second on 180 streams.",
+      "counterexample": "Text questions about an archive are a separate retrieval activity.",
+      "measurement_points": [
+        "stream count",
+        "sampled frames per second",
+        "model and measured throughput"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Video or audio analysis",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "requirements_brief"
+    },
+    {
+      "id": "generation",
+      "name": "Image, audio or video generation",
+      "description": "Create media using a generation model. Scheduling is recorded separately.",
+      "decision_rule": "media=image_generation, audio_generation or video_generation",
+      "caution": "Do not estimate this from text output tokens.",
+      "example": "Generate catalogue images within a four-hour window.",
+      "counterexample": "Text summaries use a text service.",
+      "measurement_points": [
+        "output dimensions",
+        "candidates per item",
+        "items and window",
+        "model-specific measured throughput"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Image, audio or video generation",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "requirements_brief"
+    },
+    {
+      "id": "adaptation",
+      "name": "Model adaptation",
+      "description": "Adapt an existing model using fine-tuning. The method determines resource demand and must be confirmed.",
+      "decision_rule": "training_method=adaptation or peft",
+      "caution": "Do not silently substitute full pretraining for fine-tuning.",
+      "example": "Parameter-efficient adaptation of an 8B model.",
+      "counterexample": "Continued pretraining on a large token corpus uses training.",
+      "measurement_points": [
+        "adaptation method",
+        "examples or tokens",
+        "deadline",
+        "method-specific measurements"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Model adaptation",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "requirements_brief"
+    },
+    {
+      "id": "training",
+      "name": "Pretraining or continued pretraining",
+      "description": "Train or continue pretraining a model using a token corpus and deadline. Include ingestion and checkpoint requirements.",
+      "decision_rule": "training_method=pretraining",
+      "caution": "Model size and token count are distinct measurements.",
+      "example": "Continue pretraining on 90 billion tokens over 30 days.",
+      "counterexample": "Unconfirmed parameter-efficient fine-tuning is adaptation.",
+      "measurement_points": [
+        "model",
+        "training tokens",
+        "deadline",
+        "checkpoint and ingestion volumes"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Pretraining or continued pretraining",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "analytical_text"
+    },
+    {
+      "id": "other",
+      "name": "Specialist GPU workload",
+      "description": "Simulation, indexing-only and other unsupported computations require workload-specific measurements.",
+      "decision_rule": "simulation=yes or indexing_only=yes",
+      "caution": "No text-token sizing or unsupported GPU-count claim.",
+      "example": "Fluid simulation with mesh size and solver iterations.",
+      "counterexample": "Using GPUs does not establish language-model computation.",
+      "measurement_points": [
+        "solver or application version",
+        "work items and deadline",
+        "measured throughput and memory"
+      ],
+      "diagram": {
+        "nodes": [
+          "Application entry",
+          "Specialist GPU workload",
+          "Output and retained data"
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "sizing_method": "requirements_brief"
+    }
+  ],
+  "question_order": [
+    "conflict",
+    "architecture",
+    "compute_location",
+    "demand_basis",
+    "demand",
+    "calls_selected",
+    "model",
+    "tokens",
+    "supporting_services"
+  ],
+  "policy": {
+    "unknowns": "preserve",
+    "conversion": "deterministic",
+    "storage_network": "dedicated",
+    "placement": "scope relative to this AI Factory",
+    "unsupported": "requirements brief unless an applicable measurement-based method is available"
+  }
+}

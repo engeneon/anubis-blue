@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "name": "Harbor Inference Cloud",
+  "stages": [
+    {
+      "id": "standard",
+      "name": "Standard",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "40",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      },
+      "notes": "8 tenants at 5 requests/s; endpoint routing unresolved"
+    },
+    {
+      "id": "priority",
+      "name": "Priority",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "40",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      },
+      "notes": "4 tenants at 10 requests/s; p95 TTFT 1s and ITL 50ms need boundaries"
+    },
+    {
+      "id": "standard_burst",
+      "name": "Standard Burst",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "120",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      }
+    },
+    {
+      "id": "priority_reserved",
+      "name": "Priority Reserved",
+      "type": "inference",
+      "observations": {
+        "rate": {
+          "state": "estimated",
+          "value": "100",
+          "unit": "request/s",
+          "origin": "customer",
+          "source": "fictional_customer_story"
+        },
+        "input_tokens": {
+          "state": "assumed",
+          "value": "2000",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        },
+        "output_tokens": {
+          "state": "assumed",
+          "value": "400",
+          "unit": "token",
+          "origin": "customer",
+          "source": "fictional_customer_story",
+          "accepted": true
+        }
+      }
+    }
+  ],
+  "edges": [],
+  "scenarios": [
+    {
+      "id": "normal",
+      "name": "Normal traffic",
+      "active_stages": [
+        "standard",
+        "priority"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    },
+    {
+      "id": "simultaneous",
+      "name": "Full simultaneous requested burst",
+      "active_stages": [
+        "standard_burst",
+        "priority_reserved"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 0
+    },
+    {
+      "id": "failure",
+      "name": "Priority reservation after node loss",
+      "active_stages": [
+        "priority_reserved"
+      ],
+      "multiplier": "1",
+      "failed_nodes": 1
+    }
+  ],
+  "tenancy": "multi"
+}
