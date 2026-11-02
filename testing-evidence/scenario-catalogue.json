@@ -1,0 +1,117 @@
+{
+  "scope": "All 16 fixture stories transformed with deliberately incomplete numerical intake. Checks deterministic transformation, unknown planning and absence of a complete candidate. Does not certify live interpretation, each narrative acceptance criterion or hardware performance.",
+  "scenarios": [
+    {
+      "id": "S01",
+      "name": "Alder Contact Services",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S02",
+      "name": "Bracken Engineering",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S03",
+      "name": "Cobalt Travel Operations",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S04",
+      "name": "Dune Accounting",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S05",
+      "name": "Estuary Transit",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S06",
+      "name": "Fable Creative Studio",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S07",
+      "name": "Grove Legal Technology",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S08",
+      "name": "Helix Language Institute",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S09",
+      "name": "Juniper Retail",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S10",
+      "name": "Kestrel Field Services",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S11",
+      "name": "Larch Media Archive",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S12",
+      "name": "Morrow Advertising",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S13",
+      "name": "Nacre Customer Portal",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S14",
+      "name": "Orchid Neocloud",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S15",
+      "name": "Peregrine Product Lab",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    },
+    {
+      "id": "S16",
+      "name": "Quartz Industrial Research",
+      "passed": true,
+      "planning_status": "unknown",
+      "candidates": 0
+    }
+  ]
+}

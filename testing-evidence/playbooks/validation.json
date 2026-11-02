@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-03",
+  "timezone": "Asia/Bangkok",
+  "environment": "Installed macOS Apple Silicon application, local service",
+  "selection": "Four distinct cases from all 16, no replacement or filtering",
+  "scope": "Eight GUI walkthroughs with screenshot evidence in the Word playbooks. Live proposals reviewed by coding assistant. No independent human pilot or hardware qualification.",
+  "scenarios": [
+    {
+      "id": "S13",
+      "name": "Nacre Customer Portal",
+      "provider": "DeepSeek",
+      "model": "deepseek-flash",
+      "failed_provider_requests": 1,
+      "review": "Outside model preserved. 900000/day retained as average, not peak. Local data/integration context retained without invented local GPU demand.",
+      "routes": {
+        "manual": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 17
+        },
+        "assisted": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 15
+        }
+      }
+    },
+    {
+      "id": "S14",
+      "name": "Orchid Neocloud",
+      "provider": "DeepSeek",
+      "model": "deepseek-flash",
+      "failed_provider_requests": 1,
+      "review": "Premium and standard groups preserved. Dedicated versus shared and multi-tenancy correct. Twenty customers retained as context, not GPU demand. Models unknown.",
+      "routes": {
+        "manual": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 19
+        },
+        "assisted": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 15
+        }
+      }
+    },
+    {
+      "id": "S16",
+      "name": "Quartz Industrial Research",
+      "provider": "DeepSeek",
+      "model": "deepseek-flash",
+      "failed_provider_requests": 0,
+      "review": "Simulation retained as other. Text/search/actions explicitly absent. Local compute, shared capacity and single organisation match supplied facts. No numerical demand invented.",
+      "routes": {
+        "manual": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 17
+        },
+        "assisted": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 13
+        }
+      }
+    },
+    {
+      "id": "S11",
+      "name": "Larch Media Archive",
+      "provider": "DeepSeek",
+      "model": "deepseek-flash",
+      "failed_provider_requests": 1,
+      "review": "Video analysis and retrieval assistant remain distinct. Local/shared placement and overlap match scenario fixture. actions=no is consistent with fixture but not explicit in prose, so its reported label is stronger than quoted evidence. No numerical consequence in this unresolved run. Relationship defaults independent rather than alongside, while simultaneous overlap is preserved.",
+      "routes": {
+        "manual": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 19
+        },
+        "assisted": {
+          "planning_status": "unknown",
+          "candidate_count": 0,
+          "outcome": "concluded_without_handoff",
+          "retrieved_after_reload": true,
+          "screenshot_steps": 15
+        }
+      }
+    }
+  ],
+  "document_checks": {
+    "input_register_matches_appendix": true,
+    "semantic_markup_resolved": true,
+    "screenshots_present_for_each_step": true,
+    "shared_typography_tests": "4 passed",
+    "all_scenario_regression": "16 passed",
+    "known_credential_scan": "passed",
+    "rendered_page_counts": {
+      "S13": 47,
+      "S14": 54,
+      "S16": 45,
+      "S11": 52
+    },
+    "visual_review": "Rendered Word pages and technical PDF pages inspected. Layout revised for larger diagrams, cropped token screen and loaded review screens."
+  },
+  "artifacts": {
+    "docs/playbooks/S14_Orchid_Neocloud_Playbook.docx": {
+      "bytes": 4314391,
+      "sha256": "0b4e8cc81d9c311e18096b23d7933065427c190e8804daf071a69289c2eca3fe"
+    },
+    "docs/playbooks/S11_Larch_Media_Archive_Playbook.docx": {
+      "bytes": 4368537,
+      "sha256": "a4a078641e66522e3e2226b6dfce49c47003236d11e1a4037c152cf3f2729277"
+    },
+    "docs/playbooks/S13_Nacre_Customer_Portal_Playbook.docx": {
+      "bytes": 4036564,
+      "sha256": "8a3ddcc8ff452754c304a30391a1885f9dd655d6cf8a92b00c486d404833c51a"
+    },
+    "docs/playbooks/S16_Quartz_Industrial_Research_Playbook.docx": {
+      "bytes": 3476345,
+      "sha256": "91ce109640eb85db7bdfd0fd73c7aff2453d320d570dded7ee266b1cf9a10ed0"
+    },
+    "docs/Anubis_Technical_Architecture.pdf": {
+      "bytes": 203983,
+      "sha256": "4626ae422cf74c165d4212d72eedce322da8b1d469d1fb54ef0a6514be730003"
+    },
+    "docs/Anubis_Workload_Sizing_Methodology.pdf": {
+      "bytes": 351675,
+      "sha256": "dfbfc4debb52be69d9dad70d01d689b7617b8a14eae5c47ec5ea4210e0e1ff9f"
+    }
+  }
+}

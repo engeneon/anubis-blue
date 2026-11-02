@@ -1,0 +1,198 @@
+{
+  "date": "2026-11-03",
+  "method": "SystemRandom.sample from all 16 scenarios without replacement. No redraw or filtering.",
+  "fixture_sha256": "77cc29c9b70f2974270e0397eb21adc37ef87bf39a9272c930e12b9c64df8199",
+  "scenarios": [
+    {
+      "id": "S13",
+      "name": "Nacre Customer Portal",
+      "story": "A portal sends all language-model calls to an external provider. It handles 900,000 requests per day. The proposed factory hosts customer data and integration services, not the model. The customer asks whether this requires local GPUs.",
+      "answers": {
+        "name": "Nacre Customer Portal",
+        "activities": [
+          {
+            "name": "Hosted text service",
+            "answers": {
+              "text": "yes",
+              "search": "no",
+              "agent": "no",
+              "batch": "no",
+              "stream": "no",
+              "generation": "no",
+              "adaptation": "no",
+              "training": "no",
+              "indexing": "no"
+            },
+            "location": "external",
+            "schedule": "interactive",
+            "calls": "one",
+            "relationship": "independent",
+            "sharing": "shared"
+          }
+        ],
+        "overlap": "yes",
+        "tenancy": "single"
+      },
+      "expected_patterns": [
+        "direct"
+      ],
+      "expected_arrangement": "External model service; local connectivity and storage remain.",
+      "acceptance": "Never recommend local model GPUs merely because the application uses AI.",
+      "measurement_next": "Measure request/response bytes, data storage and locally executed supporting services.",
+      "expected_question": null
+    },
+    {
+      "id": "S14",
+      "name": "Orchid Neocloud",
+      "story": "A provider hosts twenty customers using text endpoints. Premium customers require dedicated resources; standard customers may share a pool. Both groups can peak together. Model choices vary between customers.",
+      "answers": {
+        "name": "Orchid Neocloud",
+        "activities": [
+          {
+            "name": "Premium model endpoints",
+            "answers": {
+              "text": "yes",
+              "search": "no",
+              "agent": "no",
+              "batch": "no",
+              "stream": "no",
+              "generation": "no",
+              "adaptation": "no",
+              "training": "no",
+              "indexing": "no"
+            },
+            "location": "local",
+            "schedule": "interactive",
+            "calls": "one",
+            "relationship": "independent",
+            "sharing": "dedicated"
+          },
+          {
+            "name": "Standard model endpoints",
+            "answers": {
+              "text": "yes",
+              "search": "no",
+              "agent": "no",
+              "batch": "no",
+              "stream": "no",
+              "generation": "no",
+              "adaptation": "no",
+              "training": "no",
+              "indexing": "no"
+            },
+            "location": "local",
+            "schedule": "interactive",
+            "calls": "one",
+            "relationship": "alongside",
+            "sharing": "shared",
+            "predecessor": 0
+          }
+        ],
+        "overlap": "yes",
+        "tenancy": "multi"
+      },
+      "expected_patterns": [
+        "direct"
+      ],
+      "expected_arrangement": "Simultaneous dedicated and shared service groups.",
+      "acceptance": "Do not equate customer count with GPU count or a proven tenancy limit.",
+      "measurement_next": "Separate model mixes, tenant demand distributions and isolation requirements.",
+      "expected_question": null
+    },
+    {
+      "id": "S16",
+      "name": "Quartz Industrial Research",
+      "story": "A manufacturer wants GPU-accelerated fluid simulation for turbine design. Engineers describe meshes, solver steps and simulation deadlines. No text model, retrieval, agent, media generation or model training is involved.",
+      "answers": {
+        "name": "Quartz Industrial Research",
+        "activities": [
+          {
+            "name": "Fluid simulation",
+            "answers": {
+              "text": "no",
+              "search": "no",
+              "agent": "no",
+              "batch": "no",
+              "stream": "no",
+              "generation": "no",
+              "adaptation": "no",
+              "training": "no",
+              "indexing": "no"
+            },
+            "location": "local",
+            "schedule": "scheduled",
+            "calls": "unknown",
+            "relationship": "independent",
+            "sharing": "shared"
+          }
+        ],
+        "overlap": "yes",
+        "tenancy": "single"
+      },
+      "expected_patterns": [],
+      "expected_arrangement": "Outside the current common core.",
+      "acceptance": "Do not force a simulation into a language-model or training profile.",
+      "measurement_next": "Obtain solver-specific measurements and propose a future HPC pattern.",
+      "expected_question": "No core pattern confirmed"
+    },
+    {
+      "id": "S11",
+      "name": "Larch Media Archive",
+      "story": "A broadcaster continuously analyses incoming video, then uses extracted descriptions to build searchable records. Editors ask a text assistant questions about the archive. Video ingestion and editor queries run together.",
+      "answers": {
+        "name": "Larch Media Archive",
+        "activities": [
+          {
+            "name": "Video analysis",
+            "answers": {
+              "text": "no",
+              "search": "no",
+              "agent": "no",
+              "batch": "no",
+              "stream": "yes",
+              "generation": "no",
+              "adaptation": "no",
+              "training": "no",
+              "indexing": "no"
+            },
+            "location": "local",
+            "schedule": "continuous",
+            "calls": "unknown",
+            "relationship": "independent",
+            "sharing": "shared"
+          },
+          {
+            "name": "Archive search",
+            "answers": {
+              "text": "yes",
+              "search": "yes",
+              "agent": "no",
+              "batch": "no",
+              "stream": "no",
+              "generation": "no",
+              "adaptation": "no",
+              "training": "no",
+              "indexing": "no"
+            },
+            "location": "local",
+            "schedule": "interactive",
+            "calls": "one",
+            "relationship": "alongside",
+            "sharing": "shared",
+            "predecessor": 0
+          }
+        ],
+        "overlap": "yes",
+        "tenancy": "single"
+      },
+      "expected_patterns": [
+        "retrieval",
+        "stream"
+      ],
+      "expected_arrangement": "Continuous media processing alongside retrieval and answering.",
+      "acceptance": "Keep visual inference separate from text serving and do not treat the proposed arrows as proven latency.",
+      "measurement_next": "Collect video processing settings, archive indexing flow and text request samples.",
+      "expected_question": null
+    }
+  ]
+}
