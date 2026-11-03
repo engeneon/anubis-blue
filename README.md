@@ -72,10 +72,10 @@ Each playbook includes both manual and Copilot-assisted routes through GPU estim
 
 | Scenario | PDF playbook | Read online | Editable copy |
 |---|---|---|---|
-| S11 Larch Media Archive | [View PDF](docs/playbooks/S11_Larch_Media_Archive_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s11.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S11_Larch_Media_Archive_Playbook.docx) |
-| S13 Nacre Customer Portal | [View PDF](docs/playbooks/S13_Nacre_Customer_Portal_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s13.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S13_Nacre_Customer_Portal_Playbook.docx) |
-| S14 Orchid Neocloud | [View PDF](docs/playbooks/S14_Orchid_Neocloud_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s14.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S14_Orchid_Neocloud_Playbook.docx) |
-| S16 Quartz Industrial Research | [View PDF](docs/playbooks/S16_Quartz_Industrial_Research_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s16.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S16_Quartz_Industrial_Research_Playbook.docx) |
+| S11 Larch Media Archive | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S11_Larch_Media_Archive_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s11.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S11_Larch_Media_Archive_Playbook.docx) |
+| S13 Nacre Customer Portal | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S13_Nacre_Customer_Portal_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s13.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S13_Nacre_Customer_Portal_Playbook.docx) |
+| S14 Orchid Neocloud | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S14_Orchid_Neocloud_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s14.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S14_Orchid_Neocloud_Playbook.docx) |
+| S16 Quartz Industrial Research | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S16_Quartz_Industrial_Research_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s16.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S16_Quartz_Industrial_Research_Playbook.docx) |
 
 The [technical architecture PDF](docs/Anubis_Technical_Architecture.pdf) and [workload methodology PDF](docs/Anubis_Workload_Sizing_Methodology.pdf) include the implementation addendum for complete-scenario sizing and read-only explanations.
 
