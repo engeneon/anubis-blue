@@ -2,9 +2,14 @@
 
 Anubis is a deterministic AI Factory workload sizing application with an optional, human-reviewed Consultant Copilot. It estimates GPU requirements, records assumptions, and exports requirements for a downstream AI Factory design tool or process.
 
+
+**[Getting Started — install Anubis and complete your first estimate](https://engeneon.github.io/anubis-blue/getting-started.html)**
+
+[Documentation website](https://engeneon.github.io/anubis-blue/) · [Methodology](https://engeneon.github.io/anubis-blue/methodology.html) · [Example scenarios](https://engeneon.github.io/anubis-blue/scenarios.html) · [Online playbooks](https://engeneon.github.io/anubis-blue/playbooks.html)
+
 ## Install on macOS
 
-Follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is on the roadmap, and a .dmg installation for Mac will be upcoming in the next few days.
+Follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is on the roadmap, and a macOS installer is planned.
 
 ## Use the application
 
@@ -63,20 +68,20 @@ Corporate data requires a connection approved for corporate processing. The publ
 
 ## Complete customer playbooks
 
-Each MS-Word guide includes both manual and Copilot-assisted routes through GPU estimates, design handoff, explanation and saved completion, with exact input tables, diagrams and screenshots.
+Each playbook walks you through manual and Copilot-assisted workflows, from workload description to GPU estimates, design handoff and saved results. It includes input values, architecture diagrams and step-by-step screenshots. Read online, view the PDF, or download an editable Microsoft Word version.
 
-| Scenario | Word playbook |
-|---|---|
-| S11 Larch Media Archive | [Video analysis and archive assistant](docs/playbooks/S11_Larch_Media_Archive_Playbook.docx) |
-| S13 Nacre Customer Portal | [Hosted service with local continuity fallback](docs/playbooks/S13_Nacre_Customer_Portal_Playbook.docx) |
-| S14 Orchid Neocloud | [Reserved premium and shared standard pools](docs/playbooks/S14_Orchid_Neocloud_Playbook.docx) |
-| S16 Quartz Industrial Research | [Independent GPU simulation groups](docs/playbooks/S16_Quartz_Industrial_Research_Playbook.docx) |
+| Scenario | PDF playbook | Read online | Editable copy |
+|---|---|---|---|
+| S11 Larch Media Archive | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S11_Larch_Media_Archive_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s11.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S11_Larch_Media_Archive_Playbook.docx) |
+| S13 Nacre Customer Portal | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S13_Nacre_Customer_Portal_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s13.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S13_Nacre_Customer_Portal_Playbook.docx) |
+| S14 Orchid Neocloud | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S14_Orchid_Neocloud_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s14.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S14_Orchid_Neocloud_Playbook.docx) |
+| S16 Quartz Industrial Research | [View PDF](https://engeneon.github.io/anubis-blue/downloads/S16_Quartz_Industrial_Research_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s16.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S16_Quartz_Industrial_Research_Playbook.docx) |
 
 The [technical architecture PDF](docs/Anubis_Technical_Architecture.pdf) and [workload methodology PDF](docs/Anubis_Workload_Sizing_Methodology.pdf) include the implementation addendum for complete-scenario sizing and read-only explanations.
 
 ## Repository scope
 
-This repo  includes application source, tests, configuration and technical documentation. Historical customer exports, generated document/media archives, local credentials and databases are excluded. Some document-generation utilities refer to historical assets that are not included. They are not needed to build or run Anubis.
+This repo includes application source, tests, configuration and technical documentation. Historical customer exports, generated document/media archives, local credentials and databases are excluded. Some document-generation utilities refer to historical assets that are not included. They are not needed to build or run Anubis.
 
 The repository is publicly readable and cloneable. Push access is restricted to authorized maintainers. Third-party notices are retained under third_party. Anubis is licensed under Apache License 2.0.
 

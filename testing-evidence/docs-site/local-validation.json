@@ -1,0 +1,145 @@
+{
+  "checks": [
+    {
+      "page": "getting-started.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "index.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "methodology.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "playbooks.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "s11.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "s13.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "s14.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "s16.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "scenarios.html",
+      "width": 390,
+      "status": "passed"
+    },
+    {
+      "page": "getting-started.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "index.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "methodology.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "playbooks.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "s11.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "s13.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "s14.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "s16.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "page": "scenarios.html",
+      "width": 1440,
+      "status": "passed"
+    },
+    {
+      "download": "Anubis_Technical_Architecture.pdf",
+      "status": "passed",
+      "content_type": "application/pdf"
+    },
+    {
+      "download": "Anubis_Workload_Sizing_Methodology.pdf",
+      "status": "passed",
+      "content_type": "application/pdf"
+    },
+    {
+      "download": "S11_Larch_Media_Archive_Playbook.docx",
+      "status": "passed",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "download": "S11_Larch_Media_Archive_Playbook.pdf",
+      "status": "passed",
+      "content_type": "application/pdf"
+    },
+    {
+      "download": "S13_Nacre_Customer_Portal_Playbook.docx",
+      "status": "passed",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "download": "S13_Nacre_Customer_Portal_Playbook.pdf",
+      "status": "passed",
+      "content_type": "application/pdf"
+    },
+    {
+      "download": "S14_Orchid_Neocloud_Playbook.docx",
+      "status": "passed",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "download": "S14_Orchid_Neocloud_Playbook.pdf",
+      "status": "passed",
+      "content_type": "application/pdf"
+    },
+    {
+      "download": "S16_Quartz_Industrial_Research_Playbook.docx",
+      "status": "passed",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "download": "S16_Quartz_Industrial_Research_Playbook.pdf",
+      "status": "passed",
+      "content_type": "application/pdf"
+    }
+  ],
+  "passed": true
+}

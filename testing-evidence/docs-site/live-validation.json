@@ -1,0 +1,88 @@
+[
+  {
+    "path": "getting-started.html",
+    "status": 200
+  },
+  {
+    "path": "index.html",
+    "status": 200
+  },
+  {
+    "path": "methodology.html",
+    "status": 200
+  },
+  {
+    "path": "playbooks.html",
+    "status": 200
+  },
+  {
+    "path": "s11.html",
+    "status": 200
+  },
+  {
+    "path": "s13.html",
+    "status": 200
+  },
+  {
+    "path": "s14.html",
+    "status": 200
+  },
+  {
+    "path": "s16.html",
+    "status": 200
+  },
+  {
+    "path": "scenarios.html",
+    "status": 200
+  },
+  {
+    "path": "downloads/Anubis_Technical_Architecture.pdf",
+    "status": 200,
+    "content_type": "application/pdf"
+  },
+  {
+    "path": "downloads/Anubis_Workload_Sizing_Methodology.pdf",
+    "status": 200,
+    "content_type": "application/pdf"
+  },
+  {
+    "path": "downloads/S11_Larch_Media_Archive_Playbook.docx",
+    "status": 200,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  },
+  {
+    "path": "downloads/S11_Larch_Media_Archive_Playbook.pdf",
+    "status": 200,
+    "content_type": "application/pdf"
+  },
+  {
+    "path": "downloads/S13_Nacre_Customer_Portal_Playbook.docx",
+    "status": 200,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  },
+  {
+    "path": "downloads/S13_Nacre_Customer_Portal_Playbook.pdf",
+    "status": 200,
+    "content_type": "application/pdf"
+  },
+  {
+    "path": "downloads/S14_Orchid_Neocloud_Playbook.docx",
+    "status": 200,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  },
+  {
+    "path": "downloads/S14_Orchid_Neocloud_Playbook.pdf",
+    "status": 200,
+    "content_type": "application/pdf"
+  },
+  {
+    "path": "downloads/S16_Quartz_Industrial_Research_Playbook.docx",
+    "status": 200,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  },
+  {
+    "path": "downloads/S16_Quartz_Industrial_Research_Playbook.pdf",
+    "status": 200,
+    "content_type": "application/pdf"
+  }
+]

@@ -7,13 +7,13 @@ qualified. Linux installation guidance is deferred. This is a source-based
 local installation, not a signed drag-and-drop Mac application.
 
 1. Obtain the application
-Obtain the approved Anubis source archive or access to its private repository
-from your administrator. Extract it to a permanent folder, for example
-~/Code/anubis. Do not run it inside a temporary extraction folder. Keep the
-whole source tree, including docs, knowledge, contracts, ui and deploy.
-Open Terminal and change to that folder:
+Clone the public Apache-2.0 repository into a permanent folder. In Terminal:
 
-  cd ~/Code/anubis
+  git clone https://github.com/engeneon/anubis-blue.git
+  cd anubis-blue
+
+Keep the whole source tree, including docs, knowledge, contracts, ui and deploy.
+Do not run it inside a temporary extraction folder.
 
 Use your actual folder if different. Commands below run from this folder.
 
