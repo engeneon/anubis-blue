@@ -4,7 +4,7 @@ Anubis is a deterministic AI Factory workload sizing application with an optiona
 
 ## Install on macOS
 
-Follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is deferred.
+Follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is on the roadmap, and a .dmg installation for Mac will be upcoming in the next few days.
 
 ## Use the application
 
@@ -55,7 +55,7 @@ After building, run `python3 scripts/validate_scenario_catalogue.py`. Run `npx p
 
 Intake now shows **GPU estimate blocked** and names the minimum missing fields before calculation. For specialist workloads, select **Reference capacity for independent work** and provide matching demand, memory and separately sourced H200/B200/B300 capacity assumptions. These are planning estimates, not a claim of measured hardware performance. Unknown inputs remain visible and never become invented GPU counts.
 
-## Explain saved results
+## Explain saved results using the Agentic Copilot
 
 Select **Explain this to me** from calculation results or Design handoff. Choose a tested Copilot connection for plain-language prose, or use the deterministic explanation without an LLM. The explanation covers workload GPUs versus factory size, memory, storage, all four network roles and missing requirements. It cannot change the calculation or submit a handoff. Saved narratives remain linked to their exact result and can be downloaded or retrieved later.
 
@@ -63,7 +63,7 @@ Corporate data requires a connection approved for corporate processing. The publ
 
 ## Complete customer playbooks
 
-Each Word guide includes both manual and Copilot-assisted routes through GPU estimates, design handoff, explanation and saved completion, with exact input tables, diagrams and screenshots.
+Each MS-Word guide includes both manual and Copilot-assisted routes through GPU estimates, design handoff, explanation and saved completion, with exact input tables, diagrams and screenshots.
 
 | Scenario | Word playbook |
 |---|---|
@@ -76,7 +76,7 @@ The [technical architecture PDF](docs/Anubis_Technical_Architecture.pdf) and [wo
 
 ## Repository scope
 
-This repository starts with a fresh source snapshot, without predecessor Git history. It includes application source, tests, configuration and technical documentation. Historical customer exports, generated document/media archives, local credentials and databases are excluded. Some document-generation utilities refer to historical assets that are not included. They are not needed to build or run Anubis.
+This repo  includes application source, tests, configuration and technical documentation. Historical customer exports, generated document/media archives, local credentials and databases are excluded. Some document-generation utilities refer to historical assets that are not included. They are not needed to build or run Anubis.
 
 The repository is publicly readable and cloneable. Push access is restricted to authorized maintainers. Third-party notices are retained under third_party. Anubis is licensed under Apache License 2.0.
 
