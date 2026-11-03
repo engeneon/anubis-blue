@@ -53,7 +53,7 @@ class Usability(unittest.TestCase):
  def test_15_customer_guide_contract(self):
   p=ROOT/'docs/usability-user-guide.html';self.assertTrue(p.exists());s=p.read_text().lower();self.assertNotIn('synthetic end-user',s);self.assertIn('new engagement',s);self.assertIn('appendix',s)
  def test_16_random_and_all_scenario_boundaries(self):
-  scenarios=json.loads((ROOT/'tests/fixtures/architecture-scenarios.json').read_text());rows=[]
+  scenarios=json.loads((ROOT/'tests/fixtures/architecture-boundary-scenarios.json').read_text());rows=[]
   for case in scenarios:
    b=intake();b['name']=case['name'];b['components']=[];b['overlap']=case['answers']['overlap'];b['tenancy']=case['answers']['tenancy'] if case['answers']['tenancy']!='unknown' else 'single'
    for a in case['answers']['activities']:

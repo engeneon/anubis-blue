@@ -163,6 +163,7 @@ inline Json fact_proposal(const Json &output,const Json &session,const Json &sou
    auto derived=c;c=previous;c["pattern"]=pattern;
    for(auto pair:std::vector<std::pair<std::string,std::string>>{{"compute_location","location"},{"search_location","retrieval"},{"relationship","relationship"}})if(!fact(pair.first).is_null())c[pair.second]=derived[pair.second];
   }
+  if(c.value("sizing_method",std::string())=="reference"){c["reference_accepted"]=false;ask(activity,"reference_review",activity+": Review and reaccept the consultant reference capacity after this refinement. Copilot has not changed or qualified its throughput.");}
   if(!c.contains("relationship")||c["relationship"]=="unknown")c["relationship"]="independent";
   if(pattern=="direct"&&c["location"]!="external"&&(get("search").empty()||get("actions").empty()))ask(activity,"architecture",activity+": The text model is identified. Does it retrieve documents before answering or choose actions through tools? These supporting functions remain unconfirmed.");
   if(get("dedicated")!="")c["dedicated"]=get("dedicated")=="yes";
@@ -221,7 +222,7 @@ inline Json fact_proposal(const Json &output,const Json &session,const Json &sou
  // Stable material-question order. Never delegate question selection to the model.
  std::map<std::string,int> priority={{"conflict",0},{"architecture",1},{"compute_location",2},{"demand_basis",3},{"active_users",3},{"requests_per_user",4},{"jobs",3},{"window",4},{"call_envelope",5},{"model",6},{"training_tokens",7},{"deadline",7},{"input_tokens",8},{"output_tokens",9},{"overlap",10},{"data_location",11},{"search_location",12},{"specialist",13}};
  std::stable_sort(questions.begin(),questions.end(),[&](const Json&a,const Json&b){return priority[text(a,"concept")]<priority[text(b,"concept")];});
- return {{"question",questions.empty()?"Review the facts and explicit assumptions, then calculate requirements.":text(questions[0],"question")},{"changes",changes},{"preview",input},{"base_revision",session["revision"]},{"state","proposed"},{"fact_contract","2.0"},{"facts",facts},{"incoming_facts",incoming},{"conflicts",conflicts},{"trace",trace},{"questions",questions},{"knowledge_version",library["version"]},{"knowledge_digest",digest(library)},{"rules_version","facts-2.0"},{"ready_for_estimate",questions.empty()&&!components.empty()}};
+ return {{"question",questions.empty()?"Review the facts and explicit assumptions, then calculate requirements.":text(questions[0],"question")},{"changes",changes},{"preview",input},{"base_revision",session["revision"]},{"state","proposed"},{"fact_contract","2.0"},{"facts",facts},{"incoming_facts",incoming},{"conflicts",conflicts},{"trace",trace},{"questions",questions},{"knowledge_version",library["version"]},{"knowledge_digest",digest(library)},{"rules_version","facts-2.0"},{"ready_for_estimate",gpu_readiness(input)["ready"]},{"gpu_readiness",gpu_readiness(input)}};
 }
 // Recover useful evidence only after the bounded model correction failed. Nothing is accepted automatically.
 inline Json partial_fact_proposal(const Json &output,const Json &session,const Json &sources,const Json &catalog,const Json &library) {

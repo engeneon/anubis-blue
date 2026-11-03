@@ -1,0 +1,134 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "scenarios": [
+    {
+      "id": "S01",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_bcd2244a064ef33da6c249ab4bfcda60",
+      "explanation_id": "explanation_6b2767cdeb210ea5ac57cff9e3c4dad1",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S02",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_02c5eaf3b5dae0dc9a89f0454782c1ea",
+      "explanation_id": "explanation_b149b863baba8da373f441dad33c7db5",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S03",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_f20d85202b901266fd2101b3e28c0e97",
+      "explanation_id": "explanation_e7d89194a58f5a76962cc4820d6a80ff",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S04",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_544e168bc78b0b1fdbcf7a9348cebff1",
+      "explanation_id": "explanation_7163232898c1c56fb7d11f8aa7477678",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S05",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_2251585db2025f853d7a6a0059252531",
+      "explanation_id": "explanation_b4b7697826bfc86ea39c4d1d709e5985",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S06",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_590038b2734c451e860f71068b4d6dcc",
+      "explanation_id": "explanation_80625d3dfbf7a2072d9280fc7598e9f4",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S07",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_49956c681cc495c8c9223eb49118688f",
+      "explanation_id": "explanation_3a12a1a37a11ff9c8de0aa6be1490edd",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S08",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_67235fcaa03801dce49a7e215e7b21f1",
+      "explanation_id": "explanation_7b09d06955959739e3bb357bb28a9efe",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S09",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_1108142d30fbf84b032d64a1ac455345",
+      "explanation_id": "explanation_3b6e9aefe78f61590ae21836e718fefb",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S10",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_a548def4f6944f76a00b09375fe41f4c",
+      "explanation_id": "explanation_abbc2340045a2b3380ff1937b797a14e",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S11",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_b3eef662f24208dcfbd0027f990f5278",
+      "explanation_id": "explanation_9870f23a8e18045a503a4f5780b7bedb",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S12",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_2a389b562b70f761f3d7790c803fa3cf",
+      "explanation_id": "explanation_0db5a0452e0ece28c462f4329bf994e6",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S13",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_132a41a6876b2e412838143c66899bcd",
+      "explanation_id": "explanation_d0db6e1cfffdc31af4eb72416c04a0ee",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S14",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_2386f4444bcd300b7f79afc3e338b588",
+      "explanation_id": "explanation_de937f912b4f7ff9ece468ebee1043df",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S15",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_403c7d3f187e53d259b90bac8d985df6",
+      "explanation_id": "explanation_1d580c3719992502d87668109ad1abae",
+      "previous_mode": "model_assisted"
+    },
+    {
+      "id": "S16",
+      "mode": "model_assisted",
+      "result_unchanged": true,
+      "result_id": "result_c3befaea0af3af5aa6e0c03aaf6b020b",
+      "explanation_id": "explanation_3439d79eeadb31f7344e8771155ff955",
+      "previous_mode": "model_assisted"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[WebServer] (node:45988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:45990) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/ui/gpu-readiness.spec.ts:6:1 › manual intake flags the exact missing demand before review and enables calculation after correction (2.5s)
+  ✓  2 tests/ui/gpu-readiness.spec.ts:26:1 › specialist reference form produces GPU comparisons and handoff (2.1s)
+  ✓  3 tests/ui/gpu-readiness.spec.ts:45:1 › Copilot shows early missing fields without a model call (578ms)
+
+  3 passed (6.0s)

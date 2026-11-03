@@ -1,0 +1,11 @@
+test_dedicated_storage_and_direction (__main__.NetworkPlanning.test_dedicated_storage_and_direction) ... ok
+test_initial_load_and_overlap (__main__.NetworkPlanning.test_initial_load_and_overlap) ... ok
+test_invalid_inputs_rejected (__main__.NetworkPlanning.test_invalid_inputs_rejected) ... ok
+test_overlap_adds_once (__main__.NetworkPlanning.test_overlap_adds_once) ... ok
+test_storage_uses_declared_stage_rates (__main__.NetworkPlanning.test_storage_uses_declared_stage_rates) ... ok
+test_unknown_network_does_not_invent_rate_or_block_gpu (__main__.NetworkPlanning.test_unknown_network_does_not_invent_rate_or_block_gpu) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.334s
+
+OK

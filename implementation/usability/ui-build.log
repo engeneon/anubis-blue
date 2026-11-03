@@ -1,0 +1,4 @@
+
+> anubis-workload-engine@1.0.0 build
+> tsc -p ui/tsconfig.json && node scripts/copy-ui.mjs
+

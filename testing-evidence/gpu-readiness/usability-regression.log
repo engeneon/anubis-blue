@@ -1,0 +1,10 @@
+ui-build: PASS
+system-diagram: PASS
+cpp-build: PASS
+network-tests: PASS
+engine-tests: PASS
+api-tests: PASS
+planning-regression: PASS
+system-regression: PASS
+core-regression: PASS
+Run tests/ui/usability.cua.js in the authenticated GUI for browser acceptance.

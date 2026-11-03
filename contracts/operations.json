@@ -730,6 +730,55 @@
   },
   {
     "method": "POST",
+    "path": "guided-readiness",
+    "scope": "authenticated",
+    "description": "Return deterministic minimum GPU input requirements without persistence",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "copilot-explanations",
+    "scope": "writer",
+    "description": "Save a deterministic explanation or queue a read-only model explanation",
+    "body": {
+      "result_id": {
+        "type": "string"
+      },
+      "projection_id": {
+        "type": "string"
+      },
+      "profile_id": {
+        "type": "string"
+      },
+      "classification": {
+        "type": "string",
+        "enum": [
+          "public",
+          "corporate"
+        ]
+      }
+    },
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "copilot-explanations/{id}",
+    "scope": "member",
+    "description": "Read a saved explanation and exact result provenance",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "copilot-explanations/{result_id}/history",
+    "scope": "member",
+    "description": "List explanations for an exact saved result",
+    "body": null,
+    "status": 200
+  },
+  {
+    "method": "POST",
     "path": "guided-workloads",
     "scope": "writer",
     "description": "Transform architecture-led intake into a validated workload without persistence",

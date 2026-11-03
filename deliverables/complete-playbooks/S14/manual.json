@@ -1,0 +1,94 @@
+{
+  "id": "S14",
+  "mode": "manual",
+  "steps": [
+    {
+      "text": "Start Anubis and open the local address. Retrieve your private token from [[value:.anubis/identities.json]]. Paste it into [[field:Access token]] and click [[control:Open workspace]]. Never share the token.",
+      "image": "deliverables/complete-playbooks/S14/manual-01.png"
+    },
+    {
+      "text": "Click [[control:New engagement]]. Set [[field:Customer workload name]] = [[value:Orchid Neocloud manual playbook]]. Click [[control:Add Direct model service]]. Click [[control:Add Direct model service]]. Click [[control:Continue]].",
+      "image": "deliverables/complete-playbooks/S14/manual-02.png"
+    },
+    {
+      "text": "Set [[field:Factory users]] = [[value:Multiple tenants]]. Set [[field:Do activities run at the same time?]] = [[value:Yes — overlapping demand]].",
+      "image": "deliverables/complete-playbooks/S14/manual-03.png"
+    },
+    {
+      "text": "Set [[field:Component name 1]] = [[value:Premium model endpoints]]. Set [[field:Compute location 1]] = [[value:In this factory]]. Set [[field:Reserve dedicated capacity 1]] [[state:checked]]. ",
+      "image": "deliverables/complete-playbooks/S14/manual-04.png"
+    },
+    {
+      "text": "Set [[field:Component name 2]] = [[value:Standard model endpoints]]. Set [[field:Compute location 2]] = [[value:In this factory]]. Set [[field:Reserve dedicated capacity 2]] [[state:unchecked]]. Set [[field:Relationship 2]] = [[value:Independent]]. ",
+      "image": "deliverables/complete-playbooks/S14/manual-05.png"
+    },
+    {
+      "text": "Set [[field:Model preset]] = [[value:dense8b]]. Set [[field:Describe demand using]] = [[value:Requests per minute]].",
+      "image": "deliverables/complete-playbooks/S14/manual-06.png"
+    },
+    {
+      "text": "Set [[field:Peak requests per minute]] = [[value:60]]. Set [[field:Model calls per request or job]] = [[value:1]].",
+      "image": "deliverables/complete-playbooks/S14/manual-07.png"
+    },
+    {
+      "text": "Set [[field:Input tokens per model call]] = [[value:2000]]. Set [[field:Output tokens per model call]] = [[value:500]].",
+      "image": "deliverables/complete-playbooks/S14/manual-08.png"
+    },
+    {
+      "text": "Set [[field:Model preset]] = [[value:dense8b]]. Set [[field:Describe demand using]] = [[value:Requests per minute]].",
+      "image": "deliverables/complete-playbooks/S14/manual-09.png"
+    },
+    {
+      "text": "Set [[field:Peak requests per minute]] = [[value:300]]. Set [[field:Model calls per request or job]] = [[value:1]].",
+      "image": "deliverables/complete-playbooks/S14/manual-10.png"
+    },
+    {
+      "text": "Set [[field:Input tokens per model call]] = [[value:2000]]. Set [[field:Output tokens per model call]] = [[value:500]].",
+      "image": "deliverables/complete-playbooks/S14/manual-11.png"
+    },
+    {
+      "text": "Confirm [[control:GPU estimate inputs are ready]]. Retain the displayed B300 enterprise deployment profile and [[field:Sensitivity envelope]] = [[value:±30%]]. Check [[field:Use these planning assumptions]]. Click [[control:Calculate estimate]].",
+      "image": "deliverables/complete-playbooks/S14/manual-12.png"
+    },
+    {
+      "text": "Read the GPU workload comparison. Expected B300 = [[value:16]], B200 = [[value:16]], H200 = [[value:16]] GPUs. These workload counts are separate from the [[value:256]] GPU factory deployment anchor. Click [[control:Export result]] to save the calculation.",
+      "image": "deliverables/complete-playbooks/S14/manual-13.png"
+    },
+    {
+      "text": "Click [[control:Continue to Design handoff]], then [[control:Prepare projection]]. Read the executive summary and download the design intake and companion specification. Unresolved network and storage measurements remain explicit.",
+      "image": "deliverables/complete-playbooks/S14/manual-14.png"
+    },
+    {
+      "text": "Click [[control:Explain this to me]]. Set [[field:Explanation connection]] = [[value:Deterministic explanation — no model]]. Click [[control:Generate explanation]]. The saved calculation cannot be changed by this action.",
+      "image": "deliverables/complete-playbooks/S14/manual-15.png"
+    },
+    {
+      "text": "Read the explanation of the workload GPUs, deployment anchor, memory, storage and all network roles. Expand [[control:Source fields and assumptions]] to trace the explanation. Click [[control:Download explanation]], then [[control:Close]].",
+      "image": "deliverables/complete-playbooks/S14/manual-16.png"
+    },
+    {
+      "text": "Scroll down within [[control:Explain this to me]] to read [[control:Factory networks]] and [[control:What to do next]]. Expand [[control:Source fields and assumptions]] if needed. Click [[control:Download explanation]] to save the text. Scroll to the top and click [[control:Close]] to continue.",
+      "image": "deliverables/complete-playbooks/S14/manual-explanation-details.png"
+    },
+    {
+      "text": "Set [[field:Completion notes]] = [[value:Planning requirements and explanation delivered. Outstanding network and storage measurements remain in the companion specification.]]. Check [[field:I confirm that these selected requirements are delivered.]]. Click [[control:Complete engagement]].",
+      "image": "deliverables/complete-playbooks/S14/manual-17.png"
+    },
+    {
+      "text": "The engagement is complete. Its exact calculation, handoff and explanation remain saved. Use [[control:Cases]] to reopen the engagement and [[control:Saved deliverables]] to retrieve its documents.",
+      "image": "deliverables/complete-playbooks/S14/manual-18.png"
+    }
+  ],
+  "maps": [
+    {
+      "name": "Premium model endpoints",
+      "image": "deliverables/complete-playbooks/S14/manual-map-0.png"
+    },
+    {
+      "name": "Standard model endpoints",
+      "image": "deliverables/complete-playbooks/S14/manual-map-1.png"
+    }
+  ],
+  "story": null,
+  "validated": true
+}

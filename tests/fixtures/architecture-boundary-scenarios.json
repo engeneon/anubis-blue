@@ -1,0 +1,716 @@
+[
+  {
+    "id": "S01",
+    "name": "Alder Contact Services",
+    "story": "A regional service desk wants a local text classifier for 45,000 incoming messages daily. One model labels each message; no document search or tools are involved. The busiest hour receives 6,000 messages. Responses must arrive within five seconds.",
+    "answers": {
+      "name": "Alder Contact Services",
+      "activities": [
+        {
+          "name": "Message classification",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "direct"
+    ],
+    "expected_arrangement": "Single local model service.",
+    "acceptance": "Do not infer simultaneous requests from 45,000 daily items.",
+    "measurement_next": "Collect request timestamps and complete message-length samples.",
+    "expected_question": null
+  },
+  {
+    "id": "S02",
+    "name": "Bracken Engineering",
+    "story": "Eight thousand engineers ask an assistant questions about maintenance manuals. The existing external search platform returns passages; a local model writes the answer. The assistant serves 2,400 questions in the busiest hour. The 4 TB corpus is indexed by the external platform.",
+    "answers": {
+      "name": "Bracken Engineering",
+      "activities": [
+        {
+          "name": "Manual assistant",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "retrieval"
+    ],
+    "expected_arrangement": "Retrieval before local answer generation; external retrieval placement remains a follow-up.",
+    "acceptance": "Do not count the whole retrieval chain as two text-generation calls.",
+    "measurement_next": "Confirm retrieval hosting and capture complete prompts including retrieved passages.",
+    "expected_question": null
+  },
+  {
+    "id": "S03",
+    "name": "Cobalt Travel Operations",
+    "story": "A travel operations assistant resolves disruption cases by checking schedules and hotel systems. It typically invokes a model four times but complex cases take up to twelve calls. About 1,500 cases arrive daily. Tool results influence the next action.",
+    "answers": {
+      "name": "Cobalt Travel Operations",
+      "activities": [
+        {
+          "name": "Disruption case agent",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "yes",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "variable",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "agent"
+    ],
+    "expected_arrangement": "Variable tool-and-model loop.",
+    "acceptance": "Preserve variable call expansion; do not replace it with one call.",
+    "measurement_next": "Sample complete case traces, retries, model calls and context growth.",
+    "expected_question": null
+  },
+  {
+    "id": "S04",
+    "name": "Dune Accounting",
+    "story": "A service creates 80,000 text summaries of invoices between 22:00 and 06:00. Each invoice uses one model call. No interactive work runs on these resources during the processing window.",
+    "answers": {
+      "name": "Dune Accounting",
+      "activities": [
+        {
+          "name": "Invoice summaries",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "overnight",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "batch",
+      "direct"
+    ],
+    "expected_arrangement": "One overnight batch activity.",
+    "acceptance": "Keep item count and deadline distinct from concurrent users.",
+    "measurement_next": "Measure representative input/output sizes and actual arrival volume.",
+    "expected_question": null
+  },
+  {
+    "id": "S05",
+    "name": "Estuary Transit",
+    "story": "A transit operator plans live object detection on 180 camera streams. Cameras provide 1080p video, but detection is requested at five frames per second per camera. Only event clips are retained. There is no text-generation service.",
+    "answers": {
+      "name": "Estuary Transit",
+      "activities": [
+        {
+          "name": "Camera detection",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "yes",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "continuous",
+          "calls": "unknown",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "stream"
+    ],
+    "expected_arrangement": "Continuous visual inference.",
+    "acceptance": "Recognise streaming without routing camera frames through the text sizing equation.",
+    "measurement_next": "Record model, sampling rate, codec, active streams and clip retention.",
+    "expected_question": null
+  },
+  {
+    "id": "S06",
+    "name": "Fable Creative Studio",
+    "story": "A studio produces 12,000 catalogue images per day in four-hour production windows. Image size is 1024 by 1024 pixels, with several candidate images per product. It has not chosen the generation model.",
+    "answers": {
+      "name": "Fable Creative Studio",
+      "activities": [
+        {
+          "name": "Catalogue images",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "yes",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "variable",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "batch",
+      "generation"
+    ],
+    "expected_arrangement": "Batch image generation.",
+    "acceptance": "Request specialised generation evidence; never infer demand from text tokens alone.",
+    "measurement_next": "Confirm model, generation steps, images per product and accepted completion window.",
+    "expected_question": null
+  },
+  {
+    "id": "S07",
+    "name": "Grove Legal Technology",
+    "story": "A software supplier adapts an existing 8B text model monthly using 300,000 reviewed examples. It expects parameter-efficient fine-tuning, but the training team has not confirmed the method. Each run should finish within a weekend.",
+    "answers": {
+      "name": "Grove Legal Technology",
+      "activities": [
+        {
+          "name": "Monthly model adaptation",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "yes",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "unknown",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "adaptation"
+    ],
+    "expected_arrangement": "Scheduled model adaptation.",
+    "acceptance": "Do not silently apply full-pretraining memory or compute equations.",
+    "measurement_next": "Obtain base model, adaptation method, tokenised dataset and repetitions.",
+    "expected_question": null
+  },
+  {
+    "id": "S08",
+    "name": "Helix Language Institute",
+    "story": "A research institute continues pretraining an existing language model on 90 billion tokens over 30 days. Data arrives from a separate research storage service. Training checkpoints are written during the campaign.",
+    "answers": {
+      "name": "Helix Language Institute",
+      "activities": [
+        {
+          "name": "Language pretraining",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "yes",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "continuous",
+          "calls": "unknown",
+          "relationship": "independent",
+          "sharing": "dedicated"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "training"
+    ],
+    "expected_arrangement": "Dedicated continuous training campaign.",
+    "acceptance": "Identify training and request ingestion/checkpoint detail rather than hiding those resources.",
+    "measurement_next": "Obtain model size, useful training time, checkpoint size and save interval.",
+    "expected_question": null
+  },
+  {
+    "id": "S09",
+    "name": "Juniper Retail",
+    "story": "A retailer runs a document assistant for 18,000 staff and produces 20,000 store reports overnight. Staff access is disabled during the report window. Both activities use text models but have different input sizes.",
+    "answers": {
+      "name": "Juniper Retail",
+      "activities": [
+        {
+          "name": "Store assistant",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Nightly reports",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "overnight",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "no",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "batch",
+      "direct",
+      "retrieval"
+    ],
+    "expected_arrangement": "Two explicitly non-overlapping activities.",
+    "acceptance": "Create separate operating scenarios; no automatic addition of non-overlapping peaks.",
+    "measurement_next": "Confirm schedule enforcement and sample each activity separately.",
+    "expected_question": null
+  },
+  {
+    "id": "S10",
+    "name": "Kestrel Field Services",
+    "story": "A repair agent searches equipment records, proposes repairs and creates work orders through tools. New manuals are indexed nightly while the agent remains available to technicians in other time zones. The corpus is 9 TB and grows by 40 GB daily.",
+    "answers": {
+      "name": "Kestrel Field Services",
+      "activities": [
+        {
+          "name": "Repair agent",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "yes",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "variable",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Manual indexing",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "yes"
+          },
+          "location": "local",
+          "schedule": "overnight",
+          "calls": "unknown",
+          "relationship": "alongside",
+          "sharing": "shared",
+          "predecessor": 0
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "agent",
+      "batch",
+      "retrieval"
+    ],
+    "expected_arrangement": "Retrieval-and-tool agent alongside background indexing.",
+    "acceptance": "Retain indexing as supporting work; do not infer zero GPU or CPU demand.",
+    "measurement_next": "Measure embedding configuration, changed-document volume and complete agent traces.",
+    "expected_question": null
+  },
+  {
+    "id": "S11",
+    "name": "Larch Media Archive",
+    "story": "A broadcaster continuously analyses incoming video, then uses extracted descriptions to build searchable records. Editors ask a text assistant questions about the archive. Video ingestion and editor queries run together.",
+    "answers": {
+      "name": "Larch Media Archive",
+      "activities": [
+        {
+          "name": "Video analysis",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "yes",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "continuous",
+          "calls": "unknown",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Archive search",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "alongside",
+          "sharing": "shared",
+          "predecessor": 0
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "retrieval",
+      "stream"
+    ],
+    "expected_arrangement": "Continuous media processing alongside retrieval and answering.",
+    "acceptance": "Keep visual inference separate from text serving and do not treat the proposed arrows as proven latency.",
+    "measurement_next": "Collect video processing settings, archive indexing flow and text request samples.",
+    "expected_question": null
+  },
+  {
+    "id": "S12",
+    "name": "Morrow Advertising",
+    "story": "An agency first uses a text agent to draft a campaign plan. If a customer approves it, an image generation job produces campaign assets. Several customer campaigns can be in different phases at once.",
+    "answers": {
+      "name": "Morrow Advertising",
+      "activities": [
+        {
+          "name": "Campaign planner",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "yes",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "variable",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Approved campaign assets",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "yes",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "variable",
+          "relationship": "conditional",
+          "sharing": "shared",
+          "predecessor": 0
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "agent",
+      "batch",
+      "generation"
+    ],
+    "expected_arrangement": "Conditional asset generation after planning; different campaigns overlap.",
+    "acceptance": "Preserve conditional relationship without treating it as an unconditional workload multiplier.",
+    "measurement_next": "Obtain approval fraction, job volume and generation settings.",
+    "expected_question": null
+  },
+  {
+    "id": "S13",
+    "name": "Nacre Customer Portal",
+    "story": "A portal sends all language-model calls to an external provider. It handles 900,000 requests per day. The proposed factory hosts customer data and integration services, not the model. The customer asks whether this requires local GPUs.",
+    "answers": {
+      "name": "Nacre Customer Portal",
+      "activities": [
+        {
+          "name": "Hosted text service",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "external",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "direct"
+    ],
+    "expected_arrangement": "External model service; local connectivity and storage remain.",
+    "acceptance": "Never recommend local model GPUs merely because the application uses AI.",
+    "measurement_next": "Measure request/response bytes, data storage and locally executed supporting services.",
+    "expected_question": null
+  },
+  {
+    "id": "S14",
+    "name": "Orchid Neocloud",
+    "story": "A provider hosts twenty customers using text endpoints. Premium customers require dedicated resources; standard customers may share a pool. Both groups can peak together. Model choices vary between customers.",
+    "answers": {
+      "name": "Orchid Neocloud",
+      "activities": [
+        {
+          "name": "Premium model endpoints",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "dedicated"
+        },
+        {
+          "name": "Standard model endpoints",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "alongside",
+          "sharing": "shared",
+          "predecessor": 0
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "multi"
+    },
+    "expected_patterns": [
+      "direct"
+    ],
+    "expected_arrangement": "Simultaneous dedicated and shared service groups.",
+    "acceptance": "Do not equate customer count with GPU count or a proven tenancy limit.",
+    "measurement_next": "Separate model mixes, tenant demand distributions and isolation requirements.",
+    "expected_question": null
+  },
+  {
+    "id": "S15",
+    "name": "Peregrine Product Lab",
+    "story": "A product team asks for an AI assistant for roughly 5,000 employees. It cannot yet say whether the assistant searches internal documents, uses tools, or runs locally. It has no usage logs or model selection.",
+    "answers": {
+      "name": "Peregrine Product Lab",
+      "activities": [
+        {
+          "name": "Proposed assistant",
+          "answers": {
+            "text": "yes",
+            "search": "unknown",
+            "agent": "unknown",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "unknown",
+          "schedule": "interactive",
+          "calls": "unknown",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "unknown",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "direct"
+    ],
+    "expected_arrangement": "Provisional text-service match with retrieval, orchestration and placement unresolved.",
+    "acceptance": "Unknown must remain unknown; candidate patterns must not imply confirmed absence of retrieval or agents.",
+    "measurement_next": "Run a short customer walkthrough of three representative tasks.",
+    "expected_question": "Where will the model processing run?"
+  },
+  {
+    "id": "S16",
+    "name": "Quartz Industrial Research",
+    "story": "A manufacturer wants GPU-accelerated fluid simulation for turbine design. Engineers describe meshes, solver steps and simulation deadlines. No text model, retrieval, agent, media generation or model training is involved.",
+    "answers": {
+      "name": "Quartz Industrial Research",
+      "activities": [
+        {
+          "name": "Fluid simulation",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "unknown",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [],
+    "expected_arrangement": "Outside the current common core.",
+    "acceptance": "Do not force a simulation into a language-model or training profile.",
+    "measurement_next": "Obtain solver-specific measurements and propose a future HPC pattern.",
+    "expected_question": "No core pattern confirmed"
+  }
+]

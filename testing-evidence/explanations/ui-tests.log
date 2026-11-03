@@ -1,0 +1,20 @@
+[WebServer] (node:51707) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 11 tests using 1 worker
+
+(node:51709) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/ui/copilot.spec.ts:5:1 › random scenario assisted discovery review sizing and handoff (10.3s)
+  ✓   2 tests/ui/copilot.spec.ts:206:1 › Case A accepted facts lead directly to GPU estimate review (3.7s)
+  ✓   3 tests/ui/copilot.spec.ts:282:1 › engagement deletion can be cancelled and restored (583ms)
+  ✓   4 tests/ui/copilot.spec.ts:293:1 › specialist engagement concludes without a GPU result or handoff (1.1s)
+  ✓   5 tests/ui/copilot.spec.ts:308:1 › specialist calculation reaches report closure directly from stage four (806ms)
+  ✓   6 tests/ui/gpu-readiness.spec.ts:6:1 › manual intake flags the exact missing demand before review and enables calculation after correction (2.3s)
+  ✓   7 tests/ui/gpu-readiness.spec.ts:26:1 › specialist reference form produces GPU comparisons and handoff (2.1s)
+  ✓   8 tests/ui/gpu-readiness.spec.ts:45:1 › Copilot shows early missing fields without a model call (615ms)
+  ✓   9 tests/ui/mvp.spec.ts:5:1 › MVP document assistant calculation handoff closure and retrieval (3.8s)
+  ✓  10 tests/ui/mvp.spec.ts:86:1 › MVP getting started manual document assistant (1.9s)
+  ✓  11 tests/ui/workflow.spec.ts:2:1 › LLM-free consultant workflow, immutable analysis and narrow layout (2.1s)
+
+  11 passed (30.0s)

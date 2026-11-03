@@ -1,3 +1,4 @@
+#include "application/copilot/explanation.hpp"
 #include "adapters/model_transport.hpp"
 #include "application/copilot/facts.hpp"
 #include <httplib/httplib.h>
@@ -39,7 +40,7 @@ static httplib::Headers auth(const Json &p) {
 }
 static Json post(const Json &p,const Json &body,httplib::Headers &headers,bool notification=false) {
  validate_model_profile(p);require(p["enabled"].get<bool>(),"disabled","Connection is disabled");
- auto origin=text(p,"origin");httplib::Client client(origin);client.set_connection_timeout(5);client.set_read_timeout(40);client.set_write_timeout(10);client.set_follow_location(false);client.enable_server_certificate_verification(true);
+ auto origin=text(p,"origin");httplib::Client client(origin);client.set_connection_timeout(5);client.set_read_timeout(120);client.set_write_timeout(10);client.set_follow_location(false);client.enable_server_certificate_verification(true);
  // Pin a resolved public IPv4 address for standard providers. Private gateways require explicit deployment approval.
  if(!explicit_origin(origin)){
   auto host=origin.substr(origin.find("://")+3);addrinfo hints{},*res=nullptr;hints.ai_family=AF_INET;hints.ai_socktype=SOCK_STREAM;
@@ -98,7 +99,7 @@ Json execute_mcp(const Json &p,const std::string &name,const Json &args) {
  require(r.contains("result")&&!r["result"].value("isError",false),"mcp_tool_failed","MCP tool failed");return r["result"];
 }
 Json execute_model(const Json &p,const Json &context) {
- bool fact_mode=context.contains("fact_contract");auto schema=fact_mode?fact_schema():copilot_schema();auto instructions=(fact_mode?fact_prompt():copilot_prompt())+"\nOutput schema: "+schema.dump();Json body,result;auto provider=text(p,"provider");
+ bool explain=context.contains("explanation_contract"),fact_mode=context.contains("fact_contract");auto schema=explain?explanation_schema():fact_mode?fact_schema():copilot_schema();auto instructions=(explain?explanation_prompt():fact_mode?fact_prompt():copilot_prompt())+"\nOutput schema: "+schema.dump();Json body,result;auto provider=text(p,"provider");
  require(context.dump().size()<120000,"context_budget","Context exceeds the allowed input budget");
  if(provider=="mcp") {
   result=execute_mcp(p,text(p,"model_tool"),{{"instructions",instructions},{"context",context},{"max_output_tokens",p["max_output_tokens"]}});

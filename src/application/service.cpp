@@ -1,3 +1,5 @@
+#include "application/copilot/explanation.hpp"
+#include "application/characterization/readiness.hpp"
 #include "application/characterization/closure.hpp"
 #include "application/characterization/assisted.hpp"
 #include "application/characterization/resolve.hpp"
@@ -98,7 +100,7 @@ Reply Service::request(const Actor &a, const std::string &method, const std::str
     if (!s.empty())
       parts.push_back(s);
   require(!parts.empty(), "route", "Route missing");
-  bool mutation = method != "GET";
+  bool mutation = method != "GET" && !(method=="POST"&&parts[0]=="guided-readiness");
   if (mutation && a.role == "agent") {
     require(
         parts[0] == "characterizations" || parts[0] == "compilations" || parts[0] == "comparisons" ||
@@ -200,6 +202,7 @@ Reply Service::dispatch(const Actor &a, const std::string &method,
     return {{{"id", a.id}, {"role", a.role}}};
   if (method == "GET" && top == "guided-catalog") return {read_json(root_ + "/knowledge/guided-intake.json")};
   if (method == "POST" && top == "assisted-compatibility") return {assisted_review(b,read_json(root_ + "/knowledge/guided-intake.json"))};
+  if (method == "POST" && top == "guided-readiness") return {gpu_readiness(b)};
   if (method == "POST" && top == "guided-workloads") return {guided_workload(b,read_json(root_ + "/knowledge/guided-intake.json"))};
   if (method == "GET" && top == "architecture-core") return {read_json(root_ + "/knowledge/architecture-core.json")};
   if (method == "POST" && top == "characterizations") return {characterize(b, read_json(root_ + "/knowledge/architecture-core.json"))};
@@ -802,6 +805,11 @@ void Service::work() {
     try {
       if (job["data"].value("kind", "compile") == "neon")
         result = submit_neon(job["data"]["target"], job["data"]["projection"]["payload"]);
+      else if(job["data"].value("kind","")=="explanation") {
+       try{{std::lock_guard guard(mutex_);auto profile=store_.get(job["data"]["profile_id"]);require(profile["version"]==job["data"]["profile_version"]&&profile["data"].value("enabled",false),"profile_changed","Connection policy changed before explanation dispatch");}auto context=job["data"]["context"];for(int correction=0;;++correction){auto response=execute_model(job["data"]["profile"],context);try{result=validate_explanation(response["output"],job["data"]["packet"]);result["usage"]=response.value("usage",Json::object());result["correction_attempts"]=correction;break;}catch(const Error&e){if(correction==1)throw;{std::lock_guard guard(mutex_);auto current=store_.get(job["id"]);require(current["data"]["state"]=="running","cancelled","Explanation cancelled before correction");}context["correction"]={{"instruction","Correct the JSON once. Keep all six matching placeholders. Remove all literal digits and numerical words from your own prose. Do not repeat the contents of placeholders."},{"validation_error",e.code},{"previous_output",response["output"]}};}}}
+       catch(const Error&e){result=explanation_fallback(job["data"]["packet"]);result["fallback_code"]=e.code;result["fallback_reason"]="The model response was unavailable or did not pass the explanation checks. The authoritative deterministic explanation is shown.";}
+       catch(const std::exception&){result=explanation_fallback(job["data"]["packet"]);result["fallback_reason"]="The model response was unavailable or did not pass the explanation checks. The authoritative deterministic explanation is shown.";}
+      }
       else if(job["data"].value("kind","")=="copilot"||job["data"].value("kind","")=="copilot_test") {
         auto context=job["data"]["context"];
         for(int correction=0;;++correction){
@@ -853,12 +861,15 @@ void Service::work() {
         store_.commit();
         continue;
       }
-      if((d.value("kind","")=="copilot"||d.value("kind","")=="mcp_import")&&job["case_id"]!="")case_access({d["actor"],"worker"},job["case_id"]);
+      if((d.value("kind","")=="copilot"||d.value("kind","")=="mcp_import"||d.value("kind","")=="explanation")&&job["case_id"]!="")case_access({d["actor"],"worker"},job["case_id"]);
       if (!failure.is_null()) {
         d["state"] =
             failure["error"].value("code", "") == "outcome_unknown" ? "outcome_unknown" : "failed";
         d["error"] = failure["error"];
         if(d.value("kind","")=="copilot_test"||d.value("kind","")=="mcp_test") {auto profile=store_.get(d["profile_id"]);if(profile["version"]==d["profile_version"]){auto pd=profile["data"];pd["health"]="failed";pd["tested_job"]=job["id"];store_.update(profile["id"],profile["version"],pd);}}
+      } else if(d.value("kind","")=="explanation") {
+        auto profile=store_.get(d["profile_id"]);if(profile["version"]!=d["profile_version"]||!profile["data"].value("enabled",false)){result=explanation_fallback(d["packet"]);result["fallback_reason"]="The connection policy changed. A deterministic explanation is shown.";}
+        result["prompt_version"]="explanation-1.0";result["prompt_digest"]=digest(explanation_prompt());result["packet"]=d["packet"];result["created_at"]=d["created_at"];result["author"]=d["actor"];result["model"]=d["profile"]["model"];result["provider"]=d["profile"]["provider"];result["profile_id"]=d["profile_id"];result["profile_version"]=d["profile_version"];auto record=save({d["actor"],"worker"},"explanation",job["case_id"],result);d["explanation_id"]=record["id"];d["state"]="succeeded";
       } else if(d.value("kind","")=="copilot_test"||d.value("kind","")=="mcp_test") {
         auto profile=store_.get(d["profile_id"]);require(profile["version"]==d["profile_version"],"profile_changed","Profile changed during test");auto pd=profile["data"];pd["health"]="capability_passed";pd["tested_job"]=job["id"];store_.update(profile["id"],profile["version"],pd);d["state"]="succeeded";d["qualification"]="Capability only. Interpretation quality not qualified";if(d["kind"]=="mcp_test") {d["tools"]=Json::array();for(auto t:result["tools"]) {t["schema_digest"]=digest(t["inputSchema"]);d["tools"].push_back(t);}}
       } else if(d.value("kind","")=="copilot") {

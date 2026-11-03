@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-03",
+  "scope": "Deterministic software acceptance. No new physical hardware benchmark or live-model interpretation qualification claimed.",
+  "scenario_count": 16,
+  "comparisons_per_scenario": [
+    "HGX_B300",
+    "HGX_B200",
+    "HGX_H200"
+  ],
+  "successful_local_handoffs": 16,
+  "readiness_and_reference_tests": 12,
+  "browser_regression_tests": 11,
+  "interpretation_fixture_tests": 52,
+  "copilot_fixture_tests": 17,
+  "installed_gui_smoke": "passed",
+  "saved_cases_preserved_on_restart": 35,
+  "scenario_fixture_sha256": "f6376c541563c7ab4e3136cb2162fb802f81918a014cd256fae02e48499aa20d",
+  "reference_basis": "Explicit fictional consultant planning assumptions in demonstration inputs. No cross-hardware or single-job scaling inferred."
+}

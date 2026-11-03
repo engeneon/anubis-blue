@@ -18,3 +18,8 @@ assert.match(systemDiagram({pattern:'retrieval',retrieval:'local'}),/Inside this
 assert.match(systemDiagram({pattern:'retrieval',retrieval:'unknown'}),/Service location to confirm/);
 
 assert.match(systemDiagram({pattern:"retrieval",retrieval:"external"}),/e.g. customer search cluster or cloud search/);
+for (const pattern of ['stream','generation','adaptation']) {
+ assert.ok(!systemDiagram({pattern,model:'dense8b'}).includes('dense8b'));
+ assert.match(systemDiagram({pattern,sizing_method:'reference',reference_demand:'300',reference_unit:'frames',reference_gpus:'8'}),/300 frames\/s/);
+ assert.match(systemDiagram({pattern,sizing_method:'reference',reference_gpus:'8'}),/8 GPUs per independent group/);
+}

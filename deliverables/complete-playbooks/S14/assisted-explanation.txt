@@ -1,0 +1,24 @@
+ANUBIS RESULT EXPLANATION
+
+What the result means
+A conditional planning estimate is available. It depends on the accepted assumptions and is not a guarantee of production performance. This is a planning picture based on agreed assumptions. Treat it as guidance for discussion, not a promise about live operation.
+
+GPUs and factory size
+The workload estimate is 16 GPUs. The selected factory deployment anchor is 256 GPUs. These are different quantities. HGX_B300: 16 estimated GPUs (sensitivity 16 to 16). HGX_B200: 16 estimated GPUs (sensitivity 16 to 16). HGX_H200: 16 estimated GPUs (sensitivity 16 to 16). Counts use whole GPU nodes. Spare compute does not establish an admitted tenant count. Sensitivity is not a confidence interval. Think of this as the planned factory size compared with the expected workload. Any spare capacity is a planning margin and does not establish how many customers could be served.
+
+Memory and servers
+Required memory per GPU: 58.359738 GB. Selected hardware memory per GPU: 288 GB. Host RAM provision for the workload: 4096 GB. Host local disk provision: 61440 GB. Host provisions are planning assumptions. Per-device memory fit matters, not just aggregate memory. Working memory must fit on each GPU rather than just adding up across devices. The host memory and local disk are planning assumptions that the architect should confirm.
+
+Shared storage
+No local shared-storage capacity has been established. This is not a zero-storage requirement. An outside corpus is not automatically copied into this factory. Files kept for later are not yet defined for shared use. An outside collection is not copied in automatically, so this remains an open requirement rather than an absence of need.
+
+Factory networks
+External customer datacenter ingress: unresolved. North-south ingress: unresolved. Dedicated storage read/write links: unresolved / unresolved. East-west link per GPU: unresolved. Storage networking is physically dedicated, not converged. External and north-south rates describe the same traffic at different boundaries and must not be added together. These are lower bounds, not selected circuit sizes. Traffic entering the factory and links between GPUs are still open measurements. Treat them as starting limits, not chosen link sizes, and do not add overlapping views together.
+
+What to do next
+Review assumptions and outstanding measurements with the architect. Prepare or use the saved design handoff together with its companion requirements. Provide the initial customer-datacenter data volume and allowed transfer window. Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates. Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth. East-west per-GPU port demand needs the selected reference design and collective-communication measurements. Customer-datacenter round-trip latency objective is unspecified. A saved projection exists. Fields marked brief_only must be applied separately by the architect. Review open assumptions with the architect and use the saved handoff with its requirements. Provide the outside data volume and transfer window, then measure storage traffic and GPU communication needs.
+
+Result: result_fd48719f18f2e1a3f0d62b5e15c5fcf1
+Mode: model_assisted
+Model: deepseek-flash
+Created: 2026-11-03T06:14:42.000Z

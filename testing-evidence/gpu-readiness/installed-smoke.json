@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "origin": "http://127.0.0.1:8787",
+  "checks": [
+    "login",
+    "early warning",
+    "exact missing field",
+    "click to focus"
+  ],
+  "saved_cases_created": 0,
+  "console_errors": []
+}

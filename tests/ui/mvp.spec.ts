@@ -48,6 +48,16 @@ test('MVP document assistant calculation handoff closure and retrieval', async (
  const summary=await download('Download requirements summary');
  expect(summary).toContain('Measurement required');expect(summary).toContain('256 GPUs');
  for(const role of ['North-south traffic','External customer connection','Dedicated storage network','East-west GPU network'])expect(summary).toContain(role);
+ await page.getByRole('button',{name:'Explain this to me',exact:true}).click();
+ const explanation=page.getByRole('dialog',{name:'Explain this to me'});
+ await explanation.getByRole('button',{name:'Generate explanation',exact:true}).click();
+ await expect(explanation).toContainText('Explanation saved with this calculation.');
+ await expect(explanation).toContainText('The workload estimate is 8 GPUs.');
+ await expect(explanation).toContainText('selected factory deployment anchor is 256 GPUs');
+ await explanation.getByRole('button',{name:'Close',exact:true}).click();
+ await page.getByRole('button',{name:'Explain this to me',exact:true}).click();
+ await expect(page.getByRole('dialog',{name:'Explain this to me'})).toContainText('Previously saved explanations');
+ await page.getByRole('dialog',{name:'Explain this to me'}).getByRole('button',{name:'Close',exact:true}).click();
  await page.screenshot({path:output+'/01-requirements.png',fullPage:true});
  await page.getByRole('button',{name:'Continue to Design handoff',exact:true}).click();
  await page.getByRole('button',{name:'Prepare projection',exact:true}).click();

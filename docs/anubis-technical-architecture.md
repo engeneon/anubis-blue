@@ -405,3 +405,15 @@ A completed case has a workload revision, scenario set, pinned pack manifest, co
 [N4] Same checkout. src/api/reference_architecture_server.cpp, API v1 dispatch and secure-profile rejection of legacy v0 routes; ckp/reference_architecture_compiler/v0_2_0/schemas/input_schema.json.
 
 Online references and local source inspected 27 September 2026. Protocol revisions above are deliberate baselines, not claims of the latest available version.
+
+## Saved result explanations
+
+The read-only explanation service accepts a saved result identifier and, optionally, a projection of that same result. It constructs a versioned packet containing authoritative facts, source field paths, result digest, frozen revision, planning policy and reference assumptions. Original source documents, credentials and unrelated cases are excluded.
+
+`POST /api/v1/copilot-explanations` saves a deterministic narrative immediately when no profile is chosen. With a tested model profile it queues an explanation job using the existing provider adapter. Corporate-data policy, connection enablement, backend credentials, context limits, cancellation and daily request budgets apply. The profile version is checked before dispatch and publication. The worker has no model tools, workload-update capability or handoff-submit capability in this operation.
+
+The model returns six prose sections with mandatory fact markers. The server validates section identity, marker placement, size, literal digits, numerical words and markup, then inserts authoritative fact text. One correction attempt is allowed. Invalid output and provider failures return a labelled deterministic fallback. These checks constrain numerical assertions, not every possible semantic error in qualitative prose.
+
+Explanations are separate persisted records, linked to the immutable result and optional projection. Each includes generation time, model, provider, profile version, packet version and model prompt digest. Existing calculations and completed handoff snapshots are unchanged. Exact-result history is available through `GET /api/v1/copilot-explanations/{result_id}/history`, and records through `GET /api/v1/copilot-explanations/{id}`.
+
+The UI offers Explain this to me from calculation results, design handoff, completed versions and saved projection deliverables. It shows active progress, source details, downloadable text and prior narratives. The deterministic option remains usable without a model service. This release explains saved outcomes. Changes to demand require a separate deterministic recalculation.

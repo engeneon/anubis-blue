@@ -233,3 +233,9 @@ Integration routes: src/application/service.cpp. Pattern catalogue: knowledge/ar
 https://www.anthropic.com/research/demystifying-evals-for-ai-agents
 [2] Model Context Protocol. Architecture overview. Documentation version 2026-07-28. Describes context exchange, clients, servers and tools independently of a particular language model. Accessed 1 November 2026.
 https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
+
+Implemented saved-result explanation extension
+
+Explain this to me is a separate read-only agent operation, not an intake proposal. It receives a scoped packet derived from a saved calculation and optional matching projection. The provider has no tools or mutation permissions in this path. Numeric fact markers are resolved by the server after validation. A correction attempt is bounded and charged against the daily request budget. The deterministic explanation remains available without a provider.
+
+The UI requires an explicitly selected tested connection and enforces corporate/public data policy. Explanations persist against exact result versions with model and generation metadata. Completed engagements retain access to historical explanations. A change to demand returns to the deterministic workload-sizing process rather than being answered with an invented replacement GPU count.

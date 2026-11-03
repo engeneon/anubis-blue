@@ -31,6 +31,9 @@ class Provider(BaseHTTPRequestHandler):
     if source['data']['text'].startswith('FACTS:'):
      out=json.loads(source['data']['text'][6:])
      for f in out['facts']:f.update(source_id=source['id'],quote=source['data']['text'])
+  if context.get('explanation_contract'):
+   out={'sections':[{'id':k,'text':'{{'+k+'}} Review the assumptions with the architect.'} for k in ['outcome','compute','memory','storage','networks','next']]}
+   if model=='explanation_bad':out['sections'][1]['text']+=' Buy 99999 GPUs.'
   if model=='partial' and context.get('sources'):
    source=context['sources'][0]
    def f(k,v):return dict(activity='Service',concept=k,value=v,unit='',period_value='',period_unit='',status='reported',source_id=source['id'],quote=source['data']['text'])

@@ -28,50 +28,51 @@ python3 scripts/test_local_restart.py
 python3 scripts/validate_scenario_catalogue.py
 ```
 
-The following 16 fictional customer scenarios form the architecture and scope test catalogue. Their acceptance objectives are listed below. The repeatable catalogue check verifies deterministic transformation and correctly unresolved results when numerical intake is incomplete. It does **not** establish complete GPU sizing for every scenario or certify every narrative objective. The two MVP browser tests separately exercise manual and reviewed-proposal sizing, handoff, closure and retrieval.
+The [16 GPU-complete customer scenarios](docs/gpu-complete-scenarios.md) include exact intake values, explicit planning assumptions, expected B300/B200/H200 counts and handoff success criteria. Use these completed scenarios for customer demonstrations. The original incomplete descriptions are retained separately as negative tests, not as successful sizing playbooks.
 
-| ID | Customer scenario | Workload and validation objective |
-|---|---|---|
-| S01 | Alder Contact Services | Do not infer simultaneous requests from 45,000 daily items. |
-| S02 | Bracken Engineering | Do not count the whole retrieval chain as two text-generation calls. |
-| S03 | Cobalt Travel Operations | Preserve variable call expansion. do not replace it with one call. |
-| S04 | Dune Accounting | Keep item count and deadline distinct from concurrent users. |
-| S05 | Estuary Transit | Recognise streaming without routing camera frames through the text sizing equation. |
-| S06 | Fable Creative Studio | Request specialised generation evidence. never infer demand from text tokens alone. |
-| S07 | Grove Legal Technology | Do not silently apply full-pretraining memory or compute equations. |
-| S08 | Helix Language Institute | Identify training and request ingestion/checkpoint detail rather than hiding those resources. |
-| S09 | Juniper Retail | Create separate operating scenarios. no automatic addition of non-overlapping peaks. |
-| S10 | Kestrel Field Services | Retain indexing as supporting work. do not infer zero GPU or CPU demand. |
-| S11 | Larch Media Archive | Keep visual inference separate from text serving and do not treat the proposed arrows as proven latency. |
-| S12 | Morrow Advertising | Preserve conditional relationship without treating it as an unconditional workload multiplier. |
-| S13 | Nacre Customer Portal | Never recommend local model GPUs merely because the application uses AI. |
-| S14 | Orchid Neocloud | Do not equate customer count with GPU count or a proven tenancy limit. |
-| S15 | Peregrine Product Lab | Unknown must remain unknown. candidate patterns must not imply confirmed absence of retrieval or agents. |
-| S16 | Quartz Industrial Research | Do not force a simulation into a language-model or training profile. |
+| ID | Customer | B300 GPUs | B200 GPUs | H200 GPUs | B300 factory anchor | Method |
+|---|---|---:|---:|---:|---:|---|
+| S01 | Alder Contact Services | 8 | 8 | 8 | 256 | analytical |
+| S02 | Bracken Engineering | 8 | 8 | 8 | 256 | analytical |
+| S03 | Cobalt Travel Operations | 8 | 8 | 8 | 256 | analytical |
+| S04 | Dune Accounting | 8 | 8 | 8 | 256 | analytical |
+| S05 | Estuary Transit | 40 | 48 | 72 | 256 | reference |
+| S06 | Fable Creative Studio | 24 | 24 | 40 | 256 | reference |
+| S07 | Grove Legal Technology | 16 | 16 | 24 | 256 | reference |
+| S08 | Helix Language Institute | 8 | 8 | 8 | 256 | analytical |
+| S09 | Juniper Retail | 8 | 8 | 8 | 256 | analytical |
+| S10 | Kestrel Field Services | 16 | 24 | 32 | 256 | reference |
+| S11 | Larch Media Archive | 24 | 24 | 32 | 256 | analytical + reference |
+| S12 | Morrow Advertising | 32 | 40 | 48 | 256 | analytical + reference |
+| S13 | Nacre Customer Portal | 8 | 8 | 8 | 256 | analytical |
+| S14 | Orchid Neocloud | 16 | 16 | 16 | 256 | analytical |
+| S15 | Peregrine Product Lab | 8 | 8 | 8 | 256 | analytical |
+| S16 | Quartz Industrial Research | 16 | 16 | 24 | 256 | reference |
 
-See [scenario fixtures](tests/fixtures/architecture-scenarios.json) and [catalogue check results](testing-evidence/scenario-catalogue.json). Passing software checks do not qualify physical GPU performance. Fixture-provider tests do not qualify live Copilot interpretation.
+Counts use the explicit fictional planning inputs in the linked catalogue. Reference capacities are example assumptions, not benchmark measurements.
 
-## User playbooks
+After building, run `python3 scripts/validate_scenario_catalogue.py`. Run `npx playwright test tests/ui/gpu-readiness.spec.ts tests/ui/mvp.spec.ts` to validate manual and assisted intake, missing-field warnings, reference sizing and handoff journeys. See [recorded GPU and handoff results](testing-evidence/gpu-readiness/scenario-results.json).
 
-Four distinct scenarios were drawn randomly from all 16, without replacement or filtering. Each Word playbook covers both the manual and live Copilot-assisted routes, with an input register, architecture map, numbered screenshot instructions, token setup, parameter collection guidance and retrieval of saved outcomes.
+Intake now shows **GPU estimate blocked** and names the minimum missing fields before calculation. For specialist workloads, select **Reference capacity for independent work** and provide matching demand, memory and separately sourced H200/B200/B300 capacity assumptions. These are planning estimates, not a claim of measured hardware performance. Unknown inputs remain visible and never become invented GPU counts.
 
-| Scenario | Word playbook | Verified outcome |
-|---|---|---|
-| S13 Nacre Customer Portal | [Download playbook](docs/playbooks/S13_Nacre_Customer_Portal_Playbook.docx) | Outside model boundary retained. Report-only closure. |
-| S14 Orchid Neocloud | [Download playbook](docs/playbooks/S14_Orchid_Neocloud_Playbook.docx) | Dedicated and shared groups retained. Missing per-group demand remains unresolved. |
-| S16 Quartz Industrial Research | [Download playbook](docs/playbooks/S16_Quartz_Industrial_Research_Playbook.docx) | Simulation remains outside text-model sizing. Report-only closure. |
-| S11 Larch Media Archive | [Download playbook](docs/playbooks/S11_Larch_Media_Archive_Playbook.docx) | Video and text activities remain distinct. Specialist evidence is required. |
+## Explain saved results
 
-These selected scenarios do not supply enough information for a complete GPU estimate. Their successful endpoint is a saved final-status report, not an invented design handoff. All eight manual/assisted walkthroughs reached that endpoint and were retrieved after reload. Three live provider requests timed out before explicit retries succeeded. Exact model wording can vary. See the [selection and validation record](testing-evidence/playbooks/validation.json).
+Select **Explain this to me** from calculation results or Design handoff. Choose a tested Copilot connection for plain-language prose, or use the deterministic explanation without an LLM. The explanation covers workload GPUs versus factory size, memory, storage, all four network roles and missing requirements. It cannot change the calculation or submit a handoff. Saved narratives remain linked to their exact result and can be downloaded or retrieved later.
 
-## Technical documents
+Corporate data requires a connection approved for corporate processing. The public/fictional option is intended for explicitly public examples. Failed or invalid model responses use a labelled deterministic fallback. See [Copilot operation](docs/copilot-operation.txt) and [explanation validation](testing-evidence/explanations/README.md).
 
-PDF editions are included under `docs`:
+## Complete customer playbooks
 
-- [Anubis workload sizing methodology](docs/Anubis_Workload_Sizing_Methodology.pdf), version 2.1, SME evaluation edition dated 2 November 2026. Author: Traiano Giuseppe Welcome.
-- [Anubis technical solution architecture](docs/Anubis_Technical_Architecture.pdf), SME evaluation edition 1.0 dated 2 November 2026.
+Each Word guide includes both manual and Copilot-assisted routes through GPU estimates, design handoff, explanation and saved completion, with exact input tables, diagrams and screenshots.
 
-The PDFs describe the methodology and implementation boundaries. The current walkthrough evidence is dated 3 November 2026 and is recorded separately. Future qualification goals in the documents are not completed release claims.
+| Scenario | Word playbook |
+|---|---|
+| S11 Larch Media Archive | [Video analysis and archive assistant](docs/playbooks/S11_Larch_Media_Archive_Playbook.docx) |
+| S13 Nacre Customer Portal | [Hosted service with local continuity fallback](docs/playbooks/S13_Nacre_Customer_Portal_Playbook.docx) |
+| S14 Orchid Neocloud | [Reserved premium and shared standard pools](docs/playbooks/S14_Orchid_Neocloud_Playbook.docx) |
+| S16 Quartz Industrial Research | [Independent GPU simulation groups](docs/playbooks/S16_Quartz_Industrial_Research_Playbook.docx) |
+
+The [technical architecture PDF](docs/Anubis_Technical_Architecture.pdf) and [workload methodology PDF](docs/Anubis_Workload_Sizing_Methodology.pdf) include the implementation addendum for complete-scenario sizing and read-only explanations.
 
 ## Repository scope
 

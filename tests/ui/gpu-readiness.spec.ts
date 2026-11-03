@@ -1,0 +1,56 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync,mkdirSync} from 'node:fs';
+const token='ui-test-token-not-a-production-secret';
+const scenarios=JSON.parse(readFileSync('tests/fixtures/architecture-scenarios.json','utf8'));
+async function login(page:any){await page.goto('/');await page.getByLabel('Access token').fill(token);await page.getByRole('button',{name:'Open workspace',exact:true}).click();}
+test('manual intake flags the exact missing demand before review and enables calculation after correction',async({page})=>{
+ await login(page);await page.getByRole('button',{name:'New engagement',exact:true}).click();
+ await page.getByLabel('Customer workload name',{exact:true}).fill('Readiness manual acceptance');
+ await page.getByRole('button',{name:'Add Direct model service',exact:true}).click();
+ const ready=page.getByRole('region',{name:'GPU estimate readiness'});
+ await expect(ready).toContainText('GPU estimate blocked');await expect(ready).toContainText('Peak requests per minute');
+ await ready.getByRole('button',{name:'Activity 1 · Peak requests per minute',exact:true}).click();
+ await expect(page.getByLabel('Peak requests per minute',{exact:true})).toBeFocused();
+ await page.getByRole('button',{name:'4 Review and estimate',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Calculate estimate',exact:true})).toBeDisabled();
+ await ready.getByRole('button',{name:'Activity 1 · Peak requests per minute',exact:true}).click();
+ await page.getByLabel('Peak requests per minute',{exact:true}).fill('100');
+ await expect(ready).toContainText('GPU estimate inputs are ready');
+ await page.getByLabel('Peak requests per minute',{exact:true}).fill('');await expect(ready).toContainText('GPU estimate blocked');
+ mkdirSync('testing-evidence/gpu-readiness',{recursive:true});await page.screenshot({path:'testing-evidence/gpu-readiness/manual-missing-input.png',fullPage:true});
+ await page.getByLabel('Peak requests per minute',{exact:true}).fill('100');
+ await page.getByRole('button',{name:'4 Review and estimate',exact:true}).click();await page.getByLabel('Use these planning assumptions').check();
+ await page.getByRole('button',{name:'Calculate estimate',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'GPU workload comparison',exact:true})).toBeVisible();
+});
+test('specialist reference form produces GPU comparisons and handoff',async({page})=>{
+ await login(page);await page.getByRole('button',{name:'New engagement',exact:true}).click();
+ await page.getByLabel('Customer workload name',{exact:true}).fill('Estuary reference acceptance');
+ await page.getByRole('button',{name:'Add Continuous processing',exact:true}).click();
+ const ready=page.getByRole('region',{name:'GPU estimate readiness'});
+ await ready.getByRole('button',{name:'Activity 1 · Sizing method',exact:true}).click();
+ await page.getByLabel('Sizing method',{exact:true}).selectOption('reference');
+ const c=scenarios[4].planning_input.components[0];
+ for(const [label,key] of [['Work unit','reference_unit'],['Peak work units per second','reference_demand'],['GPUs per reference group','reference_gpus'],['Required GPU memory in GB','reference_memory'],['H200 work units per second per group','reference_h200'],['B200 work units per second per group','reference_b200'],['B300 work units per second per group','reference_b300'],['Reference source and conditions','reference_source']])await page.getByLabel(label,{exact:true}).fill(c[key]);
+ await page.getByLabel('Independent reference groups can serve this demand',{exact:true}).check();await page.getByLabel('I accept this reference capacity and its scope',{exact:true}).check();
+ await expect(ready).toContainText('GPU estimate inputs are ready');
+ await page.getByRole('button',{name:'4 Review and estimate',exact:true}).click();await page.getByLabel('Use these planning assumptions').check();await page.getByRole('button',{name:'Calculate estimate',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'GPU workload comparison',exact:true})).toBeVisible();
+ const [d]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export result',exact:true}).click()]);const r=JSON.parse(readFileSync((await d.path())!,'utf8'));
+ expect(r.planning.hardware_comparison.map((h:any)=>h.raw_gpus)).toEqual([40,48,72]);
+ await page.screenshot({path:'testing-evidence/gpu-readiness/reference-gpu-results.png',fullPage:true});
+ await page.getByRole('button',{name:'Continue to Design handoff',exact:true}).click();await page.getByRole('button',{name:'Prepare projection',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'AI Factory design executive summary',exact:true})).toBeVisible();
+});
+test('Copilot shows early missing fields without a model call',async({page,request})=>{
+ await login(page);await page.getByRole('button',{name:'Consultant Copilot',exact:true}).click();await page.getByLabel('Customer workload name').fill('Copilot missing demand');
+ const response=page.waitForResponse(r=>r.url().endsWith('/copilot-sessions')&&r.request().method()==='POST');await page.getByRole('button',{name:'Start assisted engagement',exact:true}).click();const s=await(await response).json();
+ const post=async(path:string,data:any)=>{const r=await request.post('/api/v1/'+path,{headers:{Authorization:'Bearer '+token},data});expect(r.ok(),await r.text()).toBeTruthy();return r.json();};
+ const story='A local text classifier with no search or tools. The peak request rate is unknown.';
+ const source=await post(`copilot-sessions/${s.id}/sources`,{name:'Incomplete customer story',kind:'message',text:story});
+ const fact=(concept:string,value:string)=>({activity:'Classifier',concept,value,unit:'',period_value:'',period_unit:'',status:'reported',source_id:source.id,quote:story});
+ await post(`copilot-sessions/${s.id}/proposals`,{facts:[fact('text_model','yes'),fact('compute_location','local'),fact('search','no'),fact('actions','no')]});
+ await page.getByRole('button',{name:'Refresh session',exact:true}).click();
+ const ready=page.getByRole('region',{name:'GPU estimate readiness'});await expect(ready).toContainText('GPU estimate blocked');await expect(ready).toContainText('Peak requests per minute');
+ await page.screenshot({path:'testing-evidence/gpu-readiness/copilot-missing-input.png',fullPage:true});
+});

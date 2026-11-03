@@ -295,3 +295,5 @@ Anubis provides a structured route from incomplete intent to a concrete configur
 [9] ISO/IEC. ISO/IEC 22237-1:2021, Data centre facilities and infrastructures General concepts. https://www.iso.org/standard/78550.html
 
 Online sources accessed 27 September 2026. Mutable benchmark and software sources must be pinned to release or commit identifiers when admitted into a production knowledge pack.
+
+Implementation update, 3 November 2026: see the addendum in `anubis-framework-v2.txt` and `Anubis_Workload_Sizing_Methodology.pdf` for independent reference-group sizing, GPU-complete demonstration scenarios and read-only saved-result explanations. Model-written qualitative interpretation does not modify deterministic requirements.

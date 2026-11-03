@@ -1,0 +1,126 @@
+{
+  "author": "local-owner",
+  "correction_attempts": 0,
+  "created_at": 1793685427,
+  "mode": "model_assisted",
+  "model": "deepseek-flash",
+  "packet": {
+    "facts": {
+      "compute": "The workload estimate is 32 GPUs. The selected factory deployment anchor is 256 GPUs. These are different quantities. HGX_B300: 32 estimated GPUs (sensitivity 24 to 40). HGX_B200: 40 estimated GPUs (sensitivity 32 to 48). HGX_H200: 48 estimated GPUs (sensitivity 40 to 72). Counts use whole GPU nodes. Spare compute does not establish an admitted tenant count. Sensitivity is not a confidence interval.",
+      "memory": "Required memory per GPU: 80 GB. Selected hardware memory per GPU: 288 GB. Host RAM provision for the workload: 8192 GB. Host local disk provision: 122880 GB. Host provisions are planning assumptions. Per-device memory fit matters, not just aggregate memory.",
+      "networks": "External customer datacenter ingress: unresolved. North-south ingress: unresolved. Dedicated storage read/write links: unresolved / unresolved. East-west link per GPU: unresolved. Storage networking is physically dedicated, not converged. External and north-south rates describe the same traffic at different boundaries and must not be added together. These are lower bounds, not selected circuit sizes.",
+      "next": "Review assumptions and outstanding measurements with the architect. Prepare or use the saved design handoff together with its companion requirements. Reference GPU capacity does not determine media, solver or training data traffic. Declare these payloads separately. Reported network rates remain lower bounds. Provide the initial customer-datacenter data volume and allowed transfer window. Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates. Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth. East-west per-GPU port demand needs the selected reference design and collective-communication measurements. Customer-datacenter round-trip latency objective is unspecified. A saved projection exists. Fields marked brief_only must be applied separately by the architect.",
+      "outcome": "A conditional planning estimate is available. It depends on the accepted assumptions and is not a guarantee of production performance.",
+      "storage": "No local shared-storage capacity has been established. This is not a zero-storage requirement. An outside corpus is not automatically copied into this factory."
+    },
+    "planning_policy": {
+      "accept_capacity_shortfall": false,
+      "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+      "assumptions_accepted": true,
+      "bytes_per_token": "4",
+      "compute_efficiency": "0.35",
+      "expansion_lead_days": 90,
+      "memory_efficiency": "0.50",
+      "minimum_service_fraction": "1",
+      "protocol_allowance": "1.2",
+      "sensitivity_percent": "30",
+      "source": "Anubis guided-1.0 planning defaults, consultant accepted; not measured"
+    },
+    "projection_id": "projection_7304f16711b96f951287608654a7820b",
+    "reference_assumptions": [
+      {
+        "accepted": true,
+        "capacities": {
+          "HGX_B200": "0.3",
+          "HGX_B300": "0.4",
+          "HGX_H200": "0.2"
+        },
+        "demand": "1",
+        "group_gpus": "8",
+        "independent_groups": true,
+        "memory_GB": "80",
+        "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 60 approved images/minute aggregate across overlapping campaigns. Fixed diffusion model, BF16, 1024 square, 30 steps. Independent eight-GPU serving groups, conditional invocation already reflected in image demand.",
+        "unit": "image"
+      }
+    ],
+    "result_digest": "3df22fab6af04088dbbc475181ba8950aa0bc507de39a887f4aa26e95f296710",
+    "result_id": "result_2a389b562b70f761f3d7790c803fa3cf",
+    "revision_id": "revision_ffe24cb60bdae5cc60364866577c1229",
+    "source_paths": {
+      "compute": [
+        "/planning/raw_gpus",
+        "/planning/initial_gpus",
+        "/planning/hardware_comparison"
+      ],
+      "handoff": [
+        "projection/mapping_ledger",
+        "projection/payload/requirements"
+      ],
+      "memory": [
+        "/planning/required_GB_per_gpu",
+        "/planning/host_ram_GB_required",
+        "/planning/local_disk_GB_required"
+      ],
+      "networks": [
+        "/planning/networks"
+      ],
+      "next": [
+        "/planning/gaps",
+        "/guided_context/characterization/gpu_readiness",
+        "/planning/networks/follow_up"
+      ],
+      "outcome": [
+        "/planning/status",
+        "/planning/gaps"
+      ],
+      "storage": [
+        "/planning/storage"
+      ]
+    },
+    "status": "conditional",
+    "version": "explanation-1.0"
+  },
+  "profile_id": "copilot_profile_62969b9faa562e3b9f52079de1d1daec",
+  "profile_version": 2,
+  "provider": "deepseek",
+  "sections": [
+    {
+      "id": "outcome",
+      "text": "A conditional planning estimate is available. It depends on the accepted assumptions and is not a guarantee of production performance. Treat this as guidance for discussion with the architect, not as proof that the final factory will meet every need."
+    },
+    {
+      "id": "compute",
+      "text": "The workload estimate is 32 GPUs. The selected factory deployment anchor is 256 GPUs. These are different quantities. HGX_B300: 32 estimated GPUs (sensitivity 24 to 40). HGX_B200: 40 estimated GPUs (sensitivity 32 to 48). HGX_H200: 48 estimated GPUs (sensitivity 40 to 72). Counts use whole GPU nodes. Spare compute does not establish an admitted tenant count. Sensitivity is not a confidence interval. The estimate shows the factory size needed under the accepted assumptions. Spare capacity is shown but does not mean extra customers can be added without review."
+    },
+    {
+      "id": "memory",
+      "text": "Required memory per GPU: 80 GB. Selected hardware memory per GPU: 288 GB. Host RAM provision for the workload: 8192 GB. Host local disk provision: 122880 GB. Host provisions are planning assumptions. Per-device memory fit matters, not just aggregate memory. Working memory per device is what matters for fitting the model, not just total memory across the factory. Host memory and local disk are planning assumptions for the saved design."
+    },
+    {
+      "id": "storage",
+      "text": "No local shared-storage capacity has been established. This is not a zero-storage requirement. An outside corpus is not automatically copied into this factory. Files kept for later are not yet sized, and an outside collection is not assumed to be copied in automatically. This remains an open point for the architect to resolve."
+    },
+    {
+      "id": "networks",
+      "text": "External customer datacenter ingress: unresolved. North-south ingress: unresolved. Dedicated storage read/write links: unresolved / unresolved. East-west link per GPU: unresolved. Storage networking is physically dedicated, not converged. External and north-south rates describe the same traffic at different boundaries and must not be added together. These are lower bounds, not selected circuit sizes. Traffic entering the factory and links between GPUs still need measurement. The rates shown are lower bounds, so they should not be treated as final circuit sizes."
+    },
+    {
+      "id": "next",
+      "text": "Review assumptions and outstanding measurements with the architect. Prepare or use the saved design handoff together with its companion requirements. Reference GPU capacity does not determine media, solver or training data traffic. Declare these payloads separately. Reported network rates remain lower bounds. Provide the initial customer-datacenter data volume and allowed transfer window. Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates. Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth. East-west per-GPU port demand needs the selected reference design and collective-communication measurements. Customer-datacenter round-trip latency objective is unspecified. A saved projection exists. Fields marked brief_only must be applied separately by the architect. Review open requirements with the architect and use the saved handoff with its companion requirements. Separate workload types and measurements still need to be declared before final choices."
+    }
+  ],
+  "usage": {
+    "completion_tokens": 1584,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1334
+    },
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 1228,
+    "prompt_tokens": 1484,
+    "prompt_tokens_details": {
+      "cached_tokens": 256
+    },
+    "total_tokens": 3068
+  },
+  "validation": "Fact placeholders and literal quantities validated. Qualitative prose remains model interpretation, not a new engineering decision."
+}

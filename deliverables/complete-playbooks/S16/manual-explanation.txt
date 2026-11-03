@@ -1,0 +1,24 @@
+ANUBIS RESULT EXPLANATION
+
+What the result means
+A conditional planning estimate is available. It depends on the accepted assumptions and is not a guarantee of production performance.
+
+GPUs and factory size
+The workload estimate is 16 GPUs. The selected factory deployment anchor is 256 GPUs. These are different quantities. HGX_B300: 16 estimated GPUs (sensitivity 8 to 16). HGX_B200: 16 estimated GPUs (sensitivity 16 to 24). HGX_H200: 24 estimated GPUs (sensitivity 16 to 24). Counts use whole GPU nodes. Spare compute does not establish an admitted tenant count. Sensitivity is not a confidence interval.
+
+Memory and servers
+Required memory per GPU: 90 GB. Selected hardware memory per GPU: 288 GB. Host RAM provision for the workload: 4096 GB. Host local disk provision: 61440 GB. Host provisions are planning assumptions. Per-device memory fit matters, not just aggregate memory.
+
+Shared storage
+No local shared-storage capacity has been established. This is not a zero-storage requirement. An outside corpus is not automatically copied into this factory.
+
+Factory networks
+External customer datacenter ingress: unresolved. North-south ingress: unresolved. Dedicated storage read/write links: unresolved / unresolved. East-west link per GPU: unresolved. Storage networking is physically dedicated, not converged. External and north-south rates describe the same traffic at different boundaries and must not be added together. These are lower bounds, not selected circuit sizes.
+
+What to do next
+Review assumptions and outstanding measurements with the architect. Prepare or use the saved design handoff together with its companion requirements. Reference GPU capacity does not determine media, solver or training data traffic. Declare these payloads separately. Reported network rates remain lower bounds. Provide the initial customer-datacenter data volume and allowed transfer window. Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates. Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth. East-west per-GPU port demand needs the selected reference design and collective-communication measurements. Customer-datacenter round-trip latency objective is unspecified. A saved projection exists. Fields marked brief_only must be applied separately by the architect.
+
+Result: result_288b23e612bcbae8175dd8221d17eb2d
+Mode: deterministic
+Model: none
+Created: 2026-11-03T06:15:35.000Z

@@ -1,0 +1,9 @@
+test_all_sixteen_saved_result_narratives (__main__.Explanations.test_all_sixteen_saved_result_narratives) ... ok
+test_authorization_policy_projection_and_history (__main__.Explanations.test_authorization_policy_projection_and_history) ... ok
+test_unresolved_and_memory_failure_explanations (__main__.Explanations.test_unresolved_and_memory_failure_explanations) ... ok
+test_untrusted_quantities_fall_back (__main__.Explanations.test_untrusted_quantities_fall_back) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 6.056s
+
+OK

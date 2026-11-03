@@ -139,3 +139,17 @@ An active job must finish or be cancelled first. If evidence changes after the p
 The View engagement button is a navigation action, not an Open status. The phase badge beside the name is the engagement status. Specialist workloads point to further evidence or final-status-report closure instead of implying a complete handoff is ready.
 
 Stage 4 also offers Review final status report directly. When no resolved candidate exists, it shows Stage 4: conclude or continue discovery and offers report closure or continued evidence gathering. It does not instruct the user to prepare an unavailable projection.
+
+Explain this to me
+
+Calculate requirements and Design handoff provide an Explain this to me button. It explains the selected saved calculation, including conditional estimates, incomplete requirements and infeasible memory results. It does not change the workload, GPU counts or handoff.
+
+Choose Deterministic explanation to work without an LLM. To use prose assistance, select a tested model connection. Leave the public/fictional checkbox unchecked for customer or corporate data. Such data may only use a connection approved for corporate processing. Provider API keys remain on the backend.
+
+Select Generate explanation. The progress indicator remains active while the provider works. Numeric facts and statuses are inserted from the saved result. The model provides short explanatory prose around those facts. Output checks reject literal numeric additions and unknown fact markers. A single bounded correction is allowed. Provider failure or invalid output produces a clearly labelled deterministic fallback. Qualitative prose remains interpretation and still deserves consultant review.
+
+The narrative covers workload GPUs versus factory size, memory, shared storage, external connectivity, north-south traffic, east-west traffic, the dedicated storage fabric and next actions. Unknowns are not zero and spare compute does not establish a qualified tenant count.
+
+Download explanation exports the narrative and its result identifier, mode, model and date. Reopen Explain this to me to retrieve prior explanations of that exact calculation. Completed engagement views and saved projections also expose this action. Later calculations do not silently replace historical explanations. For a what-if change, refine the workload and recalculate first.
+
+Provider response waiting is bounded at 120 seconds per transport request. An explanation permits at most one corrective model request. The active indicator remains visible while the job runs. On provider failure the saved explanation uses deterministic text. Do not repeatedly submit while a job is active.

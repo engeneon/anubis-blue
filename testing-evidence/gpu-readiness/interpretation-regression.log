@@ -1,0 +1,57 @@
+test_01_contract_and_access (test_copilot.Copilot.test_01_contract_and_access) ... ok
+test_02_validation_boundaries (test_copilot.Copilot.test_02_validation_boundaries) ... ok
+test_03_selective_review_conflict_idempotency (test_copilot.Copilot.test_03_selective_review_conflict_idempotency) ... ok
+test_04_source_quotation_and_review_authority (test_copilot.Copilot.test_04_source_quotation_and_review_authority) ... ok
+test_05_provider_adapters_and_credentials (test_copilot.Copilot.test_05_provider_adapters_and_credentials) ... ok
+test_06_provider_failure_and_cancellation (test_copilot.Copilot.test_06_provider_failure_and_cancellation) ... ok
+test_07_model_turn_produces_reviewable_proposal (test_copilot.Copilot.test_07_model_turn_produces_reviewable_proposal) ... ok
+test_08_policy_budget_and_disabled_profile (test_copilot.Copilot.test_08_policy_budget_and_disabled_profile) ... ok
+test_09_compilation_equivalence_and_facts (test_copilot.Copilot.test_09_compilation_equivalence_and_facts) ... ok
+test_10_external_edits_and_variants (test_copilot.Copilot.test_10_external_edits_and_variants) ... ok
+test_11_mcp_discovery_and_schema_pin (test_copilot.Copilot.test_11_mcp_discovery_and_schema_pin) ... ok
+test_12_injection_cannot_set_acceptance (test_copilot.Copilot.test_12_injection_cannot_set_acceptance) ... ok
+test_13_endpoint_policy (test_copilot.Copilot.test_13_endpoint_policy) ... ok
+test_14_source_limits_and_session_isolation (test_copilot.Copilot.test_14_source_limits_and_session_isolation) ... ok
+test_15_all_scenarios_repeatable_unknown_preservation (test_copilot.Copilot.test_15_all_scenarios_repeatable_unknown_preservation) ... ok
+test_16_handoff_and_assumption_provenance (test_copilot.Copilot.test_16_handoff_and_assumption_provenance) ... ok
+test_17_reject_nested_or_numeric_component_values (test_copilot.Copilot.test_17_reject_nested_or_numeric_component_values) ... ok
+test_f01_hourly_units (__main__.Interpretation.test_f01_hourly_units) ... ok
+test_f02_daily_is_not_peak (__main__.Interpretation.test_f02_daily_is_not_peak) ... ok
+test_f03_architecture_rules (__main__.Interpretation.test_f03_architecture_rules) ... ok
+test_f04_population_and_unknowns (__main__.Interpretation.test_f04_population_and_unknowns) ... ok
+test_f05_users_route (__main__.Interpretation.test_f05_users_route) ... ok
+test_f06_agent_envelope (__main__.Interpretation.test_f06_agent_envelope) ... ok
+test_f07_scope_and_storage (__main__.Interpretation.test_f07_scope_and_storage) ... ok
+test_f08_relationship_tenancy (__main__.Interpretation.test_f08_relationship_tenancy) ... ok
+test_f09_conflict_and_stale (__main__.Interpretation.test_f09_conflict_and_stale) ... ok
+test_f10_multi_turn_to_sizing_and_handoff (__main__.Interpretation.test_f10_multi_turn_to_sizing_and_handoff) ... ok
+test_f11_specialist_no_tokens (__main__.Interpretation.test_f11_specialist_no_tokens) ... ok
+test_f12_network_conversion (__main__.Interpretation.test_f12_network_conversion) ... ok
+test_f13_schema_sources_and_partial_apply (__main__.Interpretation.test_f13_schema_sources_and_partial_apply) ... ok
+test_f14_cards_complete (__main__.Interpretation.test_f14_cards_complete) ... ok
+test_f15_peak_average_and_clock (__main__.Interpretation.test_f15_peak_average_and_clock) ... ok
+test_f16_service_target_not_network (__main__.Interpretation.test_f16_service_target_not_network) ... ok
+test_f17_preserve_manual_engagement (__main__.Interpretation.test_f17_preserve_manual_engagement) ... ok
+test_f18_route_switch_does_not_double_count (__main__.Interpretation.test_f18_route_switch_does_not_double_count) ... ok
+test_f19_raw_unit_guard_and_external_corpus (__main__.Interpretation.test_f19_raw_unit_guard_and_external_corpus) ... ok
+test_f20_partial_recovery_is_explicit (__main__.Interpretation.test_f20_partial_recovery_is_explicit) ... ok
+test_f21_reasoning_profile (__main__.Interpretation.test_f21_reasoning_profile) ... ok
+test_f22_unit_aliases (__main__.Interpretation.test_f22_unit_aliases) ... ok
+test_f23_adaptation_category_with_unknown_method (__main__.Interpretation.test_f23_adaptation_category_with_unknown_method) ... ok
+test_f24_factory_scope_and_campaigns (__main__.Interpretation.test_f24_factory_scope_and_campaigns) ... ok
+test_f25_alongside_derives_overlap (__main__.Interpretation.test_f25_alongside_derives_overlap) ... ok
+test_f26_hosting_not_placement_or_dedication (__main__.Interpretation.test_f26_hosting_not_placement_or_dedication) ... ok
+test_f27_aggregate_is_not_a_third_workload (__main__.Interpretation.test_f27_aggregate_is_not_a_third_workload) ... ok
+test_f28_sole_workload_cannot_be_context (__main__.Interpretation.test_f28_sole_workload_cannot_be_context) ... ok
+test_f29_compatibility_and_legacy_flag (__main__.Interpretation.test_f29_compatibility_and_legacy_flag) ... ok
+test_f30_advanced_preserved_and_conflicts_blocked (__main__.Interpretation.test_f30_advanced_preserved_and_conflicts_blocked) ... ok
+test_f31_no_guided_description_is_non_destructive (__main__.Interpretation.test_f31_no_guided_description_is_non_destructive) ... ok
+test_f32_complete_retrieve_and_reopen (__main__.Interpretation.test_f32_complete_retrieve_and_reopen) ... ok
+test_f33_delete_restore_and_scope (__main__.Interpretation.test_f33_delete_restore_and_scope) ... ok
+test_f34_specialist_closure_without_result (__main__.Interpretation.test_f34_specialist_closure_without_result) ... ok
+test_f35_specialist_case_phase (__main__.Interpretation.test_f35_specialist_case_phase) ... ok
+
+----------------------------------------------------------------------
+Ran 52 tests in 5.994s
+
+OK

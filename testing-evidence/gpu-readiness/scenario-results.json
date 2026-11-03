@@ -1,0 +1,213 @@
+{
+  "scope": "Deterministic calculation and local handoff contract. Fictional planning inputs, not performance qualification.",
+  "scenarios": [
+    {
+      "id": "S01",
+      "name": "Alder Contact Services",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S02",
+      "name": "Bracken Engineering",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S03",
+      "name": "Cobalt Travel Operations",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S04",
+      "name": "Dune Accounting",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S05",
+      "name": "Estuary Transit",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 40,
+        "HGX_B200": 48,
+        "HGX_H200": 72
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "declared_reference_and_analytical_planning"
+    },
+    {
+      "id": "S06",
+      "name": "Fable Creative Studio",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 24,
+        "HGX_B200": 24,
+        "HGX_H200": 40
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "declared_reference_and_analytical_planning"
+    },
+    {
+      "id": "S07",
+      "name": "Grove Legal Technology",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 16,
+        "HGX_B200": 16,
+        "HGX_H200": 24
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "declared_reference_and_analytical_planning"
+    },
+    {
+      "id": "S08",
+      "name": "Helix Language Institute",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S09",
+      "name": "Juniper Retail",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S10",
+      "name": "Kestrel Field Services",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 16,
+        "HGX_B200": 24,
+        "HGX_H200": 32
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "declared_reference_and_analytical_planning"
+    },
+    {
+      "id": "S11",
+      "name": "Larch Media Archive",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 24,
+        "HGX_B200": 24,
+        "HGX_H200": 32
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "declared_reference_and_analytical_planning"
+    },
+    {
+      "id": "S12",
+      "name": "Morrow Advertising",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 32,
+        "HGX_B200": 40,
+        "HGX_H200": 48
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "declared_reference_and_analytical_planning"
+    },
+    {
+      "id": "S13",
+      "name": "Nacre Customer Portal",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S14",
+      "name": "Orchid Neocloud",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 16,
+        "HGX_B200": 16,
+        "HGX_H200": 16
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S15",
+      "name": "Peregrine Product Lab",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 8,
+        "HGX_B200": 8,
+        "HGX_H200": 8
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "analytical_planning"
+    },
+    {
+      "id": "S16",
+      "name": "Quartz Industrial Research",
+      "status": "conditional",
+      "gpu_counts": {
+        "HGX_B300": 16,
+        "HGX_B200": 16,
+        "HGX_H200": 24
+      },
+      "factory_gpus": 256,
+      "handoff": true,
+      "evidence_basis": "declared_reference_and_analytical_planning"
+    }
+  ]
+}

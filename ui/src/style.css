@@ -667,3 +667,18 @@ input[type="checkbox"] {
 .engagement-table td:nth-child(2){width:26%}
 .engagement-table .engagement-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:145px}
 .engagement-table:focus-visible{outline:3px solid #176b80;outline-offset:3px}
+
+.gpu-readiness { padding: 1rem 1.3rem; margin: 1rem 0; border: 2px solid #a34d16; background: #fff4e8; border-radius: 8px; }
+.gpu-readiness.ready { border-color: #287456; background: #effaf4; }
+.gpu-readiness h2 { margin-top: 0; }
+.gpu-readiness li { margin: .6rem 0; }
+.gpu-readiness button { font-weight: 700; text-align: left; }
+.explanation-dialog {width:min(850px,92vw);max-height:90vh;border:2px solid #326071;border-radius:12px;padding:24px;color:#183543;background:#fff;overflow:auto}
+.explanation-dialog::backdrop {background:#102b3acc}
+.explanation-dialog p {line-height:1.65}
+.explanation-dialog button {margin:8px 10px 8px 0}
+.explanation-dialog pre {white-space:pre-wrap;overflow-wrap:anywhere}
+.explanation-dialog label {display:block;margin:12px 0}
+.explanation-busy::before {content:'◌ ';display:inline-block;animation:spin 1s linear infinite}
+@keyframes spin {to {transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.explanation-busy::before{animation:none}}

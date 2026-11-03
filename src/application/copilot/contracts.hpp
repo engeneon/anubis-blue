@@ -22,7 +22,7 @@ inline void copilot_validate_input(const Json &input,const Json &catalog) {
  for(const auto &component:input["components"]) {
   require(component.is_object(),"component","Component must be an object");
   for(auto it=component.begin();it!=component.end();++it)
-   require(it.key()=="dedicated"?it.value().is_boolean():it.value().is_string(),"component_type","Component quantities and choices must be strings. Dedicated is boolean");
+   require((it.key()=="dedicated"||it.key()=="reference_independent"||it.key()=="reference_includes_support"||it.key()=="reference_accepted")?it.value().is_boolean():it.value().is_string(),"component_type","Component quantities and choices must be strings. Reservation and reference confirmations are boolean");
   for(const auto *key:{"rate","users","interval","jobs","window","calls","input_tokens","output_tokens","tokens","days","storage_tb","growth_gb_day","horizon_days","service_seconds"})
    if(component.contains(key)&&!component[key].get<std::string>().empty())
     require(Rational::decimal(component[key].get<std::string>())>=Rational(0),"component_quantity","Use a nonnegative decimal string or omit an unknown quantity");
@@ -67,6 +67,13 @@ inline Json copilot_proposal(const Json &output,const Json &session,const Json &
   if(field=="components")for(const auto &s:seen)require(!s.starts_with("components."),"field","Overlapping component changes");
   Json::json_pointer ptr(path);row["previous"]=proposed.contains(ptr)?proposed[ptr]:Json();row["path"]=path;
   proposed[ptr]=row.at("value");rows.push_back(row);
+ }
+ // Reference capacity remains a consultant-controlled input, not model-generated throughput.
+ for(auto &c:proposed["components"])if(c.value("sizing_method",std::string())=="reference"){
+  Json prior;for(const auto&old:session["input"]["components"])if(old["name"]==c["name"])prior=old;
+  require(!prior.is_null()&&prior.value("sizing_method",std::string())=="reference","reference_scope","Enter and accept reference capacity manually in Describe scale");
+  for(auto it=c.begin();it!=c.end();++it)if(it.key().starts_with("reference_"))require(prior.contains(it.key())&&prior[it.key()]==it.value(),"reference_scope","Copilot cannot supply or change reference capacity or its acceptance");
+  if(c!=prior)c["reference_accepted"]=false;
  }
  proposed["accepted"]=false;copilot_validate_input(proposed,catalog);
  return {{"question",output["question"]},{"changes",rows},{"preview",proposed},{"base_revision",session["revision"]},{"state","proposed"}};

@@ -1,0 +1,299 @@
+[
+  {
+    "id": "I01",
+    "scope": "Engagement",
+    "field": "Customer workload name",
+    "value": "Orchid Neocloud manual playbook / Orchid Neocloud assisted playbook",
+    "basis": "Entered",
+    "definition": "Identifies the two separate saved runs.",
+    "method": "Choose the route suffix to avoid mixing results."
+  },
+  {
+    "id": "I02",
+    "scope": "Engagement",
+    "field": "Factory users",
+    "value": "Multiple tenants",
+    "basis": "Selected",
+    "definition": "Organisations sharing the factory.",
+    "method": "Confirm commercial and organisational scope. Tenancy does not multiply aggregate demand automatically."
+  },
+  {
+    "id": "I03",
+    "scope": "Engagement",
+    "field": "Do activities run at the same time?",
+    "value": "Yes \u2014 overlapping demand",
+    "basis": "Selected",
+    "definition": "Peak workloads may coincide.",
+    "method": "Review schedules and telemetry with the operations owner."
+  },
+  {
+    "id": "I04",
+    "scope": "Premium model endpoints",
+    "field": "Component name",
+    "value": "Premium model endpoints",
+    "basis": "Selected",
+    "definition": "Business activity being sized. Numbered labels follow the order of components in the active route.",
+    "method": "Agree a recognisable activity name with the application owner. Use the matching diagram to check its scope."
+  },
+  {
+    "id": "I05",
+    "scope": "Premium model endpoints",
+    "field": "Application pattern",
+    "value": "direct",
+    "basis": "Selected",
+    "definition": "Application behaviour, not a server type.",
+    "method": "Walk through a customer task. Identify text serving, retrieval, media processing or solver work."
+  },
+  {
+    "id": "I06",
+    "scope": "Premium model endpoints",
+    "field": "Compute location",
+    "value": "In this factory",
+    "basis": "Selected",
+    "definition": "Where computation runs relative to this factory.",
+    "method": "Confirm the hosting owner and deployment boundary. Outside services do not contribute local model GPUs."
+  },
+  {
+    "id": "I07",
+    "scope": "Premium model endpoints",
+    "field": "Relationship",
+    "value": "Independent",
+    "basis": "Selected",
+    "definition": "Order or relationship of activities. This is separate from whether demand overlaps.",
+    "method": "Review the business flow with the application owner. Confirm scheduling separately."
+  },
+  {
+    "id": "I08",
+    "scope": "Premium model endpoints",
+    "field": "Model preset",
+    "value": "dense8b",
+    "basis": "Explicit planning assumption",
+    "definition": "Language-model size and architecture preset. It is not a quality guarantee.",
+    "method": "Use the model registry or serving configuration. Record an explicitly accepted assumption when the model has not been selected."
+  },
+  {
+    "id": "I09",
+    "scope": "Premium model endpoints",
+    "field": "Peak requests per minute",
+    "value": "60",
+    "basis": "Explicit planning assumption",
+    "definition": "Busy-period application requests per minute.",
+    "method": "Count application gateway requests by minute in a representative peak. Divide busiest-hour requests by sixty only when that average is an accepted planning basis."
+  },
+  {
+    "id": "I10",
+    "scope": "Premium model endpoints",
+    "field": "Model calls per request or job",
+    "value": "1",
+    "basis": "Explicit planning assumption",
+    "definition": "Model invocations per complete customer request, including retries.",
+    "method": "Inspect distributed transaction traces or model gateway logs. Count calls across the entire request, including agent loops."
+  },
+  {
+    "id": "I11",
+    "scope": "Premium model endpoints",
+    "field": "Input tokens per model call",
+    "value": "2000",
+    "basis": "Explicit planning assumption",
+    "definition": "Prompt, history and retrieved passages sent to a model call.",
+    "method": "Read prompt-token metrics from serving logs or tokenize representative full prompts with the exact model tokenizer."
+  },
+  {
+    "id": "I12",
+    "scope": "Premium model endpoints",
+    "field": "Output tokens per model call",
+    "value": "500",
+    "basis": "Explicit planning assumption",
+    "definition": "Generated response tokens per model call.",
+    "method": "Read completion-token metrics or tokenize representative outputs. Choose a planning distribution with the service owner."
+  },
+  {
+    "id": "I13",
+    "scope": "Premium model endpoints",
+    "field": "Reserve dedicated capacity",
+    "value": "Checked",
+    "basis": "Selected",
+    "definition": "Whether this activity keeps capacity reserved rather than reusing a pool.",
+    "method": "Agree isolation and reservation requirements with the service owner. Tenant count is not automatically a GPU multiplier."
+  },
+  {
+    "id": "I14",
+    "scope": "Standard model endpoints",
+    "field": "Component name",
+    "value": "Standard model endpoints",
+    "basis": "Selected",
+    "definition": "Business activity being sized. Numbered labels follow the order of components in the active route.",
+    "method": "Agree a recognisable activity name with the application owner. Use the matching diagram to check its scope."
+  },
+  {
+    "id": "I15",
+    "scope": "Standard model endpoints",
+    "field": "Application pattern",
+    "value": "direct",
+    "basis": "Selected",
+    "definition": "Application behaviour, not a server type.",
+    "method": "Walk through a customer task. Identify text serving, retrieval, media processing or solver work."
+  },
+  {
+    "id": "I16",
+    "scope": "Standard model endpoints",
+    "field": "Compute location",
+    "value": "In this factory",
+    "basis": "Selected",
+    "definition": "Where computation runs relative to this factory.",
+    "method": "Confirm the hosting owner and deployment boundary. Outside services do not contribute local model GPUs."
+  },
+  {
+    "id": "I17",
+    "scope": "Standard model endpoints",
+    "field": "Relationship",
+    "value": "Independent",
+    "basis": "Selected",
+    "definition": "Order or relationship of activities. This is separate from whether demand overlaps.",
+    "method": "Review the business flow with the application owner. Confirm scheduling separately."
+  },
+  {
+    "id": "I18",
+    "scope": "Standard model endpoints",
+    "field": "Model preset",
+    "value": "dense8b",
+    "basis": "Explicit planning assumption",
+    "definition": "Language-model size and architecture preset. It is not a quality guarantee.",
+    "method": "Use the model registry or serving configuration. Record an explicitly accepted assumption when the model has not been selected."
+  },
+  {
+    "id": "I19",
+    "scope": "Standard model endpoints",
+    "field": "Peak requests per minute",
+    "value": "300",
+    "basis": "Explicit planning assumption",
+    "definition": "Busy-period application requests per minute.",
+    "method": "Count application gateway requests by minute in a representative peak. Divide busiest-hour requests by sixty only when that average is an accepted planning basis."
+  },
+  {
+    "id": "I20",
+    "scope": "Standard model endpoints",
+    "field": "Model calls per request or job",
+    "value": "1",
+    "basis": "Explicit planning assumption",
+    "definition": "Model invocations per complete customer request, including retries.",
+    "method": "Inspect distributed transaction traces or model gateway logs. Count calls across the entire request, including agent loops."
+  },
+  {
+    "id": "I21",
+    "scope": "Standard model endpoints",
+    "field": "Input tokens per model call",
+    "value": "2000",
+    "basis": "Explicit planning assumption",
+    "definition": "Prompt, history and retrieved passages sent to a model call.",
+    "method": "Read prompt-token metrics from serving logs or tokenize representative full prompts with the exact model tokenizer."
+  },
+  {
+    "id": "I22",
+    "scope": "Standard model endpoints",
+    "field": "Output tokens per model call",
+    "value": "500",
+    "basis": "Explicit planning assumption",
+    "definition": "Generated response tokens per model call.",
+    "method": "Read completion-token metrics or tokenize representative outputs. Choose a planning distribution with the service owner."
+  },
+  {
+    "id": "I23",
+    "scope": "Shared",
+    "field": "Infrastructure deployment profile",
+    "value": "HGX B300 \u00b7 Spectrum-X \u00b7 Enterprise reference design with two network planes",
+    "basis": "Default or explicitly left blank",
+    "definition": "Selects factory anchors rather than workload demand.",
+    "method": "Architect selects a compatible catalogue profile."
+  },
+  {
+    "id": "I24",
+    "scope": "Shared",
+    "field": "Sensitivity envelope",
+    "value": "\u00b130%",
+    "basis": "Default or explicitly left blank",
+    "definition": "Explores faster and slower throughput assumptions.",
+    "method": "Choose the agreed planning sensitivity. It is not a confidence interval."
+  },
+  {
+    "id": "I25",
+    "scope": "Shared",
+    "field": "Use these planning assumptions",
+    "value": "Checked",
+    "basis": "Default or explicitly left blank",
+    "definition": "Accepts the displayed planning defaults.",
+    "method": "Review defaults before calculating."
+  },
+  {
+    "id": "I26",
+    "scope": "Shared",
+    "field": "Locally retained data in TB / Daily growth in GB",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "No local shared-storage amount is established. Blank is not zero.",
+    "method": "Inventory actual local retained copies. Do not copy an outside corpus into this value."
+  },
+  {
+    "id": "I27",
+    "scope": "Shared",
+    "field": "Initial dataset to load in TB / Initial loading window in hours",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Initial transfer scope and time remain unresolved.",
+    "method": "Obtain transfer volume and the allowed window from the data owner."
+  },
+  {
+    "id": "I28",
+    "scope": "Shared",
+    "field": "Ongoing incoming / outgoing data in GB per day",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Bulk daily transfer volumes remain unspecified.",
+    "method": "Measure ingress and egress counters separately from model token traffic."
+  },
+  {
+    "id": "I29",
+    "scope": "Shared",
+    "field": "Aggregate storage reads / writes in Gbps",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Dedicated storage fabric throughput remains unresolved.",
+    "method": "Measure directional read and write payload peaks. Capacity alone cannot determine bandwidth."
+  },
+  {
+    "id": "I30",
+    "scope": "Shared",
+    "field": "East-west payload per GPU in Gbps / Customer datacenter round-trip target in ms",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Collective traffic and latency objective remain unresolved.",
+    "method": "Use GPU communication telemetry and an agreed RTT objective."
+  },
+  {
+    "id": "I31",
+    "scope": "Shared",
+    "field": "Usable link fraction / Initial loading overlap",
+    "value": "0.7 / Yes",
+    "basis": "Default or explicitly left blank",
+    "definition": "Accepted network defaults. Storage networking is physically dedicated.",
+    "method": "Review usable bandwidth and whether loading coincides with normal operation."
+  },
+  {
+    "id": "I32",
+    "scope": "Shared",
+    "field": "Explanation connection",
+    "value": "Manual: deterministic. Assisted: tested DeepSeek connection",
+    "basis": "Default or explicitly left blank",
+    "definition": "Chooses prose generation without changing the calculation.",
+    "method": "Configure an approved provider in AI connections. Backend credentials stay on the server."
+  },
+  {
+    "id": "I33",
+    "scope": "Shared",
+    "field": "This saved result is public or fictional and may be sent to the selected provider",
+    "value": "Checked only for this fictional assisted example",
+    "basis": "Default or explicitly left blank",
+    "definition": "Permission to send the saved explanation packet to the chosen connection.",
+    "method": "Leave unchecked for corporate data and select a connection approved for that data."
+  }
+]

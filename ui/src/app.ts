@@ -1,3 +1,4 @@
+import { explainButton } from './explanation.js';
 import { mvpScope, requirementsRows, requirementsText } from "./projection-summary.js";
 import { projectionSummary, projectionSummaryText, projectionGrammarVersion } from "./projection-summary.js";
 import { mountCopilot, mountConnections } from "./copilot.js";
@@ -1272,6 +1273,8 @@ function renderPlanningResult(main:HTMLElement,p:J) {
     if(p.storage.length)box.append(table(["Storage tier","Usable bytes","Read B/s","Write B/s"],p.storage.map((t:J)=>[t.tier,t.usable_bytes,t.read_Bps??"Unspecified",t.write_Bps??"Unspecified"].map(x=>el("span","",String(x))))));
     box.append(button("Download planning architecture brief",()=>download("anubis-planning-brief.json",p)));main.append(box);return;
   }
+  const references=(p.stage_calculations||[]).filter((s:J)=>s.reference);
+  if(references.length){const sources=panel("Reference capacity assumptions");sources.append(el("p","scope-notice","These GPU counts depend on the declared per-hardware reference capacities. Anubis replicates complete independent groups. It does not qualify the supplied throughput or infer scaling of a single distributed job."));for(const s of references)sources.append(el("p","",s.stage_id+": "+s.reference.source),el("p","note",`Demand ${s.demand} ${s.demand_unit}. ${s.reference.group_gpus} GPUs per group. Required memory ${s.reference.memory_GB} GB per GPU.`));main.append(sources);}
   if(p.hardware_comparison) {
     const comparison=panel("GPU workload comparison");
     comparison.append(el("p","note","Same workload and assumptions on each GPU. Counts include whole 8-GPU nodes and declared failure reserves. These are workload estimates. deployment anchors and downstream design tool platform support are separate."));
@@ -1343,6 +1346,7 @@ function renderAnalysis(main: HTMLElement) {
     );
     return;
   }
+  explainButton(main,api,result.id);
   const r = result.data.result;
   if(r.planning) renderPlanningResult(main,r.planning);
   if (r.characterization)
@@ -1511,6 +1515,7 @@ function renderHandoff(main: HTMLElement) {
   if(!canProject&&currentCase)next.append(button("Continue gathering workload evidence",()=>{tab="copilot";render();window.scrollTo(0,0);}));
   if(result)next.append(button("Back to calculation results",()=>{tab="analysis";render();window.scrollTo(0,0);}));
   main.append(next);
+  if(result)explainButton(main,api,result.id);
   if(!canProject||!result)return;
   const coverage=panel('Where each network requirement goes');
   coverage.append(el('p','note','Prepare projection creates a partial intake plus a readable brief and companion specification. Sending the intake alone does not transfer every network requirement.'),table(['Network','Downstream intake','Brief and companion specification'],[
@@ -1579,6 +1584,7 @@ function renderHandoff(main: HTMLElement) {
           },
         });
         const summary = panel("AI Factory design executive summary");
+        explainButton(summary,api,result!.id,pr.id);
         summary.append(el("p", "note", "What this projection means for your design. Generated from saved calculation and mapping fields using fixed narrative rules."));
         const bullets = el("ul");
         for (const item of projectionSummary(pr.data)) {
@@ -1716,14 +1722,14 @@ async function renderDeliverables(main:HTMLElement) {
   box.append(el("p","",d.meaning),el("p","",`Completed by ${d.completed_by}. ${d.notes||"No consultant notes."}`),el("p","note",`Calculation ${d.result_id} · Projection ${d.projection_id}`));
   if(d.earlier_calculation_acknowledged)box.append(el("p","warning","The consultant explicitly selected an earlier calculation despite newer workload edits."));
   const summary=el("details");summary.append(el("summary","","Read saved executive summary"),el("pre","",d.executive_summary||"No narrative was recorded for this completed version."));box.append(summary);
-  appendSavedDownloads(box,d.projection_snapshot,d.result_snapshot,d.executive_summary||"");
+  appendSavedDownloads(box,d.projection_snapshot,d.result_snapshot,d.executive_summary||"");explainButton(box,api,d.result_id,d.projection_id);
   box.append(button("Download complete engagement record",()=>download("anubis-completed-engagement.json",completion)),button("View this calculation",async()=>{result=await api("results/"+d.result_id);tab="analysis";render();}));main.append(box);
  }
  if(!completions.length)main.append(el("p","","No completed version yet. Select a saved projection below or prepare one in Design handoff."));
  const history=panel("Saved projection history");
  for(const pr of projections){const row=panel("Projection "+pr.id);row.append(el("p","note",`Calculation: ${pr.data.result_id}`));row.append(button("Open saved projection",async()=>{
   const r=await api("results/"+pr.data.result_id);result=r;
-  const detail=panel("Saved projection deliverables");detail.append(el("pre","",projectionSummaryText(pr.data)));appendSavedDownloads(detail,pr.data,r.data,projectionSummaryText(pr.data));main.append(detail);
+  const detail=panel("Saved projection deliverables");detail.append(el("pre","",projectionSummaryText(pr.data)));appendSavedDownloads(detail,pr.data,r.data,projectionSummaryText(pr.data));explainButton(detail,api,r.id,pr.id);main.append(detail);
   if(c.data.status!=="completed")appendCompletion(main,pr);
   detail.scrollIntoView({behavior:"smooth"});
  }));history.append(row);}
@@ -2007,6 +2013,6 @@ function renderGuidedContext(main:HTMLElement){
  p.append(el("p","","Entered quantities are estimates. retained presets are assumptions. Blank storage capacity is unspecified. Host resources are provisions. Network rates cover declared application traffic. bulk transfers and latency require separate inputs."));
  const plan=result?.data.result.planning;
  if(plan){p.append(el("p","",plan.status==="unknown"?"Partial estimate: GPU subtotals exclude unresolved components. No complete deployment recommendation is available.":"Workload GPU demand and infrastructure deployment anchors are separate decisions."));
- p.append(table(["Application component","Demand","GPU subtotal","Sizing driver"],plan.stage_calculations.map((x:J)=>[c.components.find((v:J)=>v.id===x.stage_id)?.name||x.stage_id,x.demand+' '+x.capacity_unit,String(x.raw_gpus),x.rule].map((v:string)=>el("span","",v)))));}
+ p.append(table(["Application component","Demand","GPU subtotal","Sizing driver"],plan.stage_calculations.map((x:J)=>[c.components.find((v:J)=>v.id===x.stage_id)?.name||x.stage_id,x.demand+' '+(x.demand_unit||x.capacity_unit),String(x.raw_gpus),x.rule].map((v:string)=>el("span","",v)))));}
  p.append(button("Download requirements brief",()=>{const lines=[context.name,"Application requirements",...c.components.map((v:J)=>`${v.name}: ${v.pattern}. ${v.location}. ${v.support}`),"Follow-up measurements",...c.follow_up,"Results and assumptions",JSON.stringify(plan||result?.data.result||{},null,2),"Customer notes",context.notes||""];const blob=new Blob([lines.join("\n\n")],{type:"text/plain"});const a=el("a");a.href=URL.createObjectURL(blob);a.download="anubis-requirements-brief.txt";a.click();URL.revokeObjectURL(a.href);}));main.append(p);
 }

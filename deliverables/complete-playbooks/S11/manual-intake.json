@@ -1,0 +1,13 @@
+{
+  "project": {
+    "name": "Larch Media Archive manual playbook"
+  },
+  "requirements": {
+    "east_west_fabric": "Spectrum-X",
+    "network_fabric": "Spectrum-X",
+    "platform": "HGX_B300",
+    "storage_fabric": "Ethernet",
+    "target_gpu_count": 256,
+    "tenancy_model": "single_tenant"
+  }
+}

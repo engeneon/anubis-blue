@@ -376,3 +376,18 @@ https://arxiv.org/abs/2309.06180
 [11] Anubis qualification decision. docs/qualification-options.md. Hybrid public evidence and local downstream testing selected on 24 October 2026.
 
 The accompanying source manifest records SHA-256 digests for the local implementation and example files used in this draft. It identifies the inspected files, including uncommitted working-copy content. It does not certify execution of that source or performance of a deployed binary.
+
+
+IMPLEMENTATION ADDENDUM 3 NOVEMBER 2026
+
+Complete demonstration intake and reference group sizing
+
+The revised sixteen-scenario catalogue separates complete customer demonstrations from incomplete-input boundary tests. A successful sizing demonstration requires positive H200, B200 and B300 comparisons plus a valid factory handoff candidate. The original incomplete stories are retained as negative tests.
+
+For specialist workloads, a declared reference route sizes independent complete GPU groups. For hardware h, group count is ceil(peak work rate / reference work rate per group on h). Multiply by GPUs per group and round to whole supported nodes. Each hardware platform requires its own capacity assumption. Peak per-device memory must fit the selected hardware. Overlapping pools add. Confirmed separate windows may reuse capacity unless reservation requires separate pools. Sensitivity varies capacity within the accepted envelope. This rule does not infer linear scaling of a single larger model, mesh or distributed job.
+
+References record work unit, model or solver conditions, precision, source, group independence and consultant acceptance. The example reference values are fictional planning assumptions rather than benchmark evidence. No network or retained-data quantity is silently derived from reference GPU capacity.
+
+Explanation layer
+
+Explain this to me adds a non-authoritative prose interpretation of a saved outcome. The deterministic calculation remains the engineering source of truth. The server owns numeric statements and statuses. The LLM supplies bounded explanatory language around validated fact markers. Explanations preserve the result digest and revision and never modify inputs, results or handoffs. Provider failure or invalid text falls back to deterministic facts. Qualitative interpretation is not a new sizing decision or performance qualification.

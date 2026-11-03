@@ -1,0 +1,1856 @@
+{
+  "case_id": "case_b087e24e8330f954b83ab4990a8211d3",
+  "data": {
+    "completed_at": 1793686493,
+    "completed_by": "local-owner",
+    "earlier_calculation_acknowledged": false,
+    "executive_summary": "AI Factory design executive summary\n\n• Decision status: This is a conditional planning estimate. It uses analytical assumptions rather than measured deployment performance. The projection is partial and its selection is experimental. This projection does not establish live target qualification.\n\n• Workload compute: The workload estimate is 16 HGX B300 GPUs, rounded to the supported node size. The sensitivity envelope is 16–16 GPUs for the selected ±30% sensitivity setting. This is not a statistical confidence interval.\n\n• Factory design size: The selected reference-design configuration contains 256 GPUs across 32 nodes or trays. This is larger than the workload estimate because of the selected architecture sizing anchor. It does not mean this workload alone requires the entire factory. This profile selection alone does not certify reference-architecture compliance.\n\n• Capacity for growth: The selected platform has estimated GPU capacity for 16 simultaneous copies of the same workload profile, including 15 additional copies beyond the first. This is compute capacity only. Storage, host resources, networks and isolation must be checked before admitting additional workloads. It is not a validated tenant limit.\n\n• GPU alternatives: HGX B300: 16 GPUs (conditional). HGX B200: 16 GPUs (conditional). HGX H200: 16 GPUs (conditional). These are workload comparisons. Equal node-rounded counts do not imply equal performance, cost or downstream platform support.\n\n• Memory and server provision: Estimated GPU memory requirement: 58.36 GB per GPU. Selected hardware provides 288 GB per GPU. Host RAM provision for the workload: 4,096 GB. Local disk provision for the workload: 61,440 GB. The server template assumes 128 CPU cores per node. Host and disk provisions require deployment validation. They are not shared-storage capacity.\n\n• Shared storage: No shared-storage tier requirement is established here. This does not mean that the workload needs no storage, or that an existing external corpus must be copied into this factory.\n\n• GPU interconnect: The selected east–west fabric is Spectrum-X. Per-GPU link demand is not established. Selecting a fabric does not establish its required bandwidth or guarantee latency.\n\n• Customer and north–south connectivity: Customer-datacenter steady traffic lower bounds are 659 kbit/s inbound and 164 kbit/s outbound. Total external ingress requirement: not established. North–south ingress requirement: not established. Initial data-loading capacity remains unresolved. The customer-link latency objective is unspecified. These traffic lower bounds are not recommended circuit sizes. External and north–south boundaries carry the same declared traffic and must not be added together.\n\n• Storage network: Use a physically dedicated storage network, separate from the other fabrics. Converged networking is excluded. Technology: Ethernet. Read and write link lower bounds are not established and not established. Missing throughput measurements are not zero.\n\n• Tenancy: The workload is framed for multiple tenants. Isolation and the admitted tenant count still require architectural validation.\n\n• Downstream design handoff: The intake requests 256 GPUs on HGX B300, with Spectrum-X networking and Ethernet storage-fabric technology. This is a partial transfer. The architect must also use the companion specification. Physical compute, node and NIC details require external reconciliation even where the platform name maps directly.\n\n• Architect actions: Apply the brief-only requirements manually. These include the fields identified in the mapping ledger and are not automatically transferred by sending the intake JSON. Resolve outstanding network measurements and reconcile host, storage, physical compute and failure-domain design before final approval.\n\nNarrative rules: projection-narrative-1.1\nSource result: result_fd48719f18f2e1a3f0d62b5e15c5fcf1\n",
+    "meaning": "Requirements delivered. Not architecture approval or performance qualification.",
+    "name": "Orchid Neocloud assisted playbook",
+    "narrative_version": "projection-narrative-1.1",
+    "notes": "Planning requirements and explanation delivered. Outstanding network and storage measurements remain in the companion specification.",
+    "previous_completion_id": "",
+    "projection_digest": "306ef3e7c272f50cd7d33ab0eedb0a3efaa33aeac7f7276c277cc556d6bbe348",
+    "projection_id": "projection_32c86326e931875a5d883acea40a899a",
+    "projection_snapshot": {
+      "companion_requirements": {
+        "architecture": {
+          "anchors": [
+            {
+              "gpus": 256,
+              "nodes": 32
+            },
+            {
+              "gpus": 512,
+              "nodes": 64
+            },
+            {
+              "gpus": 1024,
+              "nodes": 128
+            }
+          ],
+          "fabric": "Spectrum-X",
+          "family": "Enterprise RA dual plane",
+          "id": "SX-HGXB300-DP-ENT-1.0.0",
+          "platform": "HGX_B300",
+          "sha256": "ddad35c3ee06e30615f534f6211349a919f381fd01a3857c2fbb1c2457049a4a",
+          "source": "ckp/spectrumx_reference/v1_0_0/ckp/reference_profiles/sx_hgxb300_dp_ent_1_0_0.json"
+        },
+        "catalog_digest": "9232d2e598b47e007b4c0a7e29930c6038885b6f1a78f9ae339eabbcff17e94b",
+        "catalog_version": "planning-1.1",
+        "cpu_cores_provision": 256,
+        "downside_gpus": 16,
+        "egress_Gbps": "0.000115",
+        "evidence_basis": "analytical_planning",
+        "excess_gpus": 240,
+        "expansion_anchor": {
+          "gpus": 512,
+          "nodes": 64
+        },
+        "expansion_trigger": "Review when observed demand exceeds initial planning envelope or agreed service degrades. start procurement before declared lead time expires",
+        "gaps": [],
+        "hardware": {
+          "bandwidth_TBps": "7.7",
+          "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+          "cpu_cores_per_node": 128,
+          "dense_bf16_TFLOPS": "2250",
+          "gpu_per_node": 8,
+          "hbm_GB": "288",
+          "host_ram_GB_per_node": "2048",
+          "local_disk_GB_per_node": "30720",
+          "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+          "usable_hbm_fraction": "0.90"
+        },
+        "hardware_comparison": [
+          {
+            "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+            "downside_gpus": 16,
+            "gaps": [],
+            "gpu_per_node": 8,
+            "hardware": {
+              "bandwidth_TBps": "7.7",
+              "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+              "cpu_cores_per_node": 128,
+              "dense_bf16_TFLOPS": "2250",
+              "gpu_per_node": 8,
+              "hbm_GB": "288",
+              "host_ram_GB_per_node": "2048",
+              "local_disk_GB_per_node": "30720",
+              "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+              "usable_hbm_fraction": "0.90"
+            },
+            "platform": "HGX_B300",
+            "provided_GB_per_gpu": "288",
+            "raw_gpus": 16,
+            "required_GB_per_gpu": "58.359738",
+            "stage_calculations": [
+              {
+                "assumptions": {
+                  "activation_GB_per_gpu": "32",
+                  "concurrent_sequences": 32,
+                  "context_tokens": 8192,
+                  "cpu_cores_per_gpu": 16,
+                  "host_ram_GB_per_gpu": "256",
+                  "kv_bytes": "2",
+                  "local_disk_GB_per_gpu": "3840",
+                  "model": "dense8b",
+                  "parallel_gpus": 1,
+                  "training_bytes_per_parameter": "16",
+                  "weight_bytes": "2",
+                  "workspace_GB": "8"
+                },
+                "capacity_per_replica": "4.892797",
+                "capacity_unit": "calls/s",
+                "demand": "1",
+                "kv_cache_GB_per_replica": "34.359738",
+                "memory_fit": true,
+                "model": {
+                  "head_dimension": 128,
+                  "kv_heads": 8,
+                  "label": "Generic dense 8B planning model",
+                  "layers": 32,
+                  "parameters": "8000000000"
+                },
+                "raw_gpus": 8,
+                "replicas": 1,
+                "required_GB_per_gpu": "58.359738",
+                "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                "scenario_id": "coincident",
+                "service_objectives": [],
+                "stage_id": "component_1",
+                "weights_GB": "16"
+              },
+              {
+                "assumptions": {
+                  "activation_GB_per_gpu": "32",
+                  "concurrent_sequences": 32,
+                  "context_tokens": 8192,
+                  "cpu_cores_per_gpu": 16,
+                  "host_ram_GB_per_gpu": "256",
+                  "kv_bytes": "2",
+                  "local_disk_GB_per_gpu": "3840",
+                  "model": "dense8b",
+                  "parallel_gpus": 1,
+                  "training_bytes_per_parameter": "16",
+                  "weight_bytes": "2",
+                  "workspace_GB": "8"
+                },
+                "capacity_per_replica": "4.892797",
+                "capacity_unit": "calls/s",
+                "demand": "5",
+                "kv_cache_GB_per_replica": "34.359738",
+                "memory_fit": true,
+                "model": {
+                  "head_dimension": 128,
+                  "kv_heads": 8,
+                  "label": "Generic dense 8B planning model",
+                  "layers": 32,
+                  "parameters": "8000000000"
+                },
+                "raw_gpus": 8,
+                "replicas": 2,
+                "required_GB_per_gpu": "58.359738",
+                "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                "scenario_id": "coincident",
+                "service_objectives": [],
+                "stage_id": "component_2",
+                "weights_GB": "16"
+              }
+            ],
+            "status": "conditional",
+            "upside_gpus": 16
+          },
+          {
+            "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+            "downside_gpus": 16,
+            "gaps": [],
+            "gpu_per_node": 8,
+            "hardware": {
+              "bandwidth_TBps": "8",
+              "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+              "compute_source": "https://www.nvidia.com/en-au/data-center/hgx/",
+              "cpu_cores_per_node": 128,
+              "dense_bf16_TFLOPS": "2250",
+              "gpu_per_node": 8,
+              "hbm_GB": "180",
+              "host_ram_GB_per_node": "2048",
+              "local_disk_GB_per_node": "30720",
+              "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+              "usable_hbm_fraction": "0.90"
+            },
+            "platform": "HGX_B200",
+            "provided_GB_per_gpu": "180",
+            "raw_gpus": 16,
+            "required_GB_per_gpu": "58.359738",
+            "stage_calculations": [
+              {
+                "assumptions": {
+                  "activation_GB_per_gpu": "32",
+                  "concurrent_sequences": 32,
+                  "context_tokens": 8192,
+                  "cpu_cores_per_gpu": 16,
+                  "host_ram_GB_per_gpu": "256",
+                  "kv_bytes": "2",
+                  "local_disk_GB_per_gpu": "3840",
+                  "model": "dense8b",
+                  "parallel_gpus": 1,
+                  "training_bytes_per_parameter": "16",
+                  "weight_bytes": "2",
+                  "workspace_GB": "8"
+                },
+                "capacity_per_replica": "5.083426",
+                "capacity_unit": "calls/s",
+                "demand": "1",
+                "kv_cache_GB_per_replica": "34.359738",
+                "memory_fit": true,
+                "model": {
+                  "head_dimension": 128,
+                  "kv_heads": 8,
+                  "label": "Generic dense 8B planning model",
+                  "layers": 32,
+                  "parameters": "8000000000"
+                },
+                "raw_gpus": 8,
+                "replicas": 1,
+                "required_GB_per_gpu": "58.359738",
+                "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                "scenario_id": "coincident",
+                "service_objectives": [],
+                "stage_id": "component_1",
+                "weights_GB": "16"
+              },
+              {
+                "assumptions": {
+                  "activation_GB_per_gpu": "32",
+                  "concurrent_sequences": 32,
+                  "context_tokens": 8192,
+                  "cpu_cores_per_gpu": 16,
+                  "host_ram_GB_per_gpu": "256",
+                  "kv_bytes": "2",
+                  "local_disk_GB_per_gpu": "3840",
+                  "model": "dense8b",
+                  "parallel_gpus": 1,
+                  "training_bytes_per_parameter": "16",
+                  "weight_bytes": "2",
+                  "workspace_GB": "8"
+                },
+                "capacity_per_replica": "5.083426",
+                "capacity_unit": "calls/s",
+                "demand": "5",
+                "kv_cache_GB_per_replica": "34.359738",
+                "memory_fit": true,
+                "model": {
+                  "head_dimension": 128,
+                  "kv_heads": 8,
+                  "label": "Generic dense 8B planning model",
+                  "layers": 32,
+                  "parameters": "8000000000"
+                },
+                "raw_gpus": 8,
+                "replicas": 1,
+                "required_GB_per_gpu": "58.359738",
+                "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                "scenario_id": "coincident",
+                "service_objectives": [],
+                "stage_id": "component_2",
+                "weights_GB": "16"
+              }
+            ],
+            "status": "conditional",
+            "upside_gpus": 16
+          },
+          {
+            "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+            "downside_gpus": 16,
+            "gaps": [],
+            "gpu_per_node": 8,
+            "hardware": {
+              "bandwidth_TBps": "4.8",
+              "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+              "compute_source": "https://www.nvidia.com/en-au/data-center/h200/",
+              "cpu_cores_per_node": 128,
+              "dense_bf16_TFLOPS": "989.5",
+              "gpu_per_node": 8,
+              "hbm_GB": "141",
+              "host_ram_GB_per_node": "2048",
+              "local_disk_GB_per_node": "30720",
+              "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+              "usable_hbm_fraction": "0.90"
+            },
+            "platform": "HGX_H200",
+            "provided_GB_per_gpu": "141",
+            "raw_gpus": 16,
+            "required_GB_per_gpu": "58.359738",
+            "stage_calculations": [
+              {
+                "assumptions": {
+                  "activation_GB_per_gpu": "32",
+                  "concurrent_sequences": 32,
+                  "context_tokens": 8192,
+                  "cpu_cores_per_gpu": 16,
+                  "host_ram_GB_per_gpu": "256",
+                  "kv_bytes": "2",
+                  "local_disk_GB_per_gpu": "3840",
+                  "model": "dense8b",
+                  "parallel_gpus": 1,
+                  "training_bytes_per_parameter": "16",
+                  "weight_bytes": "2",
+                  "workspace_GB": "8"
+                },
+                "capacity_per_replica": "3.050056",
+                "capacity_unit": "calls/s",
+                "demand": "1",
+                "kv_cache_GB_per_replica": "34.359738",
+                "memory_fit": true,
+                "model": {
+                  "head_dimension": 128,
+                  "kv_heads": 8,
+                  "label": "Generic dense 8B planning model",
+                  "layers": 32,
+                  "parameters": "8000000000"
+                },
+                "raw_gpus": 8,
+                "replicas": 1,
+                "required_GB_per_gpu": "58.359738",
+                "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                "scenario_id": "coincident",
+                "service_objectives": [],
+                "stage_id": "component_1",
+                "weights_GB": "16"
+              },
+              {
+                "assumptions": {
+                  "activation_GB_per_gpu": "32",
+                  "concurrent_sequences": 32,
+                  "context_tokens": 8192,
+                  "cpu_cores_per_gpu": 16,
+                  "host_ram_GB_per_gpu": "256",
+                  "kv_bytes": "2",
+                  "local_disk_GB_per_gpu": "3840",
+                  "model": "dense8b",
+                  "parallel_gpus": 1,
+                  "training_bytes_per_parameter": "16",
+                  "weight_bytes": "2",
+                  "workspace_GB": "8"
+                },
+                "capacity_per_replica": "3.050056",
+                "capacity_unit": "calls/s",
+                "demand": "5",
+                "kv_cache_GB_per_replica": "34.359738",
+                "memory_fit": true,
+                "model": {
+                  "head_dimension": 128,
+                  "kv_heads": 8,
+                  "label": "Generic dense 8B planning model",
+                  "layers": 32,
+                  "parameters": "8000000000"
+                },
+                "raw_gpus": 8,
+                "replicas": 2,
+                "required_GB_per_gpu": "58.359738",
+                "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                "scenario_id": "coincident",
+                "service_objectives": [],
+                "stage_id": "component_2",
+                "weights_GB": "16"
+              }
+            ],
+            "status": "conditional",
+            "upside_gpus": 16
+          }
+        ],
+        "host_ram_GB_provided": "65536",
+        "host_ram_GB_required": "4096",
+        "ingress_Gbps": "0.000461",
+        "initial_gpus": 256,
+        "limitations": [
+          "Analytical assumptions, not measured serving performance or guaranteed latency",
+          "Distinct stages use dedicated pools. scenarios reuse capacity only when declared non-overlapping",
+          "Host configuration and training scaling require later deployment validation"
+        ],
+        "local_disk_GB_required": "61440",
+        "network_scope": "Application tokens plus declared external transfers. customer RTT requirement remains independent. other payloads must be declared",
+        "networks": {
+          "basis": "Decimal TB and GB. Initial transfer rate = volume times 8 divided by transfer seconds. Apply protocol allowance and divide by usable link fraction. Application traffic is counted once at the external and north-south boundaries.",
+          "east_west": {
+            "fabric": "Spectrum-X",
+            "per_gpu_link_lower_bound_Gbps": null,
+            "per_gpu_payload_Gbps": null,
+            "scope": "GPU communication fabric. A fabric selection is not a qualified bandwidth or latency result."
+          },
+          "external_customer_datacenter": {
+            "connection": "Customer datacenter to AI Factory routed connectivity. Carrier, redundancy and encryption design remain architect decisions.",
+            "initial_load_link_Gbps": null,
+            "required_ingress_lower_bound_Gbps": null,
+            "round_trip_target_ms": null,
+            "status": "initial_load_unresolved",
+            "steady_egress_lower_bound_Gbps": "0.000164",
+            "steady_ingress_lower_bound_Gbps": "0.000659"
+          },
+          "follow_up": [
+            "Provide the initial customer-datacenter data volume and allowed transfer window.",
+            "Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates.",
+            "Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth.",
+            "East-west per-GPU port demand needs the selected reference design and collective-communication measurements.",
+            "Customer-datacenter round-trip latency objective is unspecified."
+          ],
+          "initial_load_overlaps_operation": true,
+          "model_version": "network-planning-1.0",
+          "north_south": {
+            "egress_lower_bound_Gbps": "0.000164",
+            "ingress_lower_bound_Gbps": null,
+            "scope": "Factory border to workload and storage endpoints. Carries the same external traffic, not an additional copy. Other tenants and non-model payloads need separate measurements."
+          },
+          "protocol_allowance": "1.2",
+          "storage": {
+            "converged": false,
+            "dedicated": true,
+            "read_link_lower_bound_Gbps": null,
+            "read_payload_Gbps": null,
+            "scope": "Physically dedicated storage fabric. Read and write are separate directions. Confirm bisection, fan-in, checkpoint bursts and initial-load writes. Unknown rates are not zero.",
+            "technology": "Ethernet",
+            "write_link_lower_bound_Gbps": null,
+            "write_payload_Gbps": null
+          },
+          "usable_link_fraction": "0.7"
+        },
+        "nodes_or_trays": 32,
+        "policy": {
+          "accept_capacity_shortfall": false,
+          "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+          "assumptions_accepted": true,
+          "bytes_per_token": "4",
+          "compute_efficiency": "0.35",
+          "expansion_lead_days": 90,
+          "memory_efficiency": "0.50",
+          "minimum_service_fraction": "1",
+          "protocol_allowance": "1.2",
+          "sensitivity_percent": "30",
+          "source": "Anubis guided-1.0 planning defaults, consultant accepted; not measured"
+        },
+        "provided_GB_per_gpu": "288",
+        "racks": null,
+        "raw_gpus": 16,
+        "required_GB_per_gpu": "58.359738",
+        "scenarios": [
+          {
+            "downside_gpus": 16,
+            "failure_nodes": 0,
+            "id": "coincident",
+            "raw_gpus": 16,
+            "upside_gpus": 16
+          }
+        ],
+        "selected_anchor": {
+          "gpus": 256,
+          "nodes": 32
+        },
+        "service_capacity_fraction": "1",
+        "shortfall_gpus": 0,
+        "stage_calculations": [
+          {
+            "assumptions": {
+              "activation_GB_per_gpu": "32",
+              "concurrent_sequences": 32,
+              "context_tokens": 8192,
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "kv_bytes": "2",
+              "local_disk_GB_per_gpu": "3840",
+              "model": "dense8b",
+              "parallel_gpus": 1,
+              "training_bytes_per_parameter": "16",
+              "weight_bytes": "2",
+              "workspace_GB": "8"
+            },
+            "capacity_per_replica": "4.892797",
+            "capacity_unit": "calls/s",
+            "demand": "1",
+            "kv_cache_GB_per_replica": "34.359738",
+            "memory_fit": true,
+            "model": {
+              "head_dimension": 128,
+              "kv_heads": 8,
+              "label": "Generic dense 8B planning model",
+              "layers": 32,
+              "parameters": "8000000000"
+            },
+            "raw_gpus": 8,
+            "replicas": 1,
+            "required_GB_per_gpu": "58.359738",
+            "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+            "scenario_id": "coincident",
+            "service_objectives": [],
+            "stage_id": "component_1",
+            "weights_GB": "16"
+          },
+          {
+            "assumptions": {
+              "activation_GB_per_gpu": "32",
+              "concurrent_sequences": 32,
+              "context_tokens": 8192,
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "kv_bytes": "2",
+              "local_disk_GB_per_gpu": "3840",
+              "model": "dense8b",
+              "parallel_gpus": 1,
+              "training_bytes_per_parameter": "16",
+              "weight_bytes": "2",
+              "workspace_GB": "8"
+            },
+            "capacity_per_replica": "4.892797",
+            "capacity_unit": "calls/s",
+            "demand": "5",
+            "kv_cache_GB_per_replica": "34.359738",
+            "memory_fit": true,
+            "model": {
+              "head_dimension": 128,
+              "kv_heads": 8,
+              "label": "Generic dense 8B planning model",
+              "layers": 32,
+              "parameters": "8000000000"
+            },
+            "raw_gpus": 8,
+            "replicas": 2,
+            "required_GB_per_gpu": "58.359738",
+            "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+            "scenario_id": "coincident",
+            "service_objectives": [],
+            "stage_id": "component_2",
+            "weights_GB": "16"
+          }
+        ],
+        "status": "conditional",
+        "storage": [],
+        "storage_fabric": "Ethernet",
+        "storage_network_policy": "Physically dedicated storage network required. Converged networking is excluded.",
+        "tenancy": "multi",
+        "upside_gpus": 16,
+        "usable_GB_per_gpu": "259.2",
+        "version": "1.0",
+        "workload_capacity": {
+          "basis": "Whole copies of the same workload profile at coincident declared peaks, using dedicated node-rounded GPU pools and a separate reserve per copy. Sensitivity counts are planning envelopes, not confidence intervals.",
+          "minimum_architecture": {
+            "additional_instances_compute": 15,
+            "downside_instances_compute": 16,
+            "equivalent_instances_compute": 16,
+            "gpus": 256,
+            "supports_one_instance_compute": true,
+            "upside_instances_compute": 16
+          },
+          "qualification": "Compute estimate only. Each copy also needs its storage, host resources and network capacity. tenancy and isolation require architectural validation. Architecture family is the selected catalogue profile, not an additional NCP compliance claim.",
+          "selected_architecture": {
+            "additional_instances_compute": 15,
+            "downside_instances_compute": 16,
+            "equivalent_instances_compute": 16,
+            "gpus": 256,
+            "supports_one_instance_compute": true,
+            "upside_instances_compute": 16
+          },
+          "tenant_limit": null
+        }
+      },
+      "external_obligations": [
+        "Verify modelling node count and NIC endpoints",
+        "Preserve host and physical compute specification",
+        "Qualify separate storage tiers and reserve handling",
+        "Assess returned fabrics and capacity"
+      ],
+      "intended_configuration": {
+        "constraints": [],
+        "evidence_channel": "public_planning",
+        "gpu_per_node": 8,
+        "gpus": 256,
+        "host": {
+          "ram_GB": "65536"
+        },
+        "id": "planning:factory",
+        "memory": {
+          "required_GB_per_gpu": "58.359738"
+        },
+        "nodes": 32,
+        "planning": true,
+        "platform": "HGX_B300",
+        "profile_id": "SX-HGXB300-DP-ENT-1.0.0",
+        "scenario_id": "portfolio",
+        "stage_id": "factory",
+        "status": "conditional"
+      },
+      "mapping_ledger": [
+        {
+          "affected_domains": [
+            "physical_compute",
+            "node_count",
+            "NIC_endpoints",
+            "scale_up",
+            "failure_domains"
+          ],
+          "assessment": "external_adjustment",
+          "field": "requirements.platform",
+          "intended": "HGX_B300",
+          "mode": "direct",
+          "projected": "HGX_B300"
+        },
+        {
+          "field": "requirements.target_gpu_count",
+          "intended": 256,
+          "projected": 256,
+          "rounding": "downstream design tool result requires reassessment"
+        },
+        {
+          "field": "north_south",
+          "mode": "brief_only",
+          "reason": "No verified intake field. Architect must apply ingress and egress requirements."
+        },
+        {
+          "field": "external_customer_datacenter",
+          "mode": "brief_only",
+          "reason": "Initial loading, ongoing link rates and latency targets require architect action."
+        },
+        {
+          "field": "dedicated_storage_network",
+          "mode": "brief_only",
+          "reason": "Intake carries Ethernet technology only. Physical separation, no convergence and bandwidth require architect action."
+        },
+        {
+          "field": "N-S ingress/egress, per-device VRAM, host RAM, CPU, local disk and tier throughput",
+          "mode": "brief_only",
+          "reason": "No verified equivalent intake scalar; retain in companion specification"
+        }
+      ],
+      "payload": {
+        "project": {
+          "name": "Orchid Neocloud assisted playbook"
+        },
+        "requirements": {
+          "east_west_fabric": "Spectrum-X",
+          "network_fabric": "Spectrum-X",
+          "platform": "HGX_B300",
+          "storage_fabric": "Ethernet",
+          "target_gpu_count": 256,
+          "tenancy_model": "multi_tenant"
+        }
+      },
+      "payload_digest": "6516eabd90bb1afa93b6c88eec3afb0f2462e47481ec782c94b6f2a2be0e3b5c",
+      "projection_mode": "partial",
+      "result_id": "result_fd48719f18f2e1a3f0d62b5e15c5fcf1",
+      "selection_state": "experimental",
+      "target_profile": "neon-source-01bccd6-manual-v1",
+      "target_qualified_live": false,
+      "worksheet": "Anubis planning architecture brief\nInitial GPUs: 256\nRaw workload GPUs: 16\nPlatform: HGX_B300\nFabric: Spectrum-X\nVRAM required per GPU (GB): 58.359738\nHost RAM required (GB): 4096\nDeclared traffic before link-utilization allowance (Gbps): 0.000461 / 0.000115\nNetwork requirements: {\n  \"basis\": \"Decimal TB and GB. Initial transfer rate = volume times 8 divided by transfer seconds. Apply protocol allowance and divide by usable link fraction. Application traffic is counted once at the external and north-south boundaries.\",\n  \"east_west\": {\n    \"fabric\": \"Spectrum-X\",\n    \"per_gpu_link_lower_bound_Gbps\": null,\n    \"per_gpu_payload_Gbps\": null,\n    \"scope\": \"GPU communication fabric. A fabric selection is not a qualified bandwidth or latency result.\"\n  },\n  \"external_customer_datacenter\": {\n    \"connection\": \"Customer datacenter to AI Factory routed connectivity. Carrier, redundancy and encryption design remain architect decisions.\",\n    \"initial_load_link_Gbps\": null,\n    \"required_ingress_lower_bound_Gbps\": null,\n    \"round_trip_target_ms\": null,\n    \"status\": \"initial_load_unresolved\",\n    \"steady_egress_lower_bound_Gbps\": \"0.000164\",\n    \"steady_ingress_lower_bound_Gbps\": \"0.000659\"\n  },\n  \"follow_up\": [\n    \"Provide the initial customer-datacenter data volume and allowed transfer window.\",\n    \"Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates.\",\n    \"Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth.\",\n    \"East-west per-GPU port demand needs the selected reference design and collective-communication measurements.\",\n    \"Customer-datacenter round-trip latency objective is unspecified.\"\n  ],\n  \"initial_load_overlaps_operation\": true,\n  \"model_version\": \"network-planning-1.0\",\n  \"north_south\": {\n    \"egress_lower_bound_Gbps\": \"0.000164\",\n    \"ingress_lower_bound_Gbps\": null,\n    \"scope\": \"Factory border to workload and storage endpoints. Carries the same external traffic, not an additional copy. Other tenants and non-model payloads need separate measurements.\"\n  },\n  \"protocol_allowance\": \"1.2\",\n  \"storage\": {\n    \"converged\": false,\n    \"dedicated\": true,\n    \"read_link_lower_bound_Gbps\": null,\n    \"read_payload_Gbps\": null,\n    \"scope\": \"Physically dedicated storage fabric. Read and write are separate directions. Confirm bisection, fan-in, checkpoint bursts and initial-load writes. Unknown rates are not zero.\",\n    \"technology\": \"Ethernet\",\n    \"write_link_lower_bound_Gbps\": null,\n    \"write_payload_Gbps\": null\n  },\n  \"usable_link_fraction\": \"0.7\"\n}\nStorage policy: Physically dedicated storage network. No converged network.\nStorage tiers: []\nAssumptions: {\n  \"accept_capacity_shortfall\": false,\n  \"architecture\": \"SX-HGXB300-DP-ENT-1.0.0\",\n  \"assumptions_accepted\": true,\n  \"bytes_per_token\": \"4\",\n  \"compute_efficiency\": \"0.35\",\n  \"expansion_lead_days\": 90,\n  \"memory_efficiency\": \"0.50\",\n  \"minimum_service_fraction\": \"1\",\n  \"protocol_allowance\": \"1.2\",\n  \"sensitivity_percent\": \"30\",\n  \"source\": \"Anubis guided-1.0 planning defaults, consultant accepted; not measured\"\n}\nAnalytical planning, not a performance guarantee.\n\ndownstream design tool intake\n{\n  \"project\": {\n    \"name\": \"Orchid Neocloud assisted playbook\"\n  },\n  \"requirements\": {\n    \"east_west_fabric\": \"Spectrum-X\",\n    \"network_fabric\": \"Spectrum-X\",\n    \"platform\": \"HGX_B300\",\n    \"storage_fabric\": \"Ethernet\",\n    \"target_gpu_count\": 256,\n    \"tenancy_model\": \"multi_tenant\"\n  }\n}\n\nMapping and external requirements\n[\n  {\n    \"affected_domains\": [\n      \"physical_compute\",\n      \"node_count\",\n      \"NIC_endpoints\",\n      \"scale_up\",\n      \"failure_domains\"\n    ],\n    \"assessment\": \"external_adjustment\",\n    \"field\": \"requirements.platform\",\n    \"intended\": \"HGX_B300\",\n    \"mode\": \"direct\",\n    \"projected\": \"HGX_B300\"\n  },\n  {\n    \"field\": \"requirements.target_gpu_count\",\n    \"intended\": 256,\n    \"projected\": 256,\n    \"rounding\": \"downstream design tool result requires reassessment\"\n  },\n  {\n    \"field\": \"north_south\",\n    \"mode\": \"brief_only\",\n    \"reason\": \"No verified intake field. Architect must apply ingress and egress requirements.\"\n  },\n  {\n    \"field\": \"external_customer_datacenter\",\n    \"mode\": \"brief_only\",\n    \"reason\": \"Initial loading, ongoing link rates and latency targets require architect action.\"\n  },\n  {\n    \"field\": \"dedicated_storage_network\",\n    \"mode\": \"brief_only\",\n    \"reason\": \"Intake carries Ethernet technology only. Physical separation, no convergence and bandwidth require architect action.\"\n  },\n  {\n    \"field\": \"N-S ingress/egress, per-device VRAM, host RAM, CPU, local disk and tier throughput\",\n    \"mode\": \"brief_only\",\n    \"reason\": \"No verified equivalent intake scalar; retain in companion specification\"\n  }\n]\nEquivalent workload capacity\n{\n  \"basis\": \"Whole copies of the same workload profile at coincident declared peaks, using dedicated node-rounded GPU pools and a separate reserve per copy. Sensitivity counts are planning envelopes, not confidence intervals.\",\n  \"minimum_architecture\": {\n    \"additional_instances_compute\": 15,\n    \"downside_instances_compute\": 16,\n    \"equivalent_instances_compute\": 16,\n    \"gpus\": 256,\n    \"supports_one_instance_compute\": true,\n    \"upside_instances_compute\": 16\n  },\n  \"qualification\": \"Compute estimate only. Each copy also needs its storage, host resources and network capacity. tenancy and isolation require architectural validation. Architecture family is the selected catalogue profile, not an additional NCP compliance claim.\",\n  \"selected_architecture\": {\n    \"additional_instances_compute\": 15,\n    \"downside_instances_compute\": 16,\n    \"equivalent_instances_compute\": 16,\n    \"gpus\": 256,\n    \"supports_one_instance_compute\": true,\n    \"upside_instances_compute\": 16\n  },\n  \"tenant_limit\": null\n}\n"
+    },
+    "result_digest": "85e2146a5e996cbb693e85842f331f80bd18f8e7e5da37dd776f90bf3e0b3859",
+    "result_id": "result_fd48719f18f2e1a3f0d62b5e15c5fcf1",
+    "result_snapshot": {
+      "activation_id": "",
+      "job_id": "job_7ea1e6ccffbe4d6dbfdb55d6cd3947c1",
+      "result": {
+        "candidates": [
+          {
+            "constraints": [],
+            "evidence_channel": "public_planning",
+            "gpu_per_node": 8,
+            "gpus": 256,
+            "host": {
+              "ram_GB": "65536"
+            },
+            "id": "planning:factory",
+            "memory": {
+              "required_GB_per_gpu": "58.359738"
+            },
+            "nodes": 32,
+            "planning": true,
+            "platform": "HGX_B300",
+            "profile_id": "SX-HGXB300-DP-ENT-1.0.0",
+            "scenario_id": "portfolio",
+            "stage_id": "factory",
+            "status": "conditional"
+          }
+        ],
+        "characterization": {
+          "basis": "Declared stage families; percentage mix requires a common time horizon and utilization, not a ratio of incomparable token and transaction rates",
+          "inference_share_percent": null,
+          "inference_stage_count": 2,
+          "training_share_percent": null,
+          "training_stage_count": 0,
+          "workload_character": "inference_centric"
+        },
+        "derivations": [
+          {
+            "evidence": [],
+            "id": "component_1:coincident:transactions_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "1"
+                },
+                "path": "/stages/component_1/observations/rate"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "1"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.activity",
+            "version": "1.0"
+          },
+          {
+            "evidence": [],
+            "id": "component_1:coincident:model_calls_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "1"
+                },
+                "path": "/stages/component_1/observations/rate"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "ratio",
+                  "value": "0"
+                },
+                "path": "/stages/component_1/observations/extra_calls"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "1"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.expansion",
+            "version": "1.0"
+          },
+          {
+            "evidence": [],
+            "id": "component_1:coincident:input_tokens_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "1"
+                },
+                "path": "/stages/component_1/observations/rate"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "ratio",
+                  "value": "0"
+                },
+                "path": "/stages/component_1/observations/extra_calls"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "token",
+                  "value": "2000"
+                },
+                "path": "/stages/component_1/observations/input_tokens"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "2000"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.tokens",
+            "version": "1.0"
+          },
+          {
+            "evidence": [],
+            "id": "component_1:coincident:output_tokens_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "1"
+                },
+                "path": "/stages/component_1/observations/rate"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "ratio",
+                  "value": "0"
+                },
+                "path": "/stages/component_1/observations/extra_calls"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "token",
+                  "value": "500"
+                },
+                "path": "/stages/component_1/observations/output_tokens"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "500"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.tokens",
+            "version": "1.0"
+          },
+          {
+            "evidence": [],
+            "id": "component_2:coincident:transactions_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "5"
+                },
+                "path": "/stages/component_2/observations/rate"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "5"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.activity",
+            "version": "1.0"
+          },
+          {
+            "evidence": [],
+            "id": "component_2:coincident:model_calls_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "5"
+                },
+                "path": "/stages/component_2/observations/rate"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "ratio",
+                  "value": "0"
+                },
+                "path": "/stages/component_2/observations/extra_calls"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "5"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.expansion",
+            "version": "1.0"
+          },
+          {
+            "evidence": [],
+            "id": "component_2:coincident:input_tokens_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "5"
+                },
+                "path": "/stages/component_2/observations/rate"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "ratio",
+                  "value": "0"
+                },
+                "path": "/stages/component_2/observations/extra_calls"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "token",
+                  "value": "2000"
+                },
+                "path": "/stages/component_2/observations/input_tokens"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "10000"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.tokens",
+            "version": "1.0"
+          },
+          {
+            "evidence": [],
+            "id": "component_2:coincident:output_tokens_per_second",
+            "inputs": [
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "request/s",
+                  "value": "5"
+                },
+                "path": "/stages/component_2/observations/rate"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "ratio",
+                  "value": "0"
+                },
+                "path": "/stages/component_2/observations/extra_calls"
+              },
+              {
+                "observation": {
+                  "accepted": true,
+                  "origin": "customer",
+                  "source": "Consultant intake",
+                  "state": "estimated",
+                  "unit": "token",
+                  "value": "500"
+                },
+                "path": "/stages/component_2/observations/output_tokens"
+              },
+              {
+                "path": "/scenarios/coincident",
+                "scenario": {
+                  "failed_nodes": 0,
+                  "id": "coincident",
+                  "multiplier": "1",
+                  "name": "Simultaneous or reserved capacity"
+                }
+              }
+            ],
+            "result": {
+              "denominator": "1",
+              "numerator": "2500"
+            },
+            "rounding": "exact rational; display half-up to 9 decimals",
+            "rule": "demand.tokens",
+            "version": "1.0"
+          }
+        ],
+        "domains": {
+          "compute": "conditional",
+          "network": "conditional",
+          "storage": "conditional",
+          "tenancy": "unknown"
+        },
+        "engine_source_digest": "8b3bebd03a817e0e878baf3cc7887d5fd15495bb6aee534caf0f2f6e56557ba2",
+        "engine_version": "0.1.0",
+        "execution_profile": "rational64-v1",
+        "factory_configurations": [],
+        "facts": [
+          {
+            "derivation_id": "component_1:coincident:transactions_per_second",
+            "display": "1 request/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "1"
+            },
+            "id": "component_1:coincident:transactions_per_second",
+            "name": "transactions_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_1",
+            "unit": "request/s",
+            "value": "1"
+          },
+          {
+            "derivation_id": "component_1:coincident:model_calls_per_second",
+            "display": "1 request/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "1"
+            },
+            "id": "component_1:coincident:model_calls_per_second",
+            "name": "model_calls_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_1",
+            "unit": "request/s",
+            "value": "1"
+          },
+          {
+            "derivation_id": "component_1:coincident:input_tokens_per_second",
+            "display": "2000 token/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "2000"
+            },
+            "id": "component_1:coincident:input_tokens_per_second",
+            "name": "input_tokens_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_1",
+            "unit": "token/s",
+            "value": "2000"
+          },
+          {
+            "derivation_id": "component_1:coincident:output_tokens_per_second",
+            "display": "500 token/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "500"
+            },
+            "id": "component_1:coincident:output_tokens_per_second",
+            "name": "output_tokens_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_1",
+            "unit": "token/s",
+            "value": "500"
+          },
+          {
+            "derivation_id": "component_2:coincident:transactions_per_second",
+            "display": "5 request/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "5"
+            },
+            "id": "component_2:coincident:transactions_per_second",
+            "name": "transactions_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_2",
+            "unit": "request/s",
+            "value": "5"
+          },
+          {
+            "derivation_id": "component_2:coincident:model_calls_per_second",
+            "display": "5 request/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "5"
+            },
+            "id": "component_2:coincident:model_calls_per_second",
+            "name": "model_calls_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_2",
+            "unit": "request/s",
+            "value": "5"
+          },
+          {
+            "derivation_id": "component_2:coincident:input_tokens_per_second",
+            "display": "10000 token/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "10000"
+            },
+            "id": "component_2:coincident:input_tokens_per_second",
+            "name": "input_tokens_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_2",
+            "unit": "token/s",
+            "value": "10000"
+          },
+          {
+            "derivation_id": "component_2:coincident:output_tokens_per_second",
+            "display": "2500 token/s",
+            "evidence_basis": "derived",
+            "exact": {
+              "denominator": "1",
+              "numerator": "2500"
+            },
+            "id": "component_2:coincident:output_tokens_per_second",
+            "name": "output_tokens_per_second",
+            "scenario_id": "coincident",
+            "stage_id": "component_2",
+            "unit": "token/s",
+            "value": "2500"
+          }
+        ],
+        "guided_context": {
+          "characterization": {
+            "components": [
+              {
+                "id": "component_1",
+                "location": "local",
+                "name": "Premium model endpoints",
+                "pattern": "direct",
+                "relationship": "independent",
+                "retrieval": "none",
+                "support": "Analytical sizing"
+              },
+              {
+                "id": "component_2",
+                "location": "local",
+                "name": "Standard model endpoints",
+                "pattern": "direct",
+                "relationship": "independent",
+                "retrieval": "none",
+                "support": "Analytical sizing"
+              }
+            ],
+            "follow_up": [],
+            "gpu_readiness": {
+              "assumptions": [
+                "Premium model endpoints: review model, token and memory defaults. Defaults are assumptions, not measurements.",
+                "Standard model endpoints: review model, token and memory defaults. Defaults are assumptions, not measurements."
+              ],
+              "meaning": "Inputs support a GPU calculation. Accept assumptions and calculate to check capacity and memory feasibility.",
+              "missing": [],
+              "ready": true
+            },
+            "guided_input": {
+              "accepted": true,
+              "components": [
+                {
+                  "calls": "1",
+                  "dedicated": true,
+                  "demand_mode": "rate",
+                  "input_tokens": "2000",
+                  "location": "local",
+                  "model": "dense8b",
+                  "name": "Premium model endpoints",
+                  "output_tokens": "500",
+                  "pattern": "direct",
+                  "rate": "60",
+                  "relationship": "independent",
+                  "retrieval": "none"
+                },
+                {
+                  "calls": "1",
+                  "dedicated": false,
+                  "demand_mode": "rate",
+                  "input_tokens": "2000",
+                  "location": "local",
+                  "model": "dense8b",
+                  "name": "Standard model endpoints",
+                  "output_tokens": "500",
+                  "pattern": "direct",
+                  "rate": "300",
+                  "relationship": "independent",
+                  "retrieval": "none"
+                }
+              ],
+              "input_basis": {
+                "accepted": null,
+                "components": {
+                  "basis": "planning_assumption",
+                  "source_id": ""
+                },
+                "components.0.calls": null,
+                "components.0.demand_mode": null,
+                "components.0.input_tokens": null,
+                "components.0.location": null,
+                "components.0.model": null,
+                "components.0.name": null,
+                "components.0.output_tokens": null,
+                "components.0.rate": null,
+                "components.1.calls": null,
+                "components.1.demand_mode": null,
+                "components.1.input_tokens": null,
+                "components.1.location": null,
+                "components.1.model": null,
+                "components.1.name": null,
+                "components.1.output_tokens": null,
+                "components.1.rate": null,
+                "components.1.relationship": null,
+                "overlap": null,
+                "tenancy": null
+              },
+              "name": "Orchid Neocloud assisted playbook",
+              "network": {},
+              "notes": "",
+              "overlap": "yes",
+              "tenancy": "multi"
+            },
+            "pack_digest": "19b88f641cd559ab19af96a51a205f2228d780b00944ebcfb720d473ccbced24",
+            "pack_version": "guided-1.0"
+          },
+          "name": "Orchid Neocloud assisted playbook",
+          "notes": ""
+        },
+        "knowledge_channel": "public_planning",
+        "knowledge_digest": "e4336dbf239759add3680700549617a1ce8ba663d3d23d7c5238da577bb606c2",
+        "planning": {
+          "architecture": {
+            "anchors": [
+              {
+                "gpus": 256,
+                "nodes": 32
+              },
+              {
+                "gpus": 512,
+                "nodes": 64
+              },
+              {
+                "gpus": 1024,
+                "nodes": 128
+              }
+            ],
+            "fabric": "Spectrum-X",
+            "family": "Enterprise RA dual plane",
+            "id": "SX-HGXB300-DP-ENT-1.0.0",
+            "platform": "HGX_B300",
+            "sha256": "ddad35c3ee06e30615f534f6211349a919f381fd01a3857c2fbb1c2457049a4a",
+            "source": "ckp/spectrumx_reference/v1_0_0/ckp/reference_profiles/sx_hgxb300_dp_ent_1_0_0.json"
+          },
+          "catalog_digest": "9232d2e598b47e007b4c0a7e29930c6038885b6f1a78f9ae339eabbcff17e94b",
+          "catalog_version": "planning-1.1",
+          "cpu_cores_provision": 256,
+          "downside_gpus": 16,
+          "egress_Gbps": "0.000115",
+          "evidence_basis": "analytical_planning",
+          "excess_gpus": 240,
+          "expansion_anchor": {
+            "gpus": 512,
+            "nodes": 64
+          },
+          "expansion_trigger": "Review when observed demand exceeds initial planning envelope or agreed service degrades. start procurement before declared lead time expires",
+          "gaps": [],
+          "hardware": {
+            "bandwidth_TBps": "7.7",
+            "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+            "cpu_cores_per_node": 128,
+            "dense_bf16_TFLOPS": "2250",
+            "gpu_per_node": 8,
+            "hbm_GB": "288",
+            "host_ram_GB_per_node": "2048",
+            "local_disk_GB_per_node": "30720",
+            "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+            "usable_hbm_fraction": "0.90"
+          },
+          "hardware_comparison": [
+            {
+              "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+              "downside_gpus": 16,
+              "gaps": [],
+              "gpu_per_node": 8,
+              "hardware": {
+                "bandwidth_TBps": "7.7",
+                "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+                "cpu_cores_per_node": 128,
+                "dense_bf16_TFLOPS": "2250",
+                "gpu_per_node": 8,
+                "hbm_GB": "288",
+                "host_ram_GB_per_node": "2048",
+                "local_disk_GB_per_node": "30720",
+                "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+                "usable_hbm_fraction": "0.90"
+              },
+              "platform": "HGX_B300",
+              "provided_GB_per_gpu": "288",
+              "raw_gpus": 16,
+              "required_GB_per_gpu": "58.359738",
+              "stage_calculations": [
+                {
+                  "assumptions": {
+                    "activation_GB_per_gpu": "32",
+                    "concurrent_sequences": 32,
+                    "context_tokens": 8192,
+                    "cpu_cores_per_gpu": 16,
+                    "host_ram_GB_per_gpu": "256",
+                    "kv_bytes": "2",
+                    "local_disk_GB_per_gpu": "3840",
+                    "model": "dense8b",
+                    "parallel_gpus": 1,
+                    "training_bytes_per_parameter": "16",
+                    "weight_bytes": "2",
+                    "workspace_GB": "8"
+                  },
+                  "capacity_per_replica": "4.892797",
+                  "capacity_unit": "calls/s",
+                  "demand": "1",
+                  "kv_cache_GB_per_replica": "34.359738",
+                  "memory_fit": true,
+                  "model": {
+                    "head_dimension": 128,
+                    "kv_heads": 8,
+                    "label": "Generic dense 8B planning model",
+                    "layers": 32,
+                    "parameters": "8000000000"
+                  },
+                  "raw_gpus": 8,
+                  "replicas": 1,
+                  "required_GB_per_gpu": "58.359738",
+                  "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                  "scenario_id": "coincident",
+                  "service_objectives": [],
+                  "stage_id": "component_1",
+                  "weights_GB": "16"
+                },
+                {
+                  "assumptions": {
+                    "activation_GB_per_gpu": "32",
+                    "concurrent_sequences": 32,
+                    "context_tokens": 8192,
+                    "cpu_cores_per_gpu": 16,
+                    "host_ram_GB_per_gpu": "256",
+                    "kv_bytes": "2",
+                    "local_disk_GB_per_gpu": "3840",
+                    "model": "dense8b",
+                    "parallel_gpus": 1,
+                    "training_bytes_per_parameter": "16",
+                    "weight_bytes": "2",
+                    "workspace_GB": "8"
+                  },
+                  "capacity_per_replica": "4.892797",
+                  "capacity_unit": "calls/s",
+                  "demand": "5",
+                  "kv_cache_GB_per_replica": "34.359738",
+                  "memory_fit": true,
+                  "model": {
+                    "head_dimension": 128,
+                    "kv_heads": 8,
+                    "label": "Generic dense 8B planning model",
+                    "layers": 32,
+                    "parameters": "8000000000"
+                  },
+                  "raw_gpus": 8,
+                  "replicas": 2,
+                  "required_GB_per_gpu": "58.359738",
+                  "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                  "scenario_id": "coincident",
+                  "service_objectives": [],
+                  "stage_id": "component_2",
+                  "weights_GB": "16"
+                }
+              ],
+              "status": "conditional",
+              "upside_gpus": 16
+            },
+            {
+              "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+              "downside_gpus": 16,
+              "gaps": [],
+              "gpu_per_node": 8,
+              "hardware": {
+                "bandwidth_TBps": "8",
+                "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+                "compute_source": "https://www.nvidia.com/en-au/data-center/hgx/",
+                "cpu_cores_per_node": 128,
+                "dense_bf16_TFLOPS": "2250",
+                "gpu_per_node": 8,
+                "hbm_GB": "180",
+                "host_ram_GB_per_node": "2048",
+                "local_disk_GB_per_node": "30720",
+                "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+                "usable_hbm_fraction": "0.90"
+              },
+              "platform": "HGX_B200",
+              "provided_GB_per_gpu": "180",
+              "raw_gpus": 16,
+              "required_GB_per_gpu": "58.359738",
+              "stage_calculations": [
+                {
+                  "assumptions": {
+                    "activation_GB_per_gpu": "32",
+                    "concurrent_sequences": 32,
+                    "context_tokens": 8192,
+                    "cpu_cores_per_gpu": 16,
+                    "host_ram_GB_per_gpu": "256",
+                    "kv_bytes": "2",
+                    "local_disk_GB_per_gpu": "3840",
+                    "model": "dense8b",
+                    "parallel_gpus": 1,
+                    "training_bytes_per_parameter": "16",
+                    "weight_bytes": "2",
+                    "workspace_GB": "8"
+                  },
+                  "capacity_per_replica": "5.083426",
+                  "capacity_unit": "calls/s",
+                  "demand": "1",
+                  "kv_cache_GB_per_replica": "34.359738",
+                  "memory_fit": true,
+                  "model": {
+                    "head_dimension": 128,
+                    "kv_heads": 8,
+                    "label": "Generic dense 8B planning model",
+                    "layers": 32,
+                    "parameters": "8000000000"
+                  },
+                  "raw_gpus": 8,
+                  "replicas": 1,
+                  "required_GB_per_gpu": "58.359738",
+                  "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                  "scenario_id": "coincident",
+                  "service_objectives": [],
+                  "stage_id": "component_1",
+                  "weights_GB": "16"
+                },
+                {
+                  "assumptions": {
+                    "activation_GB_per_gpu": "32",
+                    "concurrent_sequences": 32,
+                    "context_tokens": 8192,
+                    "cpu_cores_per_gpu": 16,
+                    "host_ram_GB_per_gpu": "256",
+                    "kv_bytes": "2",
+                    "local_disk_GB_per_gpu": "3840",
+                    "model": "dense8b",
+                    "parallel_gpus": 1,
+                    "training_bytes_per_parameter": "16",
+                    "weight_bytes": "2",
+                    "workspace_GB": "8"
+                  },
+                  "capacity_per_replica": "5.083426",
+                  "capacity_unit": "calls/s",
+                  "demand": "5",
+                  "kv_cache_GB_per_replica": "34.359738",
+                  "memory_fit": true,
+                  "model": {
+                    "head_dimension": 128,
+                    "kv_heads": 8,
+                    "label": "Generic dense 8B planning model",
+                    "layers": 32,
+                    "parameters": "8000000000"
+                  },
+                  "raw_gpus": 8,
+                  "replicas": 1,
+                  "required_GB_per_gpu": "58.359738",
+                  "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                  "scenario_id": "coincident",
+                  "service_objectives": [],
+                  "stage_id": "component_2",
+                  "weights_GB": "16"
+                }
+              ],
+              "status": "conditional",
+              "upside_gpus": 16
+            },
+            {
+              "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+              "downside_gpus": 16,
+              "gaps": [],
+              "gpu_per_node": 8,
+              "hardware": {
+                "bandwidth_TBps": "4.8",
+                "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+                "compute_source": "https://www.nvidia.com/en-au/data-center/h200/",
+                "cpu_cores_per_node": 128,
+                "dense_bf16_TFLOPS": "989.5",
+                "gpu_per_node": 8,
+                "hbm_GB": "141",
+                "host_ram_GB_per_node": "2048",
+                "local_disk_GB_per_node": "30720",
+                "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+                "usable_hbm_fraction": "0.90"
+              },
+              "platform": "HGX_H200",
+              "provided_GB_per_gpu": "141",
+              "raw_gpus": 16,
+              "required_GB_per_gpu": "58.359738",
+              "stage_calculations": [
+                {
+                  "assumptions": {
+                    "activation_GB_per_gpu": "32",
+                    "concurrent_sequences": 32,
+                    "context_tokens": 8192,
+                    "cpu_cores_per_gpu": 16,
+                    "host_ram_GB_per_gpu": "256",
+                    "kv_bytes": "2",
+                    "local_disk_GB_per_gpu": "3840",
+                    "model": "dense8b",
+                    "parallel_gpus": 1,
+                    "training_bytes_per_parameter": "16",
+                    "weight_bytes": "2",
+                    "workspace_GB": "8"
+                  },
+                  "capacity_per_replica": "3.050056",
+                  "capacity_unit": "calls/s",
+                  "demand": "1",
+                  "kv_cache_GB_per_replica": "34.359738",
+                  "memory_fit": true,
+                  "model": {
+                    "head_dimension": 128,
+                    "kv_heads": 8,
+                    "label": "Generic dense 8B planning model",
+                    "layers": 32,
+                    "parameters": "8000000000"
+                  },
+                  "raw_gpus": 8,
+                  "replicas": 1,
+                  "required_GB_per_gpu": "58.359738",
+                  "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                  "scenario_id": "coincident",
+                  "service_objectives": [],
+                  "stage_id": "component_1",
+                  "weights_GB": "16"
+                },
+                {
+                  "assumptions": {
+                    "activation_GB_per_gpu": "32",
+                    "concurrent_sequences": 32,
+                    "context_tokens": 8192,
+                    "cpu_cores_per_gpu": 16,
+                    "host_ram_GB_per_gpu": "256",
+                    "kv_bytes": "2",
+                    "local_disk_GB_per_gpu": "3840",
+                    "model": "dense8b",
+                    "parallel_gpus": 1,
+                    "training_bytes_per_parameter": "16",
+                    "weight_bytes": "2",
+                    "workspace_GB": "8"
+                  },
+                  "capacity_per_replica": "3.050056",
+                  "capacity_unit": "calls/s",
+                  "demand": "5",
+                  "kv_cache_GB_per_replica": "34.359738",
+                  "memory_fit": true,
+                  "model": {
+                    "head_dimension": 128,
+                    "kv_heads": 8,
+                    "label": "Generic dense 8B planning model",
+                    "layers": 32,
+                    "parameters": "8000000000"
+                  },
+                  "raw_gpus": 8,
+                  "replicas": 2,
+                  "required_GB_per_gpu": "58.359738",
+                  "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+                  "scenario_id": "coincident",
+                  "service_objectives": [],
+                  "stage_id": "component_2",
+                  "weights_GB": "16"
+                }
+              ],
+              "status": "conditional",
+              "upside_gpus": 16
+            }
+          ],
+          "host_ram_GB_provided": "65536",
+          "host_ram_GB_required": "4096",
+          "ingress_Gbps": "0.000461",
+          "initial_gpus": 256,
+          "limitations": [
+            "Analytical assumptions, not measured serving performance or guaranteed latency",
+            "Distinct stages use dedicated pools. scenarios reuse capacity only when declared non-overlapping",
+            "Host configuration and training scaling require later deployment validation"
+          ],
+          "local_disk_GB_required": "61440",
+          "network_scope": "Application tokens plus declared external transfers. customer RTT requirement remains independent. other payloads must be declared",
+          "networks": {
+            "basis": "Decimal TB and GB. Initial transfer rate = volume times 8 divided by transfer seconds. Apply protocol allowance and divide by usable link fraction. Application traffic is counted once at the external and north-south boundaries.",
+            "east_west": {
+              "fabric": "Spectrum-X",
+              "per_gpu_link_lower_bound_Gbps": null,
+              "per_gpu_payload_Gbps": null,
+              "scope": "GPU communication fabric. A fabric selection is not a qualified bandwidth or latency result."
+            },
+            "external_customer_datacenter": {
+              "connection": "Customer datacenter to AI Factory routed connectivity. Carrier, redundancy and encryption design remain architect decisions.",
+              "initial_load_link_Gbps": null,
+              "required_ingress_lower_bound_Gbps": null,
+              "round_trip_target_ms": null,
+              "status": "initial_load_unresolved",
+              "steady_egress_lower_bound_Gbps": "0.000164",
+              "steady_ingress_lower_bound_Gbps": "0.000659"
+            },
+            "follow_up": [
+              "Provide the initial customer-datacenter data volume and allowed transfer window.",
+              "Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates.",
+              "Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth.",
+              "East-west per-GPU port demand needs the selected reference design and collective-communication measurements.",
+              "Customer-datacenter round-trip latency objective is unspecified."
+            ],
+            "initial_load_overlaps_operation": true,
+            "model_version": "network-planning-1.0",
+            "north_south": {
+              "egress_lower_bound_Gbps": "0.000164",
+              "ingress_lower_bound_Gbps": null,
+              "scope": "Factory border to workload and storage endpoints. Carries the same external traffic, not an additional copy. Other tenants and non-model payloads need separate measurements."
+            },
+            "protocol_allowance": "1.2",
+            "storage": {
+              "converged": false,
+              "dedicated": true,
+              "read_link_lower_bound_Gbps": null,
+              "read_payload_Gbps": null,
+              "scope": "Physically dedicated storage fabric. Read and write are separate directions. Confirm bisection, fan-in, checkpoint bursts and initial-load writes. Unknown rates are not zero.",
+              "technology": "Ethernet",
+              "write_link_lower_bound_Gbps": null,
+              "write_payload_Gbps": null
+            },
+            "usable_link_fraction": "0.7"
+          },
+          "nodes_or_trays": 32,
+          "policy": {
+            "accept_capacity_shortfall": false,
+            "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+            "assumptions_accepted": true,
+            "bytes_per_token": "4",
+            "compute_efficiency": "0.35",
+            "expansion_lead_days": 90,
+            "memory_efficiency": "0.50",
+            "minimum_service_fraction": "1",
+            "protocol_allowance": "1.2",
+            "sensitivity_percent": "30",
+            "source": "Anubis guided-1.0 planning defaults, consultant accepted; not measured"
+          },
+          "provided_GB_per_gpu": "288",
+          "racks": null,
+          "raw_gpus": 16,
+          "required_GB_per_gpu": "58.359738",
+          "scenarios": [
+            {
+              "downside_gpus": 16,
+              "failure_nodes": 0,
+              "id": "coincident",
+              "raw_gpus": 16,
+              "upside_gpus": 16
+            }
+          ],
+          "selected_anchor": {
+            "gpus": 256,
+            "nodes": 32
+          },
+          "service_capacity_fraction": "1",
+          "shortfall_gpus": 0,
+          "stage_calculations": [
+            {
+              "assumptions": {
+                "activation_GB_per_gpu": "32",
+                "concurrent_sequences": 32,
+                "context_tokens": 8192,
+                "cpu_cores_per_gpu": 16,
+                "host_ram_GB_per_gpu": "256",
+                "kv_bytes": "2",
+                "local_disk_GB_per_gpu": "3840",
+                "model": "dense8b",
+                "parallel_gpus": 1,
+                "training_bytes_per_parameter": "16",
+                "weight_bytes": "2",
+                "workspace_GB": "8"
+              },
+              "capacity_per_replica": "4.892797",
+              "capacity_unit": "calls/s",
+              "demand": "1",
+              "kv_cache_GB_per_replica": "34.359738",
+              "memory_fit": true,
+              "model": {
+                "head_dimension": 128,
+                "kv_heads": 8,
+                "label": "Generic dense 8B planning model",
+                "layers": 32,
+                "parameters": "8000000000"
+              },
+              "raw_gpus": 8,
+              "replicas": 1,
+              "required_GB_per_gpu": "58.359738",
+              "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+              "scenario_id": "coincident",
+              "service_objectives": [],
+              "stage_id": "component_1",
+              "weights_GB": "16"
+            },
+            {
+              "assumptions": {
+                "activation_GB_per_gpu": "32",
+                "concurrent_sequences": 32,
+                "context_tokens": 8192,
+                "cpu_cores_per_gpu": 16,
+                "host_ram_GB_per_gpu": "256",
+                "kv_bytes": "2",
+                "local_disk_GB_per_gpu": "3840",
+                "model": "dense8b",
+                "parallel_gpus": 1,
+                "training_bytes_per_parameter": "16",
+                "weight_bytes": "2",
+                "workspace_GB": "8"
+              },
+              "capacity_per_replica": "4.892797",
+              "capacity_unit": "calls/s",
+              "demand": "5",
+              "kv_cache_GB_per_replica": "34.359738",
+              "memory_fit": true,
+              "model": {
+                "head_dimension": 128,
+                "kv_heads": 8,
+                "label": "Generic dense 8B planning model",
+                "layers": 32,
+                "parameters": "8000000000"
+              },
+              "raw_gpus": 8,
+              "replicas": 2,
+              "required_GB_per_gpu": "58.359738",
+              "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+              "scenario_id": "coincident",
+              "service_objectives": [],
+              "stage_id": "component_2",
+              "weights_GB": "16"
+            }
+          ],
+          "status": "conditional",
+          "storage": [],
+          "storage_fabric": "Ethernet",
+          "storage_network_policy": "Physically dedicated storage network required. Converged networking is excluded.",
+          "tenancy": "multi",
+          "upside_gpus": 16,
+          "usable_GB_per_gpu": "259.2",
+          "version": "1.0",
+          "workload_capacity": {
+            "basis": "Whole copies of the same workload profile at coincident declared peaks, using dedicated node-rounded GPU pools and a separate reserve per copy. Sensitivity counts are planning envelopes, not confidence intervals.",
+            "minimum_architecture": {
+              "additional_instances_compute": 15,
+              "downside_instances_compute": 16,
+              "equivalent_instances_compute": 16,
+              "gpus": 256,
+              "supports_one_instance_compute": true,
+              "upside_instances_compute": 16
+            },
+            "qualification": "Compute estimate only. Each copy also needs its storage, host resources and network capacity. tenancy and isolation require architectural validation. Architecture family is the selected catalogue profile, not an additional NCP compliance claim.",
+            "selected_architecture": {
+              "additional_instances_compute": 15,
+              "downside_instances_compute": 16,
+              "equivalent_instances_compute": 16,
+              "gpus": 256,
+              "supports_one_instance_compute": true,
+              "upside_instances_compute": 16
+            },
+            "tenant_limit": null
+          }
+        },
+        "questions": [],
+        "resource_candidates": [],
+        "resource_search": {
+          "evaluated": 0,
+          "limit": 256,
+          "optimality": "not_claimed",
+          "truncated": false
+        },
+        "schema_version": "1.0",
+        "scope": "Planning portfolio with explicit assumptions. measured profiles remain separate",
+        "search": {
+          "evaluated": 0,
+          "limit": 256,
+          "optimality": "not_claimed",
+          "truncated": false
+        },
+        "selection_state": "experimental",
+        "semantic_digest": "063d587bf0f9f14935d38b58a0eb38c84f623150405582d917d64084ccacb318",
+        "workload_digest": "c604d3ceda58122197bc11e89ea77395e5f891e8ece504334bd09ca79b857812"
+      },
+      "revision_id": "revision_2668ae5a534aa8449876fc4c95b6873f"
+    },
+    "revision_id": "revision_2668ae5a534aa8449876fc4c95b6873f"
+  },
+  "id": "engagement_completion_81b4e71e01ca90836328472484486a80",
+  "type": "engagement_completion",
+  "version": 1
+}

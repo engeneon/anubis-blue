@@ -1,0 +1,263 @@
+[
+  {
+    "id": "I01",
+    "scope": "Engagement",
+    "field": "Customer workload name",
+    "value": "Quartz Industrial Research manual playbook / Quartz Industrial Research assisted playbook",
+    "basis": "Entered",
+    "definition": "Identifies the two separate saved runs.",
+    "method": "Choose the route suffix to avoid mixing results."
+  },
+  {
+    "id": "I02",
+    "scope": "Engagement",
+    "field": "Factory users",
+    "value": "One organisation",
+    "basis": "Selected",
+    "definition": "Organisations sharing the factory.",
+    "method": "Confirm commercial and organisational scope. Tenancy does not multiply aggregate demand automatically."
+  },
+  {
+    "id": "I03",
+    "scope": "Engagement",
+    "field": "Do activities run at the same time?",
+    "value": "Yes \u2014 overlapping demand",
+    "basis": "Selected",
+    "definition": "Peak workloads may coincide.",
+    "method": "Review schedules and telemetry with the operations owner."
+  },
+  {
+    "id": "I04",
+    "scope": "Fluid simulation",
+    "field": "Component name",
+    "value": "Fluid simulation",
+    "basis": "Selected",
+    "definition": "Business activity being sized. Numbered labels follow the order of components in the active route.",
+    "method": "Agree a recognisable activity name with the application owner. Use the matching diagram to check its scope."
+  },
+  {
+    "id": "I05",
+    "scope": "Fluid simulation",
+    "field": "Application pattern",
+    "value": "other",
+    "basis": "Selected",
+    "definition": "Application behaviour, not a server type.",
+    "method": "Walk through a customer task. Identify text serving, retrieval, media processing or solver work."
+  },
+  {
+    "id": "I06",
+    "scope": "Fluid simulation",
+    "field": "Compute location",
+    "value": "In this factory",
+    "basis": "Selected",
+    "definition": "Where computation runs relative to this factory.",
+    "method": "Confirm the hosting owner and deployment boundary. Outside services do not contribute local model GPUs."
+  },
+  {
+    "id": "I07",
+    "scope": "Fluid simulation",
+    "field": "Relationship",
+    "value": "Independent",
+    "basis": "Selected",
+    "definition": "Order or relationship of activities. This is separate from whether demand overlaps.",
+    "method": "Review the business flow with the application owner. Confirm scheduling separately."
+  },
+  {
+    "id": "I08",
+    "scope": "Fluid simulation",
+    "field": "Sizing method",
+    "value": "Reference capacity for independent work",
+    "basis": "Selected",
+    "definition": "Analytical text sizing or replication of a complete reference GPU group.",
+    "method": "Use analytical sizing for supported language models. Select reference capacity for a scoped specialist workload."
+  },
+  {
+    "id": "I09",
+    "scope": "Fluid simulation",
+    "field": "Peak work units per second",
+    "value": "0.000138889",
+    "basis": "Explicit planning assumption",
+    "definition": "Aggregate independent work units due per second.",
+    "method": "Count peak arriving work. For batch work divide items by available seconds. Camera demand can be cameras multiplied by sampled frames per second."
+  },
+  {
+    "id": "I10",
+    "scope": "Fluid simulation",
+    "field": "Work unit",
+    "value": "simulation",
+    "basis": "Explicit planning assumption",
+    "definition": "Completed unit of work, such as a processed frame or complete simulation.",
+    "method": "Define the exact work item, input dimensions, quality settings, precision and success condition with the application owner."
+  },
+  {
+    "id": "I11",
+    "scope": "Fluid simulation",
+    "field": "GPUs per reference group",
+    "value": "8",
+    "basis": "Explicit planning assumption",
+    "definition": "GPUs in a complete independently repeatable group.",
+    "method": "Read the tested or assumed deployment configuration. Use one, two, four, eight or a multiple of eight GPUs. Do not scale a single larger mesh by adding unrelated groups."
+  },
+  {
+    "id": "I12",
+    "scope": "Fluid simulation",
+    "field": "Required GPU memory in GB",
+    "value": "90",
+    "basis": "Explicit planning assumption",
+    "definition": "Peak memory required on each GPU in the reference configuration.",
+    "method": "Measure the busiest device with GPU telemetry during representative work. Include weights, working state and buffers. Record the source and margin."
+  },
+  {
+    "id": "I13",
+    "scope": "Fluid simulation",
+    "field": "H200 work units per second per group",
+    "value": "0.000069444",
+    "basis": "Explicit planning assumption",
+    "definition": "Capacity per complete group on this specific GPU platform, in the same work units per second as demand.",
+    "method": "Use a matching measured run or an explicit engineering assumption for this platform. Do not silently translate throughput measured on another GPU."
+  },
+  {
+    "id": "I14",
+    "scope": "Fluid simulation",
+    "field": "B200 work units per second per group",
+    "value": "0.000092592",
+    "basis": "Explicit planning assumption",
+    "definition": "Capacity per complete group on this specific GPU platform, in the same work units per second as demand.",
+    "method": "Use a matching measured run or an explicit engineering assumption for this platform. Do not silently translate throughput measured on another GPU."
+  },
+  {
+    "id": "I15",
+    "scope": "Fluid simulation",
+    "field": "B300 work units per second per group",
+    "value": "0.000138888",
+    "basis": "Explicit planning assumption",
+    "definition": "Capacity per complete group on this specific GPU platform, in the same work units per second as demand.",
+    "method": "Use a matching measured run or an explicit engineering assumption for this platform. Do not silently translate throughput measured on another GPU."
+  },
+  {
+    "id": "I16",
+    "scope": "Fluid simulation",
+    "field": "Independent reference groups can serve this demand",
+    "value": "Checked",
+    "basis": "Explicit planning assumption",
+    "definition": "Whether independent full groups can share the incoming work.",
+    "method": "Check that the scheduler can route separate jobs or requests to each group. A single job requiring a larger distributed system does not satisfy this assumption."
+  },
+  {
+    "id": "I17",
+    "scope": "Fluid simulation",
+    "field": "I accept this reference capacity and its scope",
+    "value": "Checked",
+    "basis": "Explicit planning assumption",
+    "definition": "Consultant acceptance of reference scope and assumptions.",
+    "method": "Review demand, capacity, memory and group independence together. Reaccept after Copilot refinement only if the reference remains applicable."
+  },
+  {
+    "id": "I18",
+    "scope": "Fluid simulation",
+    "field": "Reference source and conditions",
+    "value": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+    "basis": "Explicit planning assumption",
+    "definition": "Source and operating conditions for the capacity assumption.",
+    "method": "Record benchmark or engineering-assumption provenance, date, model or solver version, precision, input dimensions, group size and scope. Fictional example values are not measurements."
+  },
+  {
+    "id": "I19",
+    "scope": "Shared",
+    "field": "Infrastructure deployment profile",
+    "value": "HGX B300 \u00b7 Spectrum-X \u00b7 Enterprise reference design with two network planes",
+    "basis": "Default or explicitly left blank",
+    "definition": "Selects factory anchors rather than workload demand.",
+    "method": "Architect selects a compatible catalogue profile."
+  },
+  {
+    "id": "I20",
+    "scope": "Shared",
+    "field": "Sensitivity envelope",
+    "value": "\u00b130%",
+    "basis": "Default or explicitly left blank",
+    "definition": "Explores faster and slower throughput assumptions.",
+    "method": "Choose the agreed planning sensitivity. It is not a confidence interval."
+  },
+  {
+    "id": "I21",
+    "scope": "Shared",
+    "field": "Use these planning assumptions",
+    "value": "Checked",
+    "basis": "Default or explicitly left blank",
+    "definition": "Accepts the displayed planning defaults.",
+    "method": "Review defaults before calculating."
+  },
+  {
+    "id": "I22",
+    "scope": "Shared",
+    "field": "Locally retained data in TB / Daily growth in GB",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "No local shared-storage amount is established. Blank is not zero.",
+    "method": "Inventory actual local retained copies. Do not copy an outside corpus into this value."
+  },
+  {
+    "id": "I23",
+    "scope": "Shared",
+    "field": "Initial dataset to load in TB / Initial loading window in hours",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Initial transfer scope and time remain unresolved.",
+    "method": "Obtain transfer volume and the allowed window from the data owner."
+  },
+  {
+    "id": "I24",
+    "scope": "Shared",
+    "field": "Ongoing incoming / outgoing data in GB per day",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Bulk daily transfer volumes remain unspecified.",
+    "method": "Measure ingress and egress counters separately from model token traffic."
+  },
+  {
+    "id": "I25",
+    "scope": "Shared",
+    "field": "Aggregate storage reads / writes in Gbps",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Dedicated storage fabric throughput remains unresolved.",
+    "method": "Measure directional read and write payload peaks. Capacity alone cannot determine bandwidth."
+  },
+  {
+    "id": "I26",
+    "scope": "Shared",
+    "field": "East-west payload per GPU in Gbps / Customer datacenter round-trip target in ms",
+    "value": "Blank",
+    "basis": "Default or explicitly left blank",
+    "definition": "Collective traffic and latency objective remain unresolved.",
+    "method": "Use GPU communication telemetry and an agreed RTT objective."
+  },
+  {
+    "id": "I27",
+    "scope": "Shared",
+    "field": "Usable link fraction / Initial loading overlap",
+    "value": "0.7 / Yes",
+    "basis": "Default or explicitly left blank",
+    "definition": "Accepted network defaults. Storage networking is physically dedicated.",
+    "method": "Review usable bandwidth and whether loading coincides with normal operation."
+  },
+  {
+    "id": "I28",
+    "scope": "Shared",
+    "field": "Explanation connection",
+    "value": "Manual: deterministic. Assisted: tested DeepSeek connection",
+    "basis": "Default or explicitly left blank",
+    "definition": "Chooses prose generation without changing the calculation.",
+    "method": "Configure an approved provider in AI connections. Backend credentials stay on the server."
+  },
+  {
+    "id": "I29",
+    "scope": "Shared",
+    "field": "This saved result is public or fictional and may be sent to the selected provider",
+    "value": "Checked only for this fictional assisted example",
+    "basis": "Default or explicitly left blank",
+    "definition": "Permission to send the saved explanation packet to the chosen connection.",
+    "method": "Leave unchecked for corporate data and select a connection approved for that data."
+  }
+]

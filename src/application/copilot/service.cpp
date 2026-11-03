@@ -1,3 +1,4 @@
+#include "application/copilot/explanation.hpp"
 #include "application/characterization/assisted.hpp"
 #include "application/service.hpp"
 #include "application/copilot/facts.hpp"
@@ -11,11 +12,24 @@ Reply Service::copilot_dispatch(const Actor &a,const std::string &method,const s
  auto id=p.size()>1?p[1]:"",op=p.size()>2?p[2]:"";auto catalog=load_catalog(root_); std::ifstream lf(root_+"/knowledge/workload-interpretation.json");auto library=parse(std::string(std::istreambuf_iterator<char>(lf),{}));
  const bool disabled=std::getenv("ANUBIS_COPILOT_DISABLED")&&std::string(std::getenv("ANUBIS_COPILOT_DISABLED"))=="1";
  const auto now=std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
- if(method=="POST"&&(op=="turns"||op=="test"||op=="mcp-import")) {
+ if(method=="POST"&&(op=="turns"||op=="test"||op=="mcp-import"||(p[0]=="copilot-explanations"&&!b.value("profile_id",std::string()).empty()))) {
   int limit=200;if(const char *value=std::getenv("ANUBIS_AI_DAILY_CALL_LIMIT"))limit=std::stoi(value);
   require(limit>=0&&limit<=10000,"budget","Invalid deployment call budget");int count=0;
-  for(const auto &j:store_.list("job","",-1))if(j["data"].value("kind",std::string(""))!=""&&j["data"].value("kind",std::string(""))!="neon"&&j["data"].value("created_at",int64_t(0))>=now-86400)count+=j["data"].value("kind",std::string(""))=="copilot"?2:1;
-  require(count+(op=="turns"?2:1)<=limit,"budget","Deployment model and tool request budget exhausted");
+  for(const auto &j:store_.list("job","",-1))if(j["data"].value("kind",std::string(""))!=""&&j["data"].value("kind",std::string(""))!="neon"&&j["data"].value("created_at",int64_t(0))>=now-86400)count+=j["data"].value("kind",std::string(""))=="copilot"||j["data"].value("kind",std::string(""))=="explanation"?2:1;
+  require(count+(op=="turns"||p[0]=="copilot-explanations"?2:1)<=limit,"budget","Deployment model and tool request budget exhausted");
+ }
+ if(p[0]=="copilot-explanations") {
+  if(method=="GET"&&op=="history"){auto r=scoped(a,id);require(r["type"]=="result","type","Select a saved result");Json items=Json::array();for(const auto&e:store_.list("explanation",r["case_id"],-1))if(e["data"]["packet"]["result_id"]==id)items.push_back(e);return {items};}
+  if(method=="GET"){auto e=scoped(a,id);require(e["type"]=="explanation","type","Expected saved explanation");return {e};}
+  require(method=="POST"&&id.empty(),"route","Unsupported explanation operation");keys(b,{"result_id","projection_id","profile_id","classification"},"");auto r=scoped(a,text(b,"result_id"));require(r["type"]=="result","type","Select a saved calculation");case_access(a,r["case_id"],true);
+  Json pr;auto pid=b.value("projection_id",std::string());if(!pid.empty()){pr=scoped(a,pid);require(pr["type"]=="projection"&&pr["data"]["result_id"]==r["id"],"projection","Projection must belong to this exact calculation");}
+  auto packet=explanation_packet(r,pr);auto profile_id=b.value("profile_id",std::string());
+  if(profile_id.empty()){auto data=explanation_fallback(packet);data["packet"]=packet;data["created_at"]=now;data["author"]=a.id;data["model"]=nullptr;return {save(a,"explanation",r["case_id"],data),201};}
+  require(!disabled,"disabled","Copilot disabled. Use the deterministic explanation");auto profile=store_.get(profile_id);require(profile["type"]=="copilot_profile","profile","Choose a model connection");auto data=profile["data"];
+  require(data.value("enabled",false)&&data.value("health",std::string())=="capability_passed","profile_unqualified","Test and enable the connection first");require(data["provider"]!="mcp"||data.contains("model_tool"),"model_connection","Choose a model connection");auto classification=b.value("classification",std::string("corporate"));require(classification=="public"||classification=="corporate","classification","Choose public or corporate");require(classification=="public"||data["data_policy"]=="corporate","data_policy","This connection is not approved for corporate data");
+  for(const auto&j:store_.list("job",r["case_id"],-1))if(j["data"].value("kind",std::string())=="explanation")require(j["data"]["state"]!="queued"&&j["data"]["state"]!="running","busy","An explanation is already being prepared");
+  data.erase("health");data.erase("tested_job");data.erase("health_details");
+  return {save(a,"job",r["case_id"],{{"kind","explanation"},{"attempt",0},{"packet",packet},{"context",{{"explanation_contract","1.0"},{"packet",packet}}},{"profile",data},{"profile_id",profile_id},{"profile_version",profile["version"]},{"state","queued"},{"actor",a.id},{"created_at",now}}),202};
  }
  if(p[0]=="copilot-capabilities")return {{{"schema_version","2.0"},{"fact_schema",fact_schema()},{"fact_definitions",fact_definitions()},{"architecture_library",library},{"disabled",disabled},{"fields",copilot_fields()},{"output_schema",copilot_schema()},{"manual_available",true},{"provider_qualification","Per-profile capability test required. Live interpretation qualification is separate"}}};
  if(p[0]=="copilot-profiles") {

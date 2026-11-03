@@ -2,7 +2,7 @@
   {
     "id": "S01",
     "name": "Alder Contact Services",
-    "story": "A regional service desk wants a local text classifier for 45,000 incoming messages daily. One model labels each message; no document search or tools are involved. The busiest hour receives 6,000 messages. Responses must arrive within five seconds.",
+    "story": "A regional service desk wants a local text classifier for 45,000 incoming messages daily. One model labels each message; no document search or tools are involved. The busiest hour receives 6,000 messages. Responses must arrive within five seconds.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Message classification\", \"pattern\": \"direct\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"100\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\"}]",
     "answers": {
       "name": "Alder Contact Services",
       "activities": [
@@ -35,12 +35,75 @@
     "expected_arrangement": "Single local model service.",
     "acceptance": "Do not infer simultaneous requests from 45,000 daily items.",
     "measurement_next": "Collect request timestamps and complete message-length samples.",
-    "expected_question": null
+    "expected_question": null,
+    "original_story": "A regional service desk wants a local text classifier for 45,000 incoming messages daily. One model labels each message; no document search or tools are involved. The busiest hour receives 6,000 messages. Responses must arrive within five seconds.",
+    "planning_input": {
+      "name": "Alder Contact Services",
+      "components": [
+        {
+          "name": "Message classification",
+          "pattern": "direct",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "100",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
+      "name": "Alder Contact Services",
+      "activities": [
+        {
+          "name": "Message classification",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    }
   },
   {
     "id": "S02",
     "name": "Bracken Engineering",
-    "story": "Eight thousand engineers ask an assistant questions about maintenance manuals. The existing external search platform returns passages; a local model writes the answer. The assistant serves 2,400 questions in the busiest hour. The 4 TB corpus is indexed by the external platform.",
+    "story": "Eight thousand engineers ask an assistant questions about maintenance manuals. The existing external search platform returns passages; a local model writes the answer. The assistant serves 2,400 questions in the busiest hour. The 4 TB corpus is indexed by the external platform.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Manual assistant\", \"pattern\": \"retrieval\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"40\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"external\"}]",
     "answers": {
       "name": "Bracken Engineering",
       "activities": [
@@ -73,13 +136,146 @@
     "expected_arrangement": "Retrieval before local answer generation; external retrieval placement remains a follow-up.",
     "acceptance": "Do not count the whole retrieval chain as two text-generation calls.",
     "measurement_next": "Confirm retrieval hosting and capture complete prompts including retrieved passages.",
-    "expected_question": null
+    "expected_question": null,
+    "original_story": "Eight thousand engineers ask an assistant questions about maintenance manuals. The existing external search platform returns passages; a local model writes the answer. The assistant serves 2,400 questions in the busiest hour. The 4 TB corpus is indexed by the external platform.",
+    "planning_input": {
+      "name": "Bracken Engineering",
+      "components": [
+        {
+          "name": "Manual assistant",
+          "pattern": "retrieval",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "40",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "external"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
+      "name": "Bracken Engineering",
+      "activities": [
+        {
+          "name": "Manual assistant",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    }
   },
   {
     "id": "S03",
     "name": "Cobalt Travel Operations",
-    "story": "A travel operations assistant resolves disruption cases by checking schedules and hotel systems. It typically invokes a model four times but complex cases take up to twelve calls. About 1,500 cases arrive daily. Tool results influence the next action.",
+    "story": "A travel operations assistant resolves disruption cases by checking schedules and hotel systems. It typically invokes a model four times but complex cases take up to twelve calls. About 1,500 cases arrive daily. Tool results influence the next action.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Disruption case agent\", \"pattern\": \"agent\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"30\", \"calls\": \"12\", \"input_tokens\": \"3000\", \"output_tokens\": \"600\", \"retrieval\": \"none\"}]",
     "answers": {
+      "name": "Cobalt Travel Operations",
+      "activities": [
+        {
+          "name": "Disruption case agent",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "yes",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "several_fixed",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "agent"
+    ],
+    "expected_arrangement": "Variable tool-and-model loop.",
+    "acceptance": "Preserve variable call expansion; do not replace it with one call.",
+    "measurement_next": "Sample complete case traces, retries, model calls and context growth.",
+    "expected_question": null,
+    "original_story": "A travel operations assistant resolves disruption cases by checking schedules and hotel systems. It typically invokes a model four times but complex cases take up to twelve calls. About 1,500 cases arrive daily. Tool results influence the next action.",
+    "planning_input": {
+      "name": "Cobalt Travel Operations",
+      "components": [
+        {
+          "name": "Disruption case agent",
+          "pattern": "agent",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "30",
+          "calls": "12",
+          "input_tokens": "3000",
+          "output_tokens": "600",
+          "retrieval": "none"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Cobalt Travel Operations",
       "activities": [
         {
@@ -104,20 +300,86 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "agent"
-    ],
-    "expected_arrangement": "Variable tool-and-model loop.",
-    "acceptance": "Preserve variable call expansion; do not replace it with one call.",
-    "measurement_next": "Sample complete case traces, retries, model calls and context growth.",
-    "expected_question": null
+    }
   },
   {
     "id": "S04",
     "name": "Dune Accounting",
-    "story": "A service creates 80,000 text summaries of invoices between 22:00 and 06:00. Each invoice uses one model call. No interactive work runs on these resources during the processing window.",
+    "story": "A service creates 80,000 text summaries of invoices between 22:00 and 06:00. Each invoice uses one model call. No interactive work runs on these resources during the processing window.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Invoice summaries\", \"pattern\": \"batch\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"100\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\", \"jobs\": \"80000\", \"window\": \"8\"}]",
     "answers": {
+      "name": "Dune Accounting",
+      "activities": [
+        {
+          "name": "Invoice summaries",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "batch",
+      "direct"
+    ],
+    "expected_arrangement": "One overnight batch activity.",
+    "acceptance": "Keep item count and deadline distinct from concurrent users.",
+    "measurement_next": "Measure representative input/output sizes and actual arrival volume.",
+    "expected_question": null,
+    "original_story": "A service creates 80,000 text summaries of invoices between 22:00 and 06:00. Each invoice uses one model call. No interactive work runs on these resources during the processing window.",
+    "planning_input": {
+      "name": "Dune Accounting",
+      "components": [
+        {
+          "name": "Invoice summaries",
+          "pattern": "batch",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "100",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none",
+          "jobs": "80000",
+          "window": "8"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Dune Accounting",
       "activities": [
         {
@@ -142,21 +404,88 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "batch",
-      "direct"
-    ],
-    "expected_arrangement": "One overnight batch activity.",
-    "acceptance": "Keep item count and deadline distinct from concurrent users.",
-    "measurement_next": "Measure representative input/output sizes and actual arrival volume.",
-    "expected_question": null
+    }
   },
   {
     "id": "S05",
     "name": "Estuary Transit",
-    "story": "A transit operator plans live object detection on 180 camera streams. Cameras provide 1080p video, but detection is requested at five frames per second per camera. Only event clips are retained. There is no text-generation service.",
+    "story": "A transit operator plans live object detection on 180 camera streams. Cameras provide 1080p video, but detection is requested at five frames per second per camera. Only event clips are retained. There is no text-generation service.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Camera detection\", \"pattern\": \"stream\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"900\", \"reference_unit\": \"frame\", \"reference_gpus\": \"8\", \"reference_memory\": \"40\", \"reference_h200\": \"100\", \"reference_b200\": \"160\", \"reference_b300\": \"200\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 180 cameras × 5 sampled frames/s. Fixed 1080p detector, BF16, complete eight-GPU independent camera-serving groups.\"}]",
     "answers": {
+      "name": "Estuary Transit",
+      "activities": [
+        {
+          "name": "Camera detection",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "yes",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "continuous",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "stream"
+    ],
+    "expected_arrangement": "Continuous visual inference.",
+    "acceptance": "Recognise streaming without routing camera frames through the text sizing equation.",
+    "measurement_next": "Record model, sampling rate, codec, active streams and clip retention.",
+    "expected_question": null,
+    "original_story": "A transit operator plans live object detection on 180 camera streams. Cameras provide 1080p video, but detection is requested at five frames per second per camera. Only event clips are retained. There is no text-generation service.",
+    "planning_input": {
+      "name": "Estuary Transit",
+      "components": [
+        {
+          "name": "Camera detection",
+          "pattern": "stream",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "900",
+          "reference_unit": "frame",
+          "reference_gpus": "8",
+          "reference_memory": "40",
+          "reference_h200": "100",
+          "reference_b200": "160",
+          "reference_b300": "200",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 180 cameras × 5 sampled frames/s. Fixed 1080p detector, BF16, complete eight-GPU independent camera-serving groups."
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 40,
+      "HGX_B200": 48,
+      "HGX_H200": 72
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Estuary Transit",
       "activities": [
         {
@@ -181,20 +510,88 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "stream"
-    ],
-    "expected_arrangement": "Continuous visual inference.",
-    "acceptance": "Recognise streaming without routing camera frames through the text sizing equation.",
-    "measurement_next": "Record model, sampling rate, codec, active streams and clip retention.",
-    "expected_question": null
+    }
   },
   {
     "id": "S06",
     "name": "Fable Creative Studio",
-    "story": "A studio produces 12,000 catalogue images per day in four-hour production windows. Image size is 1024 by 1024 pixels, with several candidate images per product. It has not chosen the generation model.",
+    "story": "A studio produces 12,000 catalogue images per day in four-hour production windows. Image size is 1024 by 1024 pixels, with several candidate images per product. It has not chosen the generation model.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Catalogue images\", \"pattern\": \"generation\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"0.833334\", \"reference_unit\": \"image\", \"reference_gpus\": \"8\", \"reference_memory\": \"80\", \"reference_h200\": \"0.2\", \"reference_b200\": \"0.3\", \"reference_b300\": \"0.4\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 12,000 independent images in four hours. Fixed diffusion model, 1024 square, 30 steps, BF16. Each capacity is for a complete eight-GPU group.\"}]",
     "answers": {
+      "name": "Fable Creative Studio",
+      "activities": [
+        {
+          "name": "Catalogue images",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "yes",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "generation"
+    ],
+    "expected_arrangement": "Batch image generation.",
+    "acceptance": "Request specialised generation evidence; never infer demand from text tokens alone.",
+    "measurement_next": "Confirm model, generation steps, images per product and accepted completion window.",
+    "expected_question": null,
+    "original_story": "A studio produces 12,000 catalogue images per day in four-hour production windows. Image size is 1024 by 1024 pixels, with several candidate images per product. It has not chosen the generation model.",
+    "planning_input": {
+      "name": "Fable Creative Studio",
+      "components": [
+        {
+          "name": "Catalogue images",
+          "pattern": "generation",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "0.833334",
+          "reference_unit": "image",
+          "reference_gpus": "8",
+          "reference_memory": "80",
+          "reference_h200": "0.2",
+          "reference_b200": "0.3",
+          "reference_b300": "0.4",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 12,000 independent images in four hours. Fixed diffusion model, 1024 square, 30 steps, BF16. Each capacity is for a complete eight-GPU group."
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 24,
+      "HGX_B200": 24,
+      "HGX_H200": 40
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Fable Creative Studio",
       "activities": [
         {
@@ -219,21 +616,88 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "batch",
-      "generation"
-    ],
-    "expected_arrangement": "Batch image generation.",
-    "acceptance": "Request specialised generation evidence; never infer demand from text tokens alone.",
-    "measurement_next": "Confirm model, generation steps, images per product and accepted completion window.",
-    "expected_question": null
+    }
   },
   {
     "id": "S07",
     "name": "Grove Legal Technology",
-    "story": "A software supplier adapts an existing 8B text model monthly using 300,000 reviewed examples. It expects parameter-efficient fine-tuning, but the training team has not confirmed the method. Each run should finish within a weekend.",
+    "story": "A software supplier adapts an existing 8B text model monthly using 300,000 reviewed examples. It expects parameter-efficient fine-tuning, but the training team has not confirmed the method. Each run should finish within a weekend.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Monthly model adaptation\", \"pattern\": \"adaptation\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"0.000023149\", \"reference_unit\": \"training run\", \"reference_gpus\": \"8\", \"reference_memory\": \"80\", \"reference_h200\": \"0.000011574\", \"reference_b200\": \"0.000015432\", \"reference_b300\": \"0.000023148\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Four independent 8B LoRA experiments in 48 hours. Each run uses 300,000 examples, 1,000 tokens/example, one epoch, BF16 and fixed adapter rank. Assumed group run times H200 24h, B200 18h, B300 12h. Rates conservatively rounded. No single training run is divided across groups.\"}]",
     "answers": {
+      "name": "Grove Legal Technology",
+      "activities": [
+        {
+          "name": "Monthly model adaptation",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "yes",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "adaptation"
+    ],
+    "expected_arrangement": "Scheduled model adaptation.",
+    "acceptance": "Do not silently apply full-pretraining memory or compute equations.",
+    "measurement_next": "Obtain base model, adaptation method, tokenised dataset and repetitions.",
+    "expected_question": null,
+    "original_story": "A software supplier adapts an existing 8B text model monthly using 300,000 reviewed examples. It expects parameter-efficient fine-tuning, but the training team has not confirmed the method. Each run should finish within a weekend.",
+    "planning_input": {
+      "name": "Grove Legal Technology",
+      "components": [
+        {
+          "name": "Monthly model adaptation",
+          "pattern": "adaptation",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "0.000023149",
+          "reference_unit": "training run",
+          "reference_gpus": "8",
+          "reference_memory": "80",
+          "reference_h200": "0.000011574",
+          "reference_b200": "0.000015432",
+          "reference_b300": "0.000023148",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Four independent 8B LoRA experiments in 48 hours. Each run uses 300,000 examples, 1,000 tokens/example, one epoch, BF16 and fixed adapter rank. Assumed group run times H200 24h, B200 18h, B300 12h. Rates conservatively rounded. No single training run is divided across groups."
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 16,
+      "HGX_B200": 16,
+      "HGX_H200": 24
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Grove Legal Technology",
       "activities": [
         {
@@ -258,20 +722,85 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "adaptation"
-    ],
-    "expected_arrangement": "Scheduled model adaptation.",
-    "acceptance": "Do not silently apply full-pretraining memory or compute equations.",
-    "measurement_next": "Obtain base model, adaptation method, tokenised dataset and repetitions.",
-    "expected_question": null
+    }
   },
   {
     "id": "S08",
     "name": "Helix Language Institute",
-    "story": "A research institute continues pretraining an existing language model on 90 billion tokens over 30 days. Data arrives from a separate research storage service. Training checkpoints are written during the campaign.",
+    "story": "A research institute continues pretraining an existing language model on 90 billion tokens over 30 days. Data arrives from a separate research storage service. Training checkpoints are written during the campaign.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Language pretraining\", \"pattern\": \"training\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"100\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\", \"tokens\": \"90000000000\", \"days\": \"30\"}]",
     "answers": {
+      "name": "Helix Language Institute",
+      "activities": [
+        {
+          "name": "Language pretraining",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "yes",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "training"
+    ],
+    "expected_arrangement": "Dedicated continuous training campaign.",
+    "acceptance": "Identify training and request ingestion/checkpoint detail rather than hiding those resources.",
+    "measurement_next": "Obtain model size, useful training time, checkpoint size and save interval.",
+    "expected_question": null,
+    "original_story": "A research institute continues pretraining an existing language model on 90 billion tokens over 30 days. Data arrives from a separate research storage service. Training checkpoints are written during the campaign.",
+    "planning_input": {
+      "name": "Helix Language Institute",
+      "components": [
+        {
+          "name": "Language pretraining",
+          "pattern": "training",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "100",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none",
+          "tokens": "90000000000",
+          "days": "30"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Helix Language Institute",
       "activities": [
         {
@@ -296,20 +825,118 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "training"
-    ],
-    "expected_arrangement": "Dedicated continuous training campaign.",
-    "acceptance": "Identify training and request ingestion/checkpoint detail rather than hiding those resources.",
-    "measurement_next": "Obtain model size, useful training time, checkpoint size and save interval.",
-    "expected_question": null
+    }
   },
   {
     "id": "S09",
     "name": "Juniper Retail",
-    "story": "A retailer runs a document assistant for 18,000 staff and produces 20,000 store reports overnight. Staff access is disabled during the report window. Both activities use text models but have different input sizes.",
+    "story": "A retailer runs a document assistant for 18,000 staff and produces 20,000 store reports overnight. Staff access is disabled during the report window. Both activities use text models but have different input sizes.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Daytime assistant and overnight reports have confirmed separate windows. The same GPUs may be reused.\nExact component inputs: [{\"name\": \"Store assistant\", \"pattern\": \"retrieval\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"100\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"external\"}, {\"name\": \"Nightly reports\", \"pattern\": \"batch\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"100\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\", \"jobs\": \"20000\", \"window\": \"8\"}]",
     "answers": {
+      "name": "Juniper Retail",
+      "activities": [
+        {
+          "name": "Store assistant",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Nightly reports",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "no",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "batch",
+      "direct",
+      "retrieval"
+    ],
+    "expected_arrangement": "Two explicitly non-overlapping activities.",
+    "acceptance": "Create separate operating scenarios; no automatic addition of non-overlapping peaks.",
+    "measurement_next": "Confirm schedule enforcement and sample each activity separately.",
+    "expected_question": null,
+    "original_story": "A retailer runs a document assistant for 18,000 staff and produces 20,000 store reports overnight. Staff access is disabled during the report window. Both activities use text models but have different input sizes.",
+    "planning_input": {
+      "name": "Juniper Retail",
+      "components": [
+        {
+          "name": "Store assistant",
+          "pattern": "retrieval",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "100",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "external"
+        },
+        {
+          "name": "Nightly reports",
+          "pattern": "batch",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "100",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none",
+          "jobs": "20000",
+          "window": "8"
+        }
+      ],
+      "overlap": "no",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Daytime assistant and overnight reports have confirmed separate windows. The same GPUs may be reused."
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Daytime assistant and overnight reports have confirmed separate windows. The same GPUs may be reused.",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Juniper Retail",
       "activities": [
         {
@@ -353,22 +980,131 @@
       ],
       "overlap": "no",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "batch",
-      "direct",
-      "retrieval"
-    ],
-    "expected_arrangement": "Two explicitly non-overlapping activities.",
-    "acceptance": "Create separate operating scenarios; no automatic addition of non-overlapping peaks.",
-    "measurement_next": "Confirm schedule enforcement and sample each activity separately.",
-    "expected_question": null
+    }
   },
   {
     "id": "S10",
     "name": "Kestrel Field Services",
-    "story": "A repair agent searches equipment records, proposes repairs and creates work orders through tools. New manuals are indexed nightly while the agent remains available to technicians in other time zones. The corpus is 9 TB and grows by 40 GB daily.",
+    "story": "A repair agent searches equipment records, proposes repairs and creates work orders through tools. New manuals are indexed nightly while the agent remains available to technicians in other time zones. The corpus is 9 TB and grows by 40 GB daily.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Repair agent\", \"pattern\": \"agent\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"1\", \"reference_unit\": \"repair request\", \"reference_gpus\": \"8\", \"reference_memory\": \"80\", \"reference_h200\": \"0.5\", \"reference_b200\": \"0.8\", \"reference_b300\": \"1\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Complete repair agent including local online retrieval and four text calls of 2000 input/500 output tokens per request. Fixed 8B answer/embedding models and 9 TB corpus. Excludes offline refresh, separately allocated.\", \"retrieval\": \"local\", \"reference_includes_support\": true, \"storage_tb\": \"9\", \"growth_gb_day\": \"40\", \"horizon_days\": \"365\"}, {\"name\": \"Manual indexing\", \"pattern\": \"other\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"2\", \"reference_unit\": \"document\", \"reference_gpus\": \"8\", \"reference_memory\": \"40\", \"reference_h200\": \"1\", \"reference_b200\": \"2\", \"reference_b300\": \"3\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 40 GB/day as 40,000 documents averaging 1 MB. Index 40,000 documents within 20,000 seconds. Fixed embedding model and document size. Independent indexing shards. Covers offline refresh only, excluding online repair agent.\"}]",
     "answers": {
+      "name": "Kestrel Field Services",
+      "activities": [
+        {
+          "name": "Repair agent",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "yes",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "several_fixed",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Manual indexing",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "yes",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "yes"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "agent",
+      "batch",
+      "retrieval"
+    ],
+    "expected_arrangement": "Retrieval-and-tool agent alongside background indexing.",
+    "acceptance": "Retain indexing as supporting work; do not infer zero GPU or CPU demand.",
+    "measurement_next": "Measure embedding configuration, changed-document volume and complete agent traces.",
+    "expected_question": null,
+    "original_story": "A repair agent searches equipment records, proposes repairs and creates work orders through tools. New manuals are indexed nightly while the agent remains available to technicians in other time zones. The corpus is 9 TB and grows by 40 GB daily.",
+    "planning_input": {
+      "name": "Kestrel Field Services",
+      "components": [
+        {
+          "name": "Repair agent",
+          "pattern": "agent",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "1",
+          "reference_unit": "repair request",
+          "reference_gpus": "8",
+          "reference_memory": "80",
+          "reference_h200": "0.5",
+          "reference_b200": "0.8",
+          "reference_b300": "1",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Complete repair agent including local online retrieval and four text calls of 2000 input/500 output tokens per request. Fixed 8B answer/embedding models and 9 TB corpus. Excludes offline refresh, separately allocated.",
+          "retrieval": "local",
+          "reference_includes_support": true,
+          "storage_tb": "9",
+          "growth_gb_day": "40",
+          "horizon_days": "365"
+        },
+        {
+          "name": "Manual indexing",
+          "pattern": "other",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "2",
+          "reference_unit": "document",
+          "reference_gpus": "8",
+          "reference_memory": "40",
+          "reference_h200": "1",
+          "reference_b200": "2",
+          "reference_b300": "3",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 40 GB/day as 40,000 documents averaging 1 MB. Index 40,000 documents within 20,000 seconds. Fixed embedding model and document size. Independent indexing shards. Covers offline refresh only, excluding online repair agent."
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 16,
+      "HGX_B200": 24,
+      "HGX_H200": 32
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Kestrel Field Services",
       "activities": [
         {
@@ -413,22 +1149,120 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "agent",
-      "batch",
-      "retrieval"
-    ],
-    "expected_arrangement": "Retrieval-and-tool agent alongside background indexing.",
-    "acceptance": "Retain indexing as supporting work; do not infer zero GPU or CPU demand.",
-    "measurement_next": "Measure embedding configuration, changed-document volume and complete agent traces.",
-    "expected_question": null
+    }
   },
   {
     "id": "S11",
     "name": "Larch Media Archive",
-    "story": "A broadcaster continuously analyses incoming video, then uses extracted descriptions to build searchable records. Editors ask a text assistant questions about the archive. Video ingestion and editor queries run together.",
+    "story": "A broadcaster continuously analyses incoming video, then uses extracted descriptions to build searchable records. Editors ask a text assistant questions about the archive. Video ingestion and editor queries run together.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The assistant uses an existing search/index service outside this AI Factory. Video work runs locally and overlaps assistant demand.\nExact component inputs: [{\"name\": \"Video analysis\", \"pattern\": \"stream\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"300\", \"reference_unit\": \"frame\", \"reference_gpus\": \"8\", \"reference_memory\": \"40\", \"reference_h200\": \"100\", \"reference_b200\": \"160\", \"reference_b300\": \"200\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 60 concurrent archived video streams sampled at 5 frames/s. Fixed 1080p analysis model, BF16, independent complete eight-GPU worker groups.\"}, {\"name\": \"Archive search\", \"pattern\": \"retrieval\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"40\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"external\"}]",
     "answers": {
+      "name": "Larch Media Archive",
+      "activities": [
+        {
+          "name": "Video analysis",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "yes",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "continuous",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Archive search",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "retrieval",
+      "stream"
+    ],
+    "expected_arrangement": "Continuous media processing alongside retrieval and answering.",
+    "acceptance": "Keep visual inference separate from text serving and do not treat the proposed arrows as proven latency.",
+    "measurement_next": "Collect video processing settings, archive indexing flow and text request samples.",
+    "expected_question": null,
+    "original_story": "A broadcaster continuously analyses incoming video, then uses extracted descriptions to build searchable records. Editors ask a text assistant questions about the archive. Video ingestion and editor queries run together.",
+    "planning_input": {
+      "name": "Larch Media Archive",
+      "components": [
+        {
+          "name": "Video analysis",
+          "pattern": "stream",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "300",
+          "reference_unit": "frame",
+          "reference_gpus": "8",
+          "reference_memory": "40",
+          "reference_h200": "100",
+          "reference_b200": "160",
+          "reference_b300": "200",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 60 concurrent archived video streams sampled at 5 frames/s. Fixed 1080p analysis model, BF16, independent complete eight-GPU worker groups."
+        },
+        {
+          "name": "Archive search",
+          "pattern": "retrieval",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "40",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "external"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The assistant uses an existing search/index service outside this AI Factory. Video work runs locally and overlaps assistant demand."
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The assistant uses an existing search/index service outside this AI Factory. Video work runs locally and overlaps assistant demand.",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 24,
+      "HGX_B200": 24,
+      "HGX_H200": 32
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Larch Media Archive",
       "activities": [
         {
@@ -473,21 +1307,120 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "retrieval",
-      "stream"
-    ],
-    "expected_arrangement": "Continuous media processing alongside retrieval and answering.",
-    "acceptance": "Keep visual inference separate from text serving and do not treat the proposed arrows as proven latency.",
-    "measurement_next": "Collect video processing settings, archive indexing flow and text request samples.",
-    "expected_question": null
+    }
   },
   {
     "id": "S12",
     "name": "Morrow Advertising",
-    "story": "An agency first uses a text agent to draft a campaign plan. If a customer approves it, an image generation job produces campaign assets. Several customer campaigns can be in different phases at once.",
+    "story": "An agency first uses a text agent to draft a campaign plan. If a customer approves it, an image generation job produces campaign assets. Several customer campaigns can be in different phases at once.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Campaign planner\", \"pattern\": \"agent\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"20\", \"calls\": \"4\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\"}, {\"name\": \"Approved campaign assets\", \"pattern\": \"generation\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"1\", \"reference_unit\": \"image\", \"reference_gpus\": \"8\", \"reference_memory\": \"80\", \"reference_h200\": \"0.2\", \"reference_b200\": \"0.3\", \"reference_b300\": \"0.4\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 60 approved images/minute aggregate across overlapping campaigns. Fixed diffusion model, BF16, 1024 square, 30 steps. Independent eight-GPU serving groups, conditional invocation already reflected in image demand.\"}]",
     "answers": {
+      "name": "Morrow Advertising",
+      "activities": [
+        {
+          "name": "Campaign planner",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "yes",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "several_fixed",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Approved campaign assets",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "yes",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "agent",
+      "generation"
+    ],
+    "expected_arrangement": "Conditional asset generation after planning; different campaigns overlap.",
+    "acceptance": "Preserve conditional relationship without treating it as an unconditional workload multiplier.",
+    "measurement_next": "Obtain approval fraction, job volume and generation settings.",
+    "expected_question": null,
+    "original_story": "An agency first uses a text agent to draft a campaign plan. If a customer approves it, an image generation job produces campaign assets. Several customer campaigns can be in different phases at once.",
+    "planning_input": {
+      "name": "Morrow Advertising",
+      "components": [
+        {
+          "name": "Campaign planner",
+          "pattern": "agent",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "20",
+          "calls": "4",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none"
+        },
+        {
+          "name": "Approved campaign assets",
+          "pattern": "generation",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "1",
+          "reference_unit": "image",
+          "reference_gpus": "8",
+          "reference_memory": "80",
+          "reference_h200": "0.2",
+          "reference_b200": "0.3",
+          "reference_b300": "0.4",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. 60 approved images/minute aggregate across overlapping campaigns. Fixed diffusion model, BF16, 1024 square, 30 steps. Independent eight-GPU serving groups, conditional invocation already reflected in image demand."
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 32,
+      "HGX_B200": 40,
+      "HGX_H200": 48
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Morrow Advertising",
       "activities": [
         {
@@ -532,22 +1465,114 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "agent",
-      "batch",
-      "generation"
-    ],
-    "expected_arrangement": "Conditional asset generation after planning; different campaigns overlap.",
-    "acceptance": "Preserve conditional relationship without treating it as an unconditional workload multiplier.",
-    "measurement_next": "Obtain approval fraction, job volume and generation settings.",
-    "expected_question": null
+    }
   },
   {
     "id": "S13",
     "name": "Nacre Customer Portal",
-    "story": "A portal sends all language-model calls to an external provider. It handles 900,000 requests per day. The proposed factory hosts customer data and integration services, not the model. The customer asks whether this requires local GPUs.",
+    "story": "A portal sends all language-model calls to an external provider. It handles 900,000 requests per day. The proposed factory hosts customer data and integration services, not the model. The customer asks whether this requires local GPUs.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The original outside-only service does not need local model GPUs. This revised demonstration explicitly adds a customer-approved local continuity fallback at 20 requests/minute. It is additional scope, not inferred from hosted traffic.\nExact component inputs: [{\"name\": \"Hosted text service\", \"pattern\": \"direct\", \"location\": \"external\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"100\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\"}, {\"name\": \"Local continuity fallback\", \"pattern\": \"direct\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"20\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\"}]",
     "answers": {
+      "name": "Nacre Customer Portal",
+      "activities": [
+        {
+          "name": "Hosted text service",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "external",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        },
+        {
+          "name": "Local continuity fallback",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "direct"
+    ],
+    "expected_arrangement": "External model service; local connectivity and storage remain.",
+    "acceptance": "Never recommend local model GPUs merely because the application uses AI.",
+    "measurement_next": "Measure request/response bytes, data storage and locally executed supporting services.",
+    "expected_question": null,
+    "original_story": "A portal sends all language-model calls to an external provider. It handles 900,000 requests per day. The proposed factory hosts customer data and integration services, not the model. The customer asks whether this requires local GPUs.",
+    "planning_input": {
+      "name": "Nacre Customer Portal",
+      "components": [
+        {
+          "name": "Hosted text service",
+          "pattern": "direct",
+          "location": "external",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "100",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none"
+        },
+        {
+          "name": "Local continuity fallback",
+          "pattern": "direct",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "20",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The original outside-only service does not need local model GPUs. This revised demonstration explicitly adds a customer-approved local continuity fallback at 20 requests/minute. It is additional scope, not inferred from hosted traffic."
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The original outside-only service does not need local model GPUs. This revised demonstration explicitly adds a customer-approved local continuity fallback at 20 requests/minute. It is additional scope, not inferred from hosted traffic.",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Nacre Customer Portal",
       "activities": [
         {
@@ -572,20 +1597,115 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "direct"
-    ],
-    "expected_arrangement": "External model service; local connectivity and storage remain.",
-    "acceptance": "Never recommend local model GPUs merely because the application uses AI.",
-    "measurement_next": "Measure request/response bytes, data storage and locally executed supporting services.",
-    "expected_question": null
+    }
   },
   {
     "id": "S14",
     "name": "Orchid Neocloud",
-    "story": "A provider hosts twenty customers using text endpoints. Premium customers require dedicated resources; standard customers may share a pool. Both groups can peak together. Model choices vary between customers.",
+    "story": "A provider hosts twenty customers using text endpoints. Premium customers require dedicated resources; standard customers may share a pool. Both groups can peak together. Model choices vary between customers.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The 20 tenants are represented by two aggregate demand pools. Premium capacity is reserved. Tenant count is not multiplied into these already aggregated rates.\nExact component inputs: [{\"name\": \"Premium model endpoints\", \"pattern\": \"direct\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"60\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\", \"dedicated\": true}, {\"name\": \"Standard model endpoints\", \"pattern\": \"direct\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"300\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"none\"}]",
     "answers": {
+      "name": "Orchid Neocloud",
+      "activities": [
+        {
+          "name": "Premium model endpoints",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "dedicated"
+        },
+        {
+          "name": "Standard model endpoints",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "multi"
+    },
+    "expected_patterns": [
+      "direct"
+    ],
+    "expected_arrangement": "Simultaneous dedicated and shared service groups.",
+    "acceptance": "Do not equate customer count with GPU count or a proven tenancy limit.",
+    "measurement_next": "Separate model mixes, tenant demand distributions and isolation requirements.",
+    "expected_question": null,
+    "original_story": "A provider hosts twenty customers using text endpoints. Premium customers require dedicated resources; standard customers may share a pool. Both groups can peak together. Model choices vary between customers.",
+    "planning_input": {
+      "name": "Orchid Neocloud",
+      "components": [
+        {
+          "name": "Premium model endpoints",
+          "pattern": "direct",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "60",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none",
+          "dedicated": true
+        },
+        {
+          "name": "Standard model endpoints",
+          "pattern": "direct",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "300",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "none"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "multi",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The 20 tenants are represented by two aggregate demand pools. Premium capacity is reserved. Tenant count is not multiplied into these already aggregated rates."
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. The 20 tenants are represented by two aggregate demand pools. Premium capacity is reserved. Tenant count is not multiplied into these already aggregated rates.",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 16,
+      "HGX_B200": 16,
+      "HGX_H200": 16
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Orchid Neocloud",
       "activities": [
         {
@@ -630,20 +1750,83 @@
       ],
       "overlap": "yes",
       "tenancy": "multi"
-    },
-    "expected_patterns": [
-      "direct"
-    ],
-    "expected_arrangement": "Simultaneous dedicated and shared service groups.",
-    "acceptance": "Do not equate customer count with GPU count or a proven tenancy limit.",
-    "measurement_next": "Separate model mixes, tenant demand distributions and isolation requirements.",
-    "expected_question": null
+    }
   },
   {
     "id": "S15",
     "name": "Peregrine Product Lab",
-    "story": "A product team asks for an AI assistant for roughly 5,000 employees. It cannot yet say whether the assistant searches internal documents, uses tools, or runs locally. It has no usage logs or model selection.",
+    "story": "A product team asks for an AI assistant for roughly 5,000 employees. It cannot yet say whether the assistant searches internal documents, uses tools, or runs locally. It has no usage logs or model selection.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Discovery is now resolved for this demonstration: a local answer model uses an existing search service outside this AI Factory and serves 40 questions/minute. Employee count is not used as demand.\nExact component inputs: [{\"name\": \"Proposed assistant\", \"pattern\": \"retrieval\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"40\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"external\"}]",
     "answers": {
+      "name": "Peregrine Product Lab",
+      "activities": [
+        {
+          "name": "Proposed assistant",
+          "answers": {
+            "text": "yes",
+            "search": "yes",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "retrieval"
+    ],
+    "expected_arrangement": "Provisional text-service match with retrieval, orchestration and placement unresolved.",
+    "acceptance": "Unknown must remain unknown; candidate patterns must not imply confirmed absence of retrieval or agents.",
+    "measurement_next": "Run a short customer walkthrough of three representative tasks.",
+    "expected_question": null,
+    "original_story": "A product team asks for an AI assistant for roughly 5,000 employees. It cannot yet say whether the assistant searches internal documents, uses tools, or runs locally. It has no usage logs or model selection.",
+    "planning_input": {
+      "name": "Peregrine Product Lab",
+      "components": [
+        {
+          "name": "Proposed assistant",
+          "pattern": "retrieval",
+          "location": "local",
+          "relationship": "independent",
+          "model": "dense8b",
+          "rate": "40",
+          "calls": "1",
+          "input_tokens": "2000",
+          "output_tokens": "500",
+          "retrieval": "external"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Discovery is now resolved for this demonstration: a local answer model uses an existing search service outside this AI Factory and serves 40 questions/minute. Employee count is not used as demand."
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Discovery is now resolved for this demonstration: a local answer model uses an existing search service outside this AI Factory and serves 40 questions/minute. Employee count is not used as demand.",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Peregrine Product Lab",
       "activities": [
         {
@@ -668,20 +1851,86 @@
       ],
       "overlap": "unknown",
       "tenancy": "single"
-    },
-    "expected_patterns": [
-      "direct"
-    ],
-    "expected_arrangement": "Provisional text-service match with retrieval, orchestration and placement unresolved.",
-    "acceptance": "Unknown must remain unknown; candidate patterns must not imply confirmed absence of retrieval or agents.",
-    "measurement_next": "Run a short customer walkthrough of three representative tasks.",
-    "expected_question": "Where will the model processing run?"
+    }
   },
   {
     "id": "S16",
     "name": "Quartz Industrial Research",
-    "story": "A manufacturer wants GPU-accelerated fluid simulation for turbine design. Engineers describe meshes, solver steps and simulation deadlines. No text model, retrieval, agent, media generation or model training is involved.",
+    "story": "A manufacturer wants GPU-accelerated fluid simulation for turbine design. Engineers describe meshes, solver steps and simulation deadlines. No text model, retrieval, agent, media generation or model training is involved.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. \nExact component inputs: [{\"name\": \"Fluid simulation\", \"pattern\": \"other\", \"location\": \"local\", \"relationship\": \"independent\", \"sizing_method\": \"reference\", \"reference_demand\": \"0.000138889\", \"reference_unit\": \"simulation\", \"reference_gpus\": \"8\", \"reference_memory\": \"90\", \"reference_h200\": \"0.000069444\", \"reference_b200\": \"0.000092592\", \"reference_b300\": \"0.000138888\", \"reference_independent\": true, \"reference_accepted\": true, \"reference_source\": \"Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.\"}]",
     "answers": {
+      "name": "Quartz Industrial Research",
+      "activities": [
+        {
+          "name": "Fluid simulation",
+          "answers": {
+            "text": "no",
+            "search": "no",
+            "agent": "no",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "scheduled",
+          "calls": "one",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [],
+    "expected_arrangement": "Outside the current common core.",
+    "acceptance": "Do not force a simulation into a language-model or training profile.",
+    "measurement_next": "Obtain solver-specific measurements and propose a future HPC pattern.",
+    "expected_question": "No core pattern confirmed",
+    "original_story": "A manufacturer wants GPU-accelerated fluid simulation for turbine design. Engineers describe meshes, solver steps and simulation deadlines. No text model, retrieval, agent, media generation or model training is involved.",
+    "planning_input": {
+      "name": "Quartz Industrial Research",
+      "components": [
+        {
+          "name": "Fluid simulation",
+          "pattern": "other",
+          "location": "local",
+          "relationship": "independent",
+          "sizing_method": "reference",
+          "reference_demand": "0.000138889",
+          "reference_unit": "simulation",
+          "reference_gpus": "8",
+          "reference_memory": "90",
+          "reference_h200": "0.000069444",
+          "reference_b200": "0.000092592",
+          "reference_b300": "0.000138888",
+          "reference_independent": true,
+          "reference_accepted": true,
+          "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh."
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single",
+      "accepted": true,
+      "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. "
+    },
+    "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. ",
+    "success_criteria": [
+      "Readiness lists no missing GPU inputs.",
+      "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+      "A planning:factory candidate is available for design handoff.",
+      "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+      "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+    ],
+    "revision": "gpu-complete-2.0",
+    "expected_gpu_counts": {
+      "HGX_B300": 16,
+      "HGX_B200": 16,
+      "HGX_H200": 24
+    },
+    "expected_factory_gpus": 256,
+    "original_discovery_answers": {
       "name": "Quartz Industrial Research",
       "activities": [
         {
@@ -706,11 +1955,6 @@
       ],
       "overlap": "yes",
       "tenancy": "single"
-    },
-    "expected_patterns": [],
-    "expected_arrangement": "Outside the current common core.",
-    "acceptance": "Do not force a simulation into a language-model or training profile.",
-    "measurement_next": "Obtain solver-specific measurements and propose a future HPC pattern.",
-    "expected_question": "No core pattern confirmed"
+    }
   }
 ]

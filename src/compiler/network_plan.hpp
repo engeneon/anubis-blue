@@ -23,6 +23,7 @@ inline Json network_plan(const Json &w,const Json &plan) {
  if(!read)read=stored("read_Bps");if(!write)write=stored("write_Bps");
  if(write&&volume&&hours)write=std::max(*write,*volume*Rational(8000)/(*hours*Rational(3600)));
  Json missing=Json::array();
+ for(const auto&s:w["stages"])if(s.contains("planning")&&s["planning"].contains("reference"))missing.push_back("Reference GPU capacity does not determine media, solver or training data traffic. Declare these payloads separately. Reported network rates remain lower bounds.");
  if(!initial)missing.push_back("Provide the initial customer-datacenter data volume and allowed transfer window.");
  if(!daily||!outdaily)missing.push_back("Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates.");
  if(!read||!write)missing.push_back("Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth.");

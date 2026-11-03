@@ -199,7 +199,7 @@ int main(int argc, char **argv) {
         res.set_content("Build the UI with npm run build.", "text/plain");
       }
     });
-    for (auto name : {"app.js", "copilot.js", "fact-review.js", "projection-summary.js", "help.js", "discovery.js", "guided.js", "system-diagram.js", "user-guide.html", "copilot-guide.txt", "anubis-logo.png", "style.css"})
+    for (auto name : {"app.js", "copilot.js", "fact-review.js", "projection-summary.js", "help.js", "discovery.js", "guided.js", "readiness.js", "explanation.js", "system-diagram.js", "user-guide.html", "copilot-guide.txt", "anubis-logo.png", "style.css"})
       server.Get("/" + std::string(name), [&, name](const auto &, auto &res) {
         try {
           res.set_content(file(root + "/ui/dist/" + name),

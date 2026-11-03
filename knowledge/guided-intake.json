@@ -56,19 +56,19 @@
       "id": "stream",
       "name": "Continuous processing",
       "description": "Process live audio, video or other arriving events.",
-      "sizing": "Requires a specialised sizing model"
+      "sizing": "GPU estimate requires a scoped reference: demand, capacity per independent GPU group, memory and source assumptions. Select Reference capacity in Describe scale."
     },
     {
       "id": "generation",
       "name": "Content generation",
       "description": "Create images, audio or video.",
-      "sizing": "Requires a specialised sizing model"
+      "sizing": "GPU estimate requires a scoped reference: demand, capacity per independent GPU group, memory and source assumptions. Select Reference capacity in Describe scale."
     },
     {
       "id": "adaptation",
       "name": "Model adaptation",
       "description": "Modify an existing model with customer training data.",
-      "sizing": "Requires a specialised sizing model"
+      "sizing": "GPU estimate requires a scoped reference: demand, capacity per independent GPU group, memory and source assumptions. Select Reference capacity in Describe scale."
     },
     {
       "id": "training",
@@ -80,7 +80,7 @@
       "id": "other",
       "name": "Other GPU application",
       "description": "Simulation, scientific computing or another workload outside the AI library.",
-      "sizing": "Specialist measurements required; no text-model substitution"
+      "sizing": "GPU estimate requires a scoped reference: demand, capacity per independent GPU group, memory and source assumptions. Select Reference capacity in Describe scale."
     }
   ]
 }

@@ -1,0 +1,22 @@
+test_01_contract_and_access (__main__.Copilot.test_01_contract_and_access) ... ok
+test_02_validation_boundaries (__main__.Copilot.test_02_validation_boundaries) ... ok
+test_03_selective_review_conflict_idempotency (__main__.Copilot.test_03_selective_review_conflict_idempotency) ... ok
+test_04_source_quotation_and_review_authority (__main__.Copilot.test_04_source_quotation_and_review_authority) ... ok
+test_05_provider_adapters_and_credentials (__main__.Copilot.test_05_provider_adapters_and_credentials) ... ok
+test_06_provider_failure_and_cancellation (__main__.Copilot.test_06_provider_failure_and_cancellation) ... ok
+test_07_model_turn_produces_reviewable_proposal (__main__.Copilot.test_07_model_turn_produces_reviewable_proposal) ... ok
+test_08_policy_budget_and_disabled_profile (__main__.Copilot.test_08_policy_budget_and_disabled_profile) ... ok
+test_09_compilation_equivalence_and_facts (__main__.Copilot.test_09_compilation_equivalence_and_facts) ... ok
+test_10_external_edits_and_variants (__main__.Copilot.test_10_external_edits_and_variants) ... ok
+test_11_mcp_discovery_and_schema_pin (__main__.Copilot.test_11_mcp_discovery_and_schema_pin) ... ok
+test_12_injection_cannot_set_acceptance (__main__.Copilot.test_12_injection_cannot_set_acceptance) ... ok
+test_13_endpoint_policy (__main__.Copilot.test_13_endpoint_policy) ... ok
+test_14_source_limits_and_session_isolation (__main__.Copilot.test_14_source_limits_and_session_isolation) ... ok
+test_15_all_scenarios_repeatable_unknown_preservation (__main__.Copilot.test_15_all_scenarios_repeatable_unknown_preservation) ... ok
+test_16_handoff_and_assumption_provenance (__main__.Copilot.test_16_handoff_and_assumption_provenance) ... ok
+test_17_reject_nested_or_numeric_component_values (__main__.Copilot.test_17_reject_nested_or_numeric_component_values) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 4.003s
+
+OK

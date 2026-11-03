@@ -8,7 +8,7 @@ class GuidedAPI(unittest.TestCase):
  req=test_system.API.req
  def test_catalog_assets_and_authorization(self):
   self.assertEqual(self.req('guided-catalog')[0],200)
-  for asset,mime in [('guided.js','javascript'),('system-diagram.js','javascript'),('anubis-logo.png','image/png'),('user-guide.html','html')]:
+  for asset,mime in [('readiness.js','javascript'),('guided.js','javascript'),('system-diagram.js','javascript'),('anubis-logo.png','image/png'),('user-guide.html','html')]:
    with urllib.request.urlopen(f'http://127.0.0.1:{self.port}/'+asset) as r:self.assertEqual(r.status,200);self.assertIn(mime,r.headers['Content-Type'])
   self.assertEqual(self.req('guided-workloads','POST',intake(),actor='reader')[0],403)
   self.assertEqual(self.req('guided-workloads','POST',intake(rate='bad'))[0],422)

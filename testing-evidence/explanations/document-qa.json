@@ -1,0 +1,30 @@
+[
+  {
+    "scenario": "S11",
+    "pages": 39,
+    "embedded_figures": 50,
+    "text_checks": "passed",
+    "visual_review": "page contact sheets and representative full-size pages reviewed. Diagram clipping and blank separator page corrected."
+  },
+  {
+    "scenario": "S16",
+    "pages": 32,
+    "embedded_figures": 40,
+    "text_checks": "passed",
+    "visual_review": "page contact sheets and representative full-size pages reviewed. Diagram clipping and blank separator page corrected."
+  },
+  {
+    "scenario": "S13",
+    "pages": 36,
+    "embedded_figures": 42,
+    "text_checks": "passed",
+    "visual_review": "page contact sheets and representative full-size pages reviewed. Diagram clipping and blank separator page corrected."
+  },
+  {
+    "scenario": "S14",
+    "pages": 34,
+    "embedded_figures": 46,
+    "text_checks": "passed",
+    "visual_review": "page contact sheets and representative full-size pages reviewed. Diagram clipping and blank separator page corrected."
+  }
+]

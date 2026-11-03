@@ -1,6 +1,7 @@
 #pragma once
 #include "compiler/compiler.hpp"
 #include "compiler/planning.hpp"
+#include "application/characterization/readiness.hpp"
 namespace anubis {
 // Pure transformation shared by UI and API clients. No narrative interpretation.
 inline Json guided_workload(const Json &b,const Json &pack) {
@@ -30,7 +31,7 @@ inline Json guided_workload(const Json &b,const Json &pack) {
   return result;
  };
  for(const auto &c:b["components"]) {
-  keys(c,{"name","pattern","location","demand_mode","rate","users","interval","jobs","window","calls","input_tokens","output_tokens","model","tokens","days","storage_tb","growth_gb_day","horizon_days","retrieval","service_seconds","relationship","dedicated"},"/components");
+  keys(c,{"name","pattern","location","demand_mode","rate","users","interval","jobs","window","calls","input_tokens","output_tokens","model","tokens","days","storage_tb","growth_gb_day","horizon_days","retrieval","service_seconds","relationship","dedicated","sizing_method","reference_demand","reference_unit","reference_gpus","reference_memory","reference_h200","reference_b200","reference_b300","reference_source","reference_independent","reference_includes_support","reference_accepted"},"/components");
   auto id="component_"+std::to_string(++i),pattern=text(c,"pattern"),name=text(c,"name");
   require(!name.empty()&&name.size()<=160,"component_name","Name each component (up to 160 characters)");
   bool known=false;for(const auto &p:pack["patterns"])if(p["id"]==pattern)known=true;
@@ -39,9 +40,16 @@ inline Json guided_workload(const Json &b,const Json &pack) {
   auto relationship=c.value("relationship",std::string("independent"));require(relationship=="independent"||relationship=="after"||relationship=="alongside"||relationship=="conditional","relationship","Choose a component relationship");
   require(!(overlap=="no"&&relationship=="alongside"),"schedule","Alongside components cannot use separate operating windows");
   bool supported=pattern=="direct"||pattern=="retrieval"||pattern=="agent"||pattern=="batch"||pattern=="training";
-  auto type=location=="external"?"cpu":!supported||location!="local"?"unsupported":pattern=="training"?"training":pattern=="batch"?"batch":"inference";
+  bool reference=c.value("sizing_method",std::string())=="reference";
+  auto type=reference&&location=="local"?"cpu":location=="external"?"cpu":!supported||location!="local"?"unsupported":pattern=="training"?"training":pattern=="batch"?"batch":"inference";
   Json s={{"id",id},{"name",name},{"type",type},{"observations",Json::object()},{"notes",location=="external"?"External compute excluded. Connectivity and storage remain separate requirements.":"Application component: "+pattern}};
-  if(type==std::string("unsupported")) {
+  if(reference&&location=="local") {
+   auto single=b;single["components"]=Json::array({c});auto ready=gpu_readiness(single);
+   if(!ready["ready"].get<bool>()){s["type"]="unsupported";s["notes"]="Reference GPU inputs incomplete. No count inferred.";for(const auto&issue:ready["missing"])follow.push_back(name+": "+issue["label"].get<std::string>()+" — "+issue["reason"].get<std::string>());}
+   else {s["planning"]=Json::object();for(const auto*k:{"host_ram_GB_per_gpu","local_disk_GB_per_gpu","cpu_cores_per_gpu"})s["planning"][k]=pack["serving"][k];
+   s["planning"]["reference"]={{"demand",c["reference_demand"]},{"unit",c["reference_unit"]},{"group_gpus",c["reference_gpus"]},{"memory_GB",c["reference_memory"]},{"capacities",{{"HGX_H200",c["reference_h200"]},{"HGX_B200",c["reference_b200"]},{"HGX_B300",c["reference_b300"]}}},{"source",c["reference_source"]},{"accepted",c["reference_accepted"]},{"independent_groups",c["reference_independent"]}};
+   s["notes"]="Consultant supplied reference capacity. Full groups replicated for independent work. Not text-token sizing.";}
+  } else if(type==std::string("unsupported")) {
    std::string next=pattern=="other"?"Obtain solver-specific throughput, mesh size, solver steps, memory and completion deadline.":"Obtain workload-specific model, throughput, memory and completion-window measurements.";
    follow.push_back(name+": "+next);s["notes"]=next;
   } else if(location=="local") {
@@ -65,7 +73,7 @@ inline Json guided_workload(const Json &b,const Json &pack) {
   }
   if(pattern=="retrieval"||pattern=="agent") {
    auto retrieval=c.value("retrieval",std::string("unknown"));require(retrieval=="external"||retrieval=="local"||retrieval=="none"||retrieval=="unknown","retrieval","Choose retrieval placement");
-   if(retrieval=="local"||retrieval=="unknown") {auto rid=id+"_retrieval";w["stages"].push_back({{"id",rid},{"name",name+" retrieval and indexing"},{"type","unsupported"},{"observations",Json::object()},{"notes","Confirm embedding model, index refresh volume, CPU/GPU placement and search throughput. Not included in text GPU estimate."}});follow.push_back(name+": retrieval and indexing resources need separate measurements. text GPU count is partial.");}
+   if((retrieval=="local"||retrieval=="unknown")&&!reference) {auto rid=id+"_retrieval";w["stages"].push_back({{"id",rid},{"name",name+" retrieval and indexing"},{"type","unsupported"},{"observations",Json::object()},{"notes","Confirm embedding model, index refresh volume, CPU/GPU placement and search throughput. Not included in text GPU estimate."}});follow.push_back(name+": retrieval and indexing resources need separate measurements. text GPU count is partial.");}
   }
   w["stages"].push_back(s);
   auto storage=c.value("storage_tb",std::string(""));
@@ -76,12 +84,12 @@ inline Json guided_workload(const Json &b,const Json &pack) {
    if(!growth.empty()){auto g=Rational::decimal(growth),h=Rational::decimal(horizon);require(g>=Rational(0)&&h>Rational(0),"growth","Growth must be nonnegative and horizon positive");tb=tb+g*h/Rational(1000);}
    w["stages"].push_back({{"id",id+"_data"},{"name",name+" retained data"},{"type","data"},{"storage_tier","object"},{"observations",{{"bytes",observation(Json{{"bytes",tb.display(6)}},"bytes","TB")},{"free_fraction",observation(Json::object(),"free_fraction","ratio",".2")}}}});
   }
-  map.push_back({{"id",id},{"name",name},{"pattern",pattern},{"location",location},{"retrieval",c.value("retrieval",std::string("unknown"))},{"relationship",relationship},{"support",location=="external"?"External compute":supported&&location=="local"?"Analytical sizing":"Specialist measurements required"}});
+  map.push_back({{"id",id},{"name",name},{"pattern",pattern},{"location",location},{"retrieval",c.value("retrieval",std::string("unknown"))},{"relationship",relationship},{"support",location=="external"?"External compute":reference&&location=="local"?"Reference capacity sizing":supported&&location=="local"?"Analytical sizing":"Specialist measurements required"}});
  }
  bool dedicated=false;for(const auto &c:b["components"]) {if(c.contains("dedicated"))require(c["dedicated"].is_boolean(),"dedicated","Dedicated capacity must be boolean");dedicated=dedicated||c.value("dedicated",false);}
  if(overlap=="no"&&!dedicated) {for(const auto &m:map){Json active=Json::array();auto id=m["id"].get<std::string>();for(const auto&s:w["stages"])if(s["type"]=="data"||s["id"].get<std::string>().starts_with(id+"_")||s["id"]==id)active.push_back(s["id"]);w["scenarios"].push_back({{"id",id},{"name",m["name"]},{"active_stages",active},{"multiplier","1"},{"failed_nodes",0}});}}
  else {w["scenarios"].push_back({{"id","coincident"},{"name","Simultaneous or reserved capacity"},{"multiplier","1"},{"failed_nodes",0}});if(overlap=="unknown"&&map.size()>1)follow.push_back("Overlap unknown: simultaneous demand assumed until schedules are confirmed.");}
- w["characterization"]={{"guided_input",b},{"pack_version",pack["version"]},{"pack_digest",digest(pack)},{"components",map},{"follow_up",follow}};
+ w["characterization"]={{"guided_input",b},{"gpu_readiness",gpu_readiness(b)},{"pack_version",pack["version"]},{"pack_digest",digest(pack)},{"components",map},{"follow_up",follow}};
  validate_workload(w);return w;
 }
 }

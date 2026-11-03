@@ -3331,6 +3331,201 @@
         "parameters": []
       }
     },
+    "/api/v1/guided-readiness": {
+      "post": {
+        "operationId": "post_guided_readiness",
+        "summary": "Return deterministic minimum GPU input requirements without persistence",
+        "x-authorization": "authenticated",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return deterministic minimum GPU input requirements without persistence"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-explanations": {
+      "post": {
+        "operationId": "post_copilot_explanations",
+        "summary": "Save a deterministic explanation or queue a read-only model explanation",
+        "x-authorization": "writer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Save a deterministic explanation or queue a read-only model explanation"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "result_id": {
+                    "type": "string"
+                  },
+                  "projection_id": {
+                    "type": "string"
+                  },
+                  "profile_id": {
+                    "type": "string"
+                  },
+                  "classification": {
+                    "type": "string",
+                    "enum": [
+                      "public",
+                      "corporate"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/copilot-explanations/{id}": {
+      "get": {
+        "operationId": "get_copilot_explanations_by_id",
+        "summary": "Read a saved explanation and exact result provenance",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read a saved explanation and exact result provenance"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/copilot-explanations/{result_id}/history": {
+      "get": {
+        "operationId": "get_copilot_explanations_{result_id}_history",
+        "summary": "List explanations for an exact saved result",
+        "x-authorization": "member",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List explanations for an exact saved result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "409": {
+            "description": "Conflict or target unavailable"
+          },
+          "422": {
+            "description": "Contract/engineering input validation error"
+          },
+          "428": {
+            "description": "If-Match required"
+          }
+        },
+        "parameters": []
+      }
+    },
     "/api/v1/guided-workloads": {
       "post": {
         "operationId": "post_guided_workloads",

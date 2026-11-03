@@ -54,6 +54,10 @@ route('POST','jobs/{id}/reconcile','writer','Import evidence to reconcile uncert
 route('POST','admin/backup','admin','Consistent SQLite snapshot to server-controlled backup directory',{},201)
 route('GET','planning-catalog','member','Read versioned planning hardware, model assumptions and supported downstream design tool anchors')
 route('GET','guided-catalog','member','Read versioned application patterns and accepted-default profiles')
+route('POST','guided-readiness','authenticated','Return deterministic minimum GPU input requirements without persistence',None)
+route('POST','copilot-explanations','writer','Save a deterministic explanation or queue a read-only model explanation',{'result_id':{'type':'string'},'projection_id':{'type':'string'},'profile_id':{'type':'string'},'classification':{'type':'string','enum':['public','corporate']}},201)
+route('GET','copilot-explanations/{id}','member','Read a saved explanation and exact result provenance')
+route('GET','copilot-explanations/{result_id}/history','member','List explanations for an exact saved result')
 route('POST','guided-workloads','writer','Transform architecture-led intake into a validated workload without persistence',{'name':{'type':'string'},'components':{'type':'array','minItems':1,'maxItems':16,'items':{'type':'object'}},'accepted':{'type':'boolean'},'overlap':{'enum':['yes','no','unknown']},'tenancy':{'enum':['single','multi']},'architecture':{'type':'string'},'sensitivity':{'type':'string'},'notes':{'type':'string'}})
 # Optional copilot API. Runtime owns field-level and source validation.
 route('POST','assisted-compatibility','writer','Inspect lossless assisted compatibility and preview a separate assisted copy without changing the supplied workload')

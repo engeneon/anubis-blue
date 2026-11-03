@@ -1,0 +1,106 @@
+[
+  {
+    "scenario": "S11",
+    "route": "manual",
+    "validated": true,
+    "steps": 21,
+    "gpus": {
+      "HGX_B300": 24,
+      "HGX_B200": 24,
+      "HGX_H200": 32
+    },
+    "explanation_mode": "deterministic",
+    "completion_id": "engagement_completion_60e469b7fdf9a283bfd0f0c20def4933"
+  },
+  {
+    "scenario": "S11",
+    "route": "assisted",
+    "validated": true,
+    "steps": 27,
+    "gpus": {
+      "HGX_B300": 24,
+      "HGX_B200": 24,
+      "HGX_H200": 32
+    },
+    "explanation_mode": "model_assisted",
+    "completion_id": "engagement_completion_247b05ba1c6f94b093d9b3e9aebfa5f0"
+  },
+  {
+    "scenario": "S13",
+    "route": "manual",
+    "validated": true,
+    "steps": 17,
+    "gpus": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "explanation_mode": "deterministic",
+    "completion_id": "engagement_completion_57150fac617e5a0a9c5b0c0bfbd9db62"
+  },
+  {
+    "scenario": "S13",
+    "route": "assisted",
+    "validated": true,
+    "steps": 23,
+    "gpus": {
+      "HGX_B300": 8,
+      "HGX_B200": 8,
+      "HGX_H200": 8
+    },
+    "explanation_mode": "model_assisted",
+    "completion_id": "engagement_completion_9d6480801bf85dc431837b758b3fb018"
+  },
+  {
+    "scenario": "S14",
+    "route": "manual",
+    "validated": true,
+    "steps": 19,
+    "gpus": {
+      "HGX_B300": 16,
+      "HGX_B200": 16,
+      "HGX_H200": 16
+    },
+    "explanation_mode": "deterministic",
+    "completion_id": "engagement_completion_d28f87d300d1ac77bc22e7883ebc06ae"
+  },
+  {
+    "scenario": "S14",
+    "route": "assisted",
+    "validated": true,
+    "steps": 25,
+    "gpus": {
+      "HGX_B300": 16,
+      "HGX_B200": 16,
+      "HGX_H200": 16
+    },
+    "explanation_mode": "model_assisted",
+    "completion_id": "engagement_completion_81b4e71e01ca90836328472484486a80"
+  },
+  {
+    "scenario": "S16",
+    "route": "manual",
+    "validated": true,
+    "steps": 17,
+    "gpus": {
+      "HGX_B300": 16,
+      "HGX_B200": 16,
+      "HGX_H200": 24
+    },
+    "explanation_mode": "deterministic",
+    "completion_id": "engagement_completion_1ef08d2bbd7b97d8951be5a81c12092c"
+  },
+  {
+    "scenario": "S16",
+    "route": "assisted",
+    "validated": true,
+    "steps": 22,
+    "gpus": {
+      "HGX_B300": 16,
+      "HGX_B200": 16,
+      "HGX_H200": 24
+    },
+    "explanation_mode": "model_assisted",
+    "completion_id": "engagement_completion_c085541a6862246c7f1c7cc04d1e14da"
+  }
+]

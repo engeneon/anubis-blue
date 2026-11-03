@@ -1,0 +1,577 @@
+{
+  "candidates": [
+    {
+      "constraints": [],
+      "evidence_channel": "public_planning",
+      "gpu_per_node": 8,
+      "gpus": 256,
+      "host": {
+        "ram_GB": "65536"
+      },
+      "id": "planning:factory",
+      "memory": {
+        "required_GB_per_gpu": "90"
+      },
+      "nodes": 32,
+      "planning": true,
+      "platform": "HGX_B300",
+      "profile_id": "SX-HGXB300-DP-ENT-1.0.0",
+      "scenario_id": "portfolio",
+      "stage_id": "factory",
+      "status": "conditional"
+    }
+  ],
+  "characterization": {
+    "basis": "Declared stage families; percentage mix requires a common time horizon and utilization, not a ratio of incomparable token and transaction rates",
+    "inference_share_percent": null,
+    "inference_stage_count": 0,
+    "training_share_percent": null,
+    "training_stage_count": 0,
+    "workload_character": "non_gpu_or_unresolved"
+  },
+  "derivations": [],
+  "domains": {
+    "compute": "conditional",
+    "network": "conditional",
+    "storage": "conditional",
+    "tenancy": "unknown"
+  },
+  "engine_source_digest": "8b3bebd03a817e0e878baf3cc7887d5fd15495bb6aee534caf0f2f6e56557ba2",
+  "engine_version": "0.1.0",
+  "execution_profile": "rational64-v1",
+  "factory_configurations": [],
+  "facts": [],
+  "guided_context": {
+    "characterization": {
+      "components": [
+        {
+          "id": "component_1",
+          "location": "local",
+          "name": "Fluid simulation",
+          "pattern": "other",
+          "relationship": "independent",
+          "retrieval": "unknown",
+          "support": "Reference capacity sizing"
+        }
+      ],
+      "follow_up": [],
+      "gpu_readiness": {
+        "assumptions": [
+          "Reference capacity is supplied by the consultant. It is not an Anubis benchmark qualification."
+        ],
+        "meaning": "Inputs support a GPU calculation. Accept assumptions and calculate to check capacity and memory feasibility.",
+        "missing": [],
+        "ready": true
+      },
+      "guided_input": {
+        "accepted": true,
+        "components": [
+          {
+            "demand_mode": "rate",
+            "location": "local",
+            "model": "dense8b",
+            "name": "Fluid simulation",
+            "pattern": "other",
+            "reference_accepted": true,
+            "reference_b200": "0.000092592",
+            "reference_b300": "0.000138888",
+            "reference_demand": "0.000138889",
+            "reference_gpus": "8",
+            "reference_h200": "0.000069444",
+            "reference_independent": true,
+            "reference_memory": "90",
+            "reference_source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+            "reference_unit": "simulation",
+            "relationship": "independent",
+            "retrieval": "unknown",
+            "sizing_method": "reference"
+          }
+        ],
+        "name": "Quartz Industrial Research manual playbook",
+        "network": {},
+        "notes": "",
+        "overlap": "yes",
+        "tenancy": "single"
+      },
+      "pack_digest": "19b88f641cd559ab19af96a51a205f2228d780b00944ebcfb720d473ccbced24",
+      "pack_version": "guided-1.0"
+    },
+    "name": "Quartz Industrial Research manual playbook",
+    "notes": ""
+  },
+  "knowledge_channel": "public_planning",
+  "knowledge_digest": "e4336dbf239759add3680700549617a1ce8ba663d3d23d7c5238da577bb606c2",
+  "planning": {
+    "architecture": {
+      "anchors": [
+        {
+          "gpus": 256,
+          "nodes": 32
+        },
+        {
+          "gpus": 512,
+          "nodes": 64
+        },
+        {
+          "gpus": 1024,
+          "nodes": 128
+        }
+      ],
+      "fabric": "Spectrum-X",
+      "family": "Enterprise RA dual plane",
+      "id": "SX-HGXB300-DP-ENT-1.0.0",
+      "platform": "HGX_B300",
+      "sha256": "ddad35c3ee06e30615f534f6211349a919f381fd01a3857c2fbb1c2457049a4a",
+      "source": "ckp/spectrumx_reference/v1_0_0/ckp/reference_profiles/sx_hgxb300_dp_ent_1_0_0.json"
+    },
+    "catalog_digest": "9232d2e598b47e007b4c0a7e29930c6038885b6f1a78f9ae339eabbcff17e94b",
+    "catalog_version": "planning-1.1",
+    "cpu_cores_provision": 256,
+    "downside_gpus": 16,
+    "egress_Gbps": "0",
+    "evidence_basis": "declared_reference_and_analytical_planning",
+    "excess_gpus": 240,
+    "expansion_anchor": {
+      "gpus": 512,
+      "nodes": 64
+    },
+    "expansion_trigger": "Review when observed demand exceeds initial planning envelope or agreed service degrades. start procurement before declared lead time expires",
+    "gaps": [],
+    "hardware": {
+      "bandwidth_TBps": "7.7",
+      "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+      "cpu_cores_per_node": 128,
+      "dense_bf16_TFLOPS": "2250",
+      "gpu_per_node": 8,
+      "hbm_GB": "288",
+      "host_ram_GB_per_node": "2048",
+      "local_disk_GB_per_node": "30720",
+      "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+      "usable_hbm_fraction": "0.90"
+    },
+    "hardware_comparison": [
+      {
+        "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+        "downside_gpus": 16,
+        "gaps": [],
+        "gpu_per_node": 8,
+        "hardware": {
+          "bandwidth_TBps": "7.7",
+          "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+          "cpu_cores_per_node": 128,
+          "dense_bf16_TFLOPS": "2250",
+          "gpu_per_node": 8,
+          "hbm_GB": "288",
+          "host_ram_GB_per_node": "2048",
+          "local_disk_GB_per_node": "30720",
+          "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+          "usable_hbm_fraction": "0.90"
+        },
+        "platform": "HGX_B300",
+        "provided_GB_per_gpu": "288",
+        "raw_gpus": 16,
+        "required_GB_per_gpu": "90",
+        "stage_calculations": [
+          {
+            "assumptions": {
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "local_disk_GB_per_gpu": "3840",
+              "reference": {
+                "accepted": true,
+                "capacities": {
+                  "HGX_B200": "0.000092592",
+                  "HGX_B300": "0.000138888",
+                  "HGX_H200": "0.000069444"
+                },
+                "demand": "0.000138889",
+                "group_gpus": "8",
+                "independent_groups": true,
+                "memory_GB": "90",
+                "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+                "unit": "simulation"
+              }
+            },
+            "capacity_per_replica": "0.000139",
+            "capacity_unit": "simulation/s per reference group",
+            "demand": "0.000139",
+            "demand_unit": "simulation/s",
+            "memory_fit": true,
+            "model": {
+              "name": "Reference workload"
+            },
+            "raw_gpus": 16,
+            "reference": {
+              "accepted": true,
+              "capacities": {
+                "HGX_B200": "0.000092592",
+                "HGX_B300": "0.000138888",
+                "HGX_H200": "0.000069444"
+              },
+              "demand": "0.000138889",
+              "group_gpus": "8",
+              "independent_groups": true,
+              "memory_GB": "90",
+              "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+              "unit": "simulation"
+            },
+            "replicas": 2,
+            "required_GB_per_gpu": "90",
+            "rule": "ceil(demand / capacity per independent group) × group GPUs, rounded to whole nodes. No cross-hardware or single-job scaling inferred.",
+            "scenario_id": "coincident",
+            "stage_id": "component_1"
+          }
+        ],
+        "status": "conditional",
+        "upside_gpus": 8
+      },
+      {
+        "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+        "downside_gpus": 24,
+        "gaps": [],
+        "gpu_per_node": 8,
+        "hardware": {
+          "bandwidth_TBps": "8",
+          "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+          "compute_source": "https://www.nvidia.com/en-au/data-center/hgx/",
+          "cpu_cores_per_node": 128,
+          "dense_bf16_TFLOPS": "2250",
+          "gpu_per_node": 8,
+          "hbm_GB": "180",
+          "host_ram_GB_per_node": "2048",
+          "local_disk_GB_per_node": "30720",
+          "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+          "usable_hbm_fraction": "0.90"
+        },
+        "platform": "HGX_B200",
+        "provided_GB_per_gpu": "180",
+        "raw_gpus": 16,
+        "required_GB_per_gpu": "90",
+        "stage_calculations": [
+          {
+            "assumptions": {
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "local_disk_GB_per_gpu": "3840",
+              "reference": {
+                "accepted": true,
+                "capacities": {
+                  "HGX_B200": "0.000092592",
+                  "HGX_B300": "0.000138888",
+                  "HGX_H200": "0.000069444"
+                },
+                "demand": "0.000138889",
+                "group_gpus": "8",
+                "independent_groups": true,
+                "memory_GB": "90",
+                "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+                "unit": "simulation"
+              }
+            },
+            "capacity_per_replica": "0.000093",
+            "capacity_unit": "simulation/s per reference group",
+            "demand": "0.000139",
+            "demand_unit": "simulation/s",
+            "memory_fit": true,
+            "model": {
+              "name": "Reference workload"
+            },
+            "raw_gpus": 16,
+            "reference": {
+              "accepted": true,
+              "capacities": {
+                "HGX_B200": "0.000092592",
+                "HGX_B300": "0.000138888",
+                "HGX_H200": "0.000069444"
+              },
+              "demand": "0.000138889",
+              "group_gpus": "8",
+              "independent_groups": true,
+              "memory_GB": "90",
+              "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+              "unit": "simulation"
+            },
+            "replicas": 2,
+            "required_GB_per_gpu": "90",
+            "rule": "ceil(demand / capacity per independent group) × group GPUs, rounded to whole nodes. No cross-hardware or single-job scaling inferred.",
+            "scenario_id": "coincident",
+            "stage_id": "component_1"
+          }
+        ],
+        "status": "conditional",
+        "upside_gpus": 16
+      },
+      {
+        "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+        "downside_gpus": 24,
+        "gaps": [],
+        "gpu_per_node": 8,
+        "hardware": {
+          "bandwidth_TBps": "4.8",
+          "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+          "compute_source": "https://www.nvidia.com/en-au/data-center/h200/",
+          "cpu_cores_per_node": 128,
+          "dense_bf16_TFLOPS": "989.5",
+          "gpu_per_node": 8,
+          "hbm_GB": "141",
+          "host_ram_GB_per_node": "2048",
+          "local_disk_GB_per_node": "30720",
+          "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+          "usable_hbm_fraction": "0.90"
+        },
+        "platform": "HGX_H200",
+        "provided_GB_per_gpu": "141",
+        "raw_gpus": 24,
+        "required_GB_per_gpu": "90",
+        "stage_calculations": [
+          {
+            "assumptions": {
+              "cpu_cores_per_gpu": 16,
+              "host_ram_GB_per_gpu": "256",
+              "local_disk_GB_per_gpu": "3840",
+              "reference": {
+                "accepted": true,
+                "capacities": {
+                  "HGX_B200": "0.000092592",
+                  "HGX_B300": "0.000138888",
+                  "HGX_H200": "0.000069444"
+                },
+                "demand": "0.000138889",
+                "group_gpus": "8",
+                "independent_groups": true,
+                "memory_GB": "90",
+                "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+                "unit": "simulation"
+              }
+            },
+            "capacity_per_replica": "0.000069",
+            "capacity_unit": "simulation/s per reference group",
+            "demand": "0.000139",
+            "demand_unit": "simulation/s",
+            "memory_fit": true,
+            "model": {
+              "name": "Reference workload"
+            },
+            "raw_gpus": 24,
+            "reference": {
+              "accepted": true,
+              "capacities": {
+                "HGX_B200": "0.000092592",
+                "HGX_B300": "0.000138888",
+                "HGX_H200": "0.000069444"
+              },
+              "demand": "0.000138889",
+              "group_gpus": "8",
+              "independent_groups": true,
+              "memory_GB": "90",
+              "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+              "unit": "simulation"
+            },
+            "replicas": 3,
+            "required_GB_per_gpu": "90",
+            "rule": "ceil(demand / capacity per independent group) × group GPUs, rounded to whole nodes. No cross-hardware or single-job scaling inferred.",
+            "scenario_id": "coincident",
+            "stage_id": "component_1"
+          }
+        ],
+        "status": "conditional",
+        "upside_gpus": 16
+      }
+    ],
+    "host_ram_GB_provided": "65536",
+    "host_ram_GB_required": "4096",
+    "ingress_Gbps": "0",
+    "initial_gpus": 256,
+    "limitations": [
+      "Analytical assumptions, not measured serving performance or guaranteed latency",
+      "Distinct stages use dedicated pools. scenarios reuse capacity only when declared non-overlapping",
+      "Host configuration and training scaling require later deployment validation"
+    ],
+    "local_disk_GB_required": "61440",
+    "network_scope": "Application tokens plus declared external transfers. customer RTT requirement remains independent. other payloads must be declared",
+    "networks": {
+      "basis": "Decimal TB and GB. Initial transfer rate = volume times 8 divided by transfer seconds. Apply protocol allowance and divide by usable link fraction. Application traffic is counted once at the external and north-south boundaries.",
+      "east_west": {
+        "fabric": "Spectrum-X",
+        "per_gpu_link_lower_bound_Gbps": null,
+        "per_gpu_payload_Gbps": null,
+        "scope": "GPU communication fabric. A fabric selection is not a qualified bandwidth or latency result."
+      },
+      "external_customer_datacenter": {
+        "connection": "Customer datacenter to AI Factory routed connectivity. Carrier, redundancy and encryption design remain architect decisions.",
+        "initial_load_link_Gbps": null,
+        "required_ingress_lower_bound_Gbps": null,
+        "round_trip_target_ms": null,
+        "status": "initial_load_unresolved",
+        "steady_egress_lower_bound_Gbps": "0",
+        "steady_ingress_lower_bound_Gbps": "0"
+      },
+      "follow_up": [
+        "Reference GPU capacity does not determine media, solver or training data traffic. Declare these payloads separately. Reported network rates remain lower bounds.",
+        "Provide the initial customer-datacenter data volume and allowed transfer window.",
+        "Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates.",
+        "Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth.",
+        "East-west per-GPU port demand needs the selected reference design and collective-communication measurements.",
+        "Customer-datacenter round-trip latency objective is unspecified."
+      ],
+      "initial_load_overlaps_operation": true,
+      "model_version": "network-planning-1.0",
+      "north_south": {
+        "egress_lower_bound_Gbps": "0",
+        "ingress_lower_bound_Gbps": null,
+        "scope": "Factory border to workload and storage endpoints. Carries the same external traffic, not an additional copy. Other tenants and non-model payloads need separate measurements."
+      },
+      "protocol_allowance": "1.2",
+      "storage": {
+        "converged": false,
+        "dedicated": true,
+        "read_link_lower_bound_Gbps": null,
+        "read_payload_Gbps": null,
+        "scope": "Physically dedicated storage fabric. Read and write are separate directions. Confirm bisection, fan-in, checkpoint bursts and initial-load writes. Unknown rates are not zero.",
+        "technology": "Ethernet",
+        "write_link_lower_bound_Gbps": null,
+        "write_payload_Gbps": null
+      },
+      "usable_link_fraction": "0.7"
+    },
+    "nodes_or_trays": 32,
+    "policy": {
+      "accept_capacity_shortfall": false,
+      "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+      "assumptions_accepted": true,
+      "bytes_per_token": "4",
+      "compute_efficiency": "0.35",
+      "expansion_lead_days": 90,
+      "memory_efficiency": "0.50",
+      "minimum_service_fraction": "1",
+      "protocol_allowance": "1.2",
+      "sensitivity_percent": "30",
+      "source": "Anubis guided-1.0 planning defaults, consultant accepted; not measured"
+    },
+    "provided_GB_per_gpu": "288",
+    "racks": null,
+    "raw_gpus": 16,
+    "required_GB_per_gpu": "90",
+    "scenarios": [
+      {
+        "downside_gpus": 16,
+        "failure_nodes": 0,
+        "id": "coincident",
+        "raw_gpus": 16,
+        "upside_gpus": 8
+      }
+    ],
+    "selected_anchor": {
+      "gpus": 256,
+      "nodes": 32
+    },
+    "service_capacity_fraction": "1",
+    "shortfall_gpus": 0,
+    "stage_calculations": [
+      {
+        "assumptions": {
+          "cpu_cores_per_gpu": 16,
+          "host_ram_GB_per_gpu": "256",
+          "local_disk_GB_per_gpu": "3840",
+          "reference": {
+            "accepted": true,
+            "capacities": {
+              "HGX_B200": "0.000092592",
+              "HGX_B300": "0.000138888",
+              "HGX_H200": "0.000069444"
+            },
+            "demand": "0.000138889",
+            "group_gpus": "8",
+            "independent_groups": true,
+            "memory_GB": "90",
+            "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+            "unit": "simulation"
+          }
+        },
+        "capacity_per_replica": "0.000139",
+        "capacity_unit": "simulation/s per reference group",
+        "demand": "0.000139",
+        "demand_unit": "simulation/s",
+        "memory_fit": true,
+        "model": {
+          "name": "Reference workload"
+        },
+        "raw_gpus": 16,
+        "reference": {
+          "accepted": true,
+          "capacities": {
+            "HGX_B200": "0.000092592",
+            "HGX_B300": "0.000138888",
+            "HGX_H200": "0.000069444"
+          },
+          "demand": "0.000138889",
+          "group_gpus": "8",
+          "independent_groups": true,
+          "memory_GB": "90",
+          "source": "Fictional consultant planning assumption for this demonstration, not measured benchmark evidence. Twelve independent CFD runs per 24h. Fixed solver/version, 20-million-cell mesh, 10,000 steps, FP64 mixed solver. Each job fits one eight-GPU group. Assumed group run times H200 4h, B200 3h, B300 2h. Rates conservatively rounded. No linear scaling of one larger mesh.",
+          "unit": "simulation"
+        },
+        "replicas": 2,
+        "required_GB_per_gpu": "90",
+        "rule": "ceil(demand / capacity per independent group) × group GPUs, rounded to whole nodes. No cross-hardware or single-job scaling inferred.",
+        "scenario_id": "coincident",
+        "stage_id": "component_1"
+      }
+    ],
+    "status": "conditional",
+    "storage": [],
+    "storage_fabric": "Ethernet",
+    "storage_network_policy": "Physically dedicated storage network required. Converged networking is excluded.",
+    "tenancy": "single",
+    "upside_gpus": 8,
+    "usable_GB_per_gpu": "259.2",
+    "version": "1.0",
+    "workload_capacity": {
+      "basis": "Whole copies of the same workload profile at coincident declared peaks, using dedicated node-rounded GPU pools and a separate reserve per copy. Sensitivity counts are planning envelopes, not confidence intervals.",
+      "minimum_architecture": {
+        "additional_instances_compute": 15,
+        "downside_instances_compute": 16,
+        "equivalent_instances_compute": 16,
+        "gpus": 256,
+        "supports_one_instance_compute": true,
+        "upside_instances_compute": 32
+      },
+      "qualification": "Compute estimate only. Each copy also needs its storage, host resources and network capacity. tenancy and isolation require architectural validation. Architecture family is the selected catalogue profile, not an additional NCP compliance claim.",
+      "selected_architecture": {
+        "additional_instances_compute": 15,
+        "downside_instances_compute": 16,
+        "equivalent_instances_compute": 16,
+        "gpus": 256,
+        "supports_one_instance_compute": true,
+        "upside_instances_compute": 32
+      },
+      "tenant_limit": null
+    }
+  },
+  "questions": [
+    {
+      "code": "missing_or_unqualified",
+      "message": "CPU sizing requires measured core-seconds per operation, arrival rate and utilization.",
+      "path": "/stages/component_1/observations",
+      "stage_id": "component_1"
+    }
+  ],
+  "resource_candidates": [],
+  "resource_search": {
+    "evaluated": 0,
+    "limit": 256,
+    "optimality": "not_claimed",
+    "truncated": false
+  },
+  "schema_version": "1.0",
+  "scope": "Planning portfolio with explicit assumptions. measured profiles remain separate",
+  "search": {
+    "evaluated": 0,
+    "limit": 256,
+    "optimality": "not_claimed",
+    "truncated": false
+  },
+  "selection_state": "experimental",
+  "semantic_digest": "16f7b3f5f1ca58afb24acbc30846f9ba171ca9c02b122d9a1e87531bf2ada7d2",
+  "workload_digest": "2e080525b287bd90c2cec30da3c5446a01837ed9d0a15838a0591f9d968f157f"
+}

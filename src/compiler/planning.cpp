@@ -25,7 +25,16 @@ void validate_planning(const Json &w) {
  for(auto k:{"assumptions_accepted","accept_capacity_shortfall"})require(p.contains(k)&&p[k].is_boolean(),"planning_input","Acceptance must be boolean");
  for(const auto &s:w["stages"])if(s.contains("planning")) {
   auto a=s["planning"];
-  keys(a,{"model","parallel_gpus","concurrent_sequences","context_tokens","weight_bytes","kv_bytes","workspace_GB","training_bytes_per_parameter","activation_GB_per_gpu","host_ram_GB_per_gpu","local_disk_GB_per_gpu","cpu_cores_per_gpu"},"/stages/planning");
+  keys(a,{"model","parallel_gpus","concurrent_sequences","context_tokens","weight_bytes","kv_bytes","workspace_GB","training_bytes_per_parameter","activation_GB_per_gpu","host_ram_GB_per_gpu","local_disk_GB_per_gpu","cpu_cores_per_gpu","reference"},"/stages/planning");
+  if(a.contains("reference")) {
+   const auto &ref=a["reference"];keys(ref,{"demand","unit","group_gpus","memory_GB","capacities","source","accepted","independent_groups"},"/reference");
+   for(auto k:{"demand","group_gpus","memory_GB"})require(number(ref,k)>Rational(0),"reference","Positive reference quantities required");
+   auto group=number(ref,"group_gpus");require(group==Rational(group.ceil())&&group<=Rational(1024)&&(group.ceil()<8?8%group.ceil()==0:group.ceil()%8==0),"reference","Reference groups must use 1, 2, 4, 8 or a multiple of 8 GPUs, up to 1024");
+   require(!text(ref,"source").empty()&&!text(ref,"unit").empty()&&ref.value("accepted",false)&&ref.value("independent_groups",false),"reference","Accept scoped independent reference groups and identify the source and work unit");
+   keys(ref["capacities"],{"HGX_H200","HGX_B200","HGX_B300"},"/reference/capacities");
+   for(auto k:{"HGX_H200","HGX_B200","HGX_B300"})require(number(ref["capacities"],k)>Rational(0),"reference","Each GPU platform needs its own positive capacity");
+   count(a,"cpu_cores_per_gpu");number(a,"host_ram_GB_per_gpu");number(a,"local_disk_GB_per_gpu");continue;
+  }
   for(auto k:{"parallel_gpus","concurrent_sequences","context_tokens","cpu_cores_per_gpu"})count(a,k);
   for(auto k:{"weight_bytes","kv_bytes","workspace_GB","training_bytes_per_parameter","activation_GB_per_gpu","host_ram_GB_per_gpu","local_disk_GB_per_gpu"})number(a,k);
   require(number(a,"weight_bytes")>Rational(0)&&number(a,"kv_bytes")>Rational(0)&&number(a,"training_bytes_per_parameter")>=number(a,"weight_bytes"),"planning_memory","Invalid memory precision/state assumptions");
@@ -54,6 +63,18 @@ static void add_planning_impl(const Json &w,Json &r,const std::string &compariso
   for(const auto &s:w["stages"]) {
    auto id=s["id"].get<std::string>();auto type=s["type"].get<std::string>();
    if(sc.contains("active_stages")&&std::find(sc["active_stages"].begin(),sc["active_stages"].end(),id)==sc["active_stages"].end())continue;
+   if(s.contains("planning")&&s["planning"].contains("reference")) {
+    gpu_stages++;auto a=s["planning"];auto ref=a["reference"];auto key=comparison_platform.empty()?platform:comparison_platform;
+    if(!ref["capacities"].contains(key)){gaps.push_back(id+": no reference capacity for selected GPU platform");continue;}
+    auto demand=number(ref,"demand")*Rational::decimal(sc.value("multiplier",std::string("1"))),capacity=number(ref["capacities"],key.c_str()),group=number(ref,"group_gpus"),required=number(ref,"memory_GB");
+    auto allocation=[&](Rational cap){return (Rational((demand/cap).ceil())*group/Rational(gpn)).ceil()*gpn;};
+    auto g=allocation(capacity),lo=allocation(capacity*(Rational(1)+band)),hi=allocation(capacity*(Rational(1)-band));
+    total+=g;lower+=lo;upper+=hi;floor+=(group/Rational(gpn)).ceil()*gpn;
+    maxmemory=std::max(maxmemory,required);bool fits=required<=usable;failed=failed||!fits;
+    sh=sh+Rational(g)*number(a,"host_ram_GB_per_gpu");sl=sl+Rational(g)*number(a,"local_disk_GB_per_gpu");cp=cp+Rational(g)*Rational(count(a,"cpu_cores_per_gpu"));
+    stages.push_back({{"stage_id",id},{"scenario_id",sid},{"model",{{"name","Reference workload"}}},{"assumptions",a},{"reference",ref},{"raw_gpus",g},{"replicas",(demand/capacity).ceil()},{"capacity_per_replica",capacity.display(6)},{"capacity_unit",text(ref,"unit")+"/s per reference group"},{"demand_unit",text(ref,"unit")+"/s"},{"demand",demand.display(6)},{"required_GB_per_gpu",required.display(6)},{"memory_fit",fits},{"rule","ceil(demand / capacity per independent group) × group GPUs, rounded to whole nodes. No cross-hardware or single-job scaling inferred."}});
+    continue;
+   }
    if(type=="unsupported" && w.value("characterization",Json::object()).contains("guided_input")) gaps.push_back(id+": specialist component not included in GPU subtotal");
    if(type=="transfer")in=in+fact(r,id,sid,"payload_rate").value_or(Rational(0));
    if(type!="training"&&type!="inference"&&type!="batch")continue;
@@ -122,7 +143,7 @@ static void add_planning_impl(const Json &w,Json &r,const std::string &compariso
  else for(const auto &a:anchors)if(a["gpus"]>chosen["gpus"]){next=a;break;}
  if(w.value("characterization",Json::object()).contains("guided_input") && (failed||!gaps.empty()||!p.value("assumptions_accepted",false))) {chosen=nullptr;next=nullptr;}
  auto status=failed?"fail":(!gaps.empty()||!p.value("assumptions_accepted",false))?"unknown":"conditional";
- Json plan={{"version","1.0"},{"status",status},{"evidence_basis","analytical_planning"},{"catalog_digest",digest(cat)},{"catalog_version",cat["version"]},{"architecture",architecture},{"hardware",hw},{"policy",p},{"raw_gpus",nominal},{"upside_gpus",upside},{"downside_gpus",downside},{"selected_anchor",chosen},{"expansion_anchor",next},{"scenarios",scenarios},{"stage_calculations",stages},{"storage",storage},{"gaps",gaps},{"tenancy",w.value("tenancy","single")},{"host_ram_GB_required",host.display(3)},{"local_disk_GB_required",local.display(3)},{"cpu_cores_provision",cores.ceil()},{"required_GB_per_gpu",maxmemory.display(6)},{"provided_GB_per_gpu",hbm.display(3)},{"usable_GB_per_gpu",usable.display(3)},{"ingress_Gbps",(ingress*Rational(8)/Rational(1000000000)*number(p,"protocol_allowance")).display(6)},{"egress_Gbps",(egress*Rational(8)/Rational(1000000000)*number(p,"protocol_allowance")).display(6)},{"network_scope","Application tokens plus declared external transfers. customer RTT requirement remains independent. other payloads must be declared"},{"storage_fabric","Ethernet"},{"storage_network_policy","Physically dedicated storage network required. Converged networking is excluded."},{"expansion_trigger","Review when observed demand exceeds initial planning envelope or agreed service degrades. start procurement before declared lead time expires"},{"limitations",{"Analytical assumptions, not measured serving performance or guaranteed latency","Distinct stages use dedicated pools. scenarios reuse capacity only when declared non-overlapping","Host configuration and training scaling require later deployment validation"}}};
+ Json plan={{"version","1.0"},{"status",status},{"evidence_basis",std::any_of(w["stages"].begin(),w["stages"].end(),[](const Json&s){return s.contains("planning")&&s["planning"].contains("reference");})?"declared_reference_and_analytical_planning":"analytical_planning"},{"catalog_digest",digest(cat)},{"catalog_version",cat["version"]},{"architecture",architecture},{"hardware",hw},{"policy",p},{"raw_gpus",nominal},{"upside_gpus",upside},{"downside_gpus",downside},{"selected_anchor",chosen},{"expansion_anchor",next},{"scenarios",scenarios},{"stage_calculations",stages},{"storage",storage},{"gaps",gaps},{"tenancy",w.value("tenancy","single")},{"host_ram_GB_required",host.display(3)},{"local_disk_GB_required",local.display(3)},{"cpu_cores_provision",cores.ceil()},{"required_GB_per_gpu",maxmemory.display(6)},{"provided_GB_per_gpu",hbm.display(3)},{"usable_GB_per_gpu",usable.display(3)},{"ingress_Gbps",(ingress*Rational(8)/Rational(1000000000)*number(p,"protocol_allowance")).display(6)},{"egress_Gbps",(egress*Rational(8)/Rational(1000000000)*number(p,"protocol_allowance")).display(6)},{"network_scope","Application tokens plus declared external transfers. customer RTT requirement remains independent. other payloads must be declared"},{"storage_fabric","Ethernet"},{"storage_network_policy","Physically dedicated storage network required. Converged networking is excluded."},{"expansion_trigger","Review when observed demand exceeds initial planning envelope or agreed service degrades. start procurement before declared lead time expires"},{"limitations",{"Analytical assumptions, not measured serving performance or guaranteed latency","Distinct stages use dedicated pools. scenarios reuse capacity only when declared non-overlapping","Host configuration and training scaling require later deployment validation"}}};
  plan["networks"]=network_plan(w,plan);
  if(!chosen.is_null()) {
   auto g=chosen["gpus"].get<int64_t>();plan["initial_gpus"]=g;plan["excess_gpus"]=std::max<int64_t>(0,g-nominal);plan["shortfall_gpus"]=std::max<int64_t>(0,nominal-g);

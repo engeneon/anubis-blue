@@ -1,3 +1,4 @@
+import {readinessPanel} from './readiness.js';
 import { factReview, manualFactForm, demandForm } from "./fact-review.js";
 import { architectureView } from "./guided.js";
 type J = Record<string, any>;
@@ -299,6 +300,9 @@ export async function mountCopilot(
         ? "Review the proposed facts below, confirm the assumptions and select Apply selected. Then continue here to calculate your GPU estimate."
         : "Describe your workload using the form. Anubis will propose facts for you to review before calculating an estimate."));
     }
+    const gpuCheck=el("section");next.append(gpuCheck);
+    const proposed=history.proposals.find((p:J)=>p.data.state==="proposed")?.data.preview;
+    void api("guided-readiness","POST",proposed||session.data.input).then(report=>{if(!gpuCheck.isConnected)return;readinessPanel(gpuCheck,report,session!.data.draft_id?async()=>{const d=await api("drafts/"+session!.data.draft_id);await open(d,session!.case_id,true);}:undefined);}).catch(()=>{gpuCheck.textContent="GPU readiness check unavailable. Resolve connection before calculating.";});
     main.append(next);
     if (session.data.input.components.length) {
       architectureView(main, session.data.input.components);
