@@ -1,0 +1,30 @@
+AI Factory design executive summary
+
+• Decision status: This is a conditional planning estimate. It uses analytical assumptions rather than measured deployment performance. The projection is partial and its selection is experimental. This projection does not establish live target qualification.
+
+• Workload compute: The workload estimate is 8 HGX B300 GPUs, rounded to the supported node size. The sensitivity envelope is 8–8 GPUs for the selected ±30% sensitivity setting. This is not a statistical confidence interval.
+
+• Factory design size: The selected reference-design configuration contains 256 GPUs across 32 nodes or trays. This is larger than the workload estimate because of the selected architecture sizing anchor. It does not mean this workload alone requires the entire factory. This profile selection alone does not certify reference-architecture compliance.
+
+• Capacity for growth: The selected platform has estimated GPU capacity for 32 simultaneous copies of the same workload profile, including 31 additional copies beyond the first. This is compute capacity only. Storage, host resources, networks and isolation must be checked before admitting additional workloads. It is not a validated tenant limit.
+
+• GPU alternatives: HGX B300: 8 GPUs (conditional). HGX B200: 8 GPUs (conditional). HGX H200: 8 GPUs (conditional). These are workload comparisons. Equal node-rounded counts do not imply equal performance, cost or downstream platform support.
+
+• Memory and server provision: Estimated GPU memory requirement: 58.36 GB per GPU. Selected hardware provides 288 GB per GPU. Host RAM provision for the workload: 2,048 GB. Local disk provision for the workload: 30,720 GB. The server template assumes 128 CPU cores per node. Host and disk provisions require deployment validation. They are not shared-storage capacity.
+
+• Shared storage: No shared-storage tier requirement is established here. This does not mean that the workload needs no storage, or that an existing external corpus must be copied into this factory.
+
+• GPU interconnect: The selected east–west fabric is Spectrum-X. Per-GPU link demand is not established. Selecting a fabric does not establish its required bandwidth or guarantee latency.
+
+• Customer and north–south connectivity: Customer-datacenter steady traffic lower bounds are 73 kbit/s inbound and 19 kbit/s outbound. Total external ingress requirement: not established. North–south ingress requirement: not established. Initial data-loading capacity remains unresolved. The customer-link latency objective is unspecified. These traffic lower bounds are not recommended circuit sizes. External and north–south boundaries carry the same declared traffic and must not be added together.
+
+• Storage network: Use a physically dedicated storage network, separate from the other fabrics. Converged networking is excluded. Technology: Ethernet. Read and write link lower bounds are not established and not established. Missing throughput measurements are not zero.
+
+• Tenancy: This projection assumes one organisation. Spare GPU capacity does not establish multi-tenant isolation or commercial neocloud suitability.
+
+• Downstream design handoff: The intake requests 256 GPUs on HGX B300, with Spectrum-X networking and Ethernet storage-fabric technology. This is a partial transfer. The architect must also use the companion specification. Physical compute, node and NIC details require external reconciliation even where the platform name maps directly.
+
+• Architect actions: Apply the brief-only requirements manually. These include the fields identified in the mapping ledger and are not automatically transferred by sending the intake JSON. Resolve outstanding network measurements and reconcile host, storage, physical compute and failure-domain design before final approval.
+
+Narrative rules: projection-narrative-1.1
+Source result: fixture-result

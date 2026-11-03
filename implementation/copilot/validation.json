@@ -1,0 +1,146 @@
+{
+  "timestamp_utc": "2026-11-02T10:23:10.943923+00:00",
+  "checks": [
+    {
+      "name": "build",
+      "argv": [
+        "cmake",
+        "--build",
+        "--preset",
+        "local",
+        "-j4"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/build.log",
+      "sha256": "011c61acf1d50d14d403abd3eb63bf62bf33b7017f998c0772b62530fdcccb35"
+    },
+    {
+      "name": "ui-build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/ui-build.log",
+      "sha256": "56fc8e70f6f6972400f58275714e7d8cc2e3161363967a10c662ce113eba7a85"
+    },
+    {
+      "name": "core",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "build",
+        "--output-on-failure"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/core.log",
+      "sha256": "d730ea935e2ed9d0b3de47f9e2fcce60e81ae153fe7bfeffbbc61fbaa7703ee5"
+    },
+    {
+      "name": "copilot",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_copilot.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/copilot.log",
+      "sha256": "d01660013caf6fa968e9817ea7b9eb0e312de42fd534874d002a92e6df91d2ff"
+    },
+    {
+      "name": "interpretation",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_interpretation.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/interpretation.log",
+      "sha256": "d6e4bca95b22d2e783055d64e5d77bda2f2f867b790443705ccc8d24d1229a02"
+    },
+    {
+      "name": "architecture-scenarios",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_usability.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/architecture-scenarios.log",
+      "sha256": "d5944273c744c05dd4ee5c704970c6426cd2079aca39b5b7a24e7b94c43486a7"
+    },
+    {
+      "name": "guided-api",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_usability_api.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/guided-api.log",
+      "sha256": "90cb072ee98f9fc448eae98fd7392b4fa36973379d6b1c6498174e1b9acc2a53"
+    },
+    {
+      "name": "planning",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_planning.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/planning.log",
+      "sha256": "3852e80824edf2dac08ede15c5d1d7ca4ea6426aee6b13616fed2b8e14b2adeb"
+    },
+    {
+      "name": "network",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_network_planning.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/network.log",
+      "sha256": "13c3ea6910c7c5470ae88e302cd916405e709f5066349da274070728042d4675"
+    },
+    {
+      "name": "system",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_system.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/system.log",
+      "sha256": "803fe3bdb9b9ff5994eabcea8d672f0dc76d6afc285e9fec8a63b39b6ab2f07f"
+    },
+    {
+      "name": "mcp",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tests/test_mcp.py"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/mcp.log",
+      "sha256": "e485f42d1c108aeebab9bc1161e19f4617264efe0711dd49dd2762c5aafd7c30"
+    },
+    {
+      "name": "diagram",
+      "argv": [
+        "node",
+        "tests/test_system_diagram.mjs"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/diagram.log",
+      "sha256": "f432a88278c6086a36ac7471550a0893e0f773ba2706d20755ed2f9548f25093"
+    },
+    {
+      "name": "browser",
+      "argv": [
+        "npm",
+        "run",
+        "test:ui"
+      ],
+      "returncode": 0,
+      "log": "implementation/copilot/browser.log",
+      "sha256": "d3c23699fae7c4e36862f981693ed06dd201f558ee06fa182dfe959c62c9a1de"
+    }
+  ],
+  "software_passed": true,
+  "live_model_qualified": false,
+  "human_usability_target_validated": false,
+  "production_release_approved": false
+}

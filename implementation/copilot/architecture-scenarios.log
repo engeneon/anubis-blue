@@ -1,0 +1,21 @@
+test_01_new_engagement_to_estimate (__main__.Usability.test_01_new_engagement_to_estimate) ... ok
+test_02_library_support_boundaries (__main__.Usability.test_02_library_support_boundaries) ... ok
+test_03_composition_includes_local_retrieval (__main__.Usability.test_03_composition_includes_local_retrieval) ... ok
+test_04_map_matches_compute_components (__main__.Usability.test_04_map_matches_compute_components) ... ok
+test_05_measurements_propagate (__main__.Usability.test_05_measurements_propagate) ... ok
+test_06_alternative_demand_equivalence (__main__.Usability.test_06_alternative_demand_equivalence) ... ok
+test_07_refinement_changes_estimate (__main__.Usability.test_07_refinement_changes_estimate) ... ok
+test_08_versioned_default_provenance (__main__.Usability.test_08_versioned_default_provenance) ... ok
+test_09_invalid_values_are_actionable (__main__.Usability.test_09_invalid_values_are_actionable) ... ok
+test_10_unknown_demand_never_zero_estimate (__main__.Usability.test_10_unknown_demand_never_zero_estimate) ... ok
+test_11_schedule_and_reservation (__main__.Usability.test_11_schedule_and_reservation) ... ok
+test_12_anchor_separate_from_workload (__main__.Usability.test_12_anchor_separate_from_workload) ... ok
+test_13_resource_drivers_and_growth (__main__.Usability.test_13_resource_drivers_and_growth) ... ok
+test_14_handoff_candidate_and_partial_brief (__main__.Usability.test_14_handoff_candidate_and_partial_brief) ... ok
+test_15_customer_guide_contract (__main__.Usability.test_15_customer_guide_contract) ... ok
+test_16_random_and_all_scenario_boundaries (__main__.Usability.test_16_random_and_all_scenario_boundaries) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.248s
+
+OK

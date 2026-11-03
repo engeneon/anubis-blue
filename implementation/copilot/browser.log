@@ -1,0 +1,19 @@
+
+> anubis-workload-engine@0.1.0 test:ui
+> playwright test
+
+[WebServer] (node:4425) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:4428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/ui/copilot.spec.ts:5:1 › random scenario assisted discovery review sizing and handoff (9.8s)
+  ✓  2 tests/ui/copilot.spec.ts:206:1 › Case A accepted facts lead directly to GPU estimate review (3.5s)
+  ✓  3 tests/ui/copilot.spec.ts:282:1 › engagement deletion can be cancelled and restored (550ms)
+  ✓  4 tests/ui/copilot.spec.ts:293:1 › specialist engagement concludes without a GPU result or handoff (972ms)
+  ✓  5 tests/ui/copilot.spec.ts:308:1 › specialist calculation reaches report closure directly from stage four (731ms)
+  ✓  6 tests/ui/workflow.spec.ts:2:1 › LLM-free consultant workflow, immutable analysis and narrow layout (2.0s)
+
+  6 passed (18.2s)

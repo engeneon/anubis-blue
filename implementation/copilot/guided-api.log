@@ -1,0 +1,7 @@
+test_catalog_assets_and_authorization (__main__.GuidedAPI.test_catalog_assets_and_authorization) ... ok
+test_saved_compile_and_handoff (__main__.GuidedAPI.test_saved_compile_and_handoff) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.157s
+
+OK

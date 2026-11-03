@@ -1,0 +1,13 @@
+Conclusion without design handoff — 2 November 2026
+
+A separate completed outcome, concluded_without_handoff, records a consultant-approved final status report. It does not require a result or projection and never fabricates one. Existing requirements-delivered completion remains unchanged.
+
+Deterministic assessment identifies specialist-only or mixed scope, insufficient description/evidence, stale results and existing projection availability. Specialist recommendations can be based on an unaccepted proposal, which is explicitly labelled and retained as unaccepted. Missing a projection alone is not evidence of permanent impossibility. The consultant can continue work or choose report closure with a required reason.
+
+The final report includes scope, the latest accepted fact ledger with evidence status and source quotations, outstanding questions, recommended specialist measurements and existing calculation identifiers/qualified values when available. The immutable closure record preserves source, proposal, session, draft, result and projection snapshots. Reports retain numerical uncertainty and do not promote partial results into full design requirements.
+
+A digest binds confirmation to the reviewed evidence snapshot. Changed evidence rejects a stale preview. Active jobs block closure. Case access, consultant authority and optimistic case version checks remain enforced. Cases and saved deliverables distinguish closed-with-report from requirements-delivered. Download and reopening work without a projection.
+
+Validation covers Case C with an unaccepted specialist proposal and no result, changed-source rejection, access isolation, immutable retrieval, downloaded report text, reload and reopening. Normal handoff delivery, assisted sizing and LLM-free workflows remain covered by the full suite.
+
+Outcome: all 13 validation groups passed, including 51 interpretation/API tests and five browser workflows. The installed database was backed up before activation. No customer engagement was closed by deployment.

@@ -1,0 +1,11 @@
+Engagement completion flow — 2 November 2026
+
+Complete engagement follows projection preparation. The consultant selects the already calculated result/projection pair, optionally records notes and confirms delivery. The backend checks case ownership, record types, matching projection/result references, case version and newer draft changes. Agents cannot complete or reopen engagements. Stale calculations require explicit acknowledgement. Completion and case status update occur within the existing request transaction.
+
+An immutable completion record captures result and projection snapshots and digests, the saved executive summary and narrative version, notes, author, UTC completion timestamp and previous completion link. The UI renders local dates. Completion means requirements delivered, not architectural approval or measured performance qualification.
+
+Saved deliverables exposes completion versions and projection history. The exact saved summary, intake, brief, companion, result and full completion record are downloadable. Reloading and opening a completed engagement leads to deliverables. Reopening returns the case to Active without changing previous completion records. Existing projections remain retrievable.
+
+Validation coverage: local deterministic and browser suites, including stale acknowledgement, cross-case access rejection, version checks, repeated completion after reopening, saved snapshot equality, browser reload and full-record download. See validation.json and interpretation.log for outcomes. No external design submission is performed by completion.
+
+Outcome: all 13 validation groups passed, including 49 interpretation/API tests and three browser workflows. Installed database backed up before activation. Read-only verification confirmed the new retrieval endpoints and UI. No customer engagement was completed or reopened by deployment.

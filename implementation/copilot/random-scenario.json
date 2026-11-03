@@ -1,0 +1,41 @@
+{
+  "selection_method": "secrets.choice over all 16 existing scenarios with no redraw",
+  "scenario": {
+    "id": "S03",
+    "name": "Cobalt Travel Operations",
+    "story": "A travel operations assistant resolves disruption cases by checking schedules and hotel systems. It typically invokes a model four times but complex cases take up to twelve calls. About 1,500 cases arrive daily. Tool results influence the next action.",
+    "answers": {
+      "name": "Cobalt Travel Operations",
+      "activities": [
+        {
+          "name": "Disruption case agent",
+          "answers": {
+            "text": "yes",
+            "search": "no",
+            "agent": "yes",
+            "batch": "no",
+            "stream": "no",
+            "generation": "no",
+            "adaptation": "no",
+            "training": "no",
+            "indexing": "no"
+          },
+          "location": "local",
+          "schedule": "interactive",
+          "calls": "variable",
+          "relationship": "independent",
+          "sharing": "shared"
+        }
+      ],
+      "overlap": "yes",
+      "tenancy": "single"
+    },
+    "expected_patterns": [
+      "agent"
+    ],
+    "expected_arrangement": "Variable tool-and-model loop.",
+    "acceptance": "Preserve variable call expansion; do not replace it with one call.",
+    "measurement_next": "Sample complete case traces, retries, model calls and context growth.",
+    "expected_question": null
+  }
+}

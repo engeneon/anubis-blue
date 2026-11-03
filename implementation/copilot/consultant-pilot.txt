@@ -1,0 +1,39 @@
+Anubis consultant pilot
+Structured workload interpretation
+
+Purpose
+
+Complete three fictional engagements without developer assistance. Record how clearly Anubis helps you describe the workload, correct facts and obtain an appropriate result. Do not use confidential customer information for this pilot.
+
+Access
+
+Open http://127.0.0.1:8787. If asked for an access token, open the private .anubis/identities.json file in the Anubis project and copy your identity's token into Access token. This is different from the provider API key. Do not paste either secret into the workload description or feedback.
+Open Consultant Copilot. Create a new engagement and select public classification for these fictional stories. Select DeepSeek Flash — low reasoning (pilot). The manual fact entry and workload builder remain available.
+
+Case A: document assistant
+A local answer model serves engineers using passages from an existing search system outside this AI Factory. The busiest hour has 2,400 questions. The external search system indexes a 4 TB document corpus. For this pilot, explicitly assume dense8b, 2,000 input tokens and 500 output tokens per call.
+Review the diagram, placement, source statements and conversion to requests per minute. Accept the appropriate facts using Apply selected. In Your next step, choose Review and calculate GPU estimate. Review the assumptions, select Use these planning assumptions and click Calculate estimate. Workload analysis displays the GPU comparisons. Click Continue to Design handoff above the results. Review the target configuration and select Prepare projection to obtain the executive summary, design intake and companion requirements. The external corpus must not silently become a local retained-data requirement or an initial transfer volume. After preparing the projection, add optional completion notes, confirm delivery and choose Complete engagement. Reload the page, reopen this engagement from Cases and retrieve its completed deliverables. Reopen for revisions and confirm the earlier completed record is still available.
+
+Case B: demand from users and a correction
+A local text classifier labels messages without search or tools. There are 5,000 employees, but only 100 active users during the busy period. Each active user makes two requests per minute. Use the same explicit model and token assumptions as Case A.
+Use the user-based demand route. Review and accept the estimate. Then correct active users to 120 through a reviewed fact update. Confirm that the earlier result remains distinguishable from the new estimate and that employee count was not substituted for active users.
+
+Case C: specialist scope
+A turbine manufacturer plans GPU fluid simulation. The workload is described by mesh size, solver steps and completion deadlines. It does not involve text models, retrieval, agents, media generation or model training.
+Confirm the system identifies the specialist scope, explains what measurements are needed and does not invent a text-based GPU count. Select Review final status report. Confirm that the report explains the specialist scope and missing solver measurements without inventing a GPU count. Record the reason for concluding and the recommended next action, confirm closure without a handoff and select Close with final status report. Retrieve the report from Saved deliverables after reloading. Reopen later to continue when measurements are available.
+
+Feedback to record for each case
+Start time:
+Finish time:
+Did you complete the intended task without assistance?
+Where did you hesitate or need an explanation?
+Which questions repeated information already supplied?
+Which values did you correct, and why?
+Did the architecture diagram match your understanding?
+Were reported facts, assumptions and derived values distinguishable?
+Could you identify the basis of the GPU estimate or the reason no estimate was offered?
+Did the downstream handoff contain the expected requirements?
+Any blocking failure, including the exact displayed message:
+
+Pilot interpretation
+Completion time, error correction and clarity are the measures. There is no claim of time savings until compared with a baseline. This pilot does not replace numerical regression tests or release qualification. Record model-related errors separately from interface problems.

@@ -1,0 +1,5 @@
+Results to design handoff navigation — 2 November 2026
+
+The Workload analysis screen now exposes Continue to Design handoff above the results. Stage 4 in the journey is also clickable when viewing a saved calculation. Both routes retain the same result and open the existing handoff workflow without submitting anything. The handoff screen explains Prepare projection and offers Back to calculation results.
+
+Browser validation covers the assisted agent scenario using the direct action and Case A using stage 4, preparing the projection, viewing the executive summary and returning to the same results. The LLM-free workflow is also covered. Sizing and projection calculations are unchanged.

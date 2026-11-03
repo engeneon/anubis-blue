@@ -1,0 +1,5 @@
+[ 44%] Built target anubis_core
+[ 52%] Built target anubis_guided_driver
+[ 60%] Built target anubis_characterization_tests
+[ 68%] Built target anubis_tests
+[100%] Built target anubis

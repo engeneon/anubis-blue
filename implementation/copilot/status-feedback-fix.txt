@@ -1,0 +1,13 @@
+Copilot feedback and engagement context — 2 November 2026
+
+Visible activity: sticky status banner with animation, queued/running/cancel-requested state, elapsed seconds and longer-running guidance. No fabricated progress percentage. Input is disabled while a submitted job runs. Job polling resumes when the session is remounted. Status text supports live announcements and animation respects reduced-motion preference.
+
+Input workspace: stronger border, contrasting background, white text area and an instruction sequence distinguish Describe and refine from the surrounding result/review content.
+
+Engagement list: workflow labels and next actions derive from saved sessions, drafts, result revisions, matching projections and completion status. Changes after calculation are explicitly marked for recalculation. No destructive status migration is performed.
+
+Completed context: Copilot displays a historical record notice with no input box. The user can retrieve deliverables/reopen or start a separate assisted engagement. Completion is not presented as ongoing work or architecture approval.
+
+Verification: full validation suite plus browser assertions for activity, disabled submission, completed-history controls and completion labels. API checks cover prepared, stale and completed phase derivation. No new live-model qualification is claimed.
+
+Final validation: all 13 groups passed, including 50 interpretation/API tests. The final input-panel rearrangement passed all four browser tests. Message entry and Ask/Cancel actions now precede connection settings. Installed case-phase responses and Copilot assets verified read-only after backup and activation. No engagement state changed during deployment.

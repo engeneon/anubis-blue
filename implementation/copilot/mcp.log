@@ -1,0 +1,7 @@
+test_handshake_and_injected_tool_denial (__main__.MCP.test_handshake_and_injected_tool_denial) ... ok
+test_nonlocal_target_rejected (__main__.MCP.test_nonlocal_target_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.059s
+
+OK

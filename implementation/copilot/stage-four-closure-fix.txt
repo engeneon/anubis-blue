@@ -1,0 +1,7 @@
+Stage-four closure navigation correction
+
+Cause: the handoff renderer returned early when no candidate existed, before exposing any closure action. Its introduction still instructed the user to prepare a projection.
+
+Correction: closure review is offered before the candidate check. No-candidate results show Stage 4: conclude or continue discovery with explicit status-report and continued-evidence actions. Normal results retain projection preparation and also expose report closure.
+
+Verification: build passed and all six browser workflows passed, including specialist calculation -> Analysis -> stage 4 -> report preview -> confirmed closure -> downloadable status report. Installed Case C has zero resolved candidates and the updated interface is served. No customer engagement was closed by this correction.

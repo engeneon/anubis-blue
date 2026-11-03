@@ -1,0 +1,9 @@
+Engagement lifecycle follow-up — 2 November 2026
+
+Delete engagement is an explicit confirmed move to Trash. Owner authorization and optimistic versions are enforced. Active jobs block deletion. Deleted engagements are excluded from the normal list and reject writes. Trash lists recoverable records and supports owner-authorized restoration. This implementation does not permanently erase database records or backups.
+
+Reopening a completed engagement reconstructs a fresh Copilot session from the latest saved draft when an assisted description is recoverable. The session uses the current draft version, preserves prior data classification and starts a fresh turn budget. The UI clears the remembered old session and opens Copilot directly. Earlier conversations, sources and completion snapshots remain unchanged. Existing advanced compatibility and proposal-conflict protections still apply.
+
+Tests cover cancel/delete/restore in the browser, API ownership and version checks, blocked edits to deleted cases, preserved session data, fresh-session proposal application after reopening, and an actual fixture-backed model turn after reopening in the browser. No live provider reliability claim is implied.
+
+Already-active engagements also expose Continue with Copilot in Saved deliverables. This creates a fresh session from the latest draft and preserves existing records. All 13 local validation groups passed, including 50 interpretation/API tests. The final UI follow-up passed all four browser tests. Database backed up before activation. No customer engagement deleted, restored or reopened during deployment.

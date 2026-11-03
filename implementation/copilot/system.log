@@ -1,0 +1,32 @@
+test_access_control (__main__.API.test_access_control) ... ok
+test_agent_budget_and_no_write (__main__.API.test_agent_budget_and_no_write) ... ok
+test_agent_proposal_requires_human_review (__main__.API.test_agent_proposal_requires_human_review) ... ok
+test_backup_restore (__main__.API.test_backup_restore) ... ok
+test_conflict_freeze_and_replay (__main__.API.test_conflict_freeze_and_replay) ... ok
+test_descriptor_contract (__main__.API.test_descriptor_contract) ... ok
+test_idempotency_payload_conflict (__main__.API.test_idempotency_payload_conflict) ... ok
+test_import_review_and_version_guard (__main__.API.test_import_review_and_version_guard) ... ok
+test_knowledge_dependency_lock (__main__.API.test_knowledge_dependency_lock) ... ok
+test_qualification_split_and_predeclared_limits (__main__.API.test_qualification_split_and_predeclared_limits) ... ok
+test_route_not_implemented_is_not_success (__main__.API.test_route_not_implemented_is_not_success) ... ok
+test_synthetic_activation_guard (__main__.API.test_synthetic_activation_guard) ... ok
+test_aster (__main__.Compiler.test_aster) ... ok
+test_bounded_retry_and_partial_branch (__main__.Compiler.test_bounded_retry_and_partial_branch) ... ok
+test_budget_truncation (__main__.Compiler.test_budget_truncation) ... ok
+test_changed_prompt_cannot_reuse_stale_fingerprint (__main__.Compiler.test_changed_prompt_cannot_reuse_stale_fingerprint) ... ok
+test_duplicate_json_keys (__main__.Compiler.test_duplicate_json_keys) ... ok
+test_evidence_mismatch_unknown (__main__.Compiler.test_evidence_mismatch_unknown) ... ok
+test_harbor (__main__.Compiler.test_harbor) ... ok
+test_joint_reservations_do_not_claim_interference_qualification (__main__.Compiler.test_joint_reservations_do_not_claim_interference_qualification) ... ok
+test_meridian_partial (__main__.Compiler.test_meridian_partial) ... ok
+test_product_specific_storage_evidence (__main__.Compiler.test_product_specific_storage_evidence) ... ok
+test_rejects_bad_inputs (__main__.Compiler.test_rejects_bad_inputs) ... ok
+test_replay_and_units (__main__.Compiler.test_replay_and_units) ... ok
+test_replica_oracle_and_memory_failure (__main__.Compiler.test_replica_oracle_and_memory_failure) ... ok
+test_reserve_and_inactive (__main__.Compiler.test_reserve_and_inactive) ... ok
+test_unknown_overhead_does_not_resolve (__main__.Compiler.test_unknown_overhead_does_not_resolve) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.623s
+
+OK

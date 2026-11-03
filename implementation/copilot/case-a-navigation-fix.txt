@@ -1,0 +1,9 @@
+Case A navigation correction — 2 November 2026
+
+Problem: Applying facts returned to a long copilot page. The existing workload-builder action opened the first intake stage, leaving the route to GPU sizing unclear.
+
+Correction: A prominent Your next step panel shows the four-stage journey. Applying facts focuses and scrolls to this panel. Review and calculate GPU estimate opens the existing review stage directly with accepted input values intact. Planning assumptions are presented for confirmation before calculation. Missing-information guidance remains visible.
+
+Validation: TypeScript build passed. All three browser tests passed, including the exact Case A story with sourced facts, acceptance, direct review, assumption confirmation and a GPU results screen. The agent and LLM-free workflows also passed. The installed service at port 8787 serves the updated assets. No live interpretation requalification is claimed by these fixture-backed navigation tests. No sizing equations or backend rules changed.
+
+Use: Refresh Anubis. Open the existing Consultant Copilot engagement. Apply the reviewed proposal if needed. Choose Review and calculate GPU estimate. Review and confirm Use these planning assumptions. Select Calculate estimate. Workload analysis contains GPU comparisons. Design handoff contains the downstream design inputs.

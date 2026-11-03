@@ -1,0 +1,11 @@
+Advanced editing usability correction — 2 November 2026
+
+Opening the advanced editor is view-only. Compatibility is computed from actual content against the saved assisted description, rather than trusting the legacy advanced_modified flag. Compatible saved name, notes and tenancy edits remain available to assisted editing. Existing advanced settings are not automatically removed.
+
+Before incompatible saves, the UI presents affected paths and allows cancellation. Copilot proposal application performs a three-way comparison against the reconstructed baseline. Disjoint edits are applied while custom data is retained. Overlapping field edits are rejected before writing. Stages, dependency edges and scenarios form a conservative shared conflict domain because changing array positions or identities can invalidate relationships. Stale revisions are still rejected.
+
+Both editor and copilot expose continuation and calculation options. Lossless return to assisted editing is available after compatibility inspection. Separate assisted-copy creation previews current and replacement values and creates a new engagement without modifying the original. Workloads without a recoverable guided description remain editable and calculable through the advanced editor.
+
+Verification: interpretation regression tests include legacy flags, safe renaming, custom-value preservation, non-conflicting policy changes, blocked graph conflicts and workloads without guided metadata. Browser coverage includes opening without mutation, returning to assisted mode, cancelled and accepted advanced saves, visible protection and assisted copying without mutation of the original. Full validation results are in validation.json. No live LLM qualification is claimed for this deterministic editing change.
+
+Final outcome: all 13 validation groups passed. The final UI-only follow-up build and all three browser tests passed again, including unsaved compatible rename preservation. The interpretation suite contains 48 passing tests. Installed service backed up and activated. No commit or push performed.

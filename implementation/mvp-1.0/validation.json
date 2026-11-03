@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "scenario": "Case A document assistant",
+  "interpretation": "Fixed source-linked proposal supplied through API. No live LLM qualification claimed.",
+  "gui": [
+    "review facts",
+    "accept assumptions",
+    "calculate",
+    "compare GPUs",
+    "export",
+    "prepare handoff",
+    "complete",
+    "reload",
+    "retrieve"
+  ],
+  "expected": {
+    "requests_per_minute": 40,
+    "workload_gpus": 8,
+    "factory_gpus": 256,
+    "local_storage_tiers": 0,
+    "initial_transfer": "not specified"
+  },
+  "console_errors": []
+}

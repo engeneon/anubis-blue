@@ -1,0 +1,37 @@
+Anubis MVP 1.0 — workload requirements
+
+Planning estimate. Review assumptions before design.
+
+Workload GPU estimate: 8 GPUs
+Whole-node estimate for the selected hardware. This is separate from the factory deployment size.
+
+Selected factory deployment: 256 GPUs
+Uses the selected catalogue anchor. A larger factory count does not mean this workload needs all its GPUs. Profile selection is not compliance certification.
+
+GPU memory: 58.359738 GB required per GPU / 288 GB available per GPU
+Per-device memory fit must be satisfied. Aggregate memory alone is insufficient.
+
+Host RAM and local disk: 2048 GB RAM / 30720 GB local disk
+Totals provisioned for the workload. Local disk is separate from shared storage.
+
+External customer connection: Measurement required / 0.000019 Gbps outbound
+Initial loading: Measurement required. Existing data outside this AI Factory is not automatically copied here.
+
+North-south traffic: Measurement required / 0.000019 Gbps outbound
+Factory-boundary traffic. Do not add it to the external connection requirement as if it were separate demand.
+
+Dedicated storage network: Measurement required / Measurement required
+Physically separate Ethernet fabric. No converged network. Missing measurements are not zero.
+
+East-west GPU network: Spectrum-X. Measurement required
+Fabric selection does not verify bandwidth or latency.
+
+Shared storage: No local tier requirement established
+This does not prove that no storage is needed. Data retained outside this AI Factory remains outside this estimate.
+
+GPU comparisons
+HGX_B300: 8 GPUs (conditional)
+HGX_B200: 8 GPUs (conditional)
+HGX_H200: 8 GPUs (conditional)
+
+Next: prepare the design handoff, download the companion specification, then complete the engagement.
