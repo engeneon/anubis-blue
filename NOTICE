@@ -1,0 +1,17 @@
+Anubis — AI Factory Workload Sizing Engine
+Copyright 2026 the Anubis contributors.
+
+Created by Traiano Giuseppe Welcome.
+Contact: traiano@gmail.com
+Project: https://github.com/engeneon/anubis-blue
+
+Original Anubis software and documentation are licensed under the
+Apache License, Version 2.0. See LICENSE and docs/licensing.md.
+
+This product includes nlohmann/json by Niels Lohmann and contributors,
+and cpp-httplib by yhirose and contributors. These components retain
+their MIT licences and copyright notices in third_party/nlohmann/LICENSE.MIT
+and third_party/httplib/LICENSE. Other third-party materials retain their
+respective rights and notices.
+
+This NOTICE provides attribution information. It does not modify the licence.

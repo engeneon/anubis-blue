@@ -312,6 +312,8 @@ function render() {
     b.classList.toggle("active", tab === key);
     nav.append(b);
   }
+  const about=el("details");about.append(el("summary","","About Anubis"),el("p","","Created by Traiano Giuseppe Welcome."),el("p","","Free for personal and commercial use under Apache License 2.0. Third-party components retain their licences."));
+  const licence=el("a","","Licence and attribution");licence.href="https://github.com/engeneon/anubis-blue/blob/main/docs/licensing.md";licence.target="_blank";licence.rel="noopener noreferrer";about.append(licence);side.append(about);
   const guide=el("a","","User guide");guide.href="/user-guide.html";guide.target="_blank";guide.rel="noopener";nav.append(guide);
   side.append(
     nav,

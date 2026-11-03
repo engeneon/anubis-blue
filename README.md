@@ -78,4 +78,8 @@ The [technical architecture PDF](docs/Anubis_Technical_Architecture.pdf) and [wo
 
 This repository starts with a fresh source snapshot, without predecessor Git history. It includes application source, tests, configuration and technical documentation. Historical customer exports, generated document/media archives, local credentials and databases are excluded. Some document-generation utilities refer to historical assets that are not included. They are not needed to build or run Anubis.
 
-The repository is publicly readable and cloneable. Push access is restricted to authorized maintainers. Third-party notices are retained under third_party. Public visibility does not grant additional software licence rights.
+The repository is publicly readable and cloneable. Push access is restricted to authorized maintainers. Third-party notices are retained under third_party. Anubis is licensed under Apache License 2.0.
+
+## Licence and attribution
+
+Anubis is open-source software under the [Apache License 2.0](LICENSE), free for personal and commercial use. Created by **Traiano Giuseppe Welcome**. Redistributors must preserve applicable licence and attribution notices. See [NOTICE](NOTICE) and the [licensing guide](docs/licensing.md) for scope and third-party terms.
