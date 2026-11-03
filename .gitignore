@@ -26,3 +26,6 @@ deliverables/scenario-video/alice/video-build/
 .env
 .env.*
 !.env.example
+
+# Generated documentation website
+_site/

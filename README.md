@@ -2,6 +2,11 @@
 
 Anubis is a deterministic AI Factory workload sizing application with an optional, human-reviewed Consultant Copilot. It estimates GPU requirements, records assumptions, and exports requirements for a downstream AI Factory design tool or process.
 
+
+**[Getting Started — install Anubis and complete your first estimate](https://engeneon.github.io/anubis-blue/getting-started.html)**
+
+[Documentation website](https://engeneon.github.io/anubis-blue/) · [Methodology](https://engeneon.github.io/anubis-blue/methodology.html) · [Example scenarios](https://engeneon.github.io/anubis-blue/scenarios.html) · [Online playbooks](https://engeneon.github.io/anubis-blue/playbooks.html)
+
 ## Install on macOS
 
 Follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is deferred.
@@ -63,14 +68,14 @@ Corporate data requires a connection approved for corporate processing. The publ
 
 ## Complete customer playbooks
 
-Each Word guide includes both manual and Copilot-assisted routes through GPU estimates, design handoff, explanation and saved completion, with exact input tables, diagrams and screenshots.
+Each playbook includes both manual and Copilot-assisted routes through GPU estimates, design handoff, explanation and saved completion, with exact input tables, diagrams and screenshots. Read the responsive online edition on mobile, view the printable PDF, or download the editable Word file.
 
-| Scenario | Word playbook |
-|---|---|
-| S11 Larch Media Archive | [Video analysis and archive assistant](docs/playbooks/S11_Larch_Media_Archive_Playbook.docx) |
-| S13 Nacre Customer Portal | [Hosted service with local continuity fallback](docs/playbooks/S13_Nacre_Customer_Portal_Playbook.docx) |
-| S14 Orchid Neocloud | [Reserved premium and shared standard pools](docs/playbooks/S14_Orchid_Neocloud_Playbook.docx) |
-| S16 Quartz Industrial Research | [Independent GPU simulation groups](docs/playbooks/S16_Quartz_Industrial_Research_Playbook.docx) |
+| Scenario | PDF playbook | Read online | Editable copy |
+|---|---|---|---|
+| S11 Larch Media Archive | [View PDF](docs/playbooks/S11_Larch_Media_Archive_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s11.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S11_Larch_Media_Archive_Playbook.docx) |
+| S13 Nacre Customer Portal | [View PDF](docs/playbooks/S13_Nacre_Customer_Portal_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s13.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S13_Nacre_Customer_Portal_Playbook.docx) |
+| S14 Orchid Neocloud | [View PDF](docs/playbooks/S14_Orchid_Neocloud_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s14.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S14_Orchid_Neocloud_Playbook.docx) |
+| S16 Quartz Industrial Research | [View PDF](docs/playbooks/S16_Quartz_Industrial_Research_Playbook.pdf) | [Read online](https://engeneon.github.io/anubis-blue/s16.html) | [Download editable Word version (.docx)](https://engeneon.github.io/anubis-blue/downloads/S16_Quartz_Industrial_Research_Playbook.docx) |
 
 The [technical architecture PDF](docs/Anubis_Technical_Architecture.pdf) and [workload methodology PDF](docs/Anubis_Workload_Sizing_Methodology.pdf) include the implementation addendum for complete-scenario sizing and read-only explanations.
 
