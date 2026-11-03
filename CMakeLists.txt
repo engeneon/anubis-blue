@@ -52,3 +52,8 @@ target_link_libraries(anubis_characterization_tests PRIVATE anubis_core)
 add_test(NAME characterization COMMAND anubis_characterization_tests ${CMAKE_SOURCE_DIR})
 add_executable(anubis_guided_driver tests/guided_driver.cpp)
 target_link_libraries(anubis_guided_driver PRIVATE anubis_core)
+
+find_package(Python3 COMPONENTS Interpreter QUIET)
+if(Python3_Interpreter_FOUND)
+  add_test(NAME local_launcher COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tests/test_local_launcher.py)
+endif()

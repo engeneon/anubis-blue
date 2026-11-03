@@ -14,7 +14,7 @@ if (root/'.env').exists():
   name,value=line.split('=',1);name=name.strip();value=value.strip().strip('"').strip("'")
   if name in provider_aliases:os.environ.setdefault(provider_aliases[name],value)
   elif name.startswith('ANUBIS_AI_KEY_'):os.environ.setdefault(name,value)
-print('Anubis: http://127.0.0.1:8787',flush=True)
+# The backend reports the effective address after parsing command-line options.
 print(f'Your private access token is in {identity}. It is not printed or included in exports.',flush=True)
 if (state/'neon-target.json').exists():os.environ.setdefault('ANUBIS_NEON_TARGET',str(state/'neon-target.json'))
 os.execve(str(root/'build/anubis'),[str(root/'build/anubis'),'--root',str(root),'--db',str(state/'anubis.sqlite'),*sys.argv[1:]],{**os.environ,'ANUBIS_IDENTITIES':str(identity)})

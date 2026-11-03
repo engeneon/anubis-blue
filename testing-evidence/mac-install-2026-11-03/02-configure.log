@@ -1,0 +1,15 @@
+$ cmake --preset local -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/openssl@3;/opt/homebrew/opt/sqlite
+-- The CXX compiler identification is AppleClang 21.0.0.21000101
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenSSL: /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib (found version "3.6.4")
+-- Found SQLite3: /opt/homebrew/opt/sqlite/lib/libsqlite3.dylib (found version "3.53.4")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/trai/Code/anubis-blue-install-validation-20261103/build

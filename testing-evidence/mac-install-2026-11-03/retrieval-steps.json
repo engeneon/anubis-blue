@@ -1,0 +1,22 @@
+{
+  "steps": [
+    {
+      "text": "After restarting Anubis with the same installation and port, sign in with the same token. Click [[control:Cases]]. Locate [[value:Nacre Customer Portal manual installation test]] and confirm its completed status. Click [[control:View engagement]].",
+      "image": "/Users/trai/Code/anubis-blue/testing-evidence/mac-install-2026-11-03/retrieval-01.png"
+    },
+    {
+      "text": "Open [[control:Saved deliverables]]. The completed engagement and its downloads remain available after restart. Click [[control:Download complete engagement record]] to retrieve the saved version.",
+      "image": "/Users/trai/Code/anubis-blue/testing-evidence/mac-install-2026-11-03/retrieval-02.png"
+    },
+    {
+      "text": "Click [[control:Explain this to me]] on the completed version. The saved deterministic explanation appears without generating another result. Expand [[control:Previously saved explanations]] to see its history.",
+      "image": "/Users/trai/Code/anubis-blue/testing-evidence/mac-install-2026-11-03/retrieval-03.png"
+    },
+    {
+      "text": "Read the saved network requirements and next steps. Click [[control:Download explanation]] to retrieve this exact saved interpretation, then close the panel.",
+      "image": "/Users/trai/Code/anubis-blue/testing-evidence/mac-install-2026-11-03/retrieval-04.png"
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

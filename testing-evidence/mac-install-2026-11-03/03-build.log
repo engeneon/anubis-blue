@@ -1,0 +1,31 @@
+$ cmake --build --preset local -j4
+[  8%] Building CXX object CMakeFiles/anubis_core.dir/src/compiler/planning.cpp.o
+[ 12%] Building CXX object CMakeFiles/anubis_core.dir/src/domain/quantity.cpp.o
+[ 12%] Building CXX object CMakeFiles/anubis_core.dir/src/compiler/compiler.cpp.o
+[ 16%] Building CXX object CMakeFiles/anubis_core.dir/src/domain/json.cpp.o
+[ 20%] Building CXX object CMakeFiles/anubis_core.dir/src/compiler/qualification.cpp.o
+[ 24%] Building CXX object CMakeFiles/anubis_core.dir/src/compiler/resolution.cpp.o
+[ 28%] Building CXX object CMakeFiles/anubis_core.dir/src/compiler/resources.cpp.o
+[ 32%] Building CXX object CMakeFiles/anubis_core.dir/src/application/knowledge/resolve.cpp.o
+[ 36%] Building CXX object CMakeFiles/anubis_core.dir/src/application/intake/import.cpp.o
+[ 40%] Building CXX object CMakeFiles/anubis_core.dir/src/adapters/projection.cpp.o
+[ 44%] Linking CXX static library libanubis_core.a
+[ 44%] Built target anubis_core
+[ 48%] Building CXX object CMakeFiles/anubis_guided_driver.dir/tests/guided_driver.cpp.o
+[ 52%] Building CXX object CMakeFiles/anubis.dir/src/api/main.cpp.o
+[ 56%] Building CXX object CMakeFiles/anubis_characterization_tests.dir/tests/characterization.cpp.o
+[ 60%] Building CXX object CMakeFiles/anubis_tests.dir/tests/core.cpp.o
+[ 64%] Linking CXX executable anubis_tests
+[ 64%] Built target anubis_tests
+[ 68%] Building CXX object CMakeFiles/anubis.dir/src/adapters/neon_transport.cpp.o
+[ 72%] Linking CXX executable anubis_characterization_tests
+[ 72%] Built target anubis_characterization_tests
+[ 76%] Building CXX object CMakeFiles/anubis.dir/src/application/service.cpp.o
+[ 80%] Linking CXX executable anubis_guided_driver
+[ 80%] Built target anubis_guided_driver
+[ 84%] Building CXX object CMakeFiles/anubis.dir/src/application/copilot/service.cpp.o
+[ 88%] Building CXX object CMakeFiles/anubis.dir/src/adapters/model_transport.cpp.o
+[ 92%] Building CXX object CMakeFiles/anubis.dir/src/persistence/store.cpp.o
+[ 96%] Building CXX object CMakeFiles/anubis.dir/src/persistence/postgresql/backend.cpp.o
+[100%] Linking CXX executable anubis
+[100%] Built target anubis
