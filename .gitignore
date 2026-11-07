@@ -29,3 +29,6 @@ deliverables/scenario-video/alice/video-build/
 
 # Generated documentation website
 _site/
+
+# macOS DMG packaging output
+build-macos/
