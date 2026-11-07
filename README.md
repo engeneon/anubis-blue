@@ -9,7 +9,9 @@ Anubis is a deterministic AI Factory workload sizing application with an optiona
 
 ## Install on macOS
 
-Follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is on the roadmap, and a macOS installer is planned.
+**Download the app:** get `Anubis-<version>-macos-arm64.dmg` from [Releases](https://github.com/engeneon/anubis-blue/releases/latest), open it and drag **Anubis** to Applications. It is signed and notarized by Apple, needs macOS 13 or later on Apple Silicon, and signs you in automatically. Your data lives in `~/Library/Application Support/Anubis`. Use **Anubis → Copy Access Token** if you also want to open it in a browser. See [macOS packaging](packaging/macos/README.md).
+
+**Run from source:** follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is on the roadmap.
 
 ## Use the application
 
