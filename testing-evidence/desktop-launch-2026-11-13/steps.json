@@ -1,0 +1,78 @@
+[
+  {
+    "text": "Open Anubis from Applications. The desktop app opens its local workspace. Select [[control:New engagement]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-01.png"
+  },
+  {
+    "text": "Set [[field:Customer workload name]] = [[value:Peregrine Product Lab — desktop walkthrough]]. Click [[control:Add Document or search assistant]]. Review the readiness panel, then click [[control:Continue]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-02.png"
+  },
+  {
+    "text": "Retain [[field:Factory users]] = [[value:One organisation]]. Set [[field:Do activities run at the same time?]] = [[value:Yes — overlapping demand]]. Set [[field:Component name 1]] = [[value:Proposed assistant]], [[field:Compute location 1]] = [[value:In this factory]] and [[field:Search and indexing location 1]] = [[value:Existing service outside this AI Factory]]. Leave [[field:Reserve dedicated capacity 1]] [[state:unchecked]]. Click [[control:Continue]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-03.png"
+  },
+  {
+    "text": "Retain [[field:Sizing method]] = [[value:Analytical model]], [[field:Model preset]] = [[value:dense8b · planning assumption]] and [[field:Describe demand using]] = [[value:Requests per minute]]. Enter [[field:Peak requests per minute]] = [[value:40]], [[field:Model calls per request or job]] = [[value:1]], [[field:Input tokens per model call]] = [[value:2000]] and [[field:Output tokens per model call]] = [[value:500]]. Enter the customer context shown in the input register.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-04.png"
+  },
+  {
+    "text": "Click [[control:Continue]] to review. Retain [[field:Infrastructure deployment profile]] = [[value:HGX B300 GPUs · Spectrum-X network · Enterprise reference design with two network planes]] and [[field:Sensitivity envelope]] = [[value:±30%]]. Check [[field:Use these planning assumptions]]. Click [[control:Calculate estimate]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-05.png"
+  },
+  {
+    "text": "Read [[control:GPU workload comparison]]. B300, B200 and H200 each estimate [[value:8 GPUs]]. The selected factory anchor is [[value:256 GPUs]]. These are separate quantities. Click [[control:Download GPU comparison]] for a portable table.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-06.png"
+  },
+  {
+    "text": "Click [[control:Continue to Design handoff]]. Read [[control:Where each network requirement goes]]. Keep the companion specification with the intake so all four network roles remain visible.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-07.png"
+  },
+  {
+    "text": "Retain [[field:Design project name]] = [[value:Peregrine Product Lab — desktop walkthrough]], [[field:Intended candidate]] = [[value:planning:factory]], [[field:Design modelling platform]] = [[value:HGX_B300]] and [[field:Modelling fabric choice]] = [[value:Spectrum-X]]. Leave modelling substitution [[state:unchecked]]. Click [[control:Prepare projection]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-08.png"
+  },
+  {
+    "text": "Read [[control:AI Factory design executive summary]]. The workload requires [[value:8 GPUs]] under these assumptions. The selected factory anchor is [[value:256 GPUs]]. Download the executive summary, design intake, readable architecture brief and companion specification.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-09.png"
+  },
+  {
+    "text": "Click [[control:Explain this to me]]. Retain [[field:Explanation connection]] = [[value:Deterministic explanation — no model]]. Leave the provider-transmission checkbox [[state:unchecked]]. Click [[control:Generate explanation]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-10.png"
+  },
+  {
+    "text": "Read the saved explanation. It distinguishes the [[value:8 GPU]] workload estimate from the [[value:256 GPU]] factory anchor and lists remaining storage and network measurements.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-11.png"
+  },
+  {
+    "text": "Expand [[control:Source fields and assumptions]] to trace the narrative to this saved calculation. Click [[control:Download explanation]] to save the text, then [[control:Close]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-12.png"
+  },
+  {
+    "text": "Enter [[field:Consultant notes (optional)]] = [[value:Planning requirements delivered. Network and shared-storage measurements remain explicit follow-up items.]]. Check [[field:I confirm that these selected requirements are delivered.]]. Leave the earlier-calculation override [[state:unchecked]]. Click [[control:Complete engagement]].",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-13.png"
+  },
+  {
+    "text": "Confirm [[state:Completed — requirements delivered]]. [[control:Saved deliverables]] retains the calculation, intake, companion specification and explanation. Click [[control:Download complete engagement record]] to save the delivery package.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-14.png"
+  },
+  {
+    "text": "Select [[control:Cases]]. Confirm the Peregrine engagement is marked [[state:Completed · requirements delivered]]. Use [[control:View engagement]] to return to its saved outputs.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-15.png"
+  },
+  {
+    "text": "Quit and reopen Anubis. Select [[control:Cases]] and locate [[value:Peregrine Product Lab — desktop walkthrough]]. Its status remains [[state:Completed · requirements delivered]]. Your saved work persists in the desktop data folder.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-16.png"
+  },
+  {
+    "text": "Click [[control:View engagement]] in the completed case. The saved version exposes the same calculation and handoff downloads. Use [[control:Explain this to me]] to retrieve its saved explanation.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-17.png"
+  },
+  {
+    "text": "Expand [[control:Read saved executive summary]] to retrieve the design narrative associated with the completed version. The GPU counts and outstanding measurements remain tied to the saved calculation.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-18.png"
+  },
+  {
+    "text": "Select [[control:Explain this to me]] on the completed version. The previously saved explanation appears without another calculation. Its saved calculation identifier matches the completed engagement. Close the panel when finished.",
+    "image": "/tmp/anubis-dmg-launch-2026-11-13/step-19.png"
+  }
+]

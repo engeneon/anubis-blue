@@ -1,0 +1,272 @@
+[
+  {
+    "id": "I01",
+    "field": "Customer workload name",
+    "value": "Peregrine Product Lab \u2014 desktop walkthrough",
+    "definition": "The saved engagement name.",
+    "method": "Agree a unique customer and application name.",
+    "basis": "Entered label",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I02",
+    "field": "Application pattern",
+    "value": "Document or search assistant",
+    "definition": "Search information before generating an answer.",
+    "method": "Walk through a representative task with the application owner.",
+    "basis": "Selected architecture",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I03",
+    "field": "Factory users",
+    "value": "One organisation",
+    "definition": "Organisations sharing the factory.",
+    "method": "Confirm tenancy and commercial scope.",
+    "basis": "Selected",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I04",
+    "field": "Do activities run at the same time?",
+    "value": "Yes \u2014 overlapping demand",
+    "definition": "Whether activity demand may coincide.",
+    "method": "Review job schedules and gateway traffic during busy periods.",
+    "basis": "Selected",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I05",
+    "field": "Component name 1",
+    "value": "Proposed assistant",
+    "definition": "A business activity, not a hardware node.",
+    "method": "Name the activity with the application owner.",
+    "basis": "Entered label",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I06",
+    "field": "Compute location 1",
+    "value": "In this factory",
+    "definition": "The answer model consumes local GPU capacity.",
+    "method": "Confirm the intended deployment boundary.",
+    "basis": "Selected",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I07",
+    "field": "Search and indexing location 1",
+    "value": "Existing service outside this AI Factory",
+    "definition": "Search, embeddings and index refresh remain on an existing service.",
+    "method": "Ask the search owner where queries, embedding and indexing run. Record the source corpus separately.",
+    "basis": "Confirmed scenario boundary",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I08",
+    "field": "Reserve dedicated capacity 1",
+    "value": "Unchecked",
+    "definition": "No dedicated reservation is requested for this activity.",
+    "method": "Confirm isolation and reservation policy.",
+    "basis": "Retained default",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I09",
+    "field": "Sizing method",
+    "value": "Analytical model",
+    "definition": "Use the supported dense-model equations.",
+    "method": "Use this method for a supported model. Specialist work needs scoped reference capacity.",
+    "basis": "Retained default",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I10",
+    "field": "Model preset",
+    "value": "dense8b \u00b7 planning assumption",
+    "definition": "Generic dense 8 billion parameter model.",
+    "method": "Read the model registry and serving configuration. If not selected, accept a named planning preset.",
+    "basis": "Explicit fictional planning assumption",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I11",
+    "field": "Describe demand using",
+    "value": "Requests per minute",
+    "definition": "Application arrivals in a busy period.",
+    "method": "Choose one demand representation to avoid double counting.",
+    "basis": "Selected",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I12",
+    "field": "Peak requests per minute",
+    "value": "40",
+    "definition": "Busy-period requests across the whole assistant.",
+    "method": "Count gateway requests in minute buckets over a representative peak. Employee count alone cannot supply this number.",
+    "basis": "Explicit fictional planning assumption",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I13",
+    "field": "Model calls per request or job",
+    "value": "1",
+    "definition": "Total model invocations per completed request.",
+    "method": "Inspect distributed traces and include retries or loops.",
+    "basis": "Explicit fictional planning assumption",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I14",
+    "field": "Input tokens per model call",
+    "value": "2000",
+    "definition": "Prompt, history and retrieved passages per call.",
+    "method": "Read prompt-token metrics or tokenize complete representative prompts with the actual model tokenizer.",
+    "basis": "Explicit fictional planning assumption",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I15",
+    "field": "Output tokens per model call",
+    "value": "500",
+    "definition": "Generated answer tokens per call.",
+    "method": "Read completion-token metrics or tokenize representative responses.",
+    "basis": "Explicit fictional planning assumption",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I16",
+    "field": "Customer context and measurement notes",
+    "value": "Fictional planning assumptions. 5000 employees is context, not demand. Local answer model uses an existing search service outside this AI Factory. No local corpus copy or initial transfer volume is specified.",
+    "definition": "Scope and provenance for this planning estimate.",
+    "method": "Record measurement dates, owners, uncertainty and external dependencies.",
+    "basis": "Entered context",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I17",
+    "field": "Optional service target",
+    "value": "Blank",
+    "definition": "No time-to-first-token or complete-response objective is asserted.",
+    "method": "Agree the metric, percentile and measurement boundaries.",
+    "basis": "Unspecified",
+    "unknown": "Leave unresolved. The estimate does not guarantee latency."
+  },
+  {
+    "id": "I18",
+    "field": "Data capacity and growth",
+    "value": "All optional fields blank",
+    "definition": "No local shared-storage capacity, retained corpus copy or growth volume is established.",
+    "method": "Inventory retained local copies and growth with the data owner. Use storage counters and retention policy.",
+    "basis": "Unspecified",
+    "unknown": "Leave blank rather than infer a local copy from the outside source."
+  },
+  {
+    "id": "I19",
+    "field": "Factory networks and customer datacenter connection",
+    "value": "Optional measurement fields blank",
+    "definition": "Initial transfer, loading window, bulk transfers, storage rates, E-W payload and latency remain unknown.",
+    "method": "Use transfer logs for bytes and duration, directional interface counters for busy-period rates, storage telemetry for reads/writes and collective benchmarks for E-W.",
+    "basis": "Unspecified",
+    "unknown": "Keep as follow-up items. Do not convert blanks to zero."
+  },
+  {
+    "id": "I20",
+    "field": "Network planning defaults",
+    "value": "Dedicated storage fabric, usable fraction 0.7, initial loading overlaps normal operation",
+    "definition": "Baseline network policy and utilization assumptions.",
+    "method": "Review usable bandwidth and overlap with the network architect.",
+    "basis": "Retained defaults",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I21",
+    "field": "Infrastructure deployment profile",
+    "value": "HGX B300 GPUs \u00b7 Spectrum-X network \u00b7 Enterprise reference design with two network planes",
+    "definition": "Catalogue family providing supported factory anchors.",
+    "method": "Architect selects an applicable reference profile. This selection is not certification.",
+    "basis": "Retained default",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I22",
+    "field": "Sensitivity envelope",
+    "value": "\u00b130%",
+    "definition": "Variation in assumed throughput.",
+    "method": "Agree a planning sensitivity and refine with applicable evidence.",
+    "basis": "Retained default",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I23",
+    "field": "Use these planning assumptions",
+    "value": "Checked",
+    "definition": "Accept the displayed model and capacity assumptions.",
+    "method": "Review preset memory and efficiency parameters before calculating.",
+    "basis": "Explicit acceptance",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I24",
+    "field": "Design project name / Intended candidate",
+    "value": "Peregrine Product Lab \u2014 desktop walkthrough / planning:factory",
+    "definition": "Links the design handoff to this result.",
+    "method": "Retain the engagement name and calculated factory candidate.",
+    "basis": "Retained defaults",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I25",
+    "field": "Design modelling platform / Modelling fabric choice",
+    "value": "HGX_B300 / Spectrum-X",
+    "definition": "Platform and fabric used in the downstream architecture model.",
+    "method": "Select compatible modelling values. Keep physical and performance validation explicit.",
+    "basis": "Retained defaults",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I26",
+    "field": "Accept the explicit modelling substitution and retain physical specifications outside the design tool",
+    "value": "Unchecked",
+    "definition": "No substitute platform is being acknowledged.",
+    "method": "Check only when a documented substitution is actually needed.",
+    "basis": "Retained default",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I27",
+    "field": "Explanation connection / provider transmission",
+    "value": "Deterministic explanation \u2014 no model / Unchecked",
+    "definition": "Generate prose from saved facts without sending them to a provider.",
+    "method": "Choose the built-in option. A configured Copilot is optional.",
+    "basis": "Selected",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I28",
+    "field": "Consultant notes (optional)",
+    "value": "Planning requirements delivered. Network and shared-storage measurements remain explicit follow-up items.",
+    "definition": "Delivery scope recorded at closure.",
+    "method": "List unresolved responsibilities and next measurements.",
+    "basis": "Entered",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I29",
+    "field": "I confirm that these selected requirements are delivered.",
+    "value": "Checked",
+    "definition": "Close and preserve this delivery.",
+    "method": "Review selected calculation and projection before confirming.",
+    "basis": "Explicit acceptance",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  },
+  {
+    "id": "I30",
+    "field": "If newer edits exist, I explicitly intend to deliver this earlier saved calculation.",
+    "value": "Unchecked",
+    "definition": "Do not override a newer calculation.",
+    "method": "Use only after deliberately reviewing an earlier version.",
+    "basis": "Retained default",
+    "unknown": "Confirm with the workload owner before using a customer estimate."
+  }
+]

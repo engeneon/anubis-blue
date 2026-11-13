@@ -1,6 +1,6 @@
 # Anubis Blue
 
-Anubis is a deterministic AI Factory workload sizing application with an optional, human-reviewed Consultant Copilot. It estimates GPU requirements, records assumptions, and exports requirements for a downstream AI Factory design tool or process.
+Anubis is the workload-sizing component of the Neon AI Factory Architect suite. It is a deterministic application with an optional, human-reviewed Consultant Copilot. It estimates GPU requirements, records assumptions, and exports requirements for a downstream AI Factory design tool or process.
 
 
 **[Getting Started — install Anubis and complete your first estimate](https://engeneon.github.io/anubis-blue/getting-started.html)**
@@ -9,7 +9,11 @@ Anubis is a deterministic AI Factory workload sizing application with an optiona
 
 ## Install on macOS
 
-Follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is on the roadmap, and a macOS installer is planned.
+Download the [Anubis desktop installer for Apple Silicon](https://github.com/engeneon/anubis-blue/releases/download/v0.0.1/Anubis-0.0.1-macos-arm64.dmg) for macOS 13 or later. Open the disk image, drag Anubis to Applications and open it. Quit an existing instance before replacing it. If sign-in is requested, choose **Anubis → Copy Access Token** from the macOS menu.
+
+Follow the [Peregrine desktop playbook (PDF)](deliverables/neon-launch-2026-11-13/Anubis_Desktop_Peregrine_Playbook.pdf) from installation to saved results. [Download editable Word version (.docx)](deliverables/neon-launch-2026-11-13/Anubis_Desktop_Peregrine_Playbook.docx).
+
+Desktop cases persist in `~/Library/Application Support/Anubis`. Use **Anubis → Show Data Folder** and preserve this folder across upgrades. Source installations use a separate data directory. The [source installation guide](docs/macos-installation-guide.txt) remains available for developers. Linux installation guidance is deferred.
 
 ## Use the application
 

@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-13",
+  "scenario": "S15",
+  "selection": "SystemRandom choice from canonical 16-scenario catalogue",
+  "installed_bundle": "/Applications/Anubis.app",
+  "version": "0.0.1",
+  "dmg_sha256": "2f9dc7b21982a121f211f35e8f5d875371230a05c7f33a6297901bb79b44c89a",
+  "gatekeeper": "accepted, Notarized Developer ID",
+  "codesign": "valid on disk, satisfies Designated Requirement",
+  "gpu_counts": {
+    "HGX_B300": 8,
+    "HGX_B200": 8,
+    "HGX_H200": 8
+  },
+  "factory_anchor": 256,
+  "result_id": "result_0f7e9bc10b01e2e8bd20f50e9a9dc5a7",
+  "projection_id": "projection_4f1075cbf011f6fba25b6b56c9ef8b2b",
+  "gui_completion": "passed",
+  "restart_persistence": "completed status and explanation retrieved after restart",
+  "downloaded_exports": [
+    "executive-summary.txt",
+    "design-intake.json",
+    "explanation.txt",
+    "companion.json",
+    "completed-engagement.json",
+    "architecture-brief.txt",
+    "gpu-comparison.json"
+  ],
+  "scope": "Actual desktop GUI, manual intake, deterministic explanation. No live Neon design submission or live Copilot test.",
+  "customer_blockers": [],
+  "release_dependencies": [
+    "Prepared documentation and installer download are local until publication."
+  ]
+}

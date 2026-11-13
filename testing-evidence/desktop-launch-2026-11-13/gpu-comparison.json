@@ -1,0 +1,190 @@
+[
+  {
+    "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+    "downside_gpus": 8,
+    "gaps": [],
+    "gpu_per_node": 8,
+    "hardware": {
+      "bandwidth_TBps": "7.7",
+      "basis": "B300 specifications; host configuration is an editable planning provision, not a qualified host workload model",
+      "cpu_cores_per_node": 128,
+      "dense_bf16_TFLOPS": "2250",
+      "gpu_per_node": 8,
+      "hbm_GB": "288",
+      "host_ram_GB_per_node": "2048",
+      "local_disk_GB_per_node": "30720",
+      "source": "https://docs.nvidia.com/dgx/dgxb300-user-guide/introduction-to-dgxb300.html",
+      "usable_hbm_fraction": "0.90"
+    },
+    "platform": "HGX_B300",
+    "provided_GB_per_gpu": "288",
+    "raw_gpus": 8,
+    "required_GB_per_gpu": "58.359738",
+    "stage_calculations": [
+      {
+        "assumptions": {
+          "activation_GB_per_gpu": "32",
+          "concurrent_sequences": 32,
+          "context_tokens": 8192,
+          "cpu_cores_per_gpu": 16,
+          "host_ram_GB_per_gpu": "256",
+          "kv_bytes": "2",
+          "local_disk_GB_per_gpu": "3840",
+          "model": "dense8b",
+          "parallel_gpus": 1,
+          "training_bytes_per_parameter": "16",
+          "weight_bytes": "2",
+          "workspace_GB": "8"
+        },
+        "capacity_per_replica": "4.892797",
+        "capacity_unit": "calls/s",
+        "demand": "0.666667",
+        "kv_cache_GB_per_replica": "34.359738",
+        "memory_fit": true,
+        "model": {
+          "head_dimension": 128,
+          "kv_heads": 8,
+          "label": "Generic dense 8B planning model",
+          "layers": 32,
+          "parameters": "8000000000"
+        },
+        "raw_gpus": 8,
+        "replicas": 1,
+        "required_GB_per_gpu": "58.359738",
+        "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+        "scenario_id": "coincident",
+        "service_objectives": [],
+        "stage_id": "component_1",
+        "weights_GB": "16"
+      }
+    ],
+    "status": "conditional",
+    "upside_gpus": 8
+  },
+  {
+    "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+    "downside_gpus": 8,
+    "gaps": [],
+    "gpu_per_node": 8,
+    "hardware": {
+      "bandwidth_TBps": "8",
+      "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+      "compute_source": "https://www.nvidia.com/en-au/data-center/hgx/",
+      "cpu_cores_per_node": 128,
+      "dense_bf16_TFLOPS": "2250",
+      "gpu_per_node": 8,
+      "hbm_GB": "180",
+      "host_ram_GB_per_node": "2048",
+      "local_disk_GB_per_node": "30720",
+      "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+      "usable_hbm_fraction": "0.90"
+    },
+    "platform": "HGX_B200",
+    "provided_GB_per_gpu": "180",
+    "raw_gpus": 8,
+    "required_GB_per_gpu": "58.359738",
+    "stage_calculations": [
+      {
+        "assumptions": {
+          "activation_GB_per_gpu": "32",
+          "concurrent_sequences": 32,
+          "context_tokens": 8192,
+          "cpu_cores_per_gpu": 16,
+          "host_ram_GB_per_gpu": "256",
+          "kv_bytes": "2",
+          "local_disk_GB_per_gpu": "3840",
+          "model": "dense8b",
+          "parallel_gpus": 1,
+          "training_bytes_per_parameter": "16",
+          "weight_bytes": "2",
+          "workspace_GB": "8"
+        },
+        "capacity_per_replica": "5.083426",
+        "capacity_unit": "calls/s",
+        "demand": "0.666667",
+        "kv_cache_GB_per_replica": "34.359738",
+        "memory_fit": true,
+        "model": {
+          "head_dimension": 128,
+          "kv_heads": 8,
+          "label": "Generic dense 8B planning model",
+          "layers": 32,
+          "parameters": "8000000000"
+        },
+        "raw_gpus": 8,
+        "replicas": 1,
+        "required_GB_per_gpu": "58.359738",
+        "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+        "scenario_id": "coincident",
+        "service_objectives": [],
+        "stage_id": "component_1",
+        "weights_GB": "16"
+      }
+    ],
+    "status": "conditional",
+    "upside_gpus": 8
+  },
+  {
+    "basis": "Workload estimate rounded to whole 8-GPU nodes. no RA anchor or downstream design tool platform compatibility implied",
+    "downside_gpus": 8,
+    "gaps": [],
+    "gpu_per_node": 8,
+    "hardware": {
+      "bandwidth_TBps": "4.8",
+      "basis": "SXM 8-GPU workload comparison only. Dense BF16 = sparse specification / 2. Host figures are planning assumptions, not an OEM specification.",
+      "compute_source": "https://www.nvidia.com/en-au/data-center/h200/",
+      "cpu_cores_per_node": 128,
+      "dense_bf16_TFLOPS": "989.5",
+      "gpu_per_node": 8,
+      "hbm_GB": "141",
+      "host_ram_GB_per_node": "2048",
+      "local_disk_GB_per_node": "30720",
+      "source": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+      "usable_hbm_fraction": "0.90"
+    },
+    "platform": "HGX_H200",
+    "provided_GB_per_gpu": "141",
+    "raw_gpus": 8,
+    "required_GB_per_gpu": "58.359738",
+    "stage_calculations": [
+      {
+        "assumptions": {
+          "activation_GB_per_gpu": "32",
+          "concurrent_sequences": 32,
+          "context_tokens": 8192,
+          "cpu_cores_per_gpu": 16,
+          "host_ram_GB_per_gpu": "256",
+          "kv_bytes": "2",
+          "local_disk_GB_per_gpu": "3840",
+          "model": "dense8b",
+          "parallel_gpus": 1,
+          "training_bytes_per_parameter": "16",
+          "weight_bytes": "2",
+          "workspace_GB": "8"
+        },
+        "capacity_per_replica": "3.050056",
+        "capacity_unit": "calls/s",
+        "demand": "0.666667",
+        "kv_cache_GB_per_replica": "34.359738",
+        "memory_fit": true,
+        "model": {
+          "head_dimension": 128,
+          "kv_heads": 8,
+          "label": "Generic dense 8B planning model",
+          "layers": 32,
+          "parameters": "8000000000"
+        },
+        "raw_gpus": 8,
+        "replicas": 1,
+        "required_GB_per_gpu": "58.359738",
+        "rule": "min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee",
+        "scenario_id": "coincident",
+        "service_objectives": [],
+        "stage_id": "component_1",
+        "weights_GB": "16"
+      }
+    ],
+    "status": "conditional",
+    "upside_gpus": 8
+  }
+]

@@ -1,0 +1,277 @@
+Window: "Anubis", App: Anubis.
+0 standard window Anubis, Secondary Actions: Raise
+	1 scroll area
+		2 HTML content Description: Anubis · Workload Sizing Engine, URL: 127.0.0.1:8788/
+			3 link Skip to content, Value: 127.0.0.1:8788/#main
+			4 container
+				5 image Anubis weighing a workload against a feather
+				6 text ANUBIS AI FACTORY WORKLOAD SIZING
+				7 summary About Anubis, Value: off
+					8 text About Anubis
+				9 container Main navigation
+					10 button Cases
+					11 button Discover workload
+					12 button Workload builder
+					13 button Analysis
+					14 button Compare
+					15 button Design handoff
+					16 button Saved deliverables
+					17 button Reports
+					18 button Knowledge
+					19 button Consultant Copilot
+					20 button AI connections
+					21 link User guide, Value: 127.0.0.1:8788/user-guide.html
+				22 text LOCAL ENGINE · v0.1 Deterministic by design
+			23 container
+				24 text Peregrine Product Lab — desktop walkthrough Saved · revision 2 Planning workspace
+				25 button Sign out
+			26 container
+				27 container From customer story to AI Factory architecture
+					28 heading Your path to an AI Factory design, Value: 2
+						29 text Your path to an AI Factory design
+					30 text Describe the workload → calculate its resource requirements → pass supported inputs and the companion brief to your downstream AI Factory design tool or process.
+					31 container
+						32 container 1. Customer story Purpose and scope →
+						33 container 2. Describe workload Application and essential measurements →
+						34 container 3. Calculate requirements GPU, memory, storage and traffic You are here →
+						35 container Existing intake plus companion brief →
+							36 button 4. Design handoff
+							37 text Existing intake plus companion brief →
+						38 container 5. Architecture review Architect reviews the returned design
+					39 text Planning estimates guide architecture. measured service performance and final design approval remain explicit validation steps. Position indicates your current screen, not completion or approval.
+				40 heading Next step: Design handoff, Value: 2
+					41 text Next step: Design handoff
+				42 text Your calculation is complete. Review the GPU estimates and open requirements below, then continue to stage 4 using this saved result. You do not need to return to Consultant Copilot.
+				43 button Continue to Design handoff
+				44 text On the next screen, review the target configuration and select Prepare projection. This produces the executive summary, design intake and companion requirements. It does not submit a design run.
+				45 container Your application architecture
+					46 heading Your application architecture, Value: 2
+						47 text Your application architecture
+					48 text Use this map to locate the application, its compute boundary and the measurements needed for sizing. Select an activity to describe its scale. Activity order and operating overlap are separate choices.
+					49 container Proposed assistant
+						50 heading Proposed assistant, Value: 3
+							51 text Proposed assistant
+						52 container Scrollable system architecture diagram
+							53 image Description: Proposed assistant system architecture Inputs flow through the customer application to Model serving and back to the customer application as results. The compute boundary and optional data dependencies are shown. Numbered markers identify demand, model work and retained data measurements. This is a conceptual application view, not a physical rack design., Help: Inputs flow through the customer application to Model serving and back to the customer application as results. The compute boundary and optional data dependencies are shown. Numbered markers identify demand, model work and retained data measurements. This is a conceptual application view, not a physical rack design.
+						54 text Compute: Inside this AI Factory · independent
+						55 text Analytical sizing
+						56 text Search and indexing service: Outside this AI Factory.
+						57 text Existing search service outside the AI Factory being sized. Examples include a customer datacenter search cluster or a managed cloud search service. Its source documents and index may use different storage systems. This choice does not identify a storage product or require public Internet access.
+						58 text Measure at entry: requests. At model: prompt and response size.
+				59 heading Requirements and next measurements, Value: 2
+					60 text Requirements and next measurements
+				61 text Entered quantities are estimates. retained presets are assumptions. Blank storage capacity is unspecified. Host resources are provisions. Network rates cover declared application traffic. bulk transfers and latency require separate inputs. Workload GPU demand and infrastructure deployment anchors are separate decisions.
+				62 table
+					63 row (selectable) APPLICATION COMPONENT
+DEMAND
+GPU SUBTOTAL
+SIZING DRIVER
+					64 row (selectable)
+						65 cell (selectable) Proposed assistant
+						66 cell (selectable) 0.666667 calls/s
+						67 cell (selectable) 8
+						68 cell (selectable) min(compute bound, batched decode memory bound). approximate prefill/decode, no latency guarantee
+				69 button Download requirements brief
+				70 text ANUBIS / WORKLOAD INTELLIGENCE
+				71 heading Workload analysis, Value: 1
+					72 text Workload analysis
+				73 text Immutable results · All quantities are returned by the deterministic compiler.
+				74 button Export result
+				75 button Create report
+				76 button Explain this to me
+				77 heading Your requirements at a glance, Value: 2
+					78 text Your requirements at a glance
+				79 text Planning estimates with explicit assumptions. Measurement required means unresolved, not zero.
+				80 table
+					81 row (selectable) REQUIREMENT
+CALCULATED VALUE
+WHAT THIS MEANS
+					82 row (selectable)
+						83 cell (selectable) Workload GPU estimate
+						84 cell (selectable) 8 GPUs
+						85 cell (selectable) Whole-node estimate for the selected hardware. This is separate from the factory deployment size.
+					86 row (selectable)
+						87 cell (selectable) Selected factory deployment
+						88 cell (selectable) 256 GPUs
+						89 cell (selectable) Uses the selected catalogue anchor. A larger factory count does not mean this workload needs all its GPUs. Profile selection is not compliance certification.
+					90 row (selectable)
+						91 cell (selectable) GPU memory
+						92 cell (selectable) 58.359738 GB required per GPU / 288 GB available per GPU
+						93 cell (selectable) Per-device memory fit must be satisfied. Aggregate memory alone is insufficient.
+					94 row (selectable)
+						95 cell (selectable) Host RAM and local disk
+						96 cell (selectable) 2048 GB RAM / 30720 GB local disk
+						97 cell (selectable) Totals provisioned for the workload. Local disk is separate from shared storage.
+					98 row (selectable)
+						99 cell (selectable) External customer connection
+						100 cell (selectable) Measurement required / 0.000019 Gbps outbound
+						101 cell (selectable) Initial loading: Measurement required. Existing data outside this AI Factory is not automatically copied here.
+					102 row (selectable)
+						103 cell (selectable) North-south traffic
+						104 cell (selectable) Measurement required / 0.000019 Gbps outbound
+						105 cell (selectable) Factory-boundary traffic. Do not add it to the external connection requirement as if it were separate demand.
+					106 row (selectable)
+						107 cell (selectable) Dedicated storage network
+						108 cell (selectable) Measurement required / Measurement required
+						109 cell (selectable) Physically separate Ethernet fabric. No converged network. Missing measurements are not zero.
+					110 row (selectable)
+						111 cell (selectable) East-west GPU network
+						112 cell (selectable) Spectrum-X. Measurement required
+						113 cell (selectable) Fabric selection does not verify bandwidth or latency.
+					114 row (selectable)
+						115 cell (selectable) Shared storage
+						116 cell (selectable) No local tier requirement established
+						117 cell (selectable) This does not prove that no storage is needed. Data retained outside this AI Factory remains outside this estimate.
+				118 button Download requirements summary
+				119 heading Four network requirements, Value: 2
+					120 text Four network requirements
+				121 table
+					122 row (selectable) NETWORK ROLE
+SIZING REQUIREMENT
+MEANING
+					123 row (selectable)
+						124 cell (selectable) External customer datacenter connection
+						125 cell (selectable) Needs measurement
+						126 cell (selectable) Initial load: Needs measurement. Ongoing ingress: 0.000073 Gbps. Egress: 0.000019 Gbps. RTT target: Unspecified ms.
+					127 row (selectable)
+						128 cell (selectable) North-south factory traffic
+						129 cell (selectable) Needs measurement in / 0.000019 Gbps out
+						130 cell (selectable) Factory border to workload and storage endpoints. Carries the same external traffic, not an additional copy. Other tenants and non-model payloads need separate measurements.
+					131 row (selectable)
+						132 cell (selectable) Dedicated storage network
+						133 cell (selectable) Needs measurement read / Needs measurement write
+						134 cell (selectable) Physically separate Ethernet fabric. No converged network. Size both directions and confirm initial-load writes and checkpoint bursts.
+					135 row (selectable)
+						136 cell (selectable) East-west GPU network
+						137 cell (selectable) Spectrum-X. Needs measurement per GPU
+						138 cell (selectable) GPU communication fabric. A fabric selection is not a qualified bandwidth or latency result.
+				139 text Decimal TB and GB. Initial transfer rate = volume times 8 divided by transfer seconds. Apply protocol allowance and divide by usable link fraction. Application traffic is counted once at the external and north-south boundaries. Usable link fraction: 0.7. Protocol allowance: 1.2. These are lower-bound planning rates, not selected circuit or switch port speeds. Provide the initial customer-datacenter data volume and allowed transfer window. Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates. Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth. East-west per-GPU port demand needs the selected reference design and collective-communication measurements. Customer-datacenter round-trip latency objective is unspecified.
+				140 heading GPU workload comparison, Value: 2
+					141 text GPU workload comparison
+				142 text Same workload and assumptions on each GPU. Counts include whole 8-GPU nodes and declared failure reserves. These are workload estimates. deployment anchors and downstream design tool platform support are separate.
+				143 table
+					144 row (selectable) GPU
+ESTIMATED GPUS
+SENSITIVITY RANGE
+VRAM REQUIRED / AVAILABLE
+STATUS
+					145 row (selectable)
+						146 cell (selectable) HGX_B300
+						147 cell (selectable) 8
+						148 cell (selectable) 8–8
+						149 cell (selectable) 58.359738 / 288 GB
+						150 cell (selectable) conditional
+					151 row (selectable)
+						152 cell (selectable) HGX_B200
+						153 cell (selectable) 8
+						154 cell (selectable) 8–8
+						155 cell (selectable) 58.359738 / 180 GB
+						156 cell (selectable) conditional
+					157 row (selectable)
+						158 cell (selectable) HGX_H200
+						159 cell (selectable) 8
+						160 cell (selectable) 8–8
+						161 cell (selectable) 58.359738 / 141 GB
+						162 cell (selectable) conditional
+				163 button Download GPU comparison
+				164 heading GPU deployment recommendation, Value: 2
+					165 text GPU deployment recommendation
+				166 text conditional Initial deployment: 256 GPUs · 32 nodes/trays · HGX_B300 · Spectrum-X Raw workload requirement: 8 GPUs. Sensitivity: 8–8. GPU shortfall: 0. Minimum supported architecture (256 GPUs): supports one complete workload instance in compute terms: yes, conditionally. Equivalent workload instances: 32. sensitivity range: 32–32. Selected deployment (256 GPUs): supports one complete workload instance in compute terms: yes, conditionally. Equivalent workload instances: 32. sensitivity range: 32–32. Whole copies of the same workload profile at coincident declared peaks, using dedicated node-rounded GPU pools and a separate reserve per copy. Sensitivity counts are planning envelopes, not confidence intervals. Compute estimate only. Each copy also needs its storage, host resources and network capacity. tenancy and isolation require architectural validation. Architecture family is the selected catalogue profile, not an additional NCP compliance claim.
+				167 table
+					168 row (selectable) RESOURCE
+PLANNING REQUIREMENT
+					169 row (selectable)
+						170 cell (selectable) VRAM required / provided per GPU
+						171 cell (selectable) 58.359738 / 288 GB
+					172 row (selectable)
+						173 cell (selectable) Host RAM required / provided
+						174 cell (selectable) 2048 / 65536 GB
+					175 row (selectable)
+						176 cell (selectable) Local disk / CPU provision
+						177 cell (selectable) 30720 GB / 128 cores
+					178 row (selectable)
+						179 cell (selectable) Declared traffic ingress / egress before link-utilization allowance
+						180 cell (selectable) 0.000051 / 0.000013 Gbps
+					181 row (selectable)
+						182 cell (selectable) Tenancy
+						183 cell (selectable) single
+					184 row (selectable)
+						185 cell (selectable) Next expansion anchor
+						186 cell (selectable) 512 GPUs
+				187 table
+					188 row (selectable) STORAGE TIER
+USABLE BYTES
+READ B/S
+WRITE B/S
+				189 text Application tokens plus declared external transfers. customer RTT requirement remains independent. other payloads must be declared Physically dedicated storage network required. Converged networking is excluded. Review when observed demand exceeds initial planning envelope or agreed service degrades. start procurement before declared lead time expires Analytical assumptions, not measured serving performance or guaranteed latency Distinct stages use dedicated pools. scenarios reuse capacity only when declared non-overlapping Host configuration and training scaling require later deployment validation
+				190 button Download planning architecture brief
+				191 summary Assumptions and calculations, Value: off
+					192 text Assumptions and calculations
+				193 text inference centric · Declared stage families; percentage mix requires a common time horizon and utilization, not a ratio of incomparable token and transaction rates Derived facts 4 Units and scope attached Candidates 1 Per stage and scenario Open questions 0 Clarifications and evidence Evidence public_planning Qualification stays explicit Planning portfolio with explicit assumptions. measured profiles remain separate
+				194 heading Derived workload requirements, Value: 2
+					195 text Derived workload requirements
+				196 table
+					197 row (selectable) STAGE / SCENARIO
+REQUIREMENT
+VALUE
+EVIDENCE
+TRACE
+					198 row (selectable)
+						199 cell (selectable) component_1 / coincident
+						200 cell (selectable) transactions per second
+						201 cell (selectable) 0.666666667 request/s
+						202 cell (selectable) derived
+						203 cell (selectable) Inspect
+					204 row (selectable)
+						205 cell (selectable) component_1 / coincident
+						206 cell (selectable) model calls per second
+						207 cell (selectable) 0.666666667 request/s
+						208 cell (selectable) derived
+						209 cell (selectable) Inspect
+					210 row (selectable)
+						211 cell (selectable) component_1 / coincident
+						212 cell (selectable) input tokens per second
+						213 cell (selectable) 1333.333333333 token/s
+						214 cell (selectable) derived
+						215 cell (selectable) Inspect
+					216 row (selectable)
+						217 cell (selectable) component_1 / coincident
+						218 cell (selectable) output tokens per second
+						219 cell (selectable) 333.333333333 token/s
+						220 cell (selectable) derived
+						221 cell (selectable) Inspect
+				222 heading Factory compute reservation envelopes, Value: 2
+					223 text Factory compute reservation envelopes
+				224 text No evidence-supported reservation envelope yet.
+				225 heading Execution alternatives, Value: 2
+					226 text Execution alternatives
+				227 table
+					228 row (selectable) PLATFORM
+SCOPE
+GPUS / NODES
+FEASIBILITY
+ACTION
+					229 row (selectable)
+						230 cell (selectable) HGX_B300
+						231 cell (selectable) factory / portfolio
+						232 cell (selectable) 256 / 32
+						233 cell (selectable) conditional
+						234 cell (selectable) Review constraints
+				235 heading Storage and connectivity configurations, Value: 2
+					236 text Storage and connectivity configurations
+				237 text No product-specific evidence selected. Capacity and transfer requirements remain visible above.
+				238 heading Clarifications that matter, Value: 2
+					239 text Clarifications that matter
+				240 text No additional input questions from the currently supported evaluators. Domain qualifications still apply. Run result_0f7e9bc10b01e2e8bd20f50e9a9dc5a7 · Semantic digest 59a722171226636c697dccc0e4581a6ac7a40f88311b4a0ae1ad6c7e71e5d183
+		241 scroll bar (settable, float) 0
+	242 close button
+	243 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	244 minimize button
+	245 text Anubis
+246 menu bar
+	247 Anubis
+	248 Edit
+	249 View
+	250 Window
+
+The focused UI element is 2 HTML content Description: Anubis · Workload Sizing Engine, URL: 127.0.0.1:8788/

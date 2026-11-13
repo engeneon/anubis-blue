@@ -1,0 +1,149 @@
+Anubis planning architecture brief
+Initial GPUs: 256
+Raw workload GPUs: 8
+Platform: HGX_B300
+Fabric: Spectrum-X
+VRAM required per GPU (GB): 58.359738
+Host RAM required (GB): 2048
+Declared traffic before link-utilization allowance (Gbps): 0.000051 / 0.000013
+Network requirements: {
+  "basis": "Decimal TB and GB. Initial transfer rate = volume times 8 divided by transfer seconds. Apply protocol allowance and divide by usable link fraction. Application traffic is counted once at the external and north-south boundaries.",
+  "east_west": {
+    "fabric": "Spectrum-X",
+    "per_gpu_link_lower_bound_Gbps": null,
+    "per_gpu_payload_Gbps": null,
+    "scope": "GPU communication fabric. A fabric selection is not a qualified bandwidth or latency result."
+  },
+  "external_customer_datacenter": {
+    "connection": "Customer datacenter to AI Factory routed connectivity. Carrier, redundancy and encryption design remain architect decisions.",
+    "initial_load_link_Gbps": null,
+    "required_ingress_lower_bound_Gbps": null,
+    "round_trip_target_ms": null,
+    "status": "initial_load_unresolved",
+    "steady_egress_lower_bound_Gbps": "0.000019",
+    "steady_ingress_lower_bound_Gbps": "0.000073"
+  },
+  "follow_up": [
+    "Provide the initial customer-datacenter data volume and allowed transfer window.",
+    "Ongoing bulk transfers are unspecified. Daily-volume rates are averages over 24 hours, not measured burst rates.",
+    "Measure aggregate storage read and write throughput. Storage capacity alone does not determine fabric bandwidth.",
+    "East-west per-GPU port demand needs the selected reference design and collective-communication measurements.",
+    "Customer-datacenter round-trip latency objective is unspecified."
+  ],
+  "initial_load_overlaps_operation": true,
+  "model_version": "network-planning-1.0",
+  "north_south": {
+    "egress_lower_bound_Gbps": "0.000019",
+    "ingress_lower_bound_Gbps": null,
+    "scope": "Factory border to workload and storage endpoints. Carries the same external traffic, not an additional copy. Other tenants and non-model payloads need separate measurements."
+  },
+  "protocol_allowance": "1.2",
+  "storage": {
+    "converged": false,
+    "dedicated": true,
+    "read_link_lower_bound_Gbps": null,
+    "read_payload_Gbps": null,
+    "scope": "Physically dedicated storage fabric. Read and write are separate directions. Confirm bisection, fan-in, checkpoint bursts and initial-load writes. Unknown rates are not zero.",
+    "technology": "Ethernet",
+    "write_link_lower_bound_Gbps": null,
+    "write_payload_Gbps": null
+  },
+  "usable_link_fraction": "0.7"
+}
+Storage policy: Physically dedicated storage network. No converged network.
+Storage tiers: []
+Assumptions: {
+  "accept_capacity_shortfall": false,
+  "architecture": "SX-HGXB300-DP-ENT-1.0.0",
+  "assumptions_accepted": true,
+  "bytes_per_token": "4",
+  "compute_efficiency": "0.35",
+  "expansion_lead_days": 90,
+  "memory_efficiency": "0.50",
+  "minimum_service_fraction": "1",
+  "protocol_allowance": "1.2",
+  "sensitivity_percent": "30",
+  "source": "Anubis guided-1.0 planning defaults, consultant accepted; not measured"
+}
+Analytical planning, not a performance guarantee.
+
+downstream design tool intake
+{
+  "project": {
+    "name": "Peregrine Product Lab — desktop walkthrough"
+  },
+  "requirements": {
+    "east_west_fabric": "Spectrum-X",
+    "network_fabric": "Spectrum-X",
+    "platform": "HGX_B300",
+    "storage_fabric": "Ethernet",
+    "target_gpu_count": 256,
+    "tenancy_model": "single_tenant"
+  }
+}
+
+Mapping and external requirements
+[
+  {
+    "affected_domains": [
+      "physical_compute",
+      "node_count",
+      "NIC_endpoints",
+      "scale_up",
+      "failure_domains"
+    ],
+    "assessment": "external_adjustment",
+    "field": "requirements.platform",
+    "intended": "HGX_B300",
+    "mode": "direct",
+    "projected": "HGX_B300"
+  },
+  {
+    "field": "requirements.target_gpu_count",
+    "intended": 256,
+    "projected": 256,
+    "rounding": "downstream design tool result requires reassessment"
+  },
+  {
+    "field": "north_south",
+    "mode": "brief_only",
+    "reason": "No verified intake field. Architect must apply ingress and egress requirements."
+  },
+  {
+    "field": "external_customer_datacenter",
+    "mode": "brief_only",
+    "reason": "Initial loading, ongoing link rates and latency targets require architect action."
+  },
+  {
+    "field": "dedicated_storage_network",
+    "mode": "brief_only",
+    "reason": "Intake carries Ethernet technology only. Physical separation, no convergence and bandwidth require architect action."
+  },
+  {
+    "field": "N-S ingress/egress, per-device VRAM, host RAM, CPU, local disk and tier throughput",
+    "mode": "brief_only",
+    "reason": "No verified equivalent intake scalar; retain in companion specification"
+  }
+]
+Equivalent workload capacity
+{
+  "basis": "Whole copies of the same workload profile at coincident declared peaks, using dedicated node-rounded GPU pools and a separate reserve per copy. Sensitivity counts are planning envelopes, not confidence intervals.",
+  "minimum_architecture": {
+    "additional_instances_compute": 31,
+    "downside_instances_compute": 32,
+    "equivalent_instances_compute": 32,
+    "gpus": 256,
+    "supports_one_instance_compute": true,
+    "upside_instances_compute": 32
+  },
+  "qualification": "Compute estimate only. Each copy also needs its storage, host resources and network capacity. tenancy and isolation require architectural validation. Architecture family is the selected catalogue profile, not an additional NCP compliance claim.",
+  "selected_architecture": {
+    "additional_instances_compute": 31,
+    "downside_instances_compute": 32,
+    "equivalent_instances_compute": 32,
+    "gpus": 256,
+    "supports_one_instance_compute": true,
+    "upside_instances_compute": 32
+  },
+  "tenant_limit": null
+}

@@ -1,0 +1,101 @@
+{
+  "id": "S15",
+  "name": "Peregrine Product Lab",
+  "story": "A product team asks for an AI assistant for roughly 5,000 employees. It cannot yet say whether the assistant searches internal documents, uses tools, or runs locally. It has no usage logs or model selection.\n\nPlanning completion: All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Discovery is now resolved for this demonstration: a local answer model uses an existing search service outside this AI Factory and serves 40 questions/minute. Employee count is not used as demand.\nExact component inputs: [{\"name\": \"Proposed assistant\", \"pattern\": \"retrieval\", \"location\": \"local\", \"relationship\": \"independent\", \"model\": \"dense8b\", \"rate\": \"40\", \"calls\": \"1\", \"input_tokens\": \"2000\", \"output_tokens\": \"500\", \"retrieval\": \"external\"}]",
+  "answers": {
+    "name": "Peregrine Product Lab",
+    "activities": [
+      {
+        "name": "Proposed assistant",
+        "answers": {
+          "text": "yes",
+          "search": "yes",
+          "agent": "no",
+          "batch": "no",
+          "stream": "no",
+          "generation": "no",
+          "adaptation": "no",
+          "training": "no",
+          "indexing": "no"
+        },
+        "location": "local",
+        "schedule": "interactive",
+        "calls": "one",
+        "relationship": "independent",
+        "sharing": "shared"
+      }
+    ],
+    "overlap": "yes",
+    "tenancy": "single"
+  },
+  "expected_patterns": [
+    "retrieval"
+  ],
+  "expected_arrangement": "Provisional text-service match with retrieval, orchestration and placement unresolved.",
+  "acceptance": "Unknown must remain unknown; candidate patterns must not imply confirmed absence of retrieval or agents.",
+  "measurement_next": "Run a short customer walkthrough of three representative tasks.",
+  "expected_question": null,
+  "original_story": "A product team asks for an AI assistant for roughly 5,000 employees. It cannot yet say whether the assistant searches internal documents, uses tools, or runs locally. It has no usage logs or model selection.",
+  "planning_input": {
+    "name": "Peregrine Product Lab",
+    "components": [
+      {
+        "name": "Proposed assistant",
+        "pattern": "retrieval",
+        "location": "local",
+        "relationship": "independent",
+        "model": "dense8b",
+        "rate": "40",
+        "calls": "1",
+        "input_tokens": "2000",
+        "output_tokens": "500",
+        "retrieval": "external"
+      }
+    ],
+    "overlap": "yes",
+    "tenancy": "single",
+    "accepted": true,
+    "notes": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Discovery is now resolved for this demonstration: a local answer model uses an existing search service outside this AI Factory and serves 40 questions/minute. Employee count is not used as demand."
+  },
+  "planning_assumptions": "All added numbers are explicit fictional customer planning assumptions for a reproducible demonstration. They are not historical measurements or qualified hardware benchmarks. Dense text components use dense8b, one call/request, 2000 input and 500 output tokens unless overridden in the intake table. Discovery is now resolved for this demonstration: a local answer model uses an existing search service outside this AI Factory and serves 40 questions/minute. Employee count is not used as demand.",
+  "success_criteria": [
+    "Readiness lists no missing GPU inputs.",
+    "B300, B200 and H200 comparisons each contain a positive node-rounded GPU estimate with conditional planning status.",
+    "A planning:factory candidate is available for design handoff.",
+    "Outside corpus and hosted compute are not silently included as local retained data or GPUs.",
+    "Reference capacities remain explicitly labelled assumptions, with no claim of benchmark or latency qualification."
+  ],
+  "revision": "gpu-complete-2.0",
+  "expected_gpu_counts": {
+    "HGX_B300": 8,
+    "HGX_B200": 8,
+    "HGX_H200": 8
+  },
+  "expected_factory_gpus": 256,
+  "original_discovery_answers": {
+    "name": "Peregrine Product Lab",
+    "activities": [
+      {
+        "name": "Proposed assistant",
+        "answers": {
+          "text": "yes",
+          "search": "unknown",
+          "agent": "unknown",
+          "batch": "no",
+          "stream": "no",
+          "generation": "no",
+          "adaptation": "no",
+          "training": "no",
+          "indexing": "no"
+        },
+        "location": "unknown",
+        "schedule": "interactive",
+        "calls": "unknown",
+        "relationship": "independent",
+        "sharing": "shared"
+      }
+    ],
+    "overlap": "unknown",
+    "tenancy": "single"
+  }
+}
