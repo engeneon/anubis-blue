@@ -13,7 +13,7 @@ Download the [Anubis desktop installer for Apple Silicon](https://github.com/eng
 
 Follow the [Peregrine desktop playbook (PDF)](deliverables/neon-launch-2026-11-13/Anubis_Desktop_Peregrine_Playbook.pdf) from installation to saved results. [Download editable Word version (.docx)](deliverables/neon-launch-2026-11-13/Anubis_Desktop_Peregrine_Playbook.docx).
 
-Desktop cases persist in `~/Library/Application Support/Anubis`. Use **Anubis → Show Data Folder** and preserve this folder across upgrades. Source installations use a separate data directory. The [source installation guide](docs/macos-installation-guide.txt) remains available for developers. Linux installation guidance is deferred.
+Desktop cases persist in `~/Library/Application Support/Anubis`. Use **Anubis → Show Data Folder** and preserve this folder across upgrades. Source installations use a separate data directory. The [source installation guide](docs/macos-installation-guide.txt) remains available for developers, and [macOS packaging](packaging/macos/README.md) covers building the installer. Linux installation guidance is deferred.
 
 ## Use the application
 
