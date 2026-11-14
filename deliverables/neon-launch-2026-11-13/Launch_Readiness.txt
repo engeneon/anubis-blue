@@ -1,0 +1,17 @@
+NEON AI FACTORY ARCHITECT / ANUBIS LAUNCH READINESS
+13 November 2026
+
+Release v0.0.1 published with the tested installer and checksum at https://github.com/engeneon/anubis-blue/releases/tag/v0.0.1. LinkedIn copy remains a draft. Documentation publication is verified separately.
+
+Installed Anubis 0.0.1 from the supplied DMG over the existing application bundle. Previous bundle preserved under ~/Desktop/Anubis/Previous-install-2026-11-13. Existing desktop data preserved. Gatekeeper accepted the notarized Developer ID application and signature verification passed.
+
+Random scenario S15 Peregrine Product Lab completed through the actual GUI. Expected and observed workload GPUs: B300 8, B200 8, H200 8. Selected factory anchor: 256 B300 GPUs. Exported design intake, companion requirements and explanation. Completed engagement and retrieved saved deliverables following restart. No customer-blocking failure encountered in this route.
+
+Qualification is limited to this manual desktop workflow. It does not establish measured GPU performance, live provider interpretation or live Neon submission. Unspecified shared-storage and network quantities remain follow-up items. The handoff is partial but usable for its supported fields.
+
+Before publishing the LinkedIn draft:
+1. Review and publish the repository changes and GitHub Pages build.
+2. Verify the public DMG download and SHA-256, desktop PDF, methodology and playbook links.
+3. Confirm the corporate page owner is ready to post. The draft is copy only, not a scheduled post.
+
+The supplied installer is archived as-is. No application functionality or branding inside the signed bundle was modified.

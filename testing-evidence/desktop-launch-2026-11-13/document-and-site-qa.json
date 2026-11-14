@@ -1,0 +1,15 @@
+{
+  "playbook_pages": 30,
+  "rendered_page_review": "All 30 pages reviewed. Bordered three-column numbered workflow, semantic field/value styles, architecture diagram and parameter register retained.",
+  "workflow_steps": 19,
+  "input_register_rows": 30,
+  "site_build": "9 pages built and all local href/src targets checked",
+  "visual_site_review": [
+    "Getting Started desktop download and token instructions",
+    "Neon suite overview",
+    "Peregrine PDF and DOCX playbook links"
+  ],
+  "installer_copy_hash": "Matches original staged DMG",
+  "git_diff_check": "passed",
+  "publication": "Not pushed or posted"
+}

@@ -6,6 +6,7 @@ on:
       - 'docs/**'
       - 'scripts/build_docs_site.py'
       - 'deliverables/complete-playbooks/**'
+      - 'deliverables/neon-launch-2026-11-13/**'
       - 'tests/fixtures/architecture-scenarios.json'
       - 'ui/assets/anubis-logo.png'
       - 'LICENSE'

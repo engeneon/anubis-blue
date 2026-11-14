@@ -1,6 +1,6 @@
 # Anubis Blue
 
-Anubis is a deterministic AI Factory workload sizing application with an optional, human-reviewed Consultant Copilot. It estimates GPU requirements, records assumptions, and exports requirements for a downstream AI Factory design tool or process.
+Anubis is the workload-sizing component of the Neon AI Factory Architect suite. It is a deterministic application with an optional, human-reviewed Consultant Copilot. It estimates GPU requirements, records assumptions, and exports requirements for a downstream AI Factory design tool or process.
 
 
 **[Getting Started — install Anubis and complete your first estimate](https://engeneon.github.io/anubis-blue/getting-started.html)**
@@ -9,9 +9,11 @@ Anubis is a deterministic AI Factory workload sizing application with an optiona
 
 ## Install on macOS
 
-**Download the app:** get `Anubis-<version>-macos-arm64.dmg` from [Releases](https://github.com/engeneon/anubis-blue/releases/latest), open it and drag **Anubis** to Applications. It is signed and notarized by Apple, needs macOS 13 or later on Apple Silicon, and signs you in automatically. Your data lives in `~/Library/Application Support/Anubis`. Use **Anubis → Copy Access Token** if you also want to open it in a browser. See [macOS packaging](packaging/macos/README.md).
+Download the [Anubis desktop installer for Apple Silicon](https://github.com/engeneon/anubis-blue/releases/download/v0.0.1/Anubis-0.0.1-macos-arm64.dmg) for macOS 13 or later. Open the disk image, drag Anubis to Applications and open it. Quit an existing instance before replacing it. If sign-in is requested, choose **Anubis → Copy Access Token** from the macOS menu.
 
-**Run from source:** follow the [Mac installation guide](docs/macos-installation-guide.txt), including first-login access-token setup, restarting, backup and recovery. The evaluated platform is Apple Silicon. Linux installation guidance is on the roadmap.
+Follow the [Peregrine desktop playbook (PDF)](deliverables/neon-launch-2026-11-13/Anubis_Desktop_Peregrine_Playbook.pdf) from installation to saved results. [Download editable Word version (.docx)](deliverables/neon-launch-2026-11-13/Anubis_Desktop_Peregrine_Playbook.docx).
+
+Desktop cases persist in `~/Library/Application Support/Anubis`. Use **Anubis → Show Data Folder** and preserve this folder across upgrades. Source installations use a separate data directory. The [source installation guide](docs/macos-installation-guide.txt) remains available for developers, and [macOS packaging](packaging/macos/README.md) covers building the installer. Linux installation guidance is deferred.
 
 ## Use the application
 

@@ -32,3 +32,6 @@ _site/
 
 # macOS DMG packaging output
 build-macos/
+
+# Installer binaries are distributed through GitHub Releases.
+/docs/installers/*.dmg

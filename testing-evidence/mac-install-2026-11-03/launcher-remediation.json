@@ -1,0 +1,15 @@
+{
+  "status": "fixed locally after user approval",
+  "baseline_commit": "dff91d4bc7ab07d563683c3b24583df7f2e4baa8",
+  "change": "Removed hardcoded launcher URL. Backend is the sole source of effective address.",
+  "checks": {
+    "build": "passed",
+    "ctest": "3/3 passed",
+    "default_and_custom_argument_forwarding": "passed",
+    "live_port_8792_authenticated_api": "passed",
+    "single_correct_URL": "passed",
+    "token_not_logged": "passed"
+  },
+  "existing_services": "untouched",
+  "playbook": "Baseline installation report retained. Its pending issue is superseded by this remediation record."
+}

@@ -1,0 +1,10 @@
+$ ctest --test-dir build --output-on-failure
+Test project /Users/trai/Code/anubis-blue-install-validation-20261103/build
+    Start 1: core
+1/2 Test #1: core .............................   Passed    0.43 sec
+    Start 2: characterization
+2/2 Test #2: characterization .................   Passed    0.68 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   1.10 sec

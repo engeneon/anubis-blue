@@ -1,0 +1,14 @@
+{
+  "commit": "dff91d4bc7ab07d563683c3b24583df7f2e4baa8",
+  "installation": "passed",
+  "scenario": "S13 manual passed",
+  "gpu_counts": {
+    "B300": 8,
+    "B200": 8,
+    "H200": 8
+  },
+  "factory_anchor": 256,
+  "restart": "passed",
+  "product_changes": false,
+  "issue": "Custom-port startup message prints incorrect default address. Remediation awaiting approval."
+}

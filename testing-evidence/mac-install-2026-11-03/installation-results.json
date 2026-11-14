@@ -1,0 +1,56 @@
+[
+  {
+    "step": "02-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "local",
+      "-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/openssl@3;/opt/homebrew/opt/sqlite"
+    ],
+    "exit_code": 0,
+    "seconds": 0.93
+  },
+  {
+    "step": "03-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "local",
+      "-j4"
+    ],
+    "exit_code": 0,
+    "seconds": 9.73
+  },
+  {
+    "step": "04-npm-ci",
+    "command": [
+      "npm",
+      "ci",
+      "--ignore-scripts"
+    ],
+    "exit_code": 0,
+    "seconds": 0.77
+  },
+  {
+    "step": "05-ui-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "seconds": 0.89
+  },
+  {
+    "step": "06-ctest",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build",
+      "--output-on-failure"
+    ],
+    "exit_code": 0,
+    "seconds": 1.13
+  }
+]
