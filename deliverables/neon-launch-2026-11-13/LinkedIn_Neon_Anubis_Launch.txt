@@ -12,26 +12,31 @@ Anubis helps consultants move from an application description to a reviewable AI
 
 • Describe the application and distinguish what runs inside and outside the factory.
 • Compare estimated B300, B200 and H200 GPU requirements.
-• Review memory and host provisions, storage needs and the four network roles.
+• Review memory, host and storage requirements, alongside GPU interconnect, application traffic, customer connectivity and dedicated storage networking.
 • See which assumptions support the estimate and which measurements are still needed.
 • Prepare design inputs for Neon AI Factory Architect, then save the engagement for future review.
 
 The sizing engine is deterministic. An optional, human-reviewed Copilot helps interpret workload descriptions and explain results. The calculations remain governed by explicit engineering rules.
 
-Start with the Mac desktop installer and a step-by-step customer playbook. Explore 16 worked scenarios, the published methodology and the source code.
+Anubis 0.0.1 is now available for Apple Silicon Macs running macOS 13 or later. Start with the desktop installer and follow a screenshotted customer playbook from workload description to GPU estimates and a saved design handoff.
+
+Explore 16 worked scenarios, the published methodology and the source code. The manual workflow needs no LLM account or GPU hardware.
 
 Free for commercial and personal use under Apache License 2.0.
 
 Bring one workload. Make its assumptions visible. Build a more informed design conversation.
 
-Get started:
+Download for Mac — Apple Silicon:
+https://github.com/engeneon/anubis-blue/releases/download/v0.0.1/Anubis-0.0.1-macos-arm64.dmg
+
+Getting Started:
 https://engeneon.github.io/anubis-blue/getting-started.html
 
 Methodology:
 https://engeneon.github.io/anubis-blue/methodology.html
 
-Scenarios and playbooks:
-https://engeneon.github.io/anubis-blue/playbooks.html
+Follow the desktop playbook (PDF):
+https://engeneon.github.io/anubis-blue/downloads/Anubis_Desktop_Peregrine_Playbook.pdf
 
 Source code:
 https://github.com/engeneon/anubis-blue
